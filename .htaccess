@@ -1,0 +1,8 @@
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^kilimomarathon\.co\.tz$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.kilimomarathon\.co\.tz$
+RewriteRule ^/?$ "https\:\/\/kilimomarathon\.co\.tz\/" [R=301,L]
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L,QSA]
