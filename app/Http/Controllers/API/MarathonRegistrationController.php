@@ -404,7 +404,7 @@ class MarathonRegistrationController extends BaseController
                     return $this->handleResponse('You  have voted for ' . $nominee_vote->full_name . ' as ' . $award_category->name, Response::HTTP_CREATED);
                 } else {
                     $nominee_voted = AwardNominee::where('id', $voted->nominee_id)->first();
-                    return $this->handleResponse('You  have already voted for ' . $nominee_voted->full_name . ' in this category', Response::HTTP_CREATED);
+                    return $this->handleResponse('You  have already voted for ' . $nominee_voted->full_name . ' in this category', Response::HTTP_NOT_FOUND);
                 }
             }
         }
