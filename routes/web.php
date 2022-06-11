@@ -38,6 +38,7 @@ Route::get('/get-balance', [App\Http\Controllers\FrontController::class, 'getBal
     // Route::get('/registration/invoice', [App\Http\Controllers\FrontController::class, 'registration_invoice'])->name('registration_invoice');
     Route::post('/marathon-registration', [App\Http\Controllers\FrontController::class, 'marathon_registration'])->name('marathon_registration');
     Route::get('/awards', [App\Http\Controllers\FrontController::class, 'awards'])->name('awards');
+    Route::get('/awards/category/{id}', [App\Http\Controllers\FrontController::class, 'awards_criteria'])->name('awards_criteria');
     Route::get('/votes', [App\Http\Controllers\FrontController::class, 'votes'])->name('votes');
     Route::get('/votes/{id}', [App\Http\Controllers\FrontController::class, 'votes_nominees'])->name('votes_nominees');
     // Route::get('/awards-vote', [App\Http\Controllers\FrontController::class, 'awards_vote'])->name('awards_vote');

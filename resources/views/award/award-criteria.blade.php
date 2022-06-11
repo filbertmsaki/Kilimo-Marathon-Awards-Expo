@@ -13,7 +13,6 @@
     <title>
         Awards Category List | Kilimo Marathon, Awards & EXPO
     </title>
-
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/slick.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('asset/css/all.min.css') }}">
@@ -27,8 +26,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/green.css') }}" media="screen">
     <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/default.css') }}">
-
-    <link rel="stylesheet" href="css/adminlte.min.css">
+    <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <style>
         .container {
             position: relative;
@@ -51,20 +49,44 @@
             color: #fff;
         }
 
+        .award-section .image-column .award-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .award-section .award-title {
             font-family: poppins, sans-serif;
             font-weight: 900;
             font-size: 34px;
             text-align: center;
             margin-bottom: 15px;
-            text-transform: uppercase;
+            text-transform: capitalize;
+            text-decoration: underline;
+        }
+
+        .award-section .award-description-title {
+            font-family: poppins, sans-serif;
+            font-weight: 900;
+            font-size: 30px;
+            text-align: left;
+            margin-bottom: 10px;
+            text-transform: capitalize;
         }
 
         .award-section .award-description {
-            width: 70%;
-            text-align: center;
+            text-align: left;
             font-weight: 200;
             font-size: 18px;
+
+        }
+
+        .award-section .award-description ul li {
+            padding-left: 10px;
+        }
+
+        .award-section .award-description ul li::marker {
+            content: '✓';
         }
 
         .deadline-description {
@@ -73,7 +95,7 @@
         }
 
         .image-background {
-            background-image: url('imgs/image1.jpg');
+            background-image: url('../../imgs/image1.jpg');
             background-size: cover;
             position: relative;
         }
@@ -156,7 +178,6 @@
             width: 100%;
             margin-left: 10px;
             margin-right: 10px;
-
         }
 
         .info-box-footer {
@@ -165,7 +186,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-
         }
 
         .info-box-footer .small-box-footer {
@@ -173,17 +193,12 @@
             background-color: #15472f;
             border: 2px solid #ffffff;
             padding: 7px;
-
-
         }
 
         .small-box-footer:hover {
             color: #fff !important;
             background-color: #006837;
             border: 2px solid #02361e;
-
-
-
         }
 
         /* // X-Small devices (portrait phones, less than 576px) */
@@ -197,21 +212,18 @@
             }
 
             .award-section .award-title {
-
                 font-size: 24px;
             }
-
+            .award-section .award-description-title {
+                font-size: 20px;
+            }
             .award-section .award-description {
-                width: 100%;
                 font-weight: normal;
                 font-size: 14px;
-
             }
-
             .syotimer {
                 margin-top: 1px;
             }
-
             .syotimer__body {
                 display: flex;
             }
@@ -243,7 +255,6 @@
                 line-height: 1.5;
             }
 
-
             .info-box .info-box-content .info-box-header {
                 font-size: 13px;
                 font-weight: 700;
@@ -255,8 +266,6 @@
 
             .info-box-footer .small-box-footer {
                 font-size: 15px;
-
-
             }
         }
 
@@ -272,90 +281,55 @@
 </head>
 
 <body>
-
     @include('layouts.front_header')
-
     <section id="team" class="image-background">
-
         <div class="container" style="min-height:300px;">
             <div class="award-section">
                 <div class="award-title">
-                    <span>Kilimo Awards List</span>
+                    <span>{{ $award_category->name }}</span>
                 </div>
-                <div class="award-description">
-                    <p>
-                        The KILIMO Awards are by far the biggest and most prestigious awards in
-                        Tanzania farming. Every year we review our award categories to ensure they better reflect the
-                        range of achievements that deserve recognition in the rapidly-changing world of agriculture.
-                    </p>
-                </div>
-
-            </div>
-
-
-
-            @if ($award_settings->awards_registration == '1')
-                @if (date('Y-m-d H:i:s') < date('Y-m-d H:i:s', strtotime($award_settings->awards_registration_time_remain)))
-                    <div class="deadline-description">
-                        @if (date('Y-m-d H:i:s') > date('Y-m-d H:i:s', strtotime('-8 day', strtotime($award_settings->awards_registration_time_remain))))
-                            <p>Awards registration remain time, register now toparticipate in thecompetition. </p>
-                            <div id="simple_timer"></div>
-                            <input type="hidden" id="timer_value"
-                                value="{{ $award_settings->awards_registration_time_remain }}">
-                            <div id="simple_timer"></div>
-                            <input type="hidden" id="timer_value"
-                                value="{{ $award_settings->awards_registration_time_remain }}">
-                        @endif
-                        <div class="info-box-footer">
-                            <a href="{{ route('awards_nominees') }}" class="small-box-footer">
-                                Register as Nominee Now <i class="fas fa-arrow-circle-right"></i>
-                            </a>
+                <div class="row" style="width: 100%;">
+                    <div class="col-md-6 image-column">
+                        <div class="award-image">
+                            <img src="{{ asset('imgs/AWARD.png') }}" />
                         </div>
+                        
                     </div>
-                @endif
-            @endif
-            <!-- =========================================================== -->
-            <div class="row list">
-                @foreach ($award_category as $category)
-                    <div class="col-md-3 col-sm-6 col-6 list-item ">
-                        <div class="info-box">
-
-                            <div class="info-box-content">
-                                <span class="info-box-header">
-                                    @if ($category->description !== null)
-                                    <a href="{{ route('awards_criteria', $category->slug) }}" style="color:#000">
-                                        {{ $category->name }}
-                                    </a>
-                                    @else
-                                    {{ $category->name }}
-                                    @endif
-                                   
-                                </span>
-
-
-                                @if ($category->name_in_swahili !== null)
-                                    <span class="info-box-desc">({{ $category->name_in_swahili }})</span>
+                    <div class="col-md-6">
+                        <div class="award-description-title">
+                            <span>Award Criterial
+                            </span>
+                        </div>
+                        <div class="award-description">
+                            <?php echo $award_category->description; ?>
+                        </div>
+                        @if ($award_settings->awards_registration == '1')
+                        @if (date('Y-m-d H:i:s') < date('Y-m-d H:i:s', strtotime($award_settings->awards_registration_time_remain)))
+                            <div class="deadline-description">
+                                @if (date('Y-m-d H:i:s') > date('Y-m-d H:i:s', strtotime('-8 day', strtotime($award_settings->awards_registration_time_remain))))
+                                    <p>Awards registration remain time, register now toparticipate in thecompetition. </p>
+                                    <div id="simple_timer"></div>
+                                    <input type="hidden" id="timer_value"
+                                        value="{{ $award_settings->awards_registration_time_remain }}">
+                                    <div id="simple_timer"></div>
+                                    <input type="hidden" id="timer_value"
+                                        value="{{ $award_settings->awards_registration_time_remain }}">
                                 @endif
+                                <div class="info-box-footer">
+                                    <a href="{{ route('awards_nominees') }}" class="small-box-footer">
+                                        Register as Nominee Now <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
+                                </div>
                             </div>
-                            <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
+                        @endif
+                    @endif
                     </div>
-                    <!-- /.col -->
-                @endforeach
-
+                </div>
 
             </div>
-            <!-- /.row -->
         </div>
-
     </section>
-
-
-
-
     @include('layouts.front_footer')
-
     <script src="{{ asset('asset/js/jquery-min.js') }}"></script>
     <script src="{{ asset('asset/js/popper.min.js') }}"></script>
     <script src="{{ asset('asset/js/bootstrap.min.js') }}"></script>
@@ -371,29 +345,7 @@
     <script src="{{ asset('asset/js/slick.min.js') }}"></script>
     <script src="{{ asset('asset/js/main.js') }}"></script>
     <script src="{{ asset('asset/js/jquery-3.3.1.min.js') }}"></script>
-
     <script src="{{ asset('asset/js/jquery.syotimer.js') }}"></script>
-
-
-    <script type="text/javascript">
-        $(function() {
-
-
-            var timer_value = document.getElementById("timer_value").value;
-            var date = new Date(timer_value);
-
-            $('#simple_timer').syotimer({
-                year: date.getFullYear(),
-                month: date.getMonth() + 1,
-                day: date.getDate(),
-                hour: date.getHours(),
-                minute: date.getMinutes(),
-                seconds: date.getSeconds()
-            });
-
-        });
-    </script>
-
 </body>
 
 </html>

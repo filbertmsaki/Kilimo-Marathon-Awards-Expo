@@ -16,10 +16,13 @@ class CreateAwardMarathonSettingsTable extends Migration
         Schema::create('award_marathon_settings', function (Blueprint $table) {
             $table->id();
             $table->boolean('marathon_registration')->default(false);
+            $table->timestamp('marathon_registration_time_start')->nullable();
             $table->timestamp('marathon_registration_time_remain')->nullable();
             $table->boolean('vote')->default(false);
+            $table->timestamp('vote_time_start')->nullable();
             $table->timestamp('vote_time_remain')->nullable();
             $table->boolean('awards_registration')->default(false);
+            $table->timestamp('awards_registration_time_start')->nullable();
             $table->timestamp('awards_registration_time_remain')->nullable();
             $table->timestamps();
         });

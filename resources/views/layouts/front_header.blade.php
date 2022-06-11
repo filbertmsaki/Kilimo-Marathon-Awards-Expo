@@ -39,7 +39,7 @@
     <a href="{{ route('registration') }}">Register For Marathon</a>
      
     </li>
-    <li class="nav-item {{ Request::is('awards') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('awards*') ? 'active' : '' }}">
     <a href="{{ route('awards') }}">Kilimo Award Registration</a>
     
     </li>

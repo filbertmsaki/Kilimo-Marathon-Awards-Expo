@@ -300,8 +300,8 @@ class FrontController extends Controller
                         'customerphone' => $params['mobile'],
                         'transactionamount' => $params['amount'],
                         'transactiontoken' => $tokens['result']['TransToken'],
-                        'status' => 'Not Paid',
-                    ]);
+                        'status' => 'Not Paid',                
+                    ]);                 
                     //    return   $payment_details['instructions'];
                     return view('marathon_invoice')->with(['payment_details' => $payment_details, 'payment' => $payment]);
                 }
@@ -431,6 +431,21 @@ class FrontController extends Controller
         $award_category = AwardCategory::all();
         $award_settings = AwardMarathonSetting::get()->first();
         return view('award.index')->with(['award_category' => $award_category, 'award_settings' => $award_settings]);
+    }
+    public function awards_criteria($slug)
+    {
+        $award_settings = AwardMarathonSetting::get()->first();
+        if (AwardCategory::where('slug', $slug)->exists()) {
+            $award_category = AwardCategory::where('slug', $slug)->first();
+            return view('award.award-criteria')->with(['award_category' => $award_category, 'award_settings' => $award_settings]);
+
+        }
+        else{
+            $award_category = AwardCategory::all();
+            return redirect()->route('awards')->with(['award_category' => $award_category, 'award_settings' => $award_settings]);
+        
+        }
+        
     }
     public function awards_nominees()
     {
