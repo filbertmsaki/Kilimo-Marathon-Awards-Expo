@@ -7,7 +7,7 @@
                 <form class="shake contactForm" action="{{ route('marathon_registration') }}" method="post">
                     @csrf
                     <input type="hidden" name="description" value="Kilimo Marathon Fee">
-                    <input type="hidden" name="amount" value="35000">
+                    <input type="hidden" name="amount" value="100">
 
                     <div class="row">
                         <div class="col-sm-12">
