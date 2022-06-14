@@ -71,6 +71,7 @@ class Dpo {
         $paymentCurrency   = $this->dpo_default_currency;
         $paymentAmount     = $data['paymentAmount'];
         $customerEmail     = $data['customerEmail'];
+        $customerCity     = $data['customerCity'];
         $serviceDescription   = $data['orderDescription'];
 
         $serviceDate   = date( 'Y/m/d H:i' );
@@ -91,6 +92,9 @@ class Dpo {
         <customerLastName>'.$customerLastName.'</customerLastName>
         <customerPhone>'.$customerPhone.'</customerPhone>
         <customerEmail>'.$customerEmail.'</customerEmail>
+        <customerCity>'.$customerCity.'</customerCity>
+        <customerAddress>Null</customerAddress>
+        <customerZip>0000</customerZip>
         <TransactionSource>whmcs</TransactionSource>
         <PTL>5</PTL>
         </Transaction>

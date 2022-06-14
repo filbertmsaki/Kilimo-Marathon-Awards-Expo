@@ -10,7 +10,7 @@
                     <input type="hidden" name="amount" value="35000">
 
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="full_name" class="sr-only">Full Name</label>
                                 <input type="text" placeholder="Full Name" id="full_name"
@@ -22,7 +22,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="email" class="sr-only">Email Address</label>
                                 <input type="email" placeholder="Enter Email Address" id="email"
@@ -33,11 +33,33 @@
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif
                             </div>
-                        </div>
-                        <div class="col-sm-6">
+                        </div>             
+                    </div>
+                    <div class="row">
+                        {{-- <div class="col-sm-6">
+                            <div class="form-group">
+                                <select id="select-d30c" name="payment_option" class="form-control contact-control" required="" style="text-align: center;">
+                                    <option value="">-- Select Payment Option --</option>
+                                    @foreach ($payment_options as $items)
+                                        @if ( $items['terminalmnocountry'] == 'Tanzania')
+                                        @if ( $items['terminalmno'] == 'TIGOdebitMandate')
+                                        <option value="{{$items['terminalmno']}}"> Tigo Tanzania</option>
+                                        @endif
+                                        @if ( $items['terminalmno'] == 'Selcom_webPay')
+                                        <option value="{{$items['terminalmno']}}"> Vodacom Tanzania</option>
+                                        @endif
+                                        @if ( $items['terminalmno'] == 'Selcom_webPay_Airtel')
+                                        <option value="{{$items['terminalmno']}}"> Airtel Tanzania</option>
+                                        @endif
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div> --}}
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="mobile" class="sr-only">Mobile</label>
-                                <input type="tel" pattern="^\d{1}\d{9}$" placeholder="Mobile e.g: 0xxxxxxxxx"
+                                <input type="tel" pattern="^\d{1}\d{9}$" placeholder="Mobile No. e.g: 0xxxxxxxxx"
                                     title=" Please match the required format 0xxxxxxxxx " id="phone"
                                     class="form-control contact-control" name="phone" required=""
                                     value="{{ old('phone') }}">
@@ -47,7 +69,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="region" class="sr-only">Region</label>
                                 <input type="text" placeholder="Your region" id="region"
@@ -60,24 +82,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <select id="select-d30c" name="payment_option" class="form-control contact-control" required="" style="text-align: center;">
-                            <option value="">-- Select Payment Option --</option>
-                            @foreach ($payment_options as $items)
-                                @if ( $items['terminalmnocountry'] == 'Tanzania')
-                                @if ( $items['terminalmno'] == 'TIGOdebitMandate')
-                                <option value="{{$items['terminalmno']}}"> Tigo Tanzania</option>
-                                @endif
-                                @if ( $items['terminalmno'] == 'Selcom_webPay')
-                                <option value="{{$items['terminalmno']}}"> Vodacom Tanzania</option>
-                                @endif
-                                @if ( $items['terminalmno'] == 'Selcom_webPay_Airtel')
-                                <option value="{{$items['terminalmno']}}"> Airtel Tanzania</option>
-                                @endif
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
+             
+              
 
                     <div class="form-group">
                         <select id="select-d30c" name="event" class="form-control contact-control" required="" style="text-align: center;">

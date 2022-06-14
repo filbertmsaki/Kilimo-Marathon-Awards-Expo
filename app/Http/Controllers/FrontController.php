@@ -216,7 +216,6 @@ class FrontController extends Controller
             $request->validate([
                 'full_name' => 'required',
                 'region' => 'required',
-                'payment_option' => 'required',
                 'phone' =>  ['required', 'max:13', 'unique:marathon_registrations'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:marathon_registrations'],
                 'event' => 'required',
@@ -233,7 +232,7 @@ class FrontController extends Controller
             $email          = $params['email']             = $request->email;
             $amount         = $params['amount']            = 35000;
             $description    = $params['description']       = $request->description;
-            $payment_option    = $params['payment_option']       = $request->payment_option;
+            // $payment_option    = $params['payment_option']       = $request->payment_option;
             $event    = $params['event']       = $request->event;
             $general_slug = Str::random(40);
             $i = 0;
@@ -252,7 +251,7 @@ class FrontController extends Controller
                     'paid' => 0,
                 ]
             );
-            return $this->marathon_payment($params);
+            return $this->payment($params);
             // return redirect()->back()->with('success','Registration successfully!');
         }
     }
@@ -300,8 +299,8 @@ class FrontController extends Controller
                         'customerphone' => $params['mobile'],
                         'transactionamount' => $params['amount'],
                         'transactiontoken' => $tokens['result']['TransToken'],
-                        'status' => 'Not Paid',                
-                    ]);                 
+                        'status' => 'Not Paid',
+                    ]);
                     //    return   $payment_details['instructions'];
                     return view('marathon_invoice')->with(['payment_details' => $payment_details, 'payment' => $payment]);
                 }
@@ -399,11 +398,11 @@ class FrontController extends Controller
         $data['orderDescription'] =  $params['description'];
         $dpo = new Dpo();
         $tokens = $dpo->createToken($data);
-        if ($tokens['success'] === 'true') {
-            $data['transToken'] = $tokens['transToken'];
+        if ($tokens['success'] === true) {
+            $data['transToken'] = $tokens['result']['TransToken'];
             $verify = $dpo->verifyToken($data);
             if (!empty($verify) && $verify != '') {
-                if ($verify['Result'] === '900') {
+                if ($verify['result']['Result'] === '900') {
                     $payment_url = $dpo->getPaymentUrl($tokens);
                     // Save the transaction reference
                     $slug = Str::random(40);
@@ -438,14 +437,10 @@ class FrontController extends Controller
         if (AwardCategory::where('slug', $slug)->exists()) {
             $award_category = AwardCategory::where('slug', $slug)->first();
             return view('award.award-criteria')->with(['award_category' => $award_category, 'award_settings' => $award_settings]);
-
-        }
-        else{
+        } else {
             $award_category = AwardCategory::all();
             return redirect()->route('awards')->with(['award_category' => $award_category, 'award_settings' => $award_settings]);
-        
         }
-        
     }
     public function awards_nominees()
     {
@@ -479,7 +474,7 @@ class FrontController extends Controller
                 'verified' => 0,
             ]
         );
-        if($nominees){
+        if ($nominees) {
             $maildata = [
                 'email' => $request->email,
                 'subject' => 'Kilimo Awards Nominee Form',

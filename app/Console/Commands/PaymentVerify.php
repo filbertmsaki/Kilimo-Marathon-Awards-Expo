@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\MarathonRegistration;
 use App\Models\Payment\Dpo;
 use Illuminate\Console\Command;
 use App\Models\Payment\DpoGroup;
@@ -86,7 +87,15 @@ class PaymentVerify extends Command
                 $error    = curl_error($curl);
                 $datafile = json_decode($response, true, JSON_UNESCAPED_SLASHES);;
                 curl_close($curl);
-                ///////////////////////////////////////////////////////////////////////
+                ////////////////////Marathon Update///////////////////////////////////////////////////
+
+                $marathon = MarathonRegistration::where('phone',$phonenumber)
+                ->where('paid','=','0')->get();
+
+                $marathon->update([
+                    'paid' => 1
+                ]);
+                //////////////////Payment Update////////////////
                 $payments->update([
                     'result' => $result,
                     'resultexplanation' => $resultexplanation,

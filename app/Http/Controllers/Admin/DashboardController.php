@@ -301,7 +301,8 @@ class DashboardController extends Controller
         $award_category = AwardCategory::all();
         return response()->json($award_category);
     }
-    public function award_category_add_index(){
+    public function award_category_add_index()
+    {
         return view("admin.awards.award-category-add");
     }
     public function award_category_add(Request $request)
@@ -344,9 +345,8 @@ class DashboardController extends Controller
         $where = array('slug' => $id);
         $award_category  = AwardCategory::where($where)->first();
         return view('admin.awards.award-category-edit')->with(['award_category' => $award_category,]);
-
     }
- 
+
     public function award_category_destroy($id)
     {
         $award_category = AwardCategory::where('id', $id)->delete();
@@ -755,7 +755,15 @@ class DashboardController extends Controller
             $error    = curl_error($curl);
             $datafile = json_decode($response, true, JSON_UNESCAPED_SLASHES);;
             curl_close($curl);
-            ///////////////////////////////////////////////////////////////////////
+            ////////////////////Marathon Update///////////////////////////////////////////////////
+
+            $marathon = MarathonRegistration::where('phone', $phonenumber)
+                ->where('paid', '=', '0')->get();
+
+            $marathon->update([
+                'paid' => 1
+            ]);
+            //////////////////Payment Update///////////////
             $payments->update([
                 'result' => $result,
                 'resultexplanation' => $resultexplanation,
@@ -784,6 +792,7 @@ class DashboardController extends Controller
             return redirect()->back()->with('success', $payments->resultexplanation);
         } else {
             //OverPaid/underpaid
+            
             $payments->update([
                 'result' => $result,
                 'resultexplanation' => $resultexplanation,
