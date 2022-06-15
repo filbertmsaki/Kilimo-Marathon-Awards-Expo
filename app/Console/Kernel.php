@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->command('payment:verify')->everyMinute();
         $schedule->command('delete:vote')->everyMinute();
-        $schedule->command('registration:incomplete')->everyFifteenMinutes();
+        $schedule->command('registration:incomplete')->everyTenMinutes();
 
     }
 
