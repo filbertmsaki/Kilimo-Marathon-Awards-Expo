@@ -13,9 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\DeleteIncompleRegistration::class,
         Commands\PaymentVerify::class,
         Commands\VoteDelete::class,
+        Commands\DeleteIncompleRegistration::class,
     ];
 
     /**
