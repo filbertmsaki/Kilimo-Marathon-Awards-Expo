@@ -27,9 +27,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('registration:incomplete')->everyMinute();
         $schedule->command('payment:verify')->everyMinute();
         $schedule->command('delete:vote')->everyMinute();
+        $schedule->command('registration:incomplete')->everyFifteenMinutes();
+
     }
 
     /**
