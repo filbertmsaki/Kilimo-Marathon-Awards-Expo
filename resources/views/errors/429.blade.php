@@ -2,34 +2,24 @@
 <html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>
     429 | Too Many Requests
     </title>
-
-<link rel="stylesheet" type="text/css" href="files/bootstrap.css">
-
-<link rel="stylesheet" type="text/css" href="files/slick.css">
-
-<link rel="stylesheet" media="screen" href="files/all.css">
-<link rel="stylesheet" media="screen" href="files/simple-line-icons.css">
-
-<link rel="stylesheet" type="text/css" href="files/owl_002.css">
-<link rel="stylesheet" type="text/css" href="files/owl.css">
-<link rel="stylesheet" type="text/css" href="files/animate.css">
-<link rel="stylesheet" type="text/css" href="files/normalize.css">
-
-<link rel="stylesheet" type="text/css" href="files/main.css">
-
-<link rel="stylesheet" type="text/css" href="files/responsive.css">
-
-<link rel="stylesheet" type="text/css" href="files/green.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/slick.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ asset('asset/css/all.min.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ asset('asset/css/simple-line-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/owl.carousel.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/owl.theme.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/responsive.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/green.css') }}" media="screen">
 </head>
 <body>
-
 @include('layouts.front_header')
-
 <section class="error-section section split" style="padding-bottom: 50px;">
 <div class="container">
 <div class="row">
@@ -41,13 +31,9 @@
 </div>
 </div>
 </section>
-
 <footer>
-
     <div class="container">
-    
     <div class="row section">
-    
     <div class="footer-widget col-md-6 col-lg-4 col-xs-12">
     <h3 class="small-title">
     About Us
@@ -55,9 +41,7 @@
     <p>
         SHAMBA DUNIA represents KILIMO MARATHON which will be a fun run that will theme the Agriculture sector in general for the aim of helping us realizing our main goal which reveals tangible support in Tanzania’s agricultural growth by realizing an increase in investments and sales of agricultural products.
     </p>
-    
     </div>
-    
     <div class="footer-widget col-md-6 col-lg-4 col-xs-12">
     <h3 class="small-title">
     Quick Links
@@ -80,8 +64,6 @@
     <li><a href="#">Contact Us for More Info</a></li>
     </ul>
     </div>
-    
-    
     <div class="footer-widget col-md-6 col-lg-4 col-xs-12">
     <h3 class="small-title">
     Address Location
@@ -92,12 +74,8 @@
         <li><i class="fa fa-envelope"></i> marketing@kilimomarathon.co.tz</li>
         </ul>
     </div>
-    
-    
-   
     </div>
     </div>
-    
     <div id="copyright">
     <div class="container">
     <div class="row">
@@ -119,24 +97,21 @@
 <i class="fa fa-angle-up">
 </i>
 </a>
-
 <div id="preloader" style="display: none;">
 <div class="loader" id="loader-1"></div>
 </div>
-
-<script src="files/jquery-min.js"></script>
-<script src="files/popper.js"></script>
-<script src="files/bootstrap.js"></script>
-<script src="files/jquery_002.js"></script>
-<script src="files/smoothscroll.js"></script>
-<script src="files/wow.js"></script>
-<script src="files/owl.js"></script>
-<script src="files/waypoints.js"></script>
-<script src="files/jquery_003.js"></script>
-<script src="files/jquery.js"></script>
-<script src="files/form-validator.js"></script>
-<script src="files/contact-form-script.js"></script>
-<script src="files/slick.js"></script>
-<script src="files/main.js"></script>
-
+<script src="{{ asset('asset/js/jquery-min.js') }}"></script>
+<script src="{{ asset('asset/js/popper.min.js') }}"></script>
+<script src="{{ asset('asset/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('asset/js/jquery.mixitup.js') }}"></script>
+<script src="{{ asset('asset/js/smoothscroll.js') }}"></script>
+<script src="{{ asset('asset/js/wow.js') }}"></script>
+<script src="{{ asset('asset/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('asset/js/waypoints.min.js') }}"></script>
+<script src="{{ asset('asset/js/jquery.counterup.min.js') }}"></script>
+<script src="{{ asset('asset/js/jquery.appear.js') }}"></script>
+<script src="{{ asset('asset/js/form-validator.min.js') }}"></script>
+<script src="{{ asset('asset/js/contact-form-script.min.js') }}"></script>
+<script src="{{ asset('asset/js/slick.min.js') }}"></script>
+<script src="{{ asset('asset/js/main.js') }}"></script>
 </body></html>
