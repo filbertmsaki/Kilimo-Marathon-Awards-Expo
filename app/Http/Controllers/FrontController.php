@@ -220,7 +220,7 @@ class FrontController extends Controller
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:marathon_registrations'],
                 'event' => 'required',
             ]);
-            if ($request->amount != 100) {
+            if ($request->amount != 35000) {
                 return redirect()->back()->with('danger', 'Registration Fail Due to Payment Error !');
             }
             $trimedmobile = substr($request->phone, -9);
@@ -230,7 +230,7 @@ class FrontController extends Controller
             $city           = $params['city']              = $request->region;
             $phone         = $params['mobile']             = $phonenumber;
             $email          = $params['email']             = $request->email;
-            $amount         = $params['amount']            = 100;
+            $amount         = $params['amount']            = 35000;
             $description    = $params['description']       = $request->description;
             // $payment_option    = $params['payment_option']       = $request->payment_option;
             $event    = $params['event']       = $request->event;
