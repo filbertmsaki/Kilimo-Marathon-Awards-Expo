@@ -393,8 +393,10 @@ class DashboardController extends Controller
         $phonenumber = '255' . $trimedmobile;
 
         //Check if nominee exist with the sam category
+        $currrentYear = date('Y');
         $nominee_exist = AwardNominee::where('email', $request->email)
             ->where('category_id', $request->category_id)
+            ->whereYear('created_at', '=', $currrentYear)
             ->first();
         if ($nominee_exist) {
             return redirect()->back()->with('warning', 'You have already registered in this category');
