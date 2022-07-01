@@ -442,8 +442,9 @@ class DashboardController extends Controller
             $request->validate([
                 'full_name' => 'required|min:3|max:255',
             ]);
+            $name = ucwords(strtolower($request->full_name));
             $nominee->update([
-                'full_name' => $request->full_name,
+                'full_name' =>  $name,
             ]);
         }
         if (!empty($request->mobile)) {
