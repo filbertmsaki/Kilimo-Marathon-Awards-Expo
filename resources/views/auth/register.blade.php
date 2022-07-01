@@ -35,7 +35,7 @@
           @enderror
         </div>
         <div class="input-group mb-3">
-          <input class="form-control @error('mobile') is-invalid @enderror" name="mobile" placeholder="Eg:255762650393" value="{{ old('name') }}" type="tel" pattern="\+?\d{0,3}[\s\(\-]?([0-9]{2,3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" required autocomplete="name" autofocus>
+          <input class="form-control @error('mobile') is-invalid @enderror" name="mobile" placeholder="Eg:255762650393" value="{{ old('name') }}"  required autocomplete="name" autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-phone"></span>

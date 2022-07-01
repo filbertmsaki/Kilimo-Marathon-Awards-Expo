@@ -377,17 +377,11 @@ class DashboardController extends Controller
     {
         $request->validate([
             'full_name' => 'required|min:3|max:255',
-            'mobile' => ['required', 'max:12', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:award_nominees'],
-            'email' => ['required', 'max:255', 'unique:award_nominees'],
+            'mobile' => ['required', 'max:12', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
+            'email' => ['required', 'max:255'],
             'address' => ['required', 'max:255'],
-            'age' => ['required', 'max:2'],
-            'photo' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:1524', 'dimensions:ratio=1/1'],
         ]);
-        if ($image = $request->file('photo')) {
-            $destinationPath = 'image/';
-            $nomineesImage = 'nominees_' . date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $nomineesImage);
-        }
+
         $general_slug = Str::random(40);
 
         $i = 0;
@@ -395,24 +389,31 @@ class DashboardController extends Controller
             $i++;
             $general_slug = Hash::make(Str::random(40) . $i);
         }
+        $trimedmobile = substr($request->mobile, -9);
+        $phonenumber = '255' . $trimedmobile;
 
-        $nominees = AwardNominee::create(
-            [
-                'slug' => $general_slug,
-                'mobile' => $request->mobile,
-                'email' => $request->email,
-                'address' => $request->address,
-                'category_id' => $request->category_id,
-                'full_name' => $request->full_name,
-                'company_individual' => $request->company_individual,
-                'age' => $request->age,
-                'photo' => $nomineesImage,
-                'company' => $request->company,
-                'verified' => $request->verified,
-            ]
-        );
+        //Check if nominee exist with the sam category
+        $nominee_exist = AwardNominee::where('email', $request->email)
+            ->where('category_id', $request->category_id)
+            ->first();
+        if ($nominee_exist) {
+            return redirect()->back()->with('warning', 'You have already registered in this category');
+        } else {
+            $nominees = AwardNominee::create(
+                [
+                    'slug' => $general_slug,
+                    'mobile' => $phonenumber,
+                    'email' => $request->email,
+                    'address' => $request->address,
+                    'category_id' => $request->category_id,
+                    'full_name' => $request->full_name,
+                    'company_individual' => $request->company_individual,
+                    'verified' => $request->verified,
+                ]
 
-        return redirect()->back()->with('success', 'Registration Sucessfull !');
+            );
+            return redirect()->back()->with('success', 'Registration Sucessfull !');
+        }
     }
     public function award_nominee_edit($id)
     {
@@ -446,8 +447,10 @@ class DashboardController extends Controller
                 $request->validate([
                     'mobile' => ['required', 'max:13', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:award_nominees'],
                 ]);
+                $trimedmobile = substr($request->mobile, -9);
+                $phonenumber = '255' . $trimedmobile;
                 $nominee->update([
-                    'mobile' => $request->mobile,
+                    'mobile' => $phonenumber,
                 ]);
             }
         }

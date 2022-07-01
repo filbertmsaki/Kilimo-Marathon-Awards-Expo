@@ -462,27 +462,37 @@ class FrontController extends Controller
             $i++;
             $general_slug = Hash::make(Str::random(40) . $i);
         }
-        $nominees = AwardNominee::create(
-            [
-                'slug' => $general_slug,
-                'mobile' => $request->mobile,
-                'email' => $request->email,
-                'address' => $request->address,
-                'category_id' => $request->award_category,
-                'full_name' => $request->full_name,
-                'company_individual' => $request->company_individual,
-                'verified' => 0,
-            ]
-        );
-        if ($nominees) {
-            $maildata = [
-                'email' => $request->email,
-                'subject' => 'Kilimo Awards Nominee Form',
-            ];
-            $mail = new AwardRegistrationMail($maildata);
-            Mail::send($mail);
+        //Check if nominee exist with the sam category
+        $nominee_exist = AwardNominee::where('email', $request->email)
+            ->where('category_id', $request->award_category)
+            ->first();
+        if ($nominee_exist) {
+            return redirect()->back()->with('warning', 'You have already registered in this category');
+        } else {
+            $trimedmobile = substr($request->mobile, -9);
+            $phonenumber = '255' . $trimedmobile;
+            $nominees = AwardNominee::create(
+                [
+                    'slug' => $general_slug,
+                    'mobile' => $phonenumber,
+                    'email' => $request->email,
+                    'address' => $request->address,
+                    'category_id' => $request->award_category,
+                    'full_name' => $request->full_name,
+                    'company_individual' => $request->company_individual,
+                    'verified' => 0,
+                ]
+            );
+            if ($nominees) {
+                $maildata = [
+                    'email' => $request->email,
+                    'subject' => 'Kilimo Awards Nominee Form',
+                ];
+                $mail = new AwardRegistrationMail($maildata);
+                Mail::send($mail);
+            }
+            return redirect()->route('index')->with('success', 'Registration Sucessfull !');
         }
-        return redirect()->route('index')->with('success', 'Registration Sucessfull !');
     }
     public function gallery_2021()
     {
