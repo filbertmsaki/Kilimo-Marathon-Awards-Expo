@@ -332,7 +332,7 @@
                 <div class="info-box">
 
                     <div class="info-box-content">
-                        <span class="info-box-header">{{ $nominee->full_name }}</span>
+                        <span class="info-box-header">{{  ucwords(strtolower($nominee->full_name)) }}</span>
                         <span class="info-box-desc">{{ $nominee->awardcategory->name }}</span>
                         <div class="info-box-social-media">
                             {!! $share !!}
