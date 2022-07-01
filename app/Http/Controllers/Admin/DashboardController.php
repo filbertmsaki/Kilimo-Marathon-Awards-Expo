@@ -389,8 +389,7 @@ class DashboardController extends Controller
             $i++;
             $general_slug = Hash::make(Str::random(40) . $i);
         }
-        $trimedmobile = substr($request->mobile, -9);
-        $phonenumber = '255' . $trimedmobile;
+
 
         //Check if nominee exist with the sam category
         $currrentYear = date('Y');
@@ -401,6 +400,9 @@ class DashboardController extends Controller
         if ($nominee_exist) {
             return redirect()->back()->with('warning', 'You have already registered in this category');
         } else {
+            $trimedmobile = substr($request->mobile, -9);
+            $phonenumber = '255' . $trimedmobile;
+            $name = ucwords(strtolower($request->full_name));
             $nominees = AwardNominee::create(
                 [
                     'slug' => $general_slug,
@@ -408,7 +410,7 @@ class DashboardController extends Controller
                     'email' => $request->email,
                     'address' => $request->address,
                     'category_id' => $request->category_id,
-                    'full_name' => $request->full_name,
+                    'full_name' => $name,
                     'company_individual' => $request->company_individual,
                     'verified' => $request->verified,
                 ]

@@ -473,6 +473,8 @@ class FrontController extends Controller
         } else {
             $trimedmobile = substr($request->mobile, -9);
             $phonenumber = '255' . $trimedmobile;
+            $name = ucwords(strtolower($request->full_name));
+
             $nominees = AwardNominee::create(
                 [
                     'slug' => $general_slug,
@@ -480,7 +482,7 @@ class FrontController extends Controller
                     'email' => $request->email,
                     'address' => $request->address,
                     'category_id' => $request->award_category,
-                    'full_name' => $request->full_name,
+                    'full_name' => $name,
                     'company_individual' => $request->company_individual,
                     'verified' => 0,
                 ]
