@@ -15,7 +15,16 @@
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <style>
+        .select2-container--bootstrap4 .select2-selection {
+            width: 100%;
+            background-color: transparent;
+            border: 1px solid #6c757d;
+        }
+
         @media (min-width: 576px) {
 
             /* CSS that should be displayed if width is equal to or less than 800px goes here */
@@ -48,6 +57,19 @@
     <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('js/adminlte.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+
+
+    <script>
+        $(function() {
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+        })
+    </script>
     <style>
         select {
             /* for Firefox */
@@ -370,7 +392,10 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <div class="input-group mb-3">
-                                            <select class="form-control" class="form-control verified" name="verified"
+
+
+
+                                            <select class="form-control select2bs4" class="form-control verified" name="verified"
                                                 style="width: 100%;">
                                                 <option value="1">Verified</option>
                                                 <option value="0">Not Verified</option>
@@ -485,8 +510,10 @@
                                         </div>
                                     </div>
                                     <div class="input-group mb-3 col-md-6">
-                                        <select class="form-control" class="form-control" name="category_id"
-                                            data-placeholder="To:" style="width: 100%;">
+
+
+                                        <select class="form-control select2bs4" name="category_id" data-placeholder="To:"
+                                            style="width: 100%;">
                                             <option>----Select Category ----</option>
                                             @foreach ($award_category as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -497,7 +524,7 @@
                                         @endif
                                     </div>
                                     <div class="input-group mb-3 col-md-6">
-                                        <select class="form-control" class="form-control" name="company_individual"
+                                        <select class="form-control select2bs4" name="company_individual"
                                             data-placeholder="To:" style="width: 100%;">
                                             <option value="Individual">Individual</option>
                                             <option value="Company">Company</option>
@@ -508,7 +535,7 @@
                                         @endif
                                     </div>
                                     <div class="input-group mb-3 col-md-6">
-                                        <select class="form-control" class="form-control" name="verified"
+                                        <select class="form-control select2bs4" class="form-control" name="verified"
                                             style="width: 100%;">
                                             <option value="1">Verified</option>
                                             <option value="0">Not Verified</option>
