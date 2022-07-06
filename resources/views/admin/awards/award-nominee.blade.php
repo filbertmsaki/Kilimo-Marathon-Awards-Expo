@@ -25,6 +25,10 @@
             border: 1px solid #6c757d;
         }
 
+        .select2-container--bootstrap4 .select2-selection--single .select2-selection__rendered {
+            color: #fff;
+        }
+
         @media (min-width: 576px) {
 
             /* CSS that should be displayed if width is equal to or less than 800px goes here */
@@ -395,8 +399,8 @@
 
 
 
-                                            <select class="form-control select2bs4" class="form-control verified" name="verified"
-                                                style="width: 100%;">
+                                            <select class="form-control select2bs4" class="form-control verified"
+                                                name="verified" style="width: 100%;">
                                                 <option value="1">Verified</option>
                                                 <option value="0">Not Verified</option>
 

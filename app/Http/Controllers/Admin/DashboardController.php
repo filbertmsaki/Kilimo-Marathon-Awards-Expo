@@ -402,7 +402,7 @@ class DashboardController extends Controller
         } else {
             $trimedmobile = substr($request->mobile, -9);
             $phonenumber = '255' . $trimedmobile;
-            $name = ucwords(strtolower($request->full_name));
+            $name = strtoupper($request->full_name);
             $nominees = AwardNominee::create(
                 [
                     'slug' => $general_slug,
@@ -442,7 +442,7 @@ class DashboardController extends Controller
             $request->validate([
                 'full_name' => 'required|min:3|max:255',
             ]);
-            $name = ucwords(strtolower($request->full_name));
+            $name = strtoupper($request->full_name);
             $nominee->update([
                 'full_name' =>  $name,
             ]);

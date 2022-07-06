@@ -301,7 +301,7 @@
         @if($award_nominees != null)
         <div class="container" style="min-height:300px;">
             <h1 class="section-title wow fadeInUpQuick animated" data-wow-delay=".5s" style="color:#fff;visibility: visible;-webkit-animation-delay: .5s; -moz-animation-delay: .5s; animation-delay: .5s;">
-                <p style="color:#ffffff;">Awards Nominees Voting </p>
+                <p style="color:#ffffff; text-transform: capitalize;">{{ $award_category->name }} Voting </p>
 
             </h1>
             @if($award_settings->vote == '1' )
@@ -332,8 +332,7 @@
                 <div class="info-box">
 
                     <div class="info-box-content">
-                        <span class="info-box-header">{{  ucwords(strtolower($nominee->full_name)) }}</span>
-                        <span class="info-box-desc">{{ $nominee->awardcategory->name }}</span>
+                        <span class="info-box-header">{{  strtoupper($nominee->full_name) }}</span>
                         <div class="info-box-social-media">
                             {!! $share !!}
                         </div>
