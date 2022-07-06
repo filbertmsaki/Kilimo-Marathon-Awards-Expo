@@ -17,7 +17,7 @@ class CreateMarathonRegistrationsTable extends Migration
             $table->id();
             $table->string('slug');
             $table->string('full_name');
-            $table->string('phone')->unique();
+            $table->string('phone');
             $table->string('email')->nullable();
             $table->string('event');
             $table->string('region')->nullable();

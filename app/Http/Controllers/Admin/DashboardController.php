@@ -367,7 +367,7 @@ class DashboardController extends Controller
 
         $currrentYear = date('Y');
         $award_nominees = AwardNominee::with('awardcategory')
-            ->whereYear('created_at', '=', $currrentYear-1)
+            ->whereYear('created_at', '=', $currrentYear)
             ->latest()
             ->get();
 
