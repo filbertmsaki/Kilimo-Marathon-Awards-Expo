@@ -213,6 +213,15 @@ class FrontController extends Controller
         if ($D_Date < $curDateTime ||  $marathon_registration_status == '0') {
             return redirect()->back()->with('warning', 'Ooops...Marathon Registration start on 1 June 2022');
         } else {
+
+            $currrentYear = date('Y');
+            $nominee_exist = AwardNominee::where('email', $request->email)
+                ->where('category_id', $request->category_id)
+                ->whereYear('created_at', '=', $currrentYear)
+                ->first();
+            if ($nominee_exist) {
+                return redirect()->back()->with('warning', 'You have already registered in this category');
+            }
             $request->validate([
                 'full_name' => 'required',
                 'region' => 'required',
@@ -387,8 +396,16 @@ class FrontController extends Controller
         $data = [];
         $name = explode(" ", $params['full_name']);
         $data['paymentAmount'] =  $params['amount'];
+        if(!isset($name[1])){
+            $data['customerLastName'] = "Null";
+
+        }
+        else{
+
+            $data['customerLastName'] = $name[1];
+        }
         $data['customerFirstName'] = $name[0];
-        $data['customerLastName'] = $name[1];
+        // $data['customerLastName'] = $name[1];
         $data['customerCity'] = $params['city'];
         $data['customerPhone'] = $params['mobile'];
         $data['customerEmail'] =  $params['email'];
