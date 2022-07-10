@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
     <style>
         .select2-container--bootstrap4 .select2-selection {
             width: 100%;
@@ -189,7 +189,15 @@
                         $('#nominee_mobile').val(data.mobile);
                         $('#nominee_email').val(data.email);
                         $('#nominee_address').val(data.address);
-                        $('#nominee_company').val(data.company_individual);
+
+                        $('.category_id').select2('destroy');
+                        $('.category_id').val(data.category_id).select2();
+
+                        $('.company_individual').select2('destroy');
+                        $('.company_individual').val(data.company_individual).select2();
+
+                        $('.verified').select2('destroy');
+                        $('.verified').val(data.verified).select2();
                     })
             });
             $("#master").click(function() {
@@ -227,11 +235,11 @@
                                     <thead>
                                         <tr>
                                             <th width="20px"><input type="checkbox" id="master"></th>
-                                            <th>S/N</th>
                                             <th>Nominee Name</th>
                                             <th>Mobile</th>
                                             <th>Email</th>
                                             <th>Category</th>
+                                            <th>status</th>
                                             <th>Verified</th>
                                             <th>Votes</th>
                                             <th>Action</th>
@@ -243,11 +251,11 @@
                                                 <td><input type="checkbox" name="category_id[]"
                                                         value="{{ $nominee->id }}" id="sub_chk_{{ $nominee->id }}"
                                                         class="sub_chk"></td>
-                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $nominee->full_name }}</td>
                                                 <td>{{ $nominee->mobile }}</td>
                                                 <td>{{ $nominee->email }}</td>
                                                 <td>{{ $nominee->awardcategory->name }}</td>
+                                                <td>{{ $nominee->company_individual }}</td>
                                                 <td>
                                                     @if ($nominee->verified == 1)
                                                         Verified
@@ -281,6 +289,7 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
+        <!--Edit Model -->
 
         <div class="modal fade" id="ajax-crud-modal" ria-hidden="true">
             <div class="modal-dialog">
@@ -335,8 +344,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="form-group col-md-6">
                                         <div class="input-group mb-3">
                                             <input type="text"
@@ -373,34 +380,38 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="form-group col-md-6">
                                         <div class="input-group mb-3">
-                                            <input type="text"
-                                                class="form-control @error('company_individual') is-invalid @enderror"
-                                                id="nominee_company" name="company_individual"
-                                                placeholder="Company/Individual" autocomplete="company_individual"
-                                                autofocus>
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-user"></span>
-                                                </div>
-                                            </div>
-                                            @error('company_individual')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                            <select class="form-control select2bs4 company_individual"
+                                                name="company_individual" style="width: 100%;">
+                                                <option value="Individual">Individual</option>
+                                                <option value="Company">Company</option>
+
+                                            </select>
+                                            @if ($errors->has('company_individual'))
+                                                <span
+                                                    class="text-danger">{{ $errors->first('company_individual') }}</span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <div class="input-group mb-3">
+                                            <select class="form-control select2bs4 category_id" name="category_id"
+                                                style="width: 100%;">
+                                                @foreach ($award_category as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
 
-
-
-                                            <select class="form-control select2bs4" class="form-control verified"
-                                                name="verified" style="width: 100%;">
+                                            </select>
+                                            @if ($errors->has('category_id'))
+                                                <span class="text-danger">{{ $errors->first('category_id') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group mb-3">
+                                            <select class="form-control select2bs4 verified" name="verified"
+                                                style="width: 100%;">
                                                 <option value="1">Verified</option>
                                                 <option value="0">Not Verified</option>
 
@@ -426,6 +437,7 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
+        <!--Add Model -->
 
         <div class="modal fade" id="add-nominee" ria-hidden="true">
             <div class="modal-dialog">
@@ -465,7 +477,7 @@
                                     </div>
                                     <div class="input-group mb-3 col-md-6">
                                         <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                            id="email" name="email" placeholder="Nominee Email" required
+                                            id="email" name="email" placeholder="Nominee Email"
                                             autocomplete="email" autofocus>
                                         <div class="input-group-append">
                                             <div class="input-group-text">
@@ -481,7 +493,7 @@
                                     </div>
                                     <div class="input-group mb-3 col-md-6">
                                         <input type="mobile" class="form-control @error('mobile') is-invalid @enderror"
-                                            id="mobile" name="mobile" placeholder="Nominee Mobile" required
+                                            id="mobile" name="mobile" placeholder="Nominee Mobile"
                                             autocomplete="mobile" autofocus>
                                         <div class="input-group-append">
                                             <div class="input-group-text">
@@ -499,7 +511,7 @@
                                         <div class="input-group mb-3">
                                             <input type="text"
                                                 class="form-control @error('address') is-invalid @enderror" id="address"
-                                                name="address" placeholder="Nominee Address" required
+                                                name="address" placeholder="Nominee Address"
                                                 autocomplete="address" autofocus>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
@@ -539,8 +551,7 @@
                                         @endif
                                     </div>
                                     <div class="input-group mb-3 col-md-6">
-                                        <select class="form-control select2bs4" class="form-control" name="verified"
-                                            style="width: 100%;">
+                                        <select class="form-control select2bs4" name="verified" style="width: 100%;">
                                             <option value="1">Verified</option>
                                             <option value="0">Not Verified</option>
 

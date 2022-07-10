@@ -19,6 +19,7 @@ use App\Models\Payment\PushPayment;
 use App\Http\Controllers\Controller;
 use App\Models\AwardMarathonSetting;
 use App\Models\MarathonRegistration;
+use Faker\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -375,11 +376,10 @@ class DashboardController extends Controller
     }
     public function awards_nominees_store(Request $request)
     {
+
+
         $request->validate([
             'full_name' => 'required|min:3|max:255',
-            'mobile' => ['required', 'max:12', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
-            'email' => ['required', 'max:255'],
-            'address' => ['required', 'max:255'],
         ]);
 
         $general_slug = Str::random(40);
@@ -391,6 +391,60 @@ class DashboardController extends Controller
         }
 
 
+        //Check if email is emapty
+
+
+        //check if phonenumber is empty
+        if (empty($request->mobile)) {
+            $faker = Factory::create();
+            $number = $faker->numerify('07########');
+                $trimedmobile = substr($number, -9);
+                $phonenumber = '255' . $trimedmobile;
+
+        }
+        if (!empty($request->mobile)) {
+            if ($request->mobile) {
+                $request->validate([
+                    'mobile' => ['required', 'max:13', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
+                ]);
+                $trimedmobile = substr($request->mobile, -9);
+                $phonenumber = '255' . $trimedmobile;
+            }
+        }
+
+        if (empty($request->email)) {
+            $faker = Factory::create();
+            $email = $faker->unique()->email;
+        }
+        if (!empty($request->email)) {
+            if ($request->email ) {
+                $request->validate([
+                    'email' => ['required', 'max:255',],
+                ]);
+                
+                    $email = $request->email;
+                
+            }
+        }
+
+        if (empty($request->address)) {
+           
+            $address = 'Unknown';
+        }
+        if (!empty($request->address)) {
+            if ($request->address ) {
+                $request->validate([
+                    'address' => ['required', 'max:255',],
+                ]);
+                
+                    $address = $request->address;
+                
+            }
+        }
+
+     
+
+
         //Check if nominee exist with the sam category
         $currrentYear = date('Y');
         $nominee_exist = AwardNominee::where('email', $request->email)
@@ -400,15 +454,13 @@ class DashboardController extends Controller
         if ($nominee_exist) {
             return redirect()->back()->with('warning', 'You have already registered in this category');
         } else {
-            $trimedmobile = substr($request->mobile, -9);
-            $phonenumber = '255' . $trimedmobile;
             $name = strtoupper($request->full_name);
             $nominees = AwardNominee::create(
                 [
                     'slug' => $general_slug,
                     'mobile' => $phonenumber,
-                    'email' => $request->email,
-                    'address' => $request->address,
+                    'email' => $email,
+                    'address' =>  $address,
                     'category_id' => $request->category_id,
                     'full_name' => $name,
                     'company_individual' => $request->company_individual,
@@ -430,7 +482,6 @@ class DashboardController extends Controller
 
 
         $nominee = AwardNominee::findOrFail($request->award_nominee_id);
-
 
         $request->validate([
             'verified' => ['required', 'boolean', 'max:1'],
@@ -477,12 +528,21 @@ class DashboardController extends Controller
                 'address' => $request->address,
             ]);
         }
-        if (!empty($request->company)) {
+        if (!empty($request->company_individual)) {
             $request->validate([
-                'company' => ['required', 'max:255'],
+                'company_individual' => ['required', 'max:255'],
             ]);
             $nominee->update([
-                'company' => $request->company,
+                'company_individual' => $request->company_individual,
+            ]);
+        }
+
+        if (!empty($request->category_id)) {
+            $request->validate([
+                'category_id' => ['required', 'max:255'],
+            ]);
+            $nominee->update([
+                'category_id' => $request->category_id,
             ]);
         }
 
