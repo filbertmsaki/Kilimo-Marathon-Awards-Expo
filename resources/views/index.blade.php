@@ -15,7 +15,8 @@
     <meta name="keywords"
         content="kilimo marathon,kilimomarathon,sector,tanzania, Marathon, Agriculture,ANZIA SHAMBANI,Expo">
     <meta name="author" content="Filbert Msaki - developer.filymsaki@gmail.com">
-    <meta property="og:title" content="A chance to the Agriculture sector to grow and develop | Kilimo Marathon, Awards & EXPO">
+    <meta property="og:title"
+        content="A chance to the Agriculture sector to grow and develop | Kilimo Marathon, Awards & EXPO">
     <meta property="og:url" content="https://kilimomarathon.co.tz/">
     <meta property="og:description"
         content="KILIMO MARATHON which will be a half-marathon with a theme for Agriculture sector in general for the aim of helping us realizing our main goal which is to reveal tangible support in Tanzania’s agricultural growth">
@@ -31,7 +32,8 @@
         content="KILIMO MARATHON which will be a half-marathon with a theme for Agriculture sector in general for the aim of helping us realizing our main goal which is to reveal tangible support in Tanzania’s agricultural growth">
     <meta name="twitter:image" content="{{ asset('img/default-meta-image.png') }}">
     <meta name="twitter:site" content="@kilimo_MAE">
-    <meta itemprop="name" content="A chance to the Agriculture sector to grow and develop | Kilimo Marathon, Awards & EXPO">
+    <meta itemprop="name"
+        content="A chance to the Agriculture sector to grow and develop | Kilimo Marathon, Awards & EXPO">
     <meta itemprop="url" content="https://kilimomarathon.co.tz/">
     <meta itemprop="description"
         content="To create an entertainment themed event for agriculture where people can meet and have fun while learning and observing the growth of the sector.">
@@ -71,9 +73,9 @@
 
         .title-content {
             width: 80%;
-            
+
         }
-        
+
         .u-text-2 {
             font-weight: 600;
             font-size: 1rem;
@@ -140,19 +142,21 @@
             background-color: rgb(0, 0, 0);
             color: #fff;
         }
+
         @media (max-width: 575.98px) {
             .title-content {
-            width: 100%;
-            
-        }
-        .title-btn a:not(:last-child){
-            margin-right: 10px;
-        }
-        .single_slider .slider_content .btn-common {
-  margin-top: 15px;
-}
-         }
+                width: 100%;
 
+            }
+
+            .title-btn a:not(:last-child) {
+                margin-right: 10px;
+            }
+
+            .single_slider .slider_content .btn-common {
+                margin-top: 15px;
+            }
+        }
     </style>
 </head>
 
@@ -168,7 +172,8 @@
                             <div class="title-content">
                                 <h2 class="title" data-animation="fadeInLeft" data-delay="2s">
                                     Anzia Shambani. </h2>
-                                <p data-animation="fadeInLeft" data-delay="0.6s"> A chance to the Agriculture sector to
+                                <p data-animation="fadeInLeft" data-delay="0.6s"> A chance to the Agriculture sector
+                                    to
                                     grow
                                     and go hand in hand with the current pace of digitized world.</p>
                             </div>
@@ -264,7 +269,7 @@
     <section class="split section">
 
         <div class="container">
-            
+
             <p class="section-subcontent">
                 <hr>
             </p>
@@ -275,23 +280,25 @@
                         <img class="img-fluid" src="{{ asset('image/vote.jpg') }}" alt="">
                     </figure>
                 </div>
-                <div class="col-md-6 col-xs-12" style="  margin: auto; text-align: center" >
+                <div class="col-md-6 col-xs-12" style="  margin: auto; text-align: center">
                     <div class="content-inner">
-                        <h2 class="title" >About Kilimo Awards</h2>
-                        <p class="lead">The KILIMO Awards are by far the biggest and most prestigious awards in Tanzania farming. Every year we review our award categories to ensure they better reflect the range of achievements that deserve recognition in the rapidly-changing world of agriculture.  </p>
-                       
-                        <div class="about-btn" >
+                        <h2 class="title">About Kilimo Awards</h2>
+                        <p class="lead">The KILIMO Awards are by far the biggest and most prestigious awards in
+                            Tanzania farming. Every year we review our award categories to ensure they better reflect
+                            the range of achievements that deserve recognition in the rapidly-changing world of
+                            agriculture. </p>
 
-                            @if($award_settings->vote == '1' )
-                            @if(date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime( $award_settings->vote_time_remain)))
-                            <a href="{{ route('votes') }}" class="btn btn-common">Vote Now</a>
+                        <div class="about-btn">
 
-                              @endif
+                            @if ($award_settings->vote == '1')
+                                @if (date('Y-m-d H:i:s') < date('Y-m-d H:i:s', strtotime($award_settings->vote_time_remain)))
+                                    <a href="{{ route('votes') }}" class="btn btn-common">Vote Now</a>
+                                @endif
                             @endif
                         </div>
                     </div>
                 </div>
-               
+
             </div>
         </div>
 
