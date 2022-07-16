@@ -532,11 +532,13 @@ class FrontController extends Controller
         } else {
             $currrentYear = date('Y');
             $groupedNominees = AwardNominee::with('awardcategory')
+                ->with('awardcategory')
                 ->where('Verified', '=', '1')
                 ->whereYear('created_at', '=', $currrentYear)
                 ->groupBy('category_id')
                 ->orderBy(DB::raw('COUNT(id)', 'asc'))
-                ->get(array(DB::raw('COUNT(id) as total_nominee'), 'category_id'));
+                ->get(array(DB::raw('COUNT(id) as total_nominee'), 'category_id'))
+                ->sortBy('awardcategory.name',SORT_REGULAR,false);
             return view('award.award-category')->with(['nominees' => $groupedNominees]);
         }
     }
