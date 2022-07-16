@@ -281,7 +281,13 @@
                         <p class="lead">The KILIMO Awards are by far the biggest and most prestigious awards in Tanzania farming. Every year we review our award categories to ensure they better reflect the range of achievements that deserve recognition in the rapidly-changing world of agriculture.  </p>
                        
                         <div class="about-btn" >
+
+                            @if($award_settings->vote == '1' )
+                            @if(date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime( $award_settings->vote_time_remain)))
                             <a href="{{ route('votes') }}" class="btn btn-common">Vote Now</a>
+
+                              @endif
+                            @endif
                         </div>
                     </div>
                 </div>
