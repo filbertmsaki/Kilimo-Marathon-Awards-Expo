@@ -558,7 +558,7 @@ class FrontController extends Controller
                 ->where('Verified', '=', '1')
                 ->where('category_id', '=', $award_category->id)
                 ->whereYear('created_at', '=', $currrentYear)
-                ->orderBy('id', 'asc')
+                ->orderBy('full_name', 'asc')
                 ->get();
             $share = new Share();
             $share->currentPage('Please vote for me as a ' . '' . $award_category->name)
