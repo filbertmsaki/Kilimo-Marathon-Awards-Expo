@@ -261,6 +261,36 @@
 
     </section>
 
+    <section class="split section">
+
+        <div class="container">
+            
+            <p class="section-subcontent">
+                <hr>
+            </p>
+
+            <div class="row">
+                <div class="col-md-6 col-xs-12 ">
+                    <figure class="image">
+                        <img class="img-fluid" src="{{ asset('image/vote.jpg') }}" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-6 col-xs-12" style="  margin: auto; text-align: center" >
+                    <div class="content-inner">
+                        <h2 class="title" >About Kilimo Awards</h2>
+                        <p class="lead">The KILIMO Awards are by far the biggest and most prestigious awards in Tanzania farming. Every year we review our award categories to ensure they better reflect the range of achievements that deserve recognition in the rapidly-changing world of agriculture.  </p>
+                       
+                        <div class="about-btn" >
+                            <a href="{{ route('votes') }}" class="btn btn-common">Vote Now</a>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+
+    </section>
+
     <section id="service-block-main" class="section"
         style="background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('imgs/sports-other-wallpaper-preview.jpeg');background-size: cover;">
 

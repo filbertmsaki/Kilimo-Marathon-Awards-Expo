@@ -391,7 +391,6 @@ class DashboardController extends Controller
         }
 
 
-        //Check if email is emapty
 
 
         //check if phonenumber is empty
@@ -411,6 +410,7 @@ class DashboardController extends Controller
                 $phonenumber = '255' . $trimedmobile;
             }
         }
+        //Check if email is emapty
 
         if (empty($request->email)) {
             $faker = Factory::create();
