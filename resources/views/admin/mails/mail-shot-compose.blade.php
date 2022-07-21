@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
-@section('title', 'New Mail')
-@section('pagename', 'New Mail')
+@section('title', 'Voting Mail')
+@section('pagename', 'Voting Mail')
 @section('css')
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -95,14 +95,15 @@
                         <div class="card-header">
                             <h3 class="card-title">New Mail</h3>
                         </div>
-                        <form action="{{ route('admin.mails.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.mails.mailshot.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <!-- /.card-header -->
                             <div class="card-body">
 
                                 <div class="form-group">
-                                    <select class="select2" id="to"  name="recipients[]"
-                                        multiple="multiple" data-placeholder="To:" style="width: 100%;">
+                                    <select class="select2" id="to" name="recipients[]" multiple="multiple"
+                                        data-placeholder="To:" style="width: 100%;">
+                                        <option value="0"> Sent to All </option>
                                         @foreach ($to as $data)
                                             <option value="{{ $data->email }}">{{ $data->email }}</option>
                                         @endforeach
@@ -112,55 +113,10 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <select class="select2" id="cc"  name="cc[]"
-                                        multiple="multiple" data-placeholder="Cc:" style="width: 100%;">
-                                        @foreach ($cc as $data)
-                                            <option value="{{ $data->email }}">{{ $data->email }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('cc'))
-                                        <span class="text-danger">{{ $errors->first('cc') }}</span>
-                                    @endif
-                                </div>
-                                <div class="form-group">
-                                    <select class="select2" id="bcc"  name="bcc[]"
-                                        multiple="multiple" data-placeholder="Bcc:" style="width: 100%;">
-                                        @foreach ($bcc as $data)
-                                            <option value="{{ $data->email }}">{{ $data->email }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('bcc'))
-                                        <span class="text-danger">{{ $errors->first('bcc') }}</span>
-                                    @endif
-                                </div>
-
-                                <div class="form-group">
                                     <input class="form-control" name="subject" placeholder="Subject:">
                                     @if ($errors->has('subject'))
                                         <span class="text-danger">{{ $errors->first('subject') }}</span>
                                     @endif
-                                </div>
-                                <div class="form-group">
-                                    <textarea id="compose-textarea" name="body" class="form-control" style="height: 500px"></textarea>
-                                    @if ($errors->has('body'))
-                                        <span class="text-danger">{{ $errors->first('body') }}</span>
-                                    @endif
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label class="col-sm-9 control-label">
-                                        Attachment(s)
-                                    </label>
-                                    <div class="col-sm-12">
-                                        <span class="btn btn-default btn-file">
-                                            <input id="input-2" name="attachments[]" type="file" class="file"
-                                                multiple data-show-upload="true" data-show-caption="true">
-                                            @if ($errors->has('attachments'))
-                                                <span class="text-danger">{{ $errors->first('attachments') }}</span>
-                                            @endif
-                                        </span>
-                                    </div>
                                 </div>
 
                             </div>

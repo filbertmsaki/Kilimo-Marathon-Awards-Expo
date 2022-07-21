@@ -12,6 +12,7 @@
   <title> {{config('app.name')}} | @yield('title')</title>
   
   <!-- css contents -->
+  
   @yield('css')
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">

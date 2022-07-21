@@ -140,6 +140,13 @@
                 $unread_message->count() }} New</span>@endif</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{ route('admin.mails.index') }}"
+            class="nav-link {{ Request::is('admin/mails*') ? 'active' : '' }}">
+            <i class="fas fa-envelope nav-icon"></i>
+            <p>Mail</p>
+          </a>
+        </li>
 
 
         @role('admin')

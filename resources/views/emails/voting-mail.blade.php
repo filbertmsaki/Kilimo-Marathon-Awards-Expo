@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
+<html lang="en">
 
 <head>
     <title></title>
@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css" />
     <!--<![endif]-->
+    <title>KILIMO Awards | Voting</title>
     <style>
         * {
             box-sizing: border-box;
@@ -176,7 +177,7 @@
                                                                         href="https://kilimomarathon.co.tz"
                                                                         style="outline:none" tabindex="-1"
                                                                         target="_blank"><img alt="Congratulations"
-                                                                            class="big" src="images/banner_1.png"
+                                                                            class="big" src="https://kilimomarathon.co.tz/images/banner_1.png"
                                                                             style="display: block; height: auto; border: 0; width: 640px; max-width: 100%;"
                                                                             title="Congratulations"
                                                                             width="640" /></a></div>
@@ -299,7 +300,7 @@
                                                                         href="https://kilimomarathon.co.tz/awards"
                                                                         style="outline:none" tabindex="-1"
                                                                         target="_blank"><img alt="Categories"
-                                                                            src="images/marathon_1.png"
+                                                                            src="https://kilimomarathon.co.tz/images/marathon_1.png"
                                                                             style="display: block; height: auto; border: 0; width: 320px; max-width: 100%;"
                                                                             title="Categories" width="320" /></a>
                                                                 </div>
@@ -428,7 +429,7 @@
                                                                         href="https://kilimomarathon.co.tz/votes"
                                                                         style="outline:none" tabindex="-1"
                                                                         target="_blank"><img alt="Vote"
-                                                                            src="images/expo_1.png"
+                                                                            src="https://kilimomarathon.co.tz/images/expo_1.png"
                                                                             style="display: block; height: auto; border: 0; width: 320px; max-width: 100%;"
                                                                             title="Vote" width="320" /></a></div>
                                                             </td>
@@ -566,7 +567,7 @@
                                                                                 href="https://twitter.com/kilimo_MAE"
                                                                                 target="_blank"><img alt="Twitter"
                                                                                     height="32"
-                                                                                    src="images/twitter2x.png"
+                                                                                    src="https://kilimomarathon.co.tz/images/twitter2x.png"
                                                                                     style="display: block; height: auto; border: 0;"
                                                                                     title="Twitter"
                                                                                     width="32" /></a></td>
@@ -574,7 +575,7 @@
                                                                                 href="https://www.instagram.com/kilimomarathon/"
                                                                                 target="_blank"><img alt="Instagram"
                                                                                     height="32"
-                                                                                    src="images/instagram2x.png"
+                                                                                    src="https://kilimomarathon.co.tz/images/instagram2x.png"
                                                                                     style="display: block; height: auto; border: 0;"
                                                                                     title="Instagram"
                                                                                     width="32" /></a></td>
@@ -583,7 +584,7 @@
                                                                                 target="_blank"><img
                                                                                     alt="www.kilimomarathon.co.tz"
                                                                                     height="32"
-                                                                                    src="images/Network-Web-icon.png"
+                                                                                    src="https://kilimomarathon.co.tz/images/Network-Web-icon.png"
                                                                                     style="display: block; height: auto; border: 0;"
                                                                                     title="Web"
                                                                                     width="32" /></a></td>

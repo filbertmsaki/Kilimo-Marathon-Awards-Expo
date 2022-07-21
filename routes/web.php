@@ -145,7 +145,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin','as'=>'admin.'], funct
     //Mail Route
     Route::get('/mails', [App\Http\Controllers\Admin\MailController::class, 'index'])->name('mails.index');
     Route::get('/mails/compose', [App\Http\Controllers\Admin\MailController::class, 'create'])->name('mails.create');
+    Route::get('/mails/mailshot/compose', [App\Http\Controllers\Admin\MailController::class, 'mailshot'])->name('mails.mailshot.create');
     Route::post('/mails', [App\Http\Controllers\Admin\MailController::class, 'store'])->name('mails.store');
+    Route::post('/mails/mailshot', [App\Http\Controllers\Admin\MailController::class, 'storeMailshot'])->name('mails.mailshot.store');
   
     //Site Setting Route
     Route::get('/settings/site-settings', [App\Http\Controllers\Admin\DashboardController::class, 'site_settings_index'])->name('site_settings_index');

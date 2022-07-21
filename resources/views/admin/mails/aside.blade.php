@@ -10,20 +10,16 @@
     </div>
     <div class="card-body p-0">
       <ul class="nav nav-pills flex-column">
-        <li class="nav-item active">
+        {{-- <li class="nav-item active">
           <a href="#" class="nav-link ">
             <i class="fas fa-inbox"></i> Inbox
             <span class="badge bg-primary float-right">0</span>
           </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link ">
-            <i class="far fa-envelope"></i> Sent
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link ">
-            <i class="far fa-trash-alt"></i> Trash
+        </li> --}}
+     
+        <li class="nav-item active">
+          <a href="{{ route('admin.mails.mailshot.create') }}" class="nav-link  {{ Request::is('admin/mails/mailshot*') ? 'active' : '' }}">
+            <i class="fas fa-envelope"></i> Voting - Mailshot
           </a>
         </li>
       </ul>

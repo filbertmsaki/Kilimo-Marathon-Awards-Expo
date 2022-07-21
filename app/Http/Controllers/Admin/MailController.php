@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Mail\MailDispatched;
+use App\Mail\VotingMail;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class MailController extends Controller
      */
     public function index()
     {
-       
+
         return view('admin.mails.inbox');
     }
 
@@ -31,29 +32,40 @@ class MailController extends Controller
      */
     public function create()
     {
-        
+
         $usersTbl = DB::table('users')->select('email')->groupBy('email');
         $subscriberTbl = DB::table('subscribers')->select('email')->groupBy('email');
         $awardTbl = DB::table('award_nominees')->select('email')->groupBy('email');
         $contactTbl = DB::table('contact_us')->select('email')->groupBy('email');
         $maratthonTbl = DB::table('marathon_registrations')->select('email')->groupBy('email');
         $to = $usersTbl->union($subscriberTbl)
-                        ->union($awardTbl)
-                        ->union($contactTbl)
-                        ->union($maratthonTbl)
-                        ->get();
+            ->union($awardTbl)
+            ->union($contactTbl)
+            ->union($maratthonTbl)
+            ->get();
         $cc = $usersTbl->union($subscriberTbl)
-                        ->union($awardTbl)
-                        ->union($contactTbl)
-                        ->union($maratthonTbl)
-                        ->get();
+            ->union($awardTbl)
+            ->union($contactTbl)
+            ->union($maratthonTbl)
+            ->get();
         $bcc = $usersTbl->union($subscriberTbl)
-                        ->union($awardTbl)
-                        ->union($contactTbl)
-                        ->union($maratthonTbl)
-                        ->get();
-       
-        return view('admin.mails.compose',compact(['cc','to','bcc']));
+            ->union($awardTbl)
+            ->union($contactTbl)
+            ->union($maratthonTbl)
+            ->get();
+
+        return view('admin.mails.compose', compact(['cc', 'to', 'bcc']));
+    }
+
+    public function mailshot()
+    {
+        $currrentYear = date('Y');
+        $awardTbl = DB::table('award_nominees')->select('email')
+            ->whereYear('created_at', '=', $currrentYear)
+            ->groupBy('email');
+        $to = $awardTbl->get();
+
+        return view('admin.mails.mail-shot-compose', compact(['to']));
     }
 
     /**
@@ -64,7 +76,7 @@ class MailController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $request->validate([
             'subject' => 'required',
             'body' => 'required',
@@ -77,93 +89,64 @@ class MailController extends Controller
             'cc' => $request->cc,
             'bcc' => $request->bcc,
             'attachments' => $request->file('attachments')
-         ];
-    
-        try{
+        ];
 
-            foreach($request->recipients as $email){
-                
-              
-                $mail = new MailDispatched($data,$email);
+        try {
+
+            foreach ($request->recipients as $email) {
+
+
+                $mail = new MailDispatched($data, $email);
                 Mail::send($mail);
-            
             }
-
-           
-
-        }catch(Swift_TransportException $ex){
-            return redirect()->back()->with('danger','Message sent Fail');  
+        } catch (Swift_TransportException $ex) {
+            return redirect()->back()->with('danger', 'Message sent Fail');
         }
         if (count(Mail::failures()) > 0) {
-             foreach(Mail::failures() as $email_address) {
+            foreach (Mail::failures() as $email_address) {
                 $this->statusdesc = $email_address;
-             }
- 
-        }else{
- 
-           $this->statusdesc  =   "Message sent Succesfully";
-           $this->statuscode  =   "1";
+            }
+        } else {
+
+            $this->statusdesc  =   "Message sent Succesfully";
+            $this->statuscode  =   "1";
         }
         // return response()->json(compact('this'));
-        return redirect()->back()->with('success','Message sent Succesfully');  
-
+        return redirect()->back()->with('success', 'Message sent Succesfully');
     }
-
-    /**
-     * Display the specified mail.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function storeMailshot(Request $request)
     {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified mail.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $request->validate([
+            'subject' => 'required',
+            'recipients' => 'required|array',
+        ]);
 
-    /**
-     * Update the specified mail in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $data = [
+            'subject' => $request->subject,
+        ];
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-        /**
-     * Remove the All mail from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy_all($id)
-    {
-        //
-    }
+        try {
 
+            foreach ($request->recipients as $email) {
+                $mail = new VotingMail($data, $email);
+                Mail::send($mail);
+            }
+        } catch (Swift_TransportException $ex) {
+            return redirect()->back()->with('danger', 'Message sent Fail');
+        }
+        if (count(Mail::failures()) > 0) {
+            foreach (Mail::failures() as $email_address) {
+                $this->statusdesc = $email_address;
+            }
+        } else {
+
+            $this->statusdesc  =   "Message sent Succesfully";
+            $this->statuscode  =   "1";
+        }
+        // return response()->json(compact('this'));
+        return redirect()->back()->with('success', 'Message sent Succesfully');
+    }
     public function sent()
     {
         return view('admin.mails.sent');
@@ -173,5 +156,4 @@ class MailController extends Controller
     {
         return view('admin.mails.trash');
     }
-    
 }
