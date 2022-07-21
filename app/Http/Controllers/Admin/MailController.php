@@ -145,7 +145,12 @@ class MailController extends Controller
             $this->statuscode  =   "1";
         }
         // return response()->json(compact('this'));
-        return redirect()->route('admin.mails.index')->with('success', 'Message sent Succesfully');
+        $currrentYear = date('Y');
+        $awardTbl = DB::table('award_nominees')->select('email')
+            ->whereYear('created_at', '=', $currrentYear)
+            ->groupBy('email');
+        $to = $awardTbl->get();
+        return redirect()->route('admin.mails.index')->with(['to'=>$to,'success'=>'Message sent Succesfully']);
     }
     public function sent()
     {
