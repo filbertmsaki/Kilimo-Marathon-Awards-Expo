@@ -483,7 +483,7 @@ class FrontController extends Controller
         } else {
             $trimedmobile = substr($request->mobile, -9);
             $phonenumber = '255' . $trimedmobile;
-            $name = ucwords(strtolower($request->full_name));
+            $name = strtoupper($request->full_name);
 
             $nominees = AwardNominee::create(
                 [
