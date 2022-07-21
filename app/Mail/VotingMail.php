@@ -32,7 +32,7 @@ class VotingMail extends Mailable
      */
     public function build()
     {
-        $email = $this->view('admin.mails.mail-shot-compose',[ 'data' => $this->data])
+        $email = $this->view('emails.voting-mail',[ 'data' => $this->data])
         ->to($this->email)
         ->from('marketing@kilimomarathon.co.tz', 'Kilimo Marathon, Awards & EXPO')
         ->subject($this->data['subject']);
