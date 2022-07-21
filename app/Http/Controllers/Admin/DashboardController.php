@@ -389,10 +389,6 @@ class DashboardController extends Controller
             $i++;
             $general_slug = Hash::make(Str::random(40) . $i);
         }
-
-
-
-
         //check if phonenumber is empty
         if (empty($request->mobile)) {
             $faker = Factory::create();
@@ -441,9 +437,6 @@ class DashboardController extends Controller
                 
             }
         }
-
-     
-
 
         //Check if nominee exist with the sam category
         $currrentYear = date('Y');
