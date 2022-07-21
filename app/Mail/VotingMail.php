@@ -36,9 +36,6 @@ class VotingMail extends Mailable
         ->to($this->email)
         ->from('marketing@kilimomarathon.co.tz', 'Kilimo Marathon, Awards & EXPO')
         ->subject($this->data['subject']);
-      
-       
-
        
     }
 }

@@ -145,7 +145,7 @@ class MailController extends Controller
             $this->statuscode  =   "1";
         }
         // return response()->json(compact('this'));
-        return redirect()->back()->with('success', 'Message sent Succesfully');
+        return redirect()->route('admin.mails.index')->with('success', 'Message sent Succesfully');
     }
     public function sent()
     {
