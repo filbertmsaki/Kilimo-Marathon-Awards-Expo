@@ -21,8 +21,8 @@ class CreateAwardNomineesTable extends Migration
             $table->string('company_phone')->nullable();
             $table->string('company_email')->nullable();
             $table->string('contact_person_name')->nullable();
-            $table->string('mobile');
-            $table->string('email');
+            $table->string('mobile')->nullable();
+            $table->string('email')->nullable();
             $table->string('address');
             $table->string('company_individual');
             $table->string('company_details')->nullable();
