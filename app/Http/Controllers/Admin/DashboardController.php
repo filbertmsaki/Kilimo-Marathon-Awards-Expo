@@ -494,7 +494,7 @@ class DashboardController extends Controller
         if (!empty($request->mobile)) {
             if ($request->mobile != $nominee->mobile) {
                 $request->validate([
-                    'mobile' => ['required', 'max:13', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:award_nominees'],
+                    'mobile' => ['required', 'max:13', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
                 ]);
                 $trimedmobile = substr($request->mobile, -9);
                 $phonenumber = '255' . $trimedmobile;
@@ -506,7 +506,7 @@ class DashboardController extends Controller
         if (!empty($request->email)) {
             if ($request->email != $nominee->email) {
                 $request->validate([
-                    'email' => ['required', 'max:255', 'unique:award_nominees'],
+                    'email' => ['required', 'max:255'],
                 ]);
                 $nominee->update([
                     'email' => $request->email,
