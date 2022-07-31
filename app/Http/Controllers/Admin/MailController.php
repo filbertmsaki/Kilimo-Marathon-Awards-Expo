@@ -130,7 +130,9 @@ class MailController extends Controller
 
             foreach ($request->recipients as $email) {
 
-                if ($email == '0') {
+                $trimed_email=preg_replace('/\s+/', '', $email);
+
+                if ($trimed_email == '0') {
                     $currrentYear = date('Y');
                     $awardTbl = AwardNominee::select('full_name','category_id', 'email')
                         ->whereNotNull('email')
@@ -145,24 +147,25 @@ class MailController extends Controller
                             'nominee_name' => $toemail->full_name,
                             'award_name' => $toemail->awardcategory->name,
                         ];
+                        dd($data);
+
                         $mail = new VotingMail($data, $toemail->email);
                         Mail::send($mail);
                     }
                 } else {
                     $currrentYear = date('Y');
                     $awardTbl = AwardNominee::select('full_name','category_id', 'email')
-                        ->where('email',$email)
+                        ->where('email',$trimed_email)
                         ->where('verified',1)
                         ->whereYear('created_at', '=', $currrentYear);
                     $award_nominee = $awardTbl->first();
                     $data = [
-                        'email'=>$email,
+                        'email'=>$trimed_email,
                         'subject' => $request->subject,
                         'award_slug' => $award_nominee->awardcategory->slug,
                         'nominee_name' => $award_nominee->full_name,
                         'award_name' => $award_nominee->awardcategory->name,
                     ];
-
                     $mail = new VotingMail($data, $email);
                     Mail::send($mail);
                 }
