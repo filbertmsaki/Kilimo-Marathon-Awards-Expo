@@ -147,7 +147,6 @@ class MailController extends Controller
                             'nominee_name' => $toemail->full_name,
                             'award_name' => $toemail->awardcategory->name,
                         ];
-                        dd($data);
                         $mail = new VotingMail($data, $toemail->email);
                         Mail::send($mail);
                     }
@@ -166,7 +165,6 @@ class MailController extends Controller
                         'nominee_name' => $award_nominee->full_name,
                         'award_name' => $award_nominee->awardcategory->name,
                     ];
-                    dd($data);
 
                     $mail = new VotingMail($data, $email);
                     Mail::send($mail);
