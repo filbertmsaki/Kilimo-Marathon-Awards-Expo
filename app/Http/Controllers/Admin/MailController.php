@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\MailDispatched;
 use App\Mail\VotingMail;
+use App\Models\AwardNominee;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -62,6 +63,7 @@ class MailController extends Controller
         $currrentYear = date('Y');
         $awardTbl = DB::table('award_nominees')->select('email')
             ->whereYear('created_at', '=', $currrentYear)
+            ->where('verified',1)
             ->groupBy('email');
         $to = $awardTbl->get();
 
@@ -123,9 +125,7 @@ class MailController extends Controller
             'recipients' => 'required|array',
         ]);
 
-        $data = [
-            'subject' => $request->subject,
-        ];
+
 
         try {
 
@@ -133,17 +133,37 @@ class MailController extends Controller
 
                 if ($email == '0') {
                     $currrentYear = date('Y');
-                    $awardTbl = DB::table('award_nominees')->select('email')
+                    $awardTbl = AwardNominee::select('category_id', 'email')
                         ->whereNotNull('email')
+                        ->where('verified',1)
                         ->whereYear('created_at', '=', $currrentYear)
-                        ->groupBy('email');
+                        ->groupBy('category_id', 'email');
                     $to = $awardTbl->get();
                     foreach ($to as $toemail) {
-
-                        $mail = new VotingMail($data, $toemail->email);
-                        Mail::send($mail);
+                        $data = [
+                            'email'=>$toemail->email,
+                            'subject' => $request->subject,
+                            'award_slug' => $toemail->awardcategory->slug,
+                            'award_name' => $toemail->awardcategory->name,
+                        ];
+                        dd($data);
+                        // $mail = new VotingMail($data, $toemail->email);
+                        // Mail::send($mail);
                     }
                 } else {
+                    $currrentYear = date('Y');
+                    $awardTbl = AwardNominee::select('category_id', 'email')
+                        ->where('email',$email)
+                        ->where('verified',1)
+                        ->whereYear('created_at', '=', $currrentYear)
+                        ->groupBy('category_id', 'email');
+                    $award_nominee = $awardTbl->first();
+                    $data = [
+                        'email'=>$email,
+                        'subject' => $request->subject,
+                        'award_slug' => $award_nominee->awardcategory->slug,
+                        'award_name' => $award_nominee->awardcategory->name,
+                    ];
                     $mail = new VotingMail($data, $email);
                     Mail::send($mail);
                 }

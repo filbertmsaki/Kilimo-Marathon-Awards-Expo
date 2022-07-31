@@ -275,7 +275,7 @@
                                                                 style="padding-right:50px;padding-left:50px;padding-top:70px;">
                                                                 <div
                                                                     style="color:#ffffff;font-size:14px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-weight:400;line-height:120%;text-align:center;direction:ltr;letter-spacing:0px;mso-line-height-alt:14.399999999999999px;">
-                                                                    <p style="margin: 0;">Congratulation <strong>SHAMBADUNIA</strong>  you have been approved to participate in KILIMO Awards 2022 in the category of </p>
+                                                                    <p style="margin: 0;">Congratulation <strong>{{ strtoupper($data['award_name']) }}</strong>  you have been confirmed to participate in KILIMO Awards 2022 in the category of </p>
                                                                     <p><strong>BEST AGRICULTURAL INNOVATOR</strong></p>
                                                                 </div>
                                                             </td>
@@ -287,7 +287,7 @@
                                                         width="100%">
                                                         <tr>
                                                             <td
-                                                                style="text-align:center;padding-top:40px;padding-bottom:70px;">
+                                                                style="text-align:center;padding-top:40px;padding-bottom:10px;">
                                                                 <div align="center">
                                                                     <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://kilimomarathon.co.tz/votes" style="height:44px;width:139px;v-text-anchor:middle;" arcsize="0%" strokeweight="0.75pt" strokecolor="#FFFFFF" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Arial, sans-serif; font-size:12px"><![endif]--><a
                                                                         href="https://kilimomarathon.co.tz/votes"
