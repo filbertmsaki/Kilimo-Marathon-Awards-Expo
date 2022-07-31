@@ -63,8 +63,7 @@ class MailController extends Controller
         $currrentYear = date('Y');
         $awardTbl = DB::table('award_nominees')->select('email')
             ->whereYear('created_at', '=', $currrentYear)
-            ->where('verified',1)
-            ->groupBy('email');
+            ->where('verified',1);
         $to = $awardTbl->get();
 
         return view('admin.mails.mail-shot-compose', compact(['to']));
@@ -136,8 +135,7 @@ class MailController extends Controller
                     $awardTbl = AwardNominee::select('full_name','category_id', 'email')
                         ->whereNotNull('email')
                         ->where('verified',1)
-                        ->whereYear('created_at', '=', $currrentYear)
-                        ->groupBy('full_name','category_id', 'email');
+                        ->whereYear('created_at', '=', $currrentYear);
                     $to = $awardTbl->get();
                     foreach ($to as $toemail) {
                         $data = [
@@ -155,8 +153,7 @@ class MailController extends Controller
                     $awardTbl = AwardNominee::select('full_name','category_id', 'email')
                         ->where('email',$email)
                         ->where('verified',1)
-                        ->whereYear('created_at', '=', $currrentYear)
-                        ->groupBy('full_name','category_id', 'email');
+                        ->whereYear('created_at', '=', $currrentYear);
                     $award_nominee = $awardTbl->first();
                     $data = [
                         'email'=>$email,
