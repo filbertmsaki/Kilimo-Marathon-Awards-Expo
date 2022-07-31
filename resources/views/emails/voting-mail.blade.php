@@ -314,7 +314,7 @@
                                                         width="100%">
                                                         <tr>
                                                             <td style="width:100%;padding-right:0px;padding-left:0px;">
-                                                                <div align="center" style="line-height:10px"><a
+                                                                <div align="center" style="line-height:10px;margin-bottom: 10px;"><a
                                                                         href="{{ route('votes_nominees',$data['award_slug']) }}"
                                                                         style="outline:none" tabindex="-1"
                                                                         target="_blank"><img alt="Vote"
