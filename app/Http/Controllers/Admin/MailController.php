@@ -146,9 +146,8 @@ class MailController extends Controller
                             'award_slug' => $toemail->awardcategory->slug,
                             'award_name' => $toemail->awardcategory->name,
                         ];
-                        dd($data);
-                        // $mail = new VotingMail($data, $toemail->email);
-                        // Mail::send($mail);
+                        $mail = new VotingMail($data, $toemail->email);
+                        Mail::send($mail);
                     }
                 } else {
                     $currrentYear = date('Y');
