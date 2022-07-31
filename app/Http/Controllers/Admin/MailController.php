@@ -117,6 +117,7 @@ class MailController extends Controller
     public function storeMailshot(Request $request)
     {
 
+
         $request->validate([
             'subject' => 'required',
             'recipients' => 'required|array',
@@ -129,8 +130,23 @@ class MailController extends Controller
         try {
 
             foreach ($request->recipients as $email) {
-                $mail = new VotingMail($data, $email);
-                Mail::send($mail);
+
+                if ($email == '0') {
+                    $currrentYear = date('Y');
+                    $awardTbl = DB::table('award_nominees')->select('email')
+                        ->whereNotNull('email')
+                        ->whereYear('created_at', '=', $currrentYear)
+                        ->groupBy('email');
+                    $to = $awardTbl->get();
+                    foreach ($to as $toemail) {
+
+                        $mail = new VotingMail($data, $toemail->email);
+                        Mail::send($mail);
+                    }
+                } else {
+                    $mail = new VotingMail($data, $email);
+                    Mail::send($mail);
+                }
             }
         } catch (Swift_TransportException $ex) {
             return redirect()->back()->with('danger', 'Message sent Fail');

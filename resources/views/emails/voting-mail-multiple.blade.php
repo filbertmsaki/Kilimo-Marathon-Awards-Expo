@@ -143,8 +143,7 @@
                                                                 <h1
                                                                     style="margin: 0; color: #1b4707; font-size: 12px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
                                                                     <span class="tinyMce-placeholder">Hello and
-                                                                        Welcome!</span>
-                                                                </h1>
+                                                                        Welcome!</span></h1>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -178,8 +177,7 @@
                                                                         href="https://kilimomarathon.co.tz"
                                                                         style="outline:none" tabindex="-1"
                                                                         target="_blank"><img alt="Congratulations"
-                                                                            class="big"
-                                                                            src="https://kilimomarathon.co.tz/images/banner_1.png"
+                                                                            class="big" src="https://kilimomarathon.co.tz/images/banner_1.png"
                                                                             style="display: block; height: auto; border: 0; width: 640px; max-width: 100%;"
                                                                             title="Congratulations"
                                                                             width="640" /></a></div>
@@ -233,50 +231,18 @@
                                                                         <ol>
                                                                             <li>The day of receipt the award will be
                                                                                 <strong>3rd September 2022</strong> at
-                                                                                <strong>SUA</strong> Ground.
-                                                                            </li>
+                                                                                <strong>SUA</strong> Ground.</li>
                                                                             <li>Nomination Fee per category is
-                                                                                <strong>FREE</strong>
-                                                                            </li>
+                                                                                <strong>FREE</strong></li>
+                                                                            <li>After you fill the details , the form
+                                                                                has to be submitted & then you will
+                                                                                receive a email with google form to fill
+                                                                                up personal/company details</li>
+                                                                            <li>After nominee verification complete the
+                                                                                voting window will be open, and you
+                                                                                notified through the emails.</li>
                                                                         </ol>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-4"
-                        role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                        class="row-content stack" role="presentation"
-                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #1b4707; color: #000000; width: 640px;"
-                                        width="640">
-                                        <tbody>
-                                            <tr>
-                                                <td class="column column-1"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="50%">
-                                                    <table border="0" cellpadding="0" cellspacing="0"
-                                                        class="paragraph_block" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
-                                                        width="100%">
-                                                        <tr>
-                                                            <td
-                                                                style="padding-right:50px;padding-left:50px;padding-top:70px;">
-                                                                <div
-                                                                    style="color:#ffffff;font-size:14px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-weight:400;line-height:120%;text-align:center;direction:ltr;letter-spacing:0px;mso-line-height-alt:14.399999999999999px;">
-                                                                    <p style="margin: 0;">Congratulation <strong>SHAMBADUNIA</strong>  you have been approved to participate in KILIMO Awards 2022 in the category of </p>
-                                                                    <p><strong>BEST AGRICULTURAL INNOVATOR</strong></p>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -287,40 +253,18 @@
                                                         width="100%">
                                                         <tr>
                                                             <td
-                                                                style="text-align:center;padding-top:40px;padding-bottom:70px;">
+                                                                style="text-align:center;padding-top:55px;padding-bottom:40px;">
                                                                 <div align="center">
-                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://kilimomarathon.co.tz/votes" style="height:44px;width:139px;v-text-anchor:middle;" arcsize="0%" strokeweight="0.75pt" strokecolor="#FFFFFF" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Arial, sans-serif; font-size:12px"><![endif]--><a
-                                                                        href="https://kilimomarathon.co.tz/votes"
-                                                                        style="text-decoration:none;display:inline-block;color:#ffffff;background-color:transparent;border-radius:0px;width:auto;border-top:1px solid #FFFFFF;font-weight:400;border-right:1px solid #FFFFFF;border-bottom:1px solid #FFFFFF;border-left:1px solid #FFFFFF;padding-top:5px;padding-bottom:5px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;"
+                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://kilimomarathon.co.tz/awards" style="height:33px;width:175px;v-text-anchor:middle;" arcsize="0%" strokeweight="0.75pt" strokecolor="#1B4707" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#1b4707; font-family:Arial, sans-serif; font-size:12px"><![endif]--><a
+                                                                        href="https://kilimomarathon.co.tz/awards"
+                                                                        style="text-decoration:none;display:inline-block;color:#1b4707;background-color:transparent;border-radius:0px;width:auto;border-top:1px solid #1B4707;font-weight:400;border-right:1px solid #1B4707;border-bottom:1px solid #1B4707;border-left:1px solid #1B4707;padding-top:5px;padding-bottom:5px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;"
                                                                         target="_blank"><span
                                                                             style="padding-left:20px;padding-right:20px;font-size:12px;display:inline-block;letter-spacing:normal;"><span
-                                                                                style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;"><span
-                                                                                    data-mce-style="font-size: 12px; line-height: 24px;"
-                                                                                    style="font-size: 12px; line-height: 24px;"><strong>Start
-                                                                                        Voting
-                                                                                        Now</strong></span></span></span></a>
+                                                                                style="font-size: 12px; line-height: 1.8; word-break: break-word; mso-line-height-alt: 22px;"><strong>Register
+                                                                                    As A
+                                                                                    Nominee</strong></span></span></a>
                                                                     <!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td class="column column-2"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="50%">
-                                                    <table border="0" cellpadding="0" cellspacing="0"
-                                                        class="image_block" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                        width="100%">
-                                                        <tr>
-                                                            <td style="width:100%;padding-right:0px;padding-left:0px;">
-                                                                <div align="center" style="line-height:10px"><a
-                                                                        href="https://kilimomarathon.co.tz/votes"
-                                                                        style="outline:none" tabindex="-1"
-                                                                        target="_blank"><img alt="Vote"
-                                                                            src="https://kilimomarathon.co.tz/images/expo_1.jpg"
-                                                                            style="display: block; height: auto; border: 0; width: 320px; max-width: 100%;"
-                                                                            title="Vote" width="320" /></a></div>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -416,7 +360,89 @@
                             </tr>
                         </tbody>
                     </table>
-                    
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-4"
+                        role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
+                                        class="row-content stack" role="presentation"
+                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #1b4707; color: #000000; width: 640px;"
+                                        width="640">
+                                        <tbody>
+                                            <tr>
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="50%">
+                                                    <table border="0" cellpadding="0" cellspacing="0"
+                                                        class="paragraph_block" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%">
+                                                        <tr>
+                                                            <td
+                                                                style="padding-right:50px;padding-left:50px;padding-top:70px;">
+                                                                <div
+                                                                    style="color:#ffffff;font-size:12px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-weight:400;line-height:120%;text-align:center;direction:ltr;letter-spacing:0px;mso-line-height-alt:14.399999999999999px;">
+                                                                    <p style="margin: 0;">Voting is now officially open
+                                                                        for the public to vote for their chosen
+                                                                        categories and nominees. Click the link below to
+                                                                        start casting your votes for the various
+                                                                        categories available</p>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <table border="0" cellpadding="0" cellspacing="0"
+                                                        class="button_block" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%">
+                                                        <tr>
+                                                            <td
+                                                                style="text-align:center;padding-top:40px;padding-bottom:70px;">
+                                                                <div align="center">
+                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://kilimomarathon.co.tz/votes" style="height:44px;width:139px;v-text-anchor:middle;" arcsize="0%" strokeweight="0.75pt" strokecolor="#FFFFFF" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Arial, sans-serif; font-size:12px"><![endif]--><a
+                                                                        href="https://kilimomarathon.co.tz/votes"
+                                                                        style="text-decoration:none;display:inline-block;color:#ffffff;background-color:transparent;border-radius:0px;width:auto;border-top:1px solid #FFFFFF;font-weight:400;border-right:1px solid #FFFFFF;border-bottom:1px solid #FFFFFF;border-left:1px solid #FFFFFF;padding-top:5px;padding-bottom:5px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;"
+                                                                        target="_blank"><span
+                                                                            style="padding-left:20px;padding-right:20px;font-size:12px;display:inline-block;letter-spacing:normal;"><span
+                                                                                style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;"><span
+                                                                                    data-mce-style="font-size: 12px; line-height: 24px;"
+                                                                                    style="font-size: 12px; line-height: 24px;"><strong>Start
+                                                                                        Voting
+                                                                                        Now</strong></span></span></span></a>
+                                                                    <!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td class="column column-2"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="50%">
+                                                    <table border="0" cellpadding="0" cellspacing="0"
+                                                        class="image_block" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%">
+                                                        <tr>
+                                                            <td style="width:100%;padding-right:0px;padding-left:0px;">
+                                                                <div align="center" style="line-height:10px"><a
+                                                                        href="https://kilimomarathon.co.tz/votes"
+                                                                        style="outline:none" tabindex="-1"
+                                                                        target="_blank"><img alt="Vote"
+                                                                            src="https://kilimomarathon.co.tz/images/expo_1.png"
+                                                                            style="display: block; height: auto; border: 0; width: 320px; max-width: 100%;"
+                                                                            title="Vote" width="320" /></a></div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-5"
                         role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
                         <tbody>
@@ -457,7 +483,7 @@
                                                                         style="font-size: 12px; mso-line-height-alt: 14.399999999999999px; color: #152a6d; line-height: 1.2; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
                                                                         <p
                                                                             style="margin: 0; font-size: 12px; text-align: center; mso-line-height-alt: 14.399999999999999px;">
-                                                                        </p>
+                                                                            </p>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -477,8 +503,7 @@
                                                                         <tr>
                                                                             <td class="divider_inner"
                                                                                 style="font-size: 1px; line-height: 1px; border-top: 1px solid #1B4707;">
-                                                                                <span> </span>
-                                                                            </td>
+                                                                                <span> </span></td>
                                                                         </tr>
                                                                     </table>
                                                                 </div>
@@ -600,8 +625,7 @@
                                                                     style="margin: 0; color: #1b4707; font-size: 12px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 400; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
                                                                     <strong>Where to find us:</strong><br />429 Mahando
                                                                     Road, Masaki Dar es salaam<br />+255 754 222 800 |
-                                                                    +255 624 222 211
-                                                                </h1>
+                                                                    +255 624 222 211</h1>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -657,8 +681,7 @@
                                                                 <h1
                                                                     style="margin: 0; color: #000000; font-size: 11px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 400; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
                                                                     <strong>© All rights reserved KILIMO Marathon,
-                                                                        Awards & Expo 2022</strong>
-                                                                </h1>
+                                                                        Awards & Expo 2022</strong></h1>
                                                             </td>
                                                         </tr>
                                                     </table>

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <link href="{{ asset('css/fixedColumns.dataTables.css') }}" rel="stylesheet" type="text/css" />
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
@@ -29,6 +30,29 @@
             color: #fff;
         }
 
+        th,
+        td {
+            white-space: nowrap;
+        }
+
+        div.dataTables_wrapper {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        table.dataTable tbody tr>.dtfc-fixed-left,
+        table.dataTable tbody tr>.dtfc-fixed-right {
+            color: black !important;
+        }
+
+        table.dataTable thead tr>.dtfc-fixed-left,
+        table.dataTable thead tr>.dtfc-fixed-right,
+        table.dataTable tfoot tr>.dtfc-fixed-left,
+        table.dataTable tfoot tr>.dtfc-fixed-right {
+
+            color: black;
+        }
+
         @media (min-width: 576px) {
 
             /* CSS that should be displayed if width is equal to or less than 800px goes here */
@@ -46,6 +70,7 @@
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.fixedColumns.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
@@ -96,15 +121,22 @@
                 .getFullYear() + "_" + date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
 
             var table = $('#award_nominee').DataTable({
+                processing: true,
                 lengthMenu: [
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
                 pageLength: 10,
-                responsive: true,
-                "lengthChange": true,
-                "autoWidth": false,
-                processing: true,
+                responsive: false,
+                lengthChange: true,
+                autoWidth: true,
+                scrollY: false,
+                scrollX: true,
+                scrollCollapse: false,
+                paging: true,
+                fixedColumns: {
+                    left: 2
+                },
                 dom: "<'row'<'col-sm-4'l><'col-sm-4'B><'col-sm-4'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
@@ -140,6 +172,8 @@
                         titleAttr: 'PDF',
                         title: 'nominees_lists_' + today,
                         className: 'btn btn-default btn-sm',
+                        footer: true,
+                        orientation: 'landscape',
                         exportOptions: {
                             columns: ':not(:first,:last)'
                         }
@@ -248,9 +282,8 @@
                                     <tbody>
                                         @foreach ($award_nominees as $nominee)
                                             <tr id="award_nominee_id_{{ $nominee->id }}">
-                                                <td><input type="checkbox" name="category_id[]"
-                                                        value="{{ $nominee->id }}" id="sub_chk_{{ $nominee->id }}"
-                                                        class="sub_chk"></td>
+                                                <td><input type="checkbox" name="category_id[]" value="{{ $nominee->id }}"
+                                                        id="sub_chk_{{ $nominee->id }}" class="sub_chk"></td>
                                                 <td>{{ $nominee->full_name }}</td>
                                                 <td>{{ $nominee->mobile }}</td>
                                                 <td>{{ $nominee->email }}</td>
@@ -511,8 +544,8 @@
                                         <div class="input-group mb-3">
                                             <input type="text"
                                                 class="form-control @error('address') is-invalid @enderror" id="address"
-                                                name="address" placeholder="Nominee Address"
-                                                autocomplete="address" autofocus>
+                                                name="address" placeholder="Nominee Address" autocomplete="address"
+                                                autofocus>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-map-marked-alt"></span>

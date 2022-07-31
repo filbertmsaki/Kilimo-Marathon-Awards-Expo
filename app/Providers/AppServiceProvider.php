@@ -38,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         Paginator::useBootstrap();
+        
         $general_settings = GeneralSetting::get()->first();
         if ($general_settings !== null) {
             $site_name = $general_settings->site_name;

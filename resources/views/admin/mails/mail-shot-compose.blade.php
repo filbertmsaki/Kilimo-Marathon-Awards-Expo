@@ -113,7 +113,7 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" name="subject" placeholder="Subject:">
+                                    <input class="form-control" name="subject" value="{{ old('subject') }}" placeholder="Subject:">
                                     @if ($errors->has('subject'))
                                         <span class="text-danger">{{ $errors->first('subject') }}</span>
                                     @endif
