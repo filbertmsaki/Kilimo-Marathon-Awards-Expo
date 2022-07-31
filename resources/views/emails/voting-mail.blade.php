@@ -275,8 +275,8 @@
                                                                 style="padding-right:50px;padding-left:50px;padding-top:70px;">
                                                                 <div
                                                                     style="color:#ffffff;font-size:14px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-weight:400;line-height:120%;text-align:center;direction:ltr;letter-spacing:0px;mso-line-height-alt:14.399999999999999px;">
-                                                                    <p style="margin: 0;">Congratulation <strong>{{ strtoupper($data['award_name']) }}</strong>  you have been confirmed to participate in KILIMO Awards 2022 in the category of </p>
-                                                                    <p><strong>BEST AGRICULTURAL INNOVATOR</strong></p>
+                                                                    <p style="margin: 0;">Congratulation <strong>{{ strtoupper($data['nominee_name']) }}</strong>  you have been confirmed to participate in KILIMO Awards 2022 in the category of </p>
+                                                                    <p><strong>{{ strtoupper($data['award_name']) }}</strong></p>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -289,8 +289,8 @@
                                                             <td
                                                                 style="text-align:center;padding-top:40px;padding-bottom:10px;">
                                                                 <div align="center">
-                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://kilimomarathon.co.tz/votes" style="height:44px;width:139px;v-text-anchor:middle;" arcsize="0%" strokeweight="0.75pt" strokecolor="#FFFFFF" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Arial, sans-serif; font-size:12px"><![endif]--><a
-                                                                        href="https://kilimomarathon.co.tz/votes"
+                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:44px;width:139px;v-text-anchor:middle;" arcsize="0%" strokeweight="0.75pt" strokecolor="#FFFFFF" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Arial, sans-serif; font-size:12px"><![endif]--><a
+                                                                        href="{{ route('votes_nominees',$data['award_slug']) }}"
                                                                         style="text-decoration:none;display:inline-block;color:#ffffff;background-color:transparent;border-radius:0px;width:auto;border-top:1px solid #FFFFFF;font-weight:400;border-right:1px solid #FFFFFF;border-bottom:1px solid #FFFFFF;border-left:1px solid #FFFFFF;padding-top:5px;padding-bottom:5px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;"
                                                                         target="_blank"><span
                                                                             style="padding-left:20px;padding-right:20px;font-size:12px;display:inline-block;letter-spacing:normal;"><span
@@ -315,7 +315,7 @@
                                                         <tr>
                                                             <td style="width:100%;padding-right:0px;padding-left:0px;">
                                                                 <div align="center" style="line-height:10px"><a
-                                                                        href="https://kilimomarathon.co.tz/votes"
+                                                                        href="{{ route('votes_nominees',$data['award_slug']) }}"
                                                                         style="outline:none" tabindex="-1"
                                                                         target="_blank"><img alt="Vote"
                                                                             src="https://kilimomarathon.co.tz/images/expo_1.jpg"

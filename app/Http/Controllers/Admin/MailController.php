@@ -133,36 +133,41 @@ class MailController extends Controller
 
                 if ($email == '0') {
                     $currrentYear = date('Y');
-                    $awardTbl = AwardNominee::select('category_id', 'email')
+                    $awardTbl = AwardNominee::select('full_name','category_id', 'email')
                         ->whereNotNull('email')
                         ->where('verified',1)
                         ->whereYear('created_at', '=', $currrentYear)
-                        ->groupBy('category_id', 'email');
+                        ->groupBy('full_name','category_id', 'email');
                     $to = $awardTbl->get();
                     foreach ($to as $toemail) {
                         $data = [
                             'email'=>$toemail->email,
                             'subject' => $request->subject,
                             'award_slug' => $toemail->awardcategory->slug,
+                            'nominee_name' => $toemail->full_name,
                             'award_name' => $toemail->awardcategory->name,
                         ];
+                        dd($data);
                         $mail = new VotingMail($data, $toemail->email);
                         Mail::send($mail);
                     }
                 } else {
                     $currrentYear = date('Y');
-                    $awardTbl = AwardNominee::select('category_id', 'email')
+                    $awardTbl = AwardNominee::select('full_name','category_id', 'email')
                         ->where('email',$email)
                         ->where('verified',1)
                         ->whereYear('created_at', '=', $currrentYear)
-                        ->groupBy('category_id', 'email');
+                        ->groupBy('full_name','category_id', 'email');
                     $award_nominee = $awardTbl->first();
                     $data = [
                         'email'=>$email,
                         'subject' => $request->subject,
                         'award_slug' => $award_nominee->awardcategory->slug,
+                        'nominee_name' => $award_nominee->full_name,
                         'award_name' => $award_nominee->awardcategory->name,
                     ];
+                    dd($data);
+
                     $mail = new VotingMail($data, $email);
                     Mail::send($mail);
                 }
