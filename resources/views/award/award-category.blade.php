@@ -160,7 +160,7 @@
             }
 
             .syotimer__body {
-                display: flex;
+                display: flex;/mails
             }
 
             .syotimer-cell__value {
