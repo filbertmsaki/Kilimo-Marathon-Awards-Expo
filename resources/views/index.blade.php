@@ -182,10 +182,49 @@
                                     data-animation="fadeInLeft" data-delay="0.9s"><i
                                         class="fa fa-arrow-right"></i>Register
                                     For Marathon</a>
-                                <a href="{{ route('awards_nominees') }}" class="btn btn-lg btn-common"
-                                    data-animation="fadeInLeft" data-delay="0.9s"><i
-                                        class="fa fa-arrow-right"></i>Register
-                                    As Award Nominee</a>
+
+
+
+                                @if ($award_settings->awards_registration == '1')
+                                    @if (date('Y-m-d H:i:s') < date('Y-m-d H:i:s', strtotime($award_settings->awards_registration_time_remain)))
+                                        <a href="{{ route('awards_nominees') }}" class="btn btn-lg btn-common"
+                                            data-animation="fadeInLeft" data-delay="0.9s"><i
+                                                class="fa fa-arrow-right"></i>Register
+                                            As Award Nominee</a>
+                                    @endif
+                                @else
+                                @if ($award_settings->vote == '1')
+                                @if (date('Y-m-d H:i:s') < date('Y-m-d H:i:s', strtotime($award_settings->vote_time_remain)))
+
+                                <a href="{{ route('votes') }}" class="btn btn-lg btn-common"
+                                data-animation="fadeInLeft" data-delay="0.9s"><i
+                                    class="fa fa-arrow-right"></i>Vote Now</a>
+
+
+
+
+
+                                @endif
+                            @endif
+
+
+                                @endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             </div>
 
                         </div>
