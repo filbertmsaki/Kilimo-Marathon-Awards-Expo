@@ -135,7 +135,7 @@
                 scrollCollapse: false,
                 paging: true,
                 fixedColumns: {
-                    left: 2
+                    left: 0
                 },
                 dom: "<'row'<'col-sm-4'l><'col-sm-4'B><'col-sm-4'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
