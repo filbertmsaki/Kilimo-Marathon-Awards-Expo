@@ -203,7 +203,6 @@
 
 
 
-
                                 @endif
                             @endif
 
@@ -745,7 +744,7 @@
             </h1>
             <p class="section-subcontent"></p>
             <figure class="image">
-                <img class="img-fluid" src="{{ asset('imgs/kmae-partiners-2022.jpg') }}"
+                <img class="img-fluid" src="{{ asset('img/kmae-partiners-2022.jpg') }}"
                     alt="Kilimo Marathon, Awards & EXPO Partiners">
             </figure>
             {{-- <div class="wow fadeInUpQuick" data-wow-delay="0.3s" style="visibility: hidden;">
