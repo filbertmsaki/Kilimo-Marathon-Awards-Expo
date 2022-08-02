@@ -74,7 +74,7 @@
             <img width="120" src="https://kilimomarathon.co.tz/imgs/KILIMO-MARATHON--EXPO-LOGO.png">
         </div>
         <div class="conn">
-                <p><a href="#">About KILIMO Awards | </a><a href="#">Categories | </a><a href="#">Register Awards | </a><a href="#">Vote</a></p>
+                <p><a href="https://kilimomarathon.co.tz">Home | </a><a href="https://kilimomarathon.co.tz/awards">Categories | </a><a href="https://kilimomarathon.co.tz/sponsorship">Sponsorship | </a><a href="https://kilimomarathon.co.tz/contact-us">Contact Us</a></p>
             </ul>
         </div>
         <div class="nomi">
