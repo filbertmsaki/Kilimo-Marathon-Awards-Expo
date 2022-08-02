@@ -78,26 +78,26 @@
             </ul>
         </div>
         <div class="nomi">
-            <img src="{{ asset('images/banner.jpg') }}">
+            <img src="https://kilimomarathon.co.tz/images/banner.jpg">
         </div>
         <div class="aza">
             <div class="conrats">
                 <h3>Congratulations</h3>
-                <h2>Name Of Nominee</h2>
+                <h2>{{ strtoupper($data['nominee_name']) }}</h2>
                 <p>You have been officially NOMINATED <br> For the KILIMO Awards in the Category of</p>
-                <h3>Award Category</h3>
+                <h3>{{ strtoupper($data['award_name']) }}</h3>
             </div>
 
             <div class="abut">
                 <h3>About The Awards</h3>
                 <p>The KILIMO Awards are by far the biggest and most prestigious awards in Tanzania farming. Every year we review our award categories to ensure they better reflect the range of achievements that deserve recognition in the rapidly-changing world of agriculture.</p>
 
-                <a href="#">View Nomination | </a>
-                <a href="#"> Vote Now</a>
+                <a href="{{ route('votes_nominees',$data['award_slug']) }}">View Nomination | </a>
+                <a href="{{ route('votes_nominees',$data['award_slug']) }}"> Vote Now</a>
             </div>
         </div>
         <div class="promo">
-            <img src="{{ asset('images/promo.jpg') }}">
+            <img src="https://kilimomarathon.co.tz/images/promo.jpg">
         </div>
         <div class="footer">
             <div class="linki">
