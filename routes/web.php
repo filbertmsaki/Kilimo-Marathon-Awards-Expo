@@ -17,7 +17,7 @@ Route::get('/get-balance', [App\Http\Controllers\FrontController::class, 'getBal
 
 
 
-    Route::get('/mail', function () {return view('emails.voting-mail');})->name('email.welcome');
+    Route::get('/mail', function () {return view('emails.nomination');})->name('email.welcome');
     Auth::routes();
     Auth::routes(['verify' => true]);
     Route::post('loginWithOtp', [App\Http\Controllers\Auth\LoginController::class, 'loginWithOtp'])->name('loginWithOtpview');
