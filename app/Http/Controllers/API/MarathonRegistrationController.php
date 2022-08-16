@@ -113,7 +113,13 @@ class MarathonRegistrationController extends BaseController
         $data = [];
         $name = explode(" ", $params['full_name']);
         $data['customerFirstName'] = $name[0];
-        $data['customerLastName'] = $name[1];
+        if(!isset($name[1])){
+            $data['customerLastName'] = "Null";
+        }
+        else{
+
+            $data['customerLastName'] = $name[1];
+        }
         $data['customerCity'] = $params['region'];
         $data['paymentOption'] = $params['payment_option'];
         $data['customerPhone'] = $params['phone'];
