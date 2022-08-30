@@ -54,6 +54,7 @@ Route::get('/get-balance', [App\Http\Controllers\FrontController::class, 'getBal
     Route::post('/awards-vote', [App\Http\Controllers\FrontController::class,'awards_vote_store'])->name('awards_vote_store');
     Route::get('/gallery/2021-event', [App\Http\Controllers\FrontController::class,'gallery_2021'])->name('gallery_2021');
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin','as'=>'admin.'], function() {
+    Route::get('/send-sms', [App\Http\Controllers\Admin\DashboardController::class, 'send_sms'])->name('send.sms');
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
     Route::get('/profile', [App\Http\Controllers\Admin\DashboardController::class, 'profile'])->name('profile');
     Route::post('/profile', [App\Http\Controllers\Auth\ProfileController::class, 'profile_update'])->name('profile_update');

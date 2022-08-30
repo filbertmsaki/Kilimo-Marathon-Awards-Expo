@@ -79,7 +79,7 @@
                     <h2>Please Note:</h2>
                     <div class="instraction-list">
                         <ul>
-                            <li>The marathon date is 03<sup>rd</sup> September 2022 at SUA Ground.</li>
+                            <li>The marathon date is 30<sup>th</sup> October 2022 at SUA Ground.</li>
                             <li>Registration Fee per run distance is Tsh 35,000/- including T-Shirt & BIB number</li>
                             <li>After you fill the details , the form has to be submitted & then you will be lead to the
                                 payment page</li>

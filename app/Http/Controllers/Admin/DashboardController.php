@@ -393,9 +393,8 @@ class DashboardController extends Controller
         if (empty($request->mobile)) {
             $faker = Factory::create();
             $number = $faker->numerify('07########');
-                $trimedmobile = substr($number, -9);
-                $phonenumber = '255' . $trimedmobile;
-
+            $trimedmobile = substr($number, -9);
+            $phonenumber = '255' . $trimedmobile;
         }
         if (!empty($request->mobile)) {
             if ($request->mobile) {
@@ -413,28 +412,26 @@ class DashboardController extends Controller
             $email = $faker->unique()->email;
         }
         if (!empty($request->email)) {
-            if ($request->email ) {
+            if ($request->email) {
                 $request->validate([
                     'email' => ['required', 'max:255',],
                 ]);
-                
-                    $email = $request->email;
-                
+
+                $email = $request->email;
             }
         }
 
         if (empty($request->address)) {
-           
+
             $address = 'Unknown';
         }
         if (!empty($request->address)) {
-            if ($request->address ) {
+            if ($request->address) {
                 $request->validate([
                     'address' => ['required', 'max:255',],
                 ]);
-                
-                    $address = $request->address;
-                
+
+                $address = $request->address;
             }
         }
 
@@ -880,5 +877,53 @@ class DashboardController extends Controller
             ]);
             return redirect()->back()->with('warning', $payments->resultexplanation);
         }
+    }
+
+    public function send_sms()
+    {
+        $currrentYear = date('Y');
+        $award_nominees = AwardNominee::where('Verified', '=', '1')
+            ->whereYear('created_at', '=', $currrentYear)
+            ->orderBy('id', 'asc')
+            ->get();
+
+        foreach ($award_nominees as $award) {
+            $mobile = $award->mobile;
+            $name = $award->full_name;
+
+            //send SMS to user after complete payment
+            $trimedmobile = substr($mobile, -9);
+            $phonenumber = '255' . $trimedmobile;
+            $base_url = 'https://messaging-service.co.tz/api/sms/v1/text/single';
+            $from = 'SHAMBADUNIA';
+            $to = $phonenumber;
+            $text = 'Habari, SHAMBADUNIA LIMITED kwa niaba ya kamati ya maandalizi ya KILIMO MARATHON, AWARD & EXPO 2022, Tunapenda kukutaarifu kuwa tarehe ya tukio itakuwa kuanzia Tarehe 29 Septemba hadi 1 Oktoba 2022, Katika Uwanja wa Jamhuri badala ya Tarehe 1-3 Septemba. Kwa Mawasiliano Tupigie 0766300777';
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $base_url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => '{"from":"' . $from . '", "to":"' . $to . '",  "text": "' . $text . '"}',
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: Basic c2hhbWJhZHVuaWE6UFY5Qzk1',
+                    'Content-Type: application/json',
+                    'Accept: application/json'
+                ),
+            ));
+            $response = curl_exec($curl);
+            $error    = curl_error($curl);
+            $datafile = json_decode($response, true, JSON_UNESCAPED_SLASHES);;
+            curl_close($curl);
+            dd($datafile);
+        }
+
+
+
+
     }
 }

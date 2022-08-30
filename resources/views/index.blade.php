@@ -283,8 +283,7 @@
                                     <h3>Host, Date & Venue</h3>
                                     <p>
                                         ShambaDunia Limited (SDL), will hold its second Kilimo Marathon, Awards and Expo
-                                        on the 1<sup>st</sup>
-                                        to 03<sup>rd</sup> September 2022 at Morogoro.
+                                        on the 29<sup>th</sup> September to 30<sup>th</sup> October 2022 at Morogoro.
                                     </p>
                                 </div>
                             </div>

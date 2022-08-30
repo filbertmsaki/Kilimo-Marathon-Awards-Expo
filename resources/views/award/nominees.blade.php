@@ -76,7 +76,7 @@
                     <h2>Please Note:</h2>
                     <div class="instraction-list">
                         <ul>
-                            <li>TThe day of receipt the award will be 3<sup>rd</sup> September 2022 at SUA Ground.</li>
+                            <li>TThe day of receipt the award will be 30<sup>th</sup> October 2022 at SUA Ground.</li>
                             <li>Nomination Fee per category is FREE</li>
                             <li>After you fill the details , the form has to be submitted & then you will receive a
                                 email with google form to fill up personal/company details</li>

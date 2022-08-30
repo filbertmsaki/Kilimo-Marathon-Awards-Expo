@@ -232,7 +232,7 @@
                                                                         style="font-size: 12px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #1b4707; line-height: 1.2;">
                                                                         <ol>
                                                                             <li>The day of receipt the award will be
-                                                                                <strong>3rd September 2022</strong> at
+                                                                                <strong>30<sup>th</sup> October</strong> at
                                                                                 <strong>SUA</strong> Ground.
                                                                             </li>
                                                                             <li>Nomination Fee per category is
