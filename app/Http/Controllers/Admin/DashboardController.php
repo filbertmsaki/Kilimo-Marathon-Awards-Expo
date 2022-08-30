@@ -919,8 +919,10 @@ class DashboardController extends Controller
             $error    = curl_error($curl);
             $datafile = json_decode($response, true, JSON_UNESCAPED_SLASHES);;
             curl_close($curl);
-            dd($datafile);
         }
+
+
+            return redirect()->back()->with('success', 'Sent');
 
 
 
