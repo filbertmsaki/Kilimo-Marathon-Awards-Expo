@@ -284,14 +284,14 @@
                 </div>
                 <div class="award-description">
                     <p>
-                      We're warm welcome you to participate in our marathon which will take place in SUA Ground on 30<sup>th</sup> October 
+                      We're warm welcome you to participate in our events which will take place in SUA Ground on 29<sup>th</sup> September to 1<sup>th</sup> October
                     </p>
                 </div>
 
             </div>
-     
+
                 <!-- =========================================================== -->
-               
+
                 <!-- /.row -->
         </div>
 
