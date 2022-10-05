@@ -231,7 +231,7 @@ class FrontController extends Controller
             $city           = $params['city']              = $request->region;
             $phone         = $params['mobile']             = $phonenumber;
             $email          = $params['email']             = $request->email;
-            $amount         = $params['amount']            = 100;
+            $amount         = $params['amount']            = 35000;
             $description    = $params['description']       = $request->description;
             // $payment_option    = $params['payment_option']       = $request->payment_option;
             $event    = $params['event']       = $request->event;
@@ -601,7 +601,6 @@ class FrontController extends Controller
     }
     public function callback(Request $request)
     {
-        dd($request->all());
         $transactionref = $request->CompanyRef;
         $transactiontoken = $request->TransactionToken;
         $transactionapproval = $request->CCDapproval;
