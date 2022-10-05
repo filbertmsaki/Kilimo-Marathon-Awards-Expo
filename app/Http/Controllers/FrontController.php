@@ -601,6 +601,7 @@ class FrontController extends Controller
     }
     public function callback(Request $request)
     {
+        dd($request->all());
         $transactionref = $request->CompanyRef;
         $transactiontoken = $request->TransactionToken;
         $transactionapproval = $request->CCDapproval;
