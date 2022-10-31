@@ -111,21 +111,19 @@
             });
           })
         });
-      
 
 
-          
+
+
     //DataTable Values
-       
-        
-
+    
         const date = new Date();
         const month = date.getMonth() + 1;
         const today= (month.toString().length > 1 ? month : "0" + month) + "_" + date.getDate() + "_" + date.getFullYear()+ "_" +date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
         var table = $('#empTable').DataTable({
-          
+
           ajax: {
-            url: "{{ url('admin/account/user')}}",          
+            url: "{{ url('admin/account/user')}}",
             dataSrc: ''
           },
           lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -137,7 +135,7 @@
                   "<'center col-md-4'B>"+
                   "<'right col-md-4'f>"+
               ">"+
-              
+
               ">",
           buttons: [
                 {
@@ -175,7 +173,7 @@
                 exportOptions: {
                     columns: ':not(:first,:last)'
                 }
-                },               
+                },
                 {
                   extend:    'print',
                   text:      '<i class="fa fa-print"></i> Print',
@@ -185,22 +183,22 @@
                   exportOptions: {
                       columns: ':not(:first,:last)'
                   }
-                },  
+                },
             ],
           createdRow: function (row, data, dataIndex) {
                 $(row).addClass('user_id_'+ data.id + '');
             },
-            
+
           columns: [
                   { data: null  ,
                     render: function (data, row, full) {
                       return '<input type="checkbox" class="sub_chk" data-id="'+ data.id + '">';
                     },
                   },
-                  { data: null,    
+                  { data: null,
                   render: function (data, type, row, meta) {
                         return meta.row+1; // This contains the row index
-                      } 
+                      }
                   },
                   { data: null,
                     render: function (data) {
@@ -235,10 +233,10 @@
                     },
                   }
           ],
-          
+
         });
-       
-    //Save data into database  
+
+    //Save data into database
 
         $(".btn-save").click(function(e){
               e.preventDefault();
@@ -267,7 +265,7 @@
               $.ajax({
                 url: "{{ route('admin.user_store') }}",
                 type:'POST',
-                data: { 
+                data: {
                 "_token": "{{ csrf_token() }}",
                 user_id:user_id,
                 first_name:first_name,
@@ -281,10 +279,10 @@
                 },
                 success: function(data) {
                   // window.location.href = data;
-                  document.getElementById("usersForm").reset(); 
+                  document.getElementById("usersForm").reset();
                   $('#ajax-crud-modal').modal('hide');
                   $('#empTable').DataTable().ajax.reload()
-                  
+
                   $(document).Toasts('create', {
                     class: 'bg-success',
                     title:data[1],
@@ -299,9 +297,9 @@
                         });
                       }
               });
-        }); 
+        });
 
-    //delete Single User 
+    //delete Single User
         $('body').on('click', '.delete-user', function () {
             var user_id = $(this).data("id");
             $.ajax({
@@ -314,9 +312,9 @@
                       class: 'bg-success',
                       title:data[1],
                     })
-                    
+
                 },
-                error: function (data) { 
+                error: function (data) {
                       $(document).Toasts('create', {
                       class: 'bg-danger',
                       title: 'Error Occur',
@@ -324,29 +322,29 @@
                     })
                 }
             });
-        }); 
-    
+        });
+
     //multiple delete-user
         $('#master').on('click', function(e) {
-              if($(this).is(':checked',true))  
+              if($(this).is(':checked',true))
               {
-                $(".sub_chk").prop('checked', true);  
-              } else {  
-                $(".sub_chk").prop('checked',false);  
-              }  
+                $(".sub_chk").prop('checked', true);
+              } else {
+                $(".sub_chk").prop('checked',false);
+              }
         });
         $('.delete_all').on('click', function(e) {
-            var allVals = [];  
-            $(".sub_chk:checked").each(function() {  
+            var allVals = [];
+            $(".sub_chk:checked").each(function() {
                 allVals.push($(this).attr('data-id'));
-            });  
-            if(allVals.length <=0)  {  
-                alert("Please select row.");  
-            } 
-            else {  
-                var check = confirm("Are you sure you want to delete this row?");  
-                if(check == true){  
-                    var join_selected_values = allVals.join(","); 
+            });
+            if(allVals.length <=0)  {
+                alert("Please select row.");
+            }
+            else {
+                var check = confirm("Are you sure you want to delete this row?");
+                if(check == true){
+                    var join_selected_values = allVals.join(",");
                     $.ajax({
                         url: "{{ url('admin/account/users-delete-all')}}",
                         type: 'DELETE',
@@ -355,7 +353,7 @@
                         success: function (data) {
                           $('#empTable').DataTable().ajax.reload()
                             if (data['success']) {
-                                $(".sub_chk:checked").each(function() {  
+                                $(".sub_chk:checked").each(function() {
                                     $(this).parents("tr").remove();
                                 });
                                 alert(data['success']);
@@ -373,15 +371,15 @@
                         $('table tr').filter("[data-row-id='" + value + "']").remove();
                     });
 
-                }  
-            }  
+                }
+            }
 
         });
 
 
   });
 
-  
+
   </script>
 
 @endsection
@@ -392,7 +390,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-           
+
             <!-- /.card -->
 
             <div class="card">
@@ -421,7 +419,7 @@
                   </tr>
                   </thead>
 
-             
+
                 </table>
               </div>
               <!-- /.card-body -->
@@ -450,7 +448,7 @@
               <form id="usersForm" class="usersForm" name="usersForm">
                 @csrf
                 <input type="hidden" name="user_id" id="user_id">
-    
+
                 <div class="card-body">
                   <div class="row">
                     <div class="form-group col-md-6">
@@ -528,11 +526,11 @@
                     </div>
                     <div class="form-group col-md-6">
                       <input id="password_confirmation" type="password" placeholder="Confirm Password" id="password_confirmation" class="form-control" name="password_confirmation" autocomplete="password_confirmation">
-                    
+
                     </div>
                   </div>
                 </div>
-                <!-- /.card-body -->               
+                <!-- /.card-body -->
               <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
                 @can('edit-users')
@@ -541,7 +539,7 @@
               </div>
             </form>
             </div>
-           
+
           </div>
           <!-- /.modal-content -->
         </div>
@@ -550,5 +548,5 @@
     </section>
 
 
-  
+
 @endsection

@@ -9,7 +9,7 @@ class Vote extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'ip',
+        'agent',
         'nominee_id',
         'category_id',
     ];

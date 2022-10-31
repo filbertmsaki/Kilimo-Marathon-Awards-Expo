@@ -18,9 +18,11 @@ class CreateExpoRegistrationsTable extends Migration
             $table->string('slug')->unique();
             $table->string('company_name');
             $table->string('contact_person_name');
+            $table->bigInteger('phonecode')->default(255);
             $table->string('contact_person_phone');
             $table->string('contact_person_email');
             $table->string('business_details');
+            $table->string('payment_option');
             $table->timestamps();
         });
     }

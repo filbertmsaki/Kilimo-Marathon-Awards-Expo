@@ -13,10 +13,17 @@ class PushPayment extends Model
         'transactionref', 'customername', 'customercredit',
         'transactionapproval', 'transactioncurrency', 'transactionamount',
         'fraudalert', 'fraudexplnation', 'transactionnetamount',
-        'transactionsettlementdate', 'transactionrollingreserveamount', 
-        'transactionrollingreservedate', 'customerphone', 'customercountry', 
+        'transactionsettlementdate', 'transactionrollingreserveamount',
+        'transactionrollingreservedate', 'customerphone', 'customercountry',
         'transactionfinalcurrency','transactionfinalamount',
         'customeraddress', 'customercity', 'customerzip', 'mobilepaymentrequest', 'accref',
         'status','customercredittype','accref'
     ];
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->slug = unique_token();
+        });
+    }
 }

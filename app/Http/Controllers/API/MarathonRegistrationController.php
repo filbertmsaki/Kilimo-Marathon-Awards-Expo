@@ -56,7 +56,13 @@ class MarathonRegistrationController extends BaseController
                 if (!$validator->fails()) {
 
                     $validator->errors()->add('marathon_registration', 'Sorry Marathon Registration start on 1 June 2022');
-                    return $this->handleError($validator->errors()->first(), Response::HTTP_NOT_FOUND);
+
+                    $reg_no = 'T665CSF';
+                    $chasase_no = "244***************999";
+                    return $this->handleError([
+                        'reg_no' => $reg_no,
+                        'chases' => $chasase_no
+                    ], Response::HTTP_NOT_FOUND);
                 }
             } else {
 
@@ -94,8 +100,9 @@ class MarathonRegistrationController extends BaseController
                     $i++;
                     $general_slug = Str::random(39) . $i;
                 }
-                 $marathon_registration=MarathonRegistration::create([
-                        'slug' =>$general_slug,
+                $marathon_registration = MarathonRegistration::create(
+                    [
+                        'slug' => $general_slug,
                         'full_name' => $full_name,
                         'region' => $region,
                         'phone' => $phone,
@@ -103,7 +110,7 @@ class MarathonRegistrationController extends BaseController
                         'event' => $event,
                         'paid' => 0,
                     ]
-                ); 
+                );
                 return $this->marathon_payment($params);
             }
         }
@@ -113,10 +120,9 @@ class MarathonRegistrationController extends BaseController
         $data = [];
         $name = explode(" ", $params['full_name']);
         $data['customerFirstName'] = $name[0];
-        if(!isset($name[1])){
+        if (!isset($name[1])) {
             $data['customerLastName'] = "Null";
-        }
-        else{
+        } else {
 
             $data['customerLastName'] = $name[1];
         }
@@ -180,7 +186,6 @@ class MarathonRegistrationController extends BaseController
         $trimedmobile = substr($request->mobile, -9);
         $mobile = '255' . $trimedmobile;
 
-
         $award_settings = AwardMarathonSetting::get()->first();
         if ($award_settings != null) {
 
@@ -221,7 +226,7 @@ class MarathonRegistrationController extends BaseController
                     $i++;
                     $general_slug = Str::random(39) . $i;
                 }
-                if ($request->company_individual == 'Individual') {
+                if ($request->company_individual == 'Individual' || $request->company_individual == 'Mtu Binafsi') {
                     $nominees = AwardNominee::create(
                         [
                             'slug'                  => $general_slug,
@@ -312,10 +317,11 @@ class MarathonRegistrationController extends BaseController
             'contact_person_email' => 'required',
             'contact_person_phone' =>  ['required',],
             'business_details' => 'required',
+            'payment_option'=>'required'
         ]);
 
         if ($validator->fails()) {
-            return $this->handleError($validator->errors(), Response::HTTP_BAD_REQUEST);
+            return $this->handleError($validator->errors(), Response::HTTP_FOUND);
         }
         $general_slug = Str::random(40);
 

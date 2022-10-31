@@ -39,6 +39,6 @@ class VoteDelete extends Command
      */
     public function handle()
     {
-        Vote::where([['updated_at', '<', Carbon::now()->subHours(10)]])->delete();
+        // Vote::where([['updated_at', '<', Carbon::now()->subHours(10)]])->delete();
     }
 }

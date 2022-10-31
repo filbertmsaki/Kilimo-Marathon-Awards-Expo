@@ -16,11 +16,16 @@ class CreateMarathonRegistrationsTable extends Migration
         Schema::create('marathon_registrations', function (Blueprint $table) {
             $table->id();
             $table->string('slug');
-            $table->string('full_name');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->char('gender')->nullable();
+            $table->integer('age')->nullable();
+            $table->bigInteger('phonecode')->default(255);
             $table->string('phone');
             $table->string('email')->nullable();
             $table->string('event');
-            $table->string('region')->nullable();
+            $table->string('t_shirt_size')->nullable();
+            $table->string('address')->nullable();
             $table->boolean('paid')->default(false);
             $table->timestamps();
         });

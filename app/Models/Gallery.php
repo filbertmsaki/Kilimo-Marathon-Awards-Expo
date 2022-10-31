@@ -9,9 +9,21 @@ class Gallery extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'image','slug',
-        'alt_text',
+        'slug',
+        'title',
         'event',
-        'path'
+        'description',
+        'image_url',
     ];
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->slug =unique_token();
+            $model->title = ucwords(strtolower($model->title));
+        });
+        static::updating(function ($model) {
+            $model->title = ucwords(strtolower($model->title));
+        });
+    }
 }

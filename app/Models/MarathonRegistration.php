@@ -11,11 +11,24 @@ class MarathonRegistration extends Model
     protected $guarded = [];
     protected $fillable = [
         'slug',
-        'full_name',
+        'first_name',
+        'last_name',
+        'gender',
+        'age',
+        'phonecode',
         'phone',
         'email',
         'event',
-        'region',
+        't_shirt_size',
+        'address',
         'paid',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->slug = unique_token();
+        });
+    }
 }
