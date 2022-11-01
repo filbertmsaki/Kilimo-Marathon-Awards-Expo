@@ -4,7 +4,7 @@
     @section('script')
         <script>
             $(document).ready(function() {
-     
+
                 /*  When user click add user button */
                 $('#add-gallery-btn').click(function() {
                     $('#add-gallery-form').trigger("reset");
@@ -130,14 +130,14 @@
                                             <select class="form-control select2" id="ed_event" name="event"
                                                 style="width: 100%;" required>
                                                 <option value=""> Select Event </option>
-                                                <option value="marathon"
-                                                    @if (old('event') == 'marathon') selected @endif>Kilimo Marathon
+                                                <option value="kilimo_marathon"
+                                                    @if (old('event') == 'kilimo_marathon') selected @endif>Kilimo Marathon
                                                 </option>
-                                                <option value="awards"
-                                                    @if (old('event') == 'awards') selected @endif>Kilimo Awards
+                                                <option value="kilimo_award"
+                                                    @if (old('event') == 'kilimo_award') selected @endif>Kilimo Awards
                                                 </option>
-                                                <option value="expo"
-                                                    @if (old('event') == 'expo') selected @endif>Kilimo Expo
+                                                <option value="kilimo_expo"
+                                                    @if (old('event') == 'kilimo_expo') selected @endif>Kilimo Expo
                                                 </option>
                                             </select>
                                             @if ($errors->has('event'))
@@ -223,14 +223,14 @@
                                             <select class="form-control select2" id="event" name="event"
                                                 style="width: 100%;" required>
                                                 <option value=""> Select Event </option>
-                                                <option value="marathon"
-                                                    @if (old('event') == 'marathon') selected @endif>Kilimo Marathon
+                                                <option value="kilimo_marathon"
+                                                    @if (old('event') == 'kilimo_marathon') selected @endif>Kilimo Marathon
                                                 </option>
-                                                <option value="awards"
-                                                    @if (old('event') == 'awards') selected @endif>Kilimo Awards
+                                                <option value="kilimo_award"
+                                                    @if (old('event') == 'kilimo_award') selected @endif>Kilimo Awards
                                                 </option>
-                                                <option value="expo"
-                                                    @if (old('event') == 'expo') selected @endif>Kilimo Expo
+                                                <option value="kilimo_expo"
+                                                    @if (old('event') == 'kilimo_expo') selected @endif>Kilimo Expo
                                                 </option>
                                             </select>
                                             @if ($errors->has('event'))

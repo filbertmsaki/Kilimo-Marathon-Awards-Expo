@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Web\Layout;
 
+use App\Models\Gallery;
 use Illuminate\View\Component;
 
 class PageSliderComponent extends Component
@@ -11,9 +12,12 @@ class PageSliderComponent extends Component
      *
      * @return void
      */
-    public function __construct()
+   public $page  ;
+   public $galleries  ;
+    public function __construct($page = null)
     {
-        //
+        $this->galleries = Gallery::where('event',$page)->inRandomOrder()->get();
+
     }
 
     /**

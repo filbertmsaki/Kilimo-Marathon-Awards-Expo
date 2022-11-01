@@ -37,7 +37,7 @@
 
     <nav hidden class="nav-dark nav-white">
         <div class="nav-header ">
-            <a href="index.html" class="brand py-0 " style="width:80px; height:auto;">
+            <a href="{{ route('web.index') }}" class="brand py-0 " style="width:80px; height:auto;">
                 <img  width="70" src="{{ asset('logo.png') }}" alt="" />
             </a>
             <button class="toggle-bar">

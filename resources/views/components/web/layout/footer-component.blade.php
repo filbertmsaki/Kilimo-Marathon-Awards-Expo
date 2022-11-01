@@ -1,4 +1,4 @@
-<footer class="footer_three">
+<footer class="footer_three" data-aos="fade-up">
     <div class="footer-top bg-dark3 pt-50">
         <div class="container">
             <div class="row">
@@ -26,23 +26,15 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-12 col-lg-3">
+                <div class="col-12 col-lg-3 d-none d-lg-block" >
                     <div class="widget widget_gallery clearfix">
                         <h4 class="footer-title">Our Gallery</h4>
                         <hr class="bg-primary mb-10 mt-0 d-inline-block mx-auto w-60">
                         <ul class="list-unstyled">
-                            <li><img src="{{ asset('images/gallery/thumb/1.jpg') }}" alt=""></li>
-                            <li><img src="{{ asset('images/gallery/thumb/2.jpg') }}" alt=""></li>
-                            <li><img src="{{ asset('images/gallery/thumb/3.jpg') }}" alt=""></li>
-                            <li><img src="{{ asset('images/gallery/thumb/4.jpg') }}" alt=""></li>
-                            <li><img src="{{ asset('images/gallery/thumb/5.jpg') }}" alt=""></li>
-                            <li><img src="{{ asset('images/gallery/thumb/6.jpg') }}" alt=""></li>
-                            <li><img src="{{ asset('images/gallery/thumb/7.jpg') }}" alt=""></li>
-                            <li><img src="{{ asset('images/gallery/thumb/8.jpg') }}" alt=""></li>
-                            <li><img src="{{ asset('images/gallery/thumb/9.jpg') }}" alt=""></li>
-                            <li><img src="{{ asset('images/gallery/thumb/10.jpg') }}" alt=""></li>
-                            <li><img src="{{ asset('images/gallery/thumb/11.jpg') }}" alt=""></li>
-                            <li><img src="{{ asset('images/gallery/thumb/12.jpg') }}" alt=""></li>
+                            @foreach ($galleries as $item)
+                            <li><img class="w-60 h-40" src="{{ asset($item->image_url) }}" alt="{{ $item->title }}"></li>
+
+                            @endforeach
                         </ul>
                     </div>
                 </div>

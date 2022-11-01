@@ -1,33 +1,58 @@
 @php($title = 'Home PAge')
+
 <x-web.layout.app-layout :isPagetitle="false" :pageTitle="$title">
-    <section class="bg-img pt-130 pb-50" data-overlay-light="5"
-        style="background-image: url({{ asset('images/front-end-img/banners/banner-2.jpg') }}); background-position: top center;">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="text-center mt-80">
-                        <h1 class="box-title text-dark mb-30">Find Your Online Course</h1>
-                    </div>
-                    <form class="cours-search bg-black-40 mb-30">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="What do you want to learn today?">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Search</button>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="text-center">
-                        <a href="courses_list.html" class="btn btn-primary">Browse Courses List</a>
-                    </div>
+    @section('css')
+        <style>
+            .carousel-item {
+                height: 450px !important;
+            }
+
+            .carousel-item img {
+                object-fit: cover;
+                object-position: center;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+            }
+        </style>
+    @endsection
+    <section class="pt-130">
+        <div id="myCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <!-- Carousel indicators -->
+            <ol class="carousel-indicators">
+                <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+                <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for carousel items -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ asset('images-s/sponsor1.jpg') }}" class="d-block " alt="Slide 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('images-s/sponsor2.jpg') }}" class="d-block " alt="Slide 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('images-s/sponsor3.jpg') }}" class="d-block " alt="Slide 3">
                 </div>
             </div>
+
+            <!-- Carousel controls -->
+            <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
         </div>
+
     </section>
-    <section class="py-xl-100 py-50 bg-white" data-aos="fade-up">
+    <section class="py-xl-100 py-20 bg-white" data-aos="fade-up">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-xl-10 col-12">
-                    <div class="box box-body p-xl-50 p-30 bg-lightest">
+                <div class="col-12">
+                    <div class="box box-body p-xl-50 p-10 bg-lightest">
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-12">
                                 <h1 class="mb-15">About KMAE</h1>
@@ -72,7 +97,8 @@
                                     <div class="media media-single box-shadowed bg-white pull-up mb-0"
                                         style="cursor: pointer">
                                         <div class="media-body fw-500">
-                                            <h5 class="overflow-hidden text-primary text-overflow-h nowrap">Host, Date &
+                                            <h5 class="overflow-hidden text-primary text-overflow-h nowrap">Host, Date
+                                                &
                                                 Venue</h5>
                                             <small class="text-fade">Venue: Morogoro, Tanzania</small>
                                             <p><small class="text-fade mt-10">Date: June 2023</small></p>
@@ -86,7 +112,7 @@
             </div>
         </div>
     </section>
-    <section class="py-50 ">
+    <section class="py-20 " data-aos="fade-left">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-12">
@@ -109,45 +135,45 @@
             </div>
         </div>
     </section>
-    <section class="py-10 bg-white">
+    <section class="py-20 bg-white" data-aos="fade-right">
         <div class="container">
-                <div class="box-body p-0 py-20">
-                    <div class="row align-items-center">
-                        <div class="col-md-12 col-lg-6">
-                            <div class="popup-vdo mt-30 mt-md-0">
-                                <img src="{{ asset('images-s/marathon-1.jpg') }}" class="img-fluid rounded"
-                                    alt="Awards" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-6  ">
-                            <h4 class="box-title mb-0 fw-500">Kilimo Marathon Events</h4>
-                            <hr>
-                            <ul class="course-overview list-unstyled b-1">
-                                <li><i class="me-10 mdi mdi-run"></i> <span class="tag">21 Km running distance</span>
-                                    <span class="value">Tsh 35,000/=</span>
-                                </li>
-                                <li><i class="me-10 mdi mdi-run"></i> <span class="tag">10 Km running distance</span>
-                                    <span class="value">Tsh 35,000/=</span>
-                                </li>
-                                <li><i class="me-10 mdi mdi-run"></i> <span class="tag">5 Km running distance</span>
-                                    <span class="value">Tsh 35,000/=</span>
-                                </li>
-                            </ul>
-                            @if (isMarathonActive())
-                                <div class="entry-button text-center ">
-                                    <a href="{{ route('web.event.marathon.registration') }}"
-                                        class="btn btn-primary btn-sm">Marathon Registration</a>
-                                </div>
-                            @endif
+            <div class="box-body p-0 py-20">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="popup-vdo mt-30 mt-md-0">
+                            <img src="{{ asset('images-s/marathon-1.jpg') }}" class="img-fluid rounded" alt="Awards"
+                                loading="lazy">
                         </div>
                     </div>
+                    <div class="col-md-12 col-lg-6 pt-20 ">
+                        <h4 class="box-title mb-0 fw-500">Kilimo Marathon Events</h4>
+                        <hr>
+                        <ul class="course-overview list-unstyled b-1">
+                            <li><i class="me-10 mdi mdi-run"></i> <span class="tag">21 Km running distance</span>
+                                <span class="value">Tsh 35,000/=</span>
+                            </li>
+                            <li><i class="me-10 mdi mdi-run"></i> <span class="tag">10 Km running distance</span>
+                                <span class="value">Tsh 35,000/=</span>
+                            </li>
+                            <li><i class="me-10 mdi mdi-run"></i> <span class="tag">5 Km running distance</span>
+                                <span class="value">Tsh 35,000/=</span>
+                            </li>
+                        </ul>
+                        @if (isMarathonActive())
+                            <div class="entry-button text-center ">
+                                <a href="{{ route('web.event.marathon.registration') }}"
+                                    class="btn btn-primary btn-sm">Marathon Registration</a>
+                            </div>
+                        @endif
+                    </div>
                 </div>
+            </div>
         </div>
     </section>
-    <section class="py-10 bg-white" data-aos="fade-up">
+    <section class="py-20 " data-aos="fade-up">
         <div class="container">
             <div class="row mt-30 list">
-                <div class="col-md-3 col-6 list-item">
+                <div class="col-md-3 col-12 list-item">
                     <div class="box pull-up">
                         <div class="box-body">
                             <div>
@@ -167,7 +193,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-6 list-item">
+                <div class="col-md-3 col-12 list-item">
                     <div class="box pull-up">
                         <div class="box-body">
                             <div>
@@ -188,7 +214,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-6 list-item">
+                <div class="col-md-3 col-12 list-item">
                     <div class="box pull-up">
                         <div class="box-body">
                             <div>
@@ -209,7 +235,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-6 list-item">
+                <div class="col-md-3 col-12 list-item">
                     <div class="box pull-up">
                         <div class="box-body">
                             <div>
@@ -232,7 +258,7 @@
             </div>
         </div>
     </section>
-    <section class="py-50" data-aos="fade-up">
+    <section class="py-20 bg-white" data-aos="fade-left">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-12 text-center">
@@ -277,7 +303,7 @@
             </div>
         </div>
     </section>
-    <section class="py-50 bg-white">
+    <section class="py-20 " data-aos="fade-right">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-12 position-relative">
@@ -286,7 +312,7 @@
                             loading="lazy">
                     </div>
                 </div>
-                <div class="col-lg-6 col-12">
+                <div class="col-lg-6 col-12 pt-20">
                     <h2 class="mb-10 text-primary">Kilimo Expo</h2>
                     <hr>
                     <p class="fs-16">The Kilimo Expo, held once in a year, is one of the leading Agriculture Events of
@@ -301,7 +327,7 @@
             </div>
         </div>
     </section>
-    <section class="py-50 bg-white" data-aos="fade-up">
+    <section class="py-20 bg-white" data-aos="fade-up">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-12 text-center">

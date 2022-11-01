@@ -61,11 +61,11 @@
                                         <tr>
                                             <th width="20px"><input type="checkbox" id="master"></th>
                                             <th>Nominee Name</th>
-                                            <th>Mobile</th>
-                                            <th>Email</th>
+                                            <th>Contact Phone</th>
+                                            <th>Contact Email</th>
                                             <th>Category</th>
-                                            <th>status</th>
-                                            <th>Verified</th>
+                                            <th>Entry</th>
+                                            <th>Status</th>
                                             <th>Votes</th>
                                             <th>Action</th>
                                         </tr>
@@ -76,16 +76,25 @@
                                                 <td><input type="checkbox" name="category_id[]"
                                                         value="{{ $nominee->id }}" id="sub_chk_{{ $nominee->id }}"
                                                         class="sub_chk"></td>
-                                                <td>{{ $nominee->full_name }}</td>
-                                                <td>{{ $nominee->mobile }}</td>
-                                                <td>{{ $nominee->email }}</td>
+                                                <td>{{ $nominee->company_name }}</td>
+                                                <td>{{ $nominee->contact_person_phone }}</td>
+                                                <td>{{ $nominee->contact_person_email }}</td>
                                                 <td>{{ $nominee->awardcategory->name }}</td>
-                                                <td>{{ $nominee->company_individual }}</td>
+                                                <td>
+
+                                                    @if ($nominee->entry == 1)
+                                                        <span class="right badge badge-info">Individual</span>
+                                                    @elseif ($nominee->entry == 2)
+                                                    <span class="right badge badge-success">Company</span>
+
+                                                    @endif
+
+                                                </td>
                                                 <td>
                                                     @if ($nominee->verified == 1)
-                                                        Verified
-                                                    @else
-                                                        Not Verified
+                                                    <span class="right badge badge-success">Verified</span>
+                                                    @elseif ($nominee->verified == 0)
+                                                    <span class="right badge badge-warning">Not Verified</span>
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
@@ -162,9 +171,12 @@
                                         <select class="form-control select2" name="phonecode" id="ed_phonecode"
                                             style="width: 100%;" required>
                                             <option value="">-- Select Country--</option>
-                                            <option value="254"  @if (old('phonecode') == '254') selected @endif>Kenya</option>
-                                            <option value="255"  @if (old('phonecode') == '255') selected @endif>Tanzania</option>
-                                            <option value="256"  @if (old('phonecode') == '256') selected @endif>Uganda</option>
+                                            <option value="254" @if (old('phonecode') == '254') selected @endif>
+                                                Kenya</option>
+                                            <option value="255" @if (old('phonecode') == '255') selected @endif>
+                                                Tanzania</option>
+                                            <option value="256" @if (old('phonecode') == '256') selected @endif>
+                                                Uganda</option>
                                         </select>
                                         @if ($errors->has('phonecode'))
                                             <span class="text-danger">{{ $errors->first('phonecode') }}</span>
@@ -200,8 +212,15 @@
                                         <div class="input-group mb-3">
                                             <select class="form-control select2 ed_individual" id="ed_individual"
                                                 name="company_individual" style="width: 100%;">
-                                                <option value="Individual" @if (old('company_individual') == 'Individual') selected @endif>Individual</option>
-                                                <option value="Company" @if (old('company_individual') == 'Company') selected @endif>Company</option>
+                                                <option value="">-- Award Entry--</option>
+                                                <option value="1"
+                                                    @if (old('entry') == '1') selected @endif>
+                                                    Individual
+                                                </option>
+                                                <option value="2"
+                                                    @if (old('entry') == '2') selected @endif>
+                                                    Company
+                                                </option>
                                             </select>
                                             @if ($errors->has('company_individual'))
                                                 <span
@@ -214,7 +233,9 @@
                                             <select class="form-control select2 category_id" id="category_id"
                                                 name="category_id" style="width: 100%;">
                                                 @foreach ($categories as $item)
-                                                    <option value="{{ $item->id }}"  @if (old('category_id') == $item->id) selected @endif>{{ $item->name }}</option>
+                                                    <option value="{{ $item->id }}"
+                                                        @if (old('category_id') == $item->id) selected @endif>
+                                                        {{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                             @if ($errors->has('category_id'))
@@ -226,8 +247,12 @@
                                         <div class="input-group mb-3">
                                             <select class="form-control select2 verified" id="verified"
                                                 name="verified" style="width: 100%;">
-                                                <option value="1"  @if (old('verified') == '1') selected @endif>Verified</option>
-                                                <option value="0" @if (old('verified') == '0') selected @endif>Not Verified</option>
+                                                <option value="1"
+                                                    @if (old('verified') == '1') selected @endif>Verified
+                                                </option>
+                                                <option value="0"
+                                                    @if (old('verified') == '0') selected @endif>Not Verified
+                                                </option>
                                             </select>
                                             @if ($errors->has('verified'))
                                                 <span class="text-danger">{{ $errors->first('verified') }}</span>

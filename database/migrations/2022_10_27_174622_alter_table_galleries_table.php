@@ -17,8 +17,8 @@ class AlterTableGalleriesTable extends Migration
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
             $table->string('slug');
-            $table->string('title');
-            $table->text('description');
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
             $table->string('event');
             $table->string('image_url');
             $table->timestamps();

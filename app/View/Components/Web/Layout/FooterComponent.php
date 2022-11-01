@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Web\Layout;
 
+use App\Models\Gallery;
 use Illuminate\View\Component;
 
 class FooterComponent extends Component
@@ -11,9 +12,10 @@ class FooterComponent extends Component
      *
      * @return void
      */
+    public $galleries ;
     public function __construct()
     {
-        //
+        $this->galleries = Gallery::inRandomOrder()->limit(12)->get();
     }
 
     /**
