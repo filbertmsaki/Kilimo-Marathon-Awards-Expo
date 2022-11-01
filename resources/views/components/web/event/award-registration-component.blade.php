@@ -43,7 +43,7 @@
                                     <div class="form-group">
                                         <input type="text" name="company_name" id="company_name"
                                             value="{{ old('company_name') }}" class="form-control"
-                                            placeholder="Company/ Business Name " required>
+                                            placeholder="Company/ Business Name" required>
                                         @if ($errors->has('company_name'))
                                             <span class="text-danger">{{ $errors->first('company_name') }}</span>
                                         @endif
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="col-md-4" id="company_emailDiv" style="display: none">
                                     <div class="form-group">
-                                        <input type="tel" name="company_email" value="{{ old('company_email') }}"
+                                        <input type="email" name="company_email" value="{{ old('company_email') }}"
                                             id="company_email" class="form-control" placeholder="Company Email">
                                         @if ($errors->has('company_email'))
                                             <span class="text-danger">{{ $errors->first('company_email') }}</span>

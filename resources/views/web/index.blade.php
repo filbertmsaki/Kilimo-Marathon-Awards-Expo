@@ -1,5 +1,4 @@
 @php($title = 'Home PAge')
-
 <x-web.layout.app-layout :isPagetitle="false" :pageTitle="$title">
     @section('css')
         <style>
@@ -14,9 +13,11 @@
                 width: 100%;
                 overflow: hidden;
             }
+
+
         </style>
     @endsection
-    <section class="pt-130">
+    <section class="pt-130" data-aos="fade-up">
         <div id="myCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <!-- Carousel indicators -->
             <ol class="carousel-indicators">
@@ -24,20 +25,33 @@
                 <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
                 <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
             </ol>
-
             <!-- Wrapper for carousel items -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="{{ asset('images-s/sponsor1.jpg') }}" class="d-block " alt="Slide 1">
+                    <div class="carousel-caption">
+                        <h1>Check Out this Moose</h1>
+                        <p class="lead">This text is super engaging and makes you want to click the button.</p>
+                        <a href="#" class="btn btn-sm btn-primary">Learn More</a>
+                    </div><!-- end carousel-caption -->
                 </div>
                 <div class="carousel-item">
                     <img src="{{ asset('images-s/sponsor2.jpg') }}" class="d-block " alt="Slide 2">
+                    <div class="carousel-caption">
+                        <h1>Check Out this Moose</h1>
+                        <p class="lead">This text is super engaging and makes you want to click the button.</p>
+                        <a href="#" class="btn btn-sm btn-primary">Learn More</a>
+                    </div><!-- end carousel-caption -->
                 </div>
                 <div class="carousel-item">
                     <img src="{{ asset('images-s/sponsor3.jpg') }}" class="d-block " alt="Slide 3">
+                    <div class="carousel-caption ">
+                        <h1>Check Out this Moose</h1>
+                        <p class="lead">This text is super engaging and makes you want to click the button.</p>
+                        <a href="#" class="btn btn-sm btn-primary">Learn More</a>
+                    </div><!-- end carousel-caption -->
                 </div>
             </div>
-
             <!-- Carousel controls -->
             <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
@@ -46,7 +60,6 @@
                 <span class="carousel-control-next-icon"></span>
             </a>
         </div>
-
     </section>
     <section class="py-xl-100 py-20 bg-white" data-aos="fade-up">
         <div class="container">
@@ -112,7 +125,7 @@
             </div>
         </div>
     </section>
-    <section class="py-20 " data-aos="fade-left">
+    <section class="py-20 " data-aos="fade-up">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-12">
@@ -135,14 +148,14 @@
             </div>
         </div>
     </section>
-    <section class="py-20 bg-white" data-aos="fade-right">
+    <section class="py-20 bg-white" data-aos="fade-up">
         <div class="container">
             <div class="box-body p-0 py-20">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-lg-6">
                         <div class="popup-vdo mt-30 mt-md-0">
-                            <img src="{{ asset('images-s/marathon-1.jpg') }}" class="img-fluid rounded" alt="Awards"
-                                loading="lazy">
+                            <img src="{{ asset('images-s/marathon-1.jpg') }}" class="img-fluid rounded"
+                                alt="Awards" loading="lazy">
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-6 pt-20 ">
@@ -258,7 +271,7 @@
             </div>
         </div>
     </section>
-    <section class="py-20 bg-white" data-aos="fade-left">
+    <section class="py-20 bg-white" data-aos="fade-up">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-12 text-center">
@@ -303,7 +316,7 @@
             </div>
         </div>
     </section>
-    <section class="py-20 " data-aos="fade-right">
+    <section class="py-20 " data-aos="fade-up">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-12 position-relative">

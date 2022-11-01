@@ -55,20 +55,13 @@ class AwardNominee extends Model
         return date('Y');
     }
 
-    public function scopeNomineeExist($query,$company_name,$category_id, $company_phone = null, $contact_person_phone)
+    public function scopeNomineeExist($query,$company_name,$category_id)
     {
         $currrentYear = date('Y');
 
         $award =$query->where('category_id', $category_id);
         if (request()->has('company_name')) {
             $award->where('company_name', $company_name);
-        }
-        if (request()->has('company_phone')) {
-            $award->orWhere('company_phone', $company_phone);
-        }
-
-        if (request()->has('contact_person_phone')) {
-            $award->orWhere('contact_person_phone', $contact_person_phone);
         }
         return $award->whereYear('created_at', '=', $currrentYear)->exists();
     }

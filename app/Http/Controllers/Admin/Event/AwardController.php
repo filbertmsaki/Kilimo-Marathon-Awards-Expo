@@ -22,19 +22,19 @@ class AwardController extends Controller
     public function index()
     {
 
-        $updates = AwardNominee::all();
-        foreach($updates as $update){
-            if($update->company_individual == 'Individual'){
+        // $updates = AwardNominee::all();
+        // foreach ($updates as $update) {
+        //     if ($update->company_individual == 'Individual') {
 
-                $update->update([
-                    'entry'=>1
-                ]);
-            }else {
-                $update->update([
-                    'entry'=>2
-                ]);
-            }
-        }
+        //         $update->update([
+        //             'entry' => 1
+        //         ]);
+        //     } else {
+        //         $update->update([
+        //             'entry' => 2
+        //         ]);
+        //     }
+        // }
         $categories = AwardCategory::all();
         $currrentYear = date('Y');
         $nominees = AwardNominee::with('awardcategory')
@@ -59,68 +59,89 @@ class AwardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function awardValidation($request)
+    {
+        if (!empty($request->company_phone)) {
+            $request->merge([
+                'company_phone' => phone_number_format($request->phonecode, $request->company_phone)
+            ]);
+            $request->validate([
+                'company_phone' => ['required', 'min:10', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
+            ]);
+        }
+        if (!empty($request->contact_person_phone)) {
+            $request->merge([
+                'contact_person_phone' => phone_number_format($request->phonecode, $request->contact_person_phone)
+            ]);
+            $request->validate([
+                'contact_person_phone' => ['required', 'min:10', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
+            ]);
+        }
+        if (!empty($request->company_email)) {
+            $request->validate([
+                'company_email' => 'required|min:3|max:255',
+            ]);
+        }
+        if (!empty($request->contact_person_email)) {
+            $request->validate([
+                'contact_person_email' => 'required|min:3|max:255',
+            ]);
+        }
+        if (!empty($request->company_name)) {
+            $request->merge([
+                'company_name' => ucwords(strtolower($request->get('company_name')))
+            ]);
+        }
+        if (!empty($request->service_name)) {
+            $request->merge([
+                'service_name' => ucwords(strtolower($request->get('service_name')))
+            ]);
+        }
+        if (!empty($request->contact_person_name)) {
+            $request->merge([
+                'contact_person_name' => ucwords(strtolower($request->get('contact_person_name')))
+            ]);
+        }
+        if (!empty($request->address)) {
+            $request->merge([
+                'address' => ucwords(strtolower($request->get('address')))
+            ]);
+        }
+        if (!empty($request->company_details)) {
+            $request->merge([
+                'company_details' => ucwords(strtolower($request->get('company_details')))
+            ]);
+        }
+    }
     public function store(Request $request)
     {
-        if (!empty($request->mobile)) {
-            $request->merge([
-                'mobile' => phone_number_format($request->get('phonecode'), $request->get('mobile'))
-            ]);
-            $request->validate([
-                'mobile' => ['required', 'min:10', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
-            ]);
-        }
-        if (!empty($request->email)) {
-            $request->validate([
-                'email' => 'required|min:3|max:255',
-            ]);
-        }
+        $this->awardValidation($request);
         $request->validate([
-            'full_name' => 'required|min:3|max:255',
-            'phonecode' => 'required',
+            'entry' => 'required|numeric',
+            'phonecode' => 'required|numeric',
             'category_id' => 'required',
-            'company_individual' => 'required',
-            'verified' => 'required',
+            'company_name' => 'required|string',
+            'service_name' => 'required|string',
         ]);
-        $full_name = $request->full_name;
-        $email = $request->email;
-        $phonecode = $request->phonecode;
-        $mobile = $request->mobile;
-        $address = $request->address;
-        $category_id = $request->category_id;
-        $company_individual = $request->company_individual;
-        $verified = $request->verified;
-        //check if phonenumber is empty
-        if (empty($mobile)) {
-            $faker = Factory::create();
-            $mobile = $faker->numerify('255#########');
-        }
-        //Check if email is emapty
-        if (empty($email)) {
-            $faker = Factory::create();
-            $email = $faker->unique()->email;
-        }
-        $currrentYear = date('Y');
-        $nominee_exist = AwardNominee::where('email', $email)
-            ->where('category_id', $category_id)
-            ->where('mobile', $mobile)
-            ->whereYear('created_at', '=', $currrentYear)
-            ->exists();
-        if ($nominee_exist) {
-            return redirect()->back()->with('warning', 'You have already registered in this category');
-        }
-        AwardNominee::create(
-            [
-                'full_name' => $full_name,
-                'phonecode' => $phonecode,
-                'mobile' => $mobile,
-                'email' => $email,
-                'address' =>  $address,
-                'category_id' => $category_id,
-                'company_individual' => $company_individual,
-                'verified' => $verified,
-            ]
+        DB::beginTransaction();
+        $exist = AwardNominee::nomineeExist(
+            $request->company_name,
+            $request->category_id,
+            $request->company_phone,
+            $request->contact_person_phone
         );
-        return redirect()->back()->with('success', 'Registration Sucessfull !');
+        if ($exist) {
+            return redirect()->back()->with('warning', 'You have already registered in this category, please wait to be verified!');
+        }
+        if ($request->entry == 1) {
+            $request->merge([
+                'company_phone' => null,
+                'company_email' => null,
+            ]);
+        }
+        AwardNominee::create($request->except('_token'));
+        DB::commit();
+        return redirect()->back()->with('success', 'You have successful register to kilimo awards!');
     }
     /**
      * Display the specified resource.
@@ -131,10 +152,10 @@ class AwardController extends Controller
     public function show($id)
     {
         $nominees = AwardNominee::with('awardcategory')
-            ->whereYear('created_at',$id)
+            ->whereYear('created_at', $id)
             ->where('verified', 1)
             ->orderBy('category_id', 'desc')->get();
-            return view('admin.events.award.show',compact('nominees','id'));
+        return view('admin.events.award.show', compact('nominees', 'id'));
     }
     public function awardsWinners($id)
     {
@@ -166,57 +187,27 @@ class AwardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!empty($request->mobile)) {
-            $request->merge([
-                'mobile' => phone_number_format($request->get('phonecode'), $request->get('mobile'))
-            ]);
-            $request->validate([
-                'mobile' => 'required|min:10',
-            ]);
-        }
-        if (!empty($request->email)) {
-            $request->validate([
-                'email' => 'required|min:3|max:255',
-            ]);
-        }
+        $this->awardValidation($request);
         $request->validate([
-            'full_name' => 'required|min:3|max:255',
-            'phonecode' => 'required',
+            'entry' => 'required|numeric',
+            'phonecode' => 'required|numeric',
             'category_id' => 'required',
-            'company_individual' => 'required',
-            'verified' => 'required|boolean|max:1',
+            'company_name' => 'required|string',
+            'service_name' => 'required|string',
         ]);
-        $full_name = $request->full_name;
-        $email = $request->email;
-        $phonecode = $request->phonecode;
-        $mobile = $request->mobile;
-        $address = $request->address;
-        $category_id = $request->category_id;
-        $company_individual = $request->company_individual;
-        $verified = $request->verified;
-        //check if phonenumber is empty
-        if (empty($mobile)) {
-            $faker = Factory::create();
-            $mobile = $faker->numerify('255#########');
-        }
-        //Check if email is emapty
-        if (empty($email)) {
-            $faker = Factory::create();
-            $email = $faker->unique()->email;
+        DB::beginTransaction();
+        if ($request->entry == 1) {
+            $request->merge([
+                'company_phone' => null,
+                'company_email' => null,
+            ]);
         }
         $nominee = AwardNominee::where('slug', $request->nominee_id)->first() ?? abort(404);
-        $nominee->update([
-            'full_name' => $full_name,
-            'phonecode' => $phonecode,
-            'mobile' => $mobile,
-            'email' => $email,
-            'address' =>  $address,
-            'category_id' => $category_id,
-            'company_individual' => $company_individual,
-            'verified' => $verified,
-        ]);
 
-        return redirect()->back()->with('success', 'Sucessfull Updated!');
+        $nominee->update($request->except('_token', '_method'));
+
+        DB::commit();
+        return redirect()->back()->with('success', 'You have successful update your informations!');
     }
     /**
      * Remove the specified resource from storage.

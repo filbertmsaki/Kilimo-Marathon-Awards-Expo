@@ -43,14 +43,10 @@ class ExpoController extends Controller
         $exist = ExpoRegistration::expoExist(
             $request->company_name,
             $request->company_phone,
-            $request->company_email,
             $request->contact_person_phone,
-            $request->contact_person_email
         );
-
         if($exist){
             return redirect()->back()->with('warning', 'You have already registered in kilimo expo, please wait to be verified!');
-
         }
         ExpoRegistration::create($request->except('_token'));
         DB::commit();

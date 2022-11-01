@@ -19,18 +19,39 @@
                         $('#edit-nominee-title').html("Edit Nominee");
                         $('#edit-nominee-modal').modal('show');
                         $('#ed_nominee_id').val(data.slug);
-                        $('#ed_full_name').val(data.full_name);
-                        $('#ed_address').val(data.address);
-                        $('#ed_mobile').val(data.mobile);
-                        $('#ed_email').val(data.email);
+                        $('#ed_entry').select2('destroy');
+                        $('#ed_entry').val(data.entry).select2();
                         $('#ed_phonecode').select2('destroy');
                         $('#ed_phonecode').val(data.phonecode).select2();
-                        $('#company_individual').select2('destroy');
-                        $('#company_individual').val(data.company_individual).select2();
-                        $('#category_id').select2('destroy');
-                        $('#category_id').val(data.category_id).select2();
-                        $('#verified').select2('destroy');
-                        $('#verified').val(data.verified).select2();
+                        $('#ed_company_name').val(data.company_name);
+                        $('#ed_service_name').val(data.service_name);
+                        $('#ed_company_phone').val(data.company_phone);
+                        $('#ed_company_email').val(data.company_email);
+                        $('#ed_contact_person_name').val(data.contact_person_name);
+                        $('#ed_contact_person_phone').val(data.contact_person_phone);
+                        $('#ed_contact_person_email').val(data.contact_person_email);
+                        $('#ed_address').val(data.address);
+                        $('#ed_category_id').select2('destroy');
+                        $('#ed_category_id').val(data.category_id).select2();
+                        $('#ed_verified').select2('destroy');
+                        $('#ed_verified').val(data.verified).select2();
+                        $('#ed_company_details').val(data.company_details);
+                        var entry = $('#ed_entry').val();
+                        if (entry == '1') {
+                            $('.company_phoneDiv').hide();
+                            $('.company_emailDiv').hide();
+                            $('.company_name').attr('placeholder', 'Enter Service/ Business Name')
+                            $('.company_phone').prop('required', false);
+                            $('.company_email').prop('required', false);
+
+                        } else {
+                            $('.company_phoneDiv').show();
+                            $('.company_emailDiv').show();
+                            $('.company_name').attr('placeholder', 'Enter Company Name')
+                            $('.company_phone').prop('required', false);
+                            $('.company_email').prop('required', false);
+
+                        }
                     };
                 });
             });
@@ -60,7 +81,7 @@
                                     <thead>
                                         <tr>
                                             <th width="20px"><input type="checkbox" id="master"></th>
-                                            <th>Nominee Name</th>
+                                            <th>Company/ Business Name</th>
                                             <th>Contact Phone</th>
                                             <th>Contact Email</th>
                                             <th>Category</th>
@@ -81,20 +102,17 @@
                                                 <td>{{ $nominee->contact_person_email }}</td>
                                                 <td>{{ $nominee->awardcategory->name }}</td>
                                                 <td>
-
                                                     @if ($nominee->entry == 1)
                                                         <span class="right badge badge-info">Individual</span>
                                                     @elseif ($nominee->entry == 2)
-                                                    <span class="right badge badge-success">Company</span>
-
+                                                        <span class="right badge badge-success">Company</span>
                                                     @endif
-
                                                 </td>
                                                 <td>
                                                     @if ($nominee->verified == 1)
-                                                    <span class="right badge badge-success">Verified</span>
+                                                        <span class="right badge badge-success">Verified</span>
                                                     @elseif ($nominee->verified == 0)
-                                                    <span class="right badge badge-warning">Not Verified</span>
+                                                        <span class="right badge badge-warning">Not Verified</span>
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
@@ -139,37 +157,24 @@
                             <input type="hidden" name="nominee_id" id="ed_nominee_id">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <div class="input-group mb-3">
-                                            <input type="text"
-                                                class="form-control @error('full_name') is-invalid @enderror"
-                                                id="ed_full_name" name="full_name" placeholder="Nominee Name" required
-                                                autocomplete="full_name" autofocus>
-
-                                            @error('full_name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <div class="input-group mb-3">
-                                            <input type="text"
-                                                class="form-control @error('address') is-invalid @enderror"
-                                                id="ed_address" name="address" placeholder="Address Name"
-                                                autocomplete="address" autofocus>
-
-                                            @error('address')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
+                                    <div class="input-group mb-3 col-md-6">
+                                        <select class="form-control select2 entry" id="ed_entry" name="entry"
+                                            style="width: 100%;" required>
+                                            <option value="">-- Award Entry--</option>
+                                            <option value="1" @if (old('entry') == '1') selected @endif>
+                                                Individual
+                                            </option>
+                                            <option value="2" @if (old('entry') == '2') selected @endif>
+                                                Company
+                                            </option>
+                                        </select>
+                                        @if ($errors->has('entry'))
+                                            <span class="text-danger">{{ $errors->first('entry') }}</span>
+                                        @endif
                                     </div>
                                     <div class="input-group mb-3 col-md-6">
-                                        <select class="form-control select2" name="phonecode" id="ed_phonecode"
-                                            style="width: 100%;" required>
+                                        <select class="form-control select2" id="ed_phonecode" name="phonecode"
+                                            id="phonecode" style="width: 100%;" required>
                                             <option value="">-- Select Country--</option>
                                             <option value="254" @if (old('phonecode') == '254') selected @endif>
                                                 Kenya</option>
@@ -182,83 +187,141 @@
                                             <span class="text-danger">{{ $errors->first('phonecode') }}</span>
                                         @endif
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <div class="input-group mb-3">
-                                            <input type="text"
-                                                class="form-control @error('mobile') is-invalid @enderror"
-                                                id="ed_mobile" name="mobile" placeholder="Nominee Mobile"
-                                                autocomplete="mobile" autofocus>
-                                            @error('mobile')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
+                                    <div class="input-group mb-3 col-md-6 company_nameDiv">
+                                        <input type="text"
+                                            class="form-control @error('company_name') is-invalid @enderror"
+                                            id="ed_company_name" name="company_name"
+                                            placeholder="Company/ Business Name" required autocomplete="company_name"
+                                            value="{{ old('company_name') }}" autofocus>
+                                        @error('company_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <div class="input-group mb-3">
-                                            <input type="email"
-                                                class="form-control @error('email') is-invalid @enderror"
-                                                id="ed_email" name="email" placeholder="Nominee Email"
-                                                autocomplete="email" autofocus>
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
+                                    <div class="input-group mb-3 col-md-6">
+                                        <input type="text"
+                                            class="form-control @error('service_name') is-invalid @enderror"
+                                            id="ed_service_name" name="service_name"
+                                            placeholder="Business / Service you provide" required
+                                            autocomplete="service_name" value="{{ old('service_name') }}" autofocus>
+                                        @error('service_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <div class="input-group mb-3">
-                                            <select class="form-control select2 ed_individual" id="ed_individual"
-                                                name="company_individual" style="width: 100%;">
-                                                <option value="">-- Award Entry--</option>
-                                                <option value="1"
-                                                    @if (old('entry') == '1') selected @endif>
-                                                    Individual
-                                                </option>
-                                                <option value="2"
-                                                    @if (old('entry') == '2') selected @endif>
-                                                    Company
-                                                </option>
-                                            </select>
-                                            @if ($errors->has('company_individual'))
-                                                <span
-                                                    class="text-danger">{{ $errors->first('company_individual') }}</span>
-                                            @endif
-                                        </div>
+                                    <div class="input-group mb-3 col-md-6 company_phoneDiv" id=""
+                                        style="display: none">
+                                        <input type="tel"
+                                            class="form-control @error('company_phone') is-invalid @enderror"
+                                            id="ed_company_phone" name="company_phone" placeholder="Company Phone"
+                                            value="{{ old('company_phone') }}" autocomplete="company_phone"
+                                            autofocus>
+                                        @error('company_phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <div class="input-group mb-3">
-                                            <select class="form-control select2 category_id" id="category_id"
-                                                name="category_id" style="width: 100%;">
-                                                @foreach ($categories as $item)
-                                                    <option value="{{ $item->id }}"
-                                                        @if (old('category_id') == $item->id) selected @endif>
-                                                        {{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('category_id'))
-                                                <span class="text-danger">{{ $errors->first('category_id') }}</span>
-                                            @endif
-                                        </div>
+                                    <div class="input-group mb-3 col-md-6 company_emailDiv" style="display: none">
+                                        <input type="email"
+                                            class="form-control @error('company_email') is-invalid @enderror"
+                                            id="ed_company_email" name="company_email" placeholder="Company Email"
+                                            value="{{ old('company_email') }}" autocomplete="company_email"
+                                            autofocus>
+                                        @error('company_email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <div class="input-group mb-3">
-                                            <select class="form-control select2 verified" id="verified"
-                                                name="verified" style="width: 100%;">
-                                                <option value="1"
-                                                    @if (old('verified') == '1') selected @endif>Verified
-                                                </option>
-                                                <option value="0"
-                                                    @if (old('verified') == '0') selected @endif>Not Verified
-                                                </option>
-                                            </select>
-                                            @if ($errors->has('verified'))
-                                                <span class="text-danger">{{ $errors->first('verified') }}</span>
-                                            @endif
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group col-md-6 mb-3">
+                                        <input type="text"
+                                            class="form-control @error('contact_person_name') is-invalid @enderror"
+                                            id="ed_contact_person_name" name="contact_person_name"
+                                            placeholder="Contact Person Name" autocomplete="contact_person_name"
+                                            value="{{ old('contact_person_name') }}" autofocus>
+                                        @error('contact_person_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
+                                    <div class="input-group col-md-6 mb-3">
+                                        <input type="tel"
+                                            class="form-control @error('contact_person_phone') is-invalid @enderror"
+                                            id="ed_contact_person_phone" name="contact_person_phone"
+                                            placeholder="Contact Person Phone" autocomplete="contact_person_phone"
+                                            value="{{ old('contact_person_phone') }}" autofocus>
+                                        @error('contact_person_phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="input-group col-md-6 mb-3">
+                                        <input type="email"
+                                            class="form-control @error('contact_person_email') is-invalid @enderror"
+                                            id="ed_contact_person_email" name="contact_person_email"
+                                            placeholder="Contact Person email" autocomplete="contact_person_email"
+                                            value="{{ old('contact_person_email') }}" autofocus>
+                                        @error('contact_person_email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="input-group col-md-6 mb-3">
+                                        <input type="text"
+                                            class="form-control @error('address') is-invalid @enderror"
+                                            id="ed_address" name="address" placeholder="Address Location"
+                                            autocomplete="address" value="{{ old('address') }}" autofocus>
+                                        @error('address')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="input-group mb-3 col-md-6">
+                                        <select class="form-control select2" id="ed_category_id" name="category_id"
+                                            style="width: 100%;" required>
+                                            <option value="">-- Award Category --</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}"
+                                                    @if (old('category_id') == $category->id) selected @endif>
+                                                    {{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('category_id'))
+                                            <span class="text-danger">{{ $errors->first('category_id') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="input-group mb-3 col-md-6">
+                                        <select class="form-control select2" id="ed_verified" name="verified"
+                                            style="width: 100%;" required>
+                                            <option value="1" @if (old('verified') == '1') selected @endif>
+                                                Verified</option>
+                                            <option value="0" @if (old('verified') == '0') selected @endif>
+                                                Not Verified</option>
+                                        </select>
+                                        @if ($errors->has('verified'))
+                                            <span class="text-danger">{{ $errors->first('verified') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="input-group col-12 mb-3">
+                                        <textarea name="company_details" id="ed_company_details" value="{{ old('company_details') }}" rows="5"
+                                            class="form-control @error('company_details') is-invalid @enderror"
+                                            placeholder="Short description about your company, business or service"></textarea>
+                                        @error('company_details')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -294,36 +357,24 @@
                             @csrf
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <div class="input-group mb-3">
-                                            <input type="text"
-                                                class="form-control @error('full_name') is-invalid @enderror"
-                                                id="full_name" name="full_name" placeholder="Nominee Name" required
-                                                autocomplete="full_name" value="{{ old('full_name') }}" autofocus>
-
-                                            @error('full_name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
                                     <div class="input-group mb-3 col-md-6">
-                                        <input type="email"
-                                            class="form-control @error('email') is-invalid @enderror" id="email"
-                                            name="email" placeholder="Nominee Email" value="{{ old('email') }}"
-                                            autocomplete="email" autofocus>
-
-                                        <span class="help-block"><strong></strong></span>
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="input-group mb-3 col-md-6">
-                                        <select class="form-control select2" name="phonecode" id="phonecode"
+                                        <select class="form-control select2 entry" id="entry" name="entry"
                                             style="width: 100%;" required>
+                                            <option value="">-- Award Entry--</option>
+                                            <option value="1" @if (old('entry') == '1') selected @endif>
+                                                Individual
+                                            </option>
+                                            <option value="2" @if (old('entry') == '2') selected @endif>
+                                                Company
+                                            </option>
+                                        </select>
+                                        @if ($errors->has('entry'))
+                                            <span class="text-danger">{{ $errors->first('entry') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="input-group mb-3 col-md-6">
+                                        <select class="form-control select2" id="phonecode" name="phonecode"
+                                            id="phonecode" style="width: 100%;" required>
                                             <option value="">-- Select Country--</option>
                                             <option value="254" @if (old('phonecode') == '254') selected @endif>
                                                 Kenya</option>
@@ -336,36 +387,109 @@
                                             <span class="text-danger">{{ $errors->first('phonecode') }}</span>
                                         @endif
                                     </div>
-                                    <div class="input-group mb-3 col-md-6">
-                                        <input type="mobile"
-                                            class="form-control @error('mobile') is-invalid @enderror" id="mobile"
-                                            name="mobile" placeholder="Nominee Mobile" value="{{ old('mobile') }}"
-                                            autocomplete="mobile" autofocus>
-
-                                        <span class="help-block"><strong></strong></span>
-                                        @error('mobile')
+                                    <div class="input-group mb-3 col-md-6 company_nameDiv" id="">
+                                        <input type="text"
+                                            class="form-control company_name @error('company_name') is-invalid @enderror"
+                                            id="company_name" name="company_name"
+                                            placeholder="Company/ Business Name" required autocomplete="company_name"
+                                            value="{{ old('company_name') }}" autofocus>
+                                        @error('company_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <div class="input-group mb-3">
-                                            <input type="text"
-                                                class="form-control @error('address') is-invalid @enderror"
-                                                id="address" name="address" placeholder="Nominee Address"
-                                                autocomplete="address" value="{{ old('address') }}" autofocus>
-
-                                            @error('address')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
+                                    <div class="input-group mb-3 col-md-6">
+                                        <input type="text"
+                                            class="form-control @error('service_name') is-invalid @enderror"
+                                            id="service_name" name="service_name"
+                                            placeholder="Business / Service you provide" required
+                                            autocomplete="service_name" value="{{ old('service_name') }}" autofocus>
+                                        @error('service_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="input-group mb-3 col-md-6 company_phoneDiv" id=""
+                                        style="display: none">
+                                        <input type="tel"
+                                            class="form-control company_phone @error('company_phone') is-invalid @enderror"
+                                            id="company_phone" name="company_phone" placeholder="Company Phone"
+                                            value="{{ old('company_phone') }}" autocomplete="company_phone"
+                                            autofocus>
+                                        @error('company_phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="input-group mb-3 col-md-6 company_emailDiv" id=""
+                                        style="display: none">
+                                        <input type="email"
+                                            class="form-control company_email @error('company_email') is-invalid @enderror"
+                                            id="company_email" name="company_email" placeholder="Company Email"
+                                            value="{{ old('company_email') }}" autocomplete="company_email"
+                                            autofocus>
+                                        @error('company_email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group col-md-6 mb-3">
+                                        <input type="text"
+                                            class="form-control @error('contact_person_name') is-invalid @enderror"
+                                            id="contact_person_name" name="contact_person_name"
+                                            placeholder="Contact Person Name" autocomplete="contact_person_name"
+                                            value="{{ old('contact_person_name') }}" autofocus>
+                                        @error('contact_person_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="input-group col-md-6 mb-3">
+                                        <input type="tel"
+                                            class="form-control @error('contact_person_phone') is-invalid @enderror"
+                                            id="contact_person_phone" name="contact_person_phone"
+                                            placeholder="Contact Person Phone" autocomplete="contact_person_phone"
+                                            value="{{ old('contact_person_phone') }}" autofocus>
+                                        @error('contact_person_phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="input-group col-md-6 mb-3">
+                                        <input type="email"
+                                            class="form-control @error('contact_person_email') is-invalid @enderror"
+                                            id="contact_person_email" name="contact_person_email"
+                                            placeholder="Contact Person email" autocomplete="contact_person_email"
+                                            value="{{ old('contact_person_email') }}" autofocus>
+                                        @error('contact_person_email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="input-group col-md-6 mb-3">
+                                        <input type="text"
+                                            class="form-control @error('address') is-invalid @enderror"
+                                            id="address" name="address" placeholder="Address Location"
+                                            autocomplete="address" value="{{ old('address') }}" autofocus>
+                                        @error('address')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="input-group mb-3 col-md-6">
-                                        <select class="form-control select2" name="category_id" style="width: 100%;">
-                                            <option value="">----Select Category ----</option>
+                                        <select class="form-control select2" id="category_id" name="category_id"
+                                            style="width: 100%;" required>
+                                            <option value="">-- Award Category --</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}"
                                                     @if (old('category_id') == $category->id) selected @endif>
@@ -377,20 +501,8 @@
                                         @endif
                                     </div>
                                     <div class="input-group mb-3 col-md-6">
-                                        <select class="form-control select2" name="company_individual"
-                                            data-placeholder="To:" style="width: 100%;">
-                                            <option value="Individual"
-                                                @if (old('company_individual') == 'Individual') selected @endif>Individual</option>
-                                            <option value="Company"
-                                                @if (old('company_individual') == 'Company') selected @endif>Company</option>
-                                        </select>
-                                        @if ($errors->has('company_individual'))
-                                            <span
-                                                class="text-danger">{{ $errors->first('company_individual') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="input-group mb-3 col-md-6">
-                                        <select class="form-control select2" name="verified" style="width: 100%;">
+                                        <select class="form-control select2" id="verified" name="verified"
+                                            style="width: 100%;" required>
                                             <option value="1" @if (old('verified') == '1') selected @endif>
                                                 Verified</option>
                                             <option value="0" @if (old('verified') == '0') selected @endif>
@@ -400,6 +512,17 @@
                                             <span class="text-danger">{{ $errors->first('verified') }}</span>
                                         @endif
                                     </div>
+                                    <div class="input-group col-12 mb-3">
+                                        <textarea name="company_details" id="company_details" value="{{ old('company_details') }}" rows="5"
+                                            class="form-control @error('company_details') is-invalid @enderror"
+                                            placeholder="Short description about your company, business or service"></textarea>
+                                        @error('company_details')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
                                 </div>
                             </div>
                             <!-- /.card-body -->

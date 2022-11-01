@@ -8,6 +8,26 @@ function isJSON(something) {
         return false;
     }
 }
+$(document).on('keyup paste change input', '.entry', function () {
+    var value = $(this).val();
+    if (value == '1') {
+        $('.company_phoneDiv').hide();
+        $('.company_emailDiv').hide();
+        $('.company_name').attr('placeholder', 'Enter Service/ Business Name')
+        $('.company_phone').prop('required', false);
+        $('.company_email').prop('required', false);
+        $('.company_email').val('');
+        $('.company_phone').val('');
+    } else {
+        $('.company_phoneDiv').show();
+        $('.company_emailDiv').show();
+        $('.company_name').attr('placeholder', 'Enter Company Name')
+        $('.company_phone').prop('required', false);
+        $('.company_email').prop('required', false);
+        $('.company_email').val('');
+        $('.company_phone').val('');
+    }
+});
 $(".dataTables_scrollHeadInner").css({
     "width": "100%"
 });
@@ -73,6 +93,7 @@ var table = $('#datatable').DataTable({
         titleAttr: 'PDF',
         title: listName + ' ' + today,
         className: 'btn btn-info btn-sm',
+        orientation: 'landscape',
         exportOptions: {
             columns: ':not(:first,:last)'
         }

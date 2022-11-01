@@ -41047,8 +41047,9 @@ textarea.form-control {
     margin-bottom: 30px;
     width: 100%;
     background-color: #ffffff;
-    border-radius: 5px;
+    border-radius: 1px;
     padding: 0px;
+    border:1px solid #006837;
     -webkit-transition: .5s;
     transition: .5s;
     display: -ms-flexbox;
@@ -50077,5 +50078,9 @@ div#social-links ul li a {
 
     max-height: 400px;
 }
-
+.page-item.active .page-link {
+   
+    background-color: #006837 !important;
+    border-color: #006837 !important;
+}
 

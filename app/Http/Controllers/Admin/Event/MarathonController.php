@@ -7,6 +7,7 @@ use App\Http\Requests\MarathonRequest;
 use App\Models\AwardMarathonSetting;
 use App\Models\MarathonRegistration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -45,16 +46,9 @@ class MarathonController extends Controller
      */
     public function store(MarathonRequest $request)
     {
-        MarathonRegistration::create(
-            [
-                'full_name' => $request->full_name,
-                'region' => $request->region,
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'event' => $request->event,
-                'paid' => 1,
-            ]
-        );
+        DB::beginTransaction();
+        MarathonRegistration::create($request->except('_token'));
+        DB::commit();
         return redirect()->back()->with('success', 'Marathon runner successfully Added!');
     }
 
@@ -108,46 +102,10 @@ class MarathonController extends Controller
     public function update(MarathonRequest $request, $id)
     {
         $marathon_runner_id  = $request->marathon_runner_id;
-        $full_name            = $request->full_name;
-        $email            = $request->email;
-        $phonecode            = $request->phonecode;
-        $phone            = $request->phone;
-        $region                  = $request->region;
-        $event               = $request->event;
-
+        DB::beginTransaction();
         $marathon_runner = MarathonRegistration::where('id', $marathon_runner_id)->first() ?? abort(404);
-        if (!($email == $marathon_runner->email)) {
-            $marathon_runner->update([
-                'email' => $email,
-            ]);
-        }
-
-        if (!($full_name == $marathon_runner->full_name)) {
-            $marathon_runner->update([
-                'full_name' => $full_name,
-            ]);
-        }
-        if (!($phonecode == $marathon_runner->phonecode)) {
-            $marathon_runner->update([
-                'phonecode' => $phonecode,
-            ]);
-        }
-        if (!($region == $marathon_runner->region)) {
-            $marathon_runner->update([
-                'region' => $region,
-            ]);
-        }
-        if (!($event == $marathon_runner->event)) {
-            $marathon_runner->update([
-                'event' => $event,
-            ]);
-        }
-        if (!($phone == $marathon_runner->phone)) {
-
-            $marathon_runner->update([
-                'phone' =>  $phone,
-            ]);
-        }
+        $marathon_runner->update($request->except('_token', '_method'));
+        DB::commit();
         return redirect()->back()->with('success', 'Marathon runner successfully Update!');
     }
 

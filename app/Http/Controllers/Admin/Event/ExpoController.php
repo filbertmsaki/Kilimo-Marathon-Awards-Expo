@@ -40,7 +40,7 @@ class ExpoController extends Controller
         DB::beginTransaction();
         ExpoRegistration::create($request->except('_token'));
         DB::commit();
-        return redirect()->back()->with('success', 'Sucessfull Created!');
+        return redirect()->back()->with('success', 'You have successful register to kilimo expo!');
     }
     /**
      * Display the specified resource.

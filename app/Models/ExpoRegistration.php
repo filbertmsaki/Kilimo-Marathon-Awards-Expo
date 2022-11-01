@@ -33,7 +33,7 @@ class ExpoRegistration extends Model
         });
     }
 
-    public function scopeExpoExist($query,$company_name, $company_phone = null, $company_email = null, $contact_person_phone, $contact_person_email = null)
+    public function scopeExpoExist($query,$company_name, $company_phone = null,  $contact_person_phone)
     {
         $currrentYear = date('Y');
         $qry =$query->where('company_name', $company_name);
@@ -41,16 +41,11 @@ class ExpoRegistration extends Model
         if (request()->has('company_phone')) {
             $qry->where('company_phone', $company_phone);
         }
-        if (request()->has('company_email')) {
-            $qry->orWhere('company_email', $company_email);
-        }
 
         if (request()->has('contact_person_phone')) {
-            $qry->orWhere('contact_person_phone', $contact_person_phone);
+            $qry->where('contact_person_phone', $contact_person_phone);
         }
-        if (request()->has('contact_person_email')) {
-            $qry->orWhere('contact_person_email', $contact_person_email);
-        }
+
         return $qry->whereYear('created_at', '=', $currrentYear)->exists();
     }
 }

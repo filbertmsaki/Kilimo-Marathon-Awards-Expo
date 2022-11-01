@@ -45,9 +45,7 @@ class AwardController extends Controller
         DB::beginTransaction();
         $exist = AwardNominee::nomineeExist(
             $request->company_name,
-            $request->category_id,
-            $request->company_phone,
-            $request->contact_person_phone
+            $request->category_id
         );
         if ($exist) {
             return redirect()->back()->with('warning', 'You have already registered in this category, please wait to be verified!');
