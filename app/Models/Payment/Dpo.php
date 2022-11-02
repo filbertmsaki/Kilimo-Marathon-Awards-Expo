@@ -147,9 +147,9 @@ class Dpo
 
         $companyToken =  $this->company_token;
         $transToken   = $request->TransToken;
-        $phoneNumber  = '255762650393';
-        $mno          = 'Selcom_webPay';
-        $mnocountry   = 'Tanzania';
+        $phoneNumber  = $request->phone;
+        $mno          = $request->mno;
+        $mnocountry   = $request->country;
 
         $xml = '<?xml version="1.0" encoding="UTF-8"?>
               <API3G>
