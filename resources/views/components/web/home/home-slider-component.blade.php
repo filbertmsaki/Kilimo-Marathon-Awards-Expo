@@ -4,7 +4,7 @@
         <div id="myCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <!-- Carousel indicators -->
             <ol class="carousel-indicators">
-                @foreach ($page_galleries as $gallery)
+                @foreach ($page_sliders as $gallery)
                     <li data-bs-target="#myCarousel" data-bs-slide-to="{{ $loop->iteration - 1 }}"
                         class="@if ($loop->iteration - 1 == 0) active @endif"></li>
                 @endforeach
