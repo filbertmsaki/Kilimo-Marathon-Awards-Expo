@@ -57,12 +57,6 @@ class MarathonRegistrationController extends BaseController
 
                     $validator->errors()->add('marathon_registration', 'Sorry Marathon Registration start on 1 June 2022');
 
-                    $reg_no = 'T665CSF';
-                    $chasase_no = "244***************999";
-                    return $this->handleError([
-                        'reg_no' => $reg_no,
-                        'chases' => $chasase_no
-                    ], Response::HTTP_NOT_FOUND);
                 }
             } else {
 

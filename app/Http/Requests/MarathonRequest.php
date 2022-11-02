@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 class MarathonRequest extends FormRequest
 {
     /**
@@ -15,7 +14,6 @@ class MarathonRequest extends FormRequest
     {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,7 +29,10 @@ class MarathonRequest extends FormRequest
             'event' => 'required|numeric',
         ];
     }
-
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json($validator->errors()));
+    }
     public function messages()
     {
         return [
@@ -46,8 +47,6 @@ class MarathonRequest extends FormRequest
             'event.required' => 'Marathon Event is required!',
         ];
     }
-
-
     public function getValidatorInstance()
     {
         $this->cleanPhoneNumber();
@@ -58,7 +57,6 @@ class MarathonRequest extends FormRequest
         $this->cleanTShirtSize();
         return parent::getValidatorInstance();
     }
-
     protected function cleanPhoneNumber()
     {
         if ($this->request->has('phone')) {

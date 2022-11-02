@@ -142,14 +142,14 @@ class Dpo
             ];
         }
     }
-    public function ChargeTokenMobile($data)
+    public function ChargeTokenMobile($request)
     {
 
         $companyToken =  $this->company_token;
-        $transToken   = $data['transToken'];
-        $phoneNumber  = $data['phoneNumber'];
-        $mno          = $data['mno'];
-        $mnocountry   = $data['mnocountry'];
+        $transToken   = $request->TransToken;
+        $phoneNumber  = '255762650393';
+        $mno          = 'Selcom_webPay';
+        $mnocountry   = 'Tanzania';
 
         $xml = '<?xml version="1.0" encoding="UTF-8"?>
               <API3G>
@@ -238,11 +238,11 @@ class Dpo
         }
     }
 
-    public function verifyToken($data)
+    public function verifyToken($request)
     {
 
         $companyToken = $this->company_token;
-        $transToken   = $data['TransToken'];
+        $transToken   = $request->TransToken;
         $xml = '<?xml version="1.0" encoding="utf-8"?>
           <API3G>
             <CompanyToken>' . $companyToken . '</CompanyToken>
