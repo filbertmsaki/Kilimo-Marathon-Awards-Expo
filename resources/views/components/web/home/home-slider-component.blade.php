@@ -17,7 +17,7 @@
                         <div class="carousel-caption">
                             <h1>{{ $gallery->title }}</h1>
                             <p class="lead">{{ $gallery->description }}</p>
-                            <a href="{{ route('contactUs') }}" class="btn btn-sm btn-primary">Learn More</a>
+                            <a href="{{ route('web.contactUs') }}" class="btn btn-sm btn-primary">Learn More</a>
                         </div><!-- end carousel-caption -->
                     </div>
                 @endforeach
