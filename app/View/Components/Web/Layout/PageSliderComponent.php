@@ -12,12 +12,12 @@ class PageSliderComponent extends Component
      *
      * @return void
      */
-   public $page  ;
-   public $galleries  ;
+    public $page;
+    public $galleries;
     public function __construct($page = null)
     {
-        $this->galleries = Gallery::where('event',$page)->inRandomOrder()->get();
-
+        $this->page = $page;
+        $this->galleries = Gallery::where('event', $page)->inRandomOrder()->get();
     }
 
     /**

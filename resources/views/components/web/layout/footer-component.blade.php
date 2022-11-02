@@ -12,7 +12,7 @@
                             increase in investments and sales of agricultural products.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-12">
+                <div class="col-lg-3 col-6">
                     <div class="widget">
                         <h4 class="footer-title">Contact Info</h4>
                         <hr class="bg-primary mb-10 mt-0 d-inline-block mx-auto w-60">
@@ -26,15 +26,15 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-12 col-lg-3 d-none d-lg-block" >
-                    <div class="widget widget_gallery clearfix">
-                        <h4 class="footer-title">Our Gallery</h4>
-                        <hr class="bg-primary mb-10 mt-0 d-inline-block mx-auto w-60">
-                        <ul class="list-unstyled">
-                            @foreach ($galleries as $item)
-                            <li><img class="w-60 h-40" src="{{ asset($item->image_url) }}" alt="{{ $item->title }}"></li>
-
-                            @endforeach
+                <div class="col-6 col-lg-3" >
+                    <div class="widget footer_widget">
+                        <h4 class="footer-title">Quick Link</h4>
+                        <hr class="bg-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+                        <ul class="list list-arrow">
+                            <li><a href="{{ route('web.refund.policy') }}">Refund Policy</a></li>
+                            <li><a href="https://shambadunia.com" target="_blank">Shambadunia</a></li>
+                            <li><a href="{{ route('web.contactUs') }}">Contact Us</a></li>
+                            <li><a href="#">FAQs</a></li>
                         </ul>
                     </div>
                 </div>

@@ -2,65 +2,9 @@
 <x-web.layout.app-layout :isPagetitle="false" :pageTitle="$title">
     @section('css')
         <style>
-            .carousel-item {
-                height: 450px !important;
-            }
-
-            .carousel-item img {
-                object-fit: cover;
-                object-position: center;
-                height: 100%;
-                width: 100%;
-                overflow: hidden;
-            }
-
-
         </style>
     @endsection
-    <section class="pt-130" data-aos="fade-up">
-        <div id="myCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
-            <!-- Carousel indicators -->
-            <ol class="carousel-indicators">
-                <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
-                <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
-                <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
-            </ol>
-            <!-- Wrapper for carousel items -->
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{{ asset('images-s/sponsor1.jpg') }}" class="d-block " alt="Slide 1">
-                    <div class="carousel-caption">
-                        <h1>Check Out this Moose</h1>
-                        <p class="lead">This text is super engaging and makes you want to click the button.</p>
-                        <a href="#" class="btn btn-sm btn-primary">Learn More</a>
-                    </div><!-- end carousel-caption -->
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('images-s/sponsor2.jpg') }}" class="d-block " alt="Slide 2">
-                    <div class="carousel-caption">
-                        <h1>Check Out this Moose</h1>
-                        <p class="lead">This text is super engaging and makes you want to click the button.</p>
-                        <a href="#" class="btn btn-sm btn-primary">Learn More</a>
-                    </div><!-- end carousel-caption -->
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('images-s/sponsor3.jpg') }}" class="d-block " alt="Slide 3">
-                    <div class="carousel-caption ">
-                        <h1>Check Out this Moose</h1>
-                        <p class="lead">This text is super engaging and makes you want to click the button.</p>
-                        <a href="#" class="btn btn-sm btn-primary">Learn More</a>
-                    </div><!-- end carousel-caption -->
-                </div>
-            </div>
-            <!-- Carousel controls -->
-            <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </a>
-            <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </a>
-        </div>
-    </section>
+    <x-web.home.home-slider-component />
     <section class="py-xl-100 py-20 bg-white" data-aos="fade-up">
         <div class="container">
             <div class="row justify-content-center">
@@ -154,8 +98,8 @@
                 <div class="row align-items-center">
                     <div class="col-md-12 col-lg-6">
                         <div class="popup-vdo mt-30 mt-md-0">
-                            <img src="{{ asset('images-s/marathon-1.jpg') }}" class="img-fluid rounded"
-                                alt="Awards" loading="lazy">
+                            <img src="{{ asset('images-s/marathon-1.jpg') }}" class="img-fluid rounded" alt="Awards"
+                                loading="lazy">
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-6 pt-20 ">
@@ -185,8 +129,8 @@
     </section>
     <section class="py-20 " data-aos="fade-up">
         <div class="container">
-            <div class="row mt-30 list">
-                <div class="col-md-3 col-12 list-item">
+            <div class="row mt-30 div-list">
+                <div class="col-md-3 col-12 div-list-item">
                     <div class="box pull-up">
                         <div class="box-body">
                             <div>
@@ -206,7 +150,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-12 list-item">
+                <div class="col-md-3 col-12 div-list-item">
                     <div class="box pull-up">
                         <div class="box-body">
                             <div>
@@ -227,7 +171,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-12 list-item">
+                <div class="col-md-3 col-12 div-list-item">
                     <div class="box pull-up">
                         <div class="box-body">
                             <div>
@@ -248,7 +192,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-12 list-item">
+                <div class="col-md-3 col-12 div-list-item">
                     <div class="box pull-up">
                         <div class="box-body">
                             <div>
@@ -279,8 +223,8 @@
                     <hr class="w-100 bg-primary">
                 </div>
             </div>
-            <div class="row mt-30 list">
-                <div class="col-lg-4 col-md-4 col-12 list-item">
+            <div class="row mt-30 div-list">
+                <div class="col-lg-4 col-md-4 col-12 div-list-item">
                     <div class="card">
                         <img class="card-img-top" src="{{ asset('images-s/sponsor4.jpg') }}" alt="Card image cap">
                         <div class="card-body">
@@ -290,7 +234,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-12 list-item">
+                <div class="col-lg-4 col-md-4 col-12 div-list-item">
                     <div class="card">
                         <img class="card-img-top" src="{{ asset('images-s/IMG_6380.jpg') }}" alt="Card image cap">
                         <div class="card-body">
@@ -301,7 +245,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-12 list-item">
+                <div class="col-lg-4 col-md-4 col-12 div-list-item">
                     <div class="card">
                         <img class="card-img-top" src="{{ asset('images-s/KILIMO MOROGORO-205.jpg') }}"
                             alt="Card image cap">

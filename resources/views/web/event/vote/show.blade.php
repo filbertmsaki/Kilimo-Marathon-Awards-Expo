@@ -9,9 +9,9 @@
                     <hr>
                 </div>
             </div>
-            <div class="row list">
+            <div class="row div-list">
                 @foreach ($award_nominees as $nominee)
-                    <div class="col-md-3 col-6 list-item">
+                    <div class="col-md-3 col-6 div-list-item">
                         <div class="box text-center">
                             <div class="box-body p-1">
                                 <span class="icon-Group text-primary fs-40"><i class="me-10 mdi mdi-trophy-award"

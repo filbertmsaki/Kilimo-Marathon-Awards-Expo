@@ -31,17 +31,5 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/skin_color.css') }}">
     @yield('css')
-    <style>
-        .carousel-item {
-            height: 450px !important;
-        }
-
-        .carousel-item img {
-            object-fit: cover;
-            object-position: center;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-        }
-    </style>
+ 
 </head>

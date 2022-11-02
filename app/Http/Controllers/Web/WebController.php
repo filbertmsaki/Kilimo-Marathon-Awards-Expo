@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Mail\SubscribeMail;
 use App\Models\ContactUs;
+use App\Models\Gallery;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -60,7 +61,12 @@ class WebController extends Controller
     }
     public function refundPolicy()
     {
-        return view('web.contact-us');
+        return view('web.refund-policy');
+    }
+    public function gallery()
+    {
+        $galleries =  Gallery::inRandomOrder()->limit(24)->get();
+        return view('web.gallery.index',compact('galleries'));
     }
     public function subscribe(Request $request)
     {

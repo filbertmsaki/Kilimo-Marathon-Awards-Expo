@@ -5,7 +5,6 @@ File: scss
 */
 /*------------------------------------------------------------------
 [Table of contents]
-
 Body, layout, Basic
 Header
 Sidebar
@@ -64,7 +63,6 @@ pagination
 Morris chart
 project table
 Waves
-
 -------------------------------------------------------------------*/
 /****************************/
 /** Imports **/
@@ -41049,7 +41047,7 @@ textarea.form-control {
     background-color: #ffffff;
     border-radius: 1px;
     padding: 0px;
-    border:1px solid #006837;
+    border: 1px solid #006837;
     -webkit-transition: .5s;
     transition: .5s;
     display: -ms-flexbox;
@@ -49948,12 +49946,12 @@ img.online {
     height: auto !important;
 }
 
-.list {
+.div-list {
     display: flex;
     flex-wrap: wrap;
 }
 
-.list-item {
+.div-list-item {
     display: flex;
 }
 
@@ -49993,7 +49991,6 @@ div#social-links {
     margin-right: auto;
     margin-bottom: -10px;
     margin-left: auto;
-
 }
 
 div#social-links ul {
@@ -50005,7 +50002,6 @@ div#social-links ul li {
 }
 
 div#social-links ul li a {
-
     font-size: 20px;
     color: #222;
     /* background-color: #ccc; */
@@ -50044,43 +50040,111 @@ div#social-links ul li a {
 #toast-container {
     z-index: 999999999999999999 !important;
 }
+
 #toast-container>div {
     opacity: 1 !important;
 }
+
 .btn {
     border-radius: 0 !important;
 }
 
 @media (max-width: 575.98px) {}
 
+.owl-carousel .owl-item {
+    max-height: 400px;
+}
+
+.page-item.active .page-link {
+    background-color: #006837 !important;
+    border-color: #006837 !important;
+}
+
+.carousel-item {
+    height: 500px !important;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-caption {
+    z-index: 2;
+    background-color: #ffffffa3;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    right: 0px;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    min-width: 300px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.carousel-item:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: black;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+h1 {
+    color: #006837 !important;
+    font-weight: 600;
+}
+
 @media (max-width: 767.98px) {
+    .carousel-item {
+        height: 400px !important;
+    }
     .fs-16 {
         font-size: 1.2rem !important;
     }
+
     .fs-18 {
-    font-size: 1.1rem !important;
-}
+        font-size: 1.1rem !important;
+    }
 
     .icon-bar-sticky {
         display: none;
     }
-    .h1, h1 {
-    font-size: 2rem;
-}
+
+    .h1,
+    h1 {
+        font-size: 2rem;
+    }
 
     .h2,
     h2 {
         font-size: 1.6rem;
     }
-}
 
-.owl-carousel .owl-item {
+    .carousel-caption h1 {
+        font-size: 1.6rem;
+    }
 
-    max-height: 400px;
+    .carousel-caption .lead {
+        font-size: 1.2rem;
+        font-weight: 400;
+    }
 }
-.page-item.active .page-link {
-   
-    background-color: #006837 !important;
-    border-color: #006837 !important;
-}
-

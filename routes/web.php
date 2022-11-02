@@ -59,6 +59,7 @@ Route::group(['as' => 'web.'], function () {
     Route::get('/contact-us', [WebController::class, 'ContactUs'])->name('contactUs');
     Route::get('/refund-policy', [WebController::class, 'refundPolicy'])->name('refund.policy');
     Route::post('/subscribe', [WebController::class, 'subscribe'])->name('subscribe');
+    Route::get('/gallery', [WebController::class, 'gallery'])->name('gallery');
     Route::post('/contact-us', [WebController::class, 'contactUsStore'])->name('contactUs.store');
     Route::group(['prefix' => 'event', 'as' => 'event.'], function () {
         Route::group(['prefix' => 'award', 'as' => 'award.'], function () {
