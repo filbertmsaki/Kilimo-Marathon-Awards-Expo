@@ -4,7 +4,7 @@
 
 +function ($) {
   'use strict'
-	
+
 // Dynamic active menu
     var path = window.location.pathname.split("/").pop();
     var target = $('.menu li a[href="'+path+'"]');
@@ -430,10 +430,10 @@
 
 
 $(function () {
-    "use strict";   
+    "use strict";
 
-		
-	
+
+
 	jQuery(window).scroll(startCounter);
 	function startCounter() {
 		var hT = jQuery('.countnm-bx').offset().top,
@@ -453,13 +453,13 @@ $(function () {
 			});
 		}
 	}
-	
-	
+
+
   }); // End of use strict
 
 
 $(function () {
-	"use strict"; 
+	"use strict";
 		var checkSelectorExistence = function(selectorName) {
 		  if(jQuery(selectorName).length > 0){return true;}else{return false;}
 		};
@@ -473,7 +473,7 @@ $(function () {
 		  var inputValue = $(this).val();
 		  if ( inputValue == "" ) {
 			$(this).removeClass('filled');
-			$(this).parents('.form-group').removeClass('focused');  
+			$(this).parents('.form-group').removeClass('focused');
 		  } else {
 			$(this).addClass('filled');
 		  }
@@ -493,7 +493,7 @@ $(function () {
               $autohgt = ($this.data('autoheight')) ? $this.data('autoheight') : false,
               $autowdt = ($this.data('autoWidth')) ? $this.data('autoWidth') : true,
               $space = ($this.attr('data-space')) ? $this.data('space') : 20;
-         
+
               $(this).owlCarousel({
                   loop: $loop,
                   items: $items,
@@ -513,11 +513,11 @@ $(function () {
                   autoplayHoverPause: true,
               });
 
-       }); 
+       });
  });
 
 $(function () {
-	
+
 	 AOS.init({
 		easing: 'ease-in-out-sine'
 	  });
@@ -526,8 +526,8 @@ $(function () {
 
 
 var options = {
-	title: 'This website uses cookies.<br> The General Data Protection Regulation (GDPR) and the ePrivacy Directive (ePR) affect how you as a website owner may use cookies and online tracking of visitors from the EU.',
-	message: 'We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services',
+	title: 'This website uses cookies.',
+	message: 'We use cookies to ensure you have the best browsing experience on our website. By using our site, you acknowledge that you have read and understood our <a href="#">Cookie Policy</a> & <a href="#">Privacy Policy</a>.',
 	delay: 600,
 	expires: 1,
 	link: '#privacy',
