@@ -9,8 +9,7 @@
 
                             <li class="ms-10 pe-10"><a href="#"><i class="text-dark fa fa-envelope"></i>
                                     marketing@kilimomarathon.co.tz</a></li>
-                            <li class="ms-10 pe-10"><a href="#"><i class="text-dark fa fa-phone"></i>+(255) 624
-                                    222 211 </a></li>
+                            <li class="ms-10 pe-10"><a href="#"><i class="text-dark fa fa-phone"></i>+(255) 754 222 800 </a></li>
                         </ul>
                     </div>
                 </div>
