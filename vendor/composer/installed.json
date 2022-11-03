@@ -1204,17 +1204,17 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.14.5",
-            "version_normalized": "2.14.5.0",
+            "version": "2.14.6",
+            "version_normalized": "2.14.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "a63e5e8f26ebbebf8ed3c5c691637325512eb0dc"
+                "reference": "f7948baaa0330277c729714910336383286305da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/a63e5e8f26ebbebf8ed3c5c691637325512eb0dc",
-                "reference": "a63e5e8f26ebbebf8ed3c5c691637325512eb0dc",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/f7948baaa0330277c729714910336383286305da",
+                "reference": "f7948baaa0330277c729714910336383286305da",
                 "shasum": ""
             },
             "require": {
@@ -1230,7 +1230,7 @@
                 "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
                 "whoops/soap": "Formats errors as SOAP responses"
             },
-            "time": "2022-01-07T12:00:00+00:00",
+            "time": "2022-11-02T16:23:29+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1266,7 +1266,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.14.5"
+                "source": "https://github.com/filp/whoops/tree/2.14.6"
             },
             "funding": [
                 {
@@ -1885,17 +1885,17 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.83.25",
-            "version_normalized": "8.83.25.0",
+            "version": "v8.83.26",
+            "version_normalized": "8.83.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b77b908a9426efa41d6286a2ef4c3adbf5398ca1"
+                "reference": "7411d9fa71c1b0fd73a33e225f14512b74e6c81e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b77b908a9426efa41d6286a2ef4c3adbf5398ca1",
-                "reference": "b77b908a9426efa41d6286a2ef4c3adbf5398ca1",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/7411d9fa71c1b0fd73a33e225f14512b74e6c81e",
+                "reference": "7411d9fa71c1b0fd73a33e225f14512b74e6c81e",
                 "shasum": ""
             },
             "require": {
@@ -2014,7 +2014,7 @@
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^2.0).",
                 "wildbit/swiftmailer-postmark": "Required to use Postmark mail driver (^3.0)."
             },
-            "time": "2022-09-30T13:00:40+00:00",
+            "time": "2022-11-01T14:48:50+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2390,17 +2390,17 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.3.5",
-            "version_normalized": "2.3.5.0",
+            "version": "2.3.6",
+            "version_normalized": "2.3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "84d74485fdb7074f4f9dd6f02ab957b1de513257"
+                "reference": "857afc47ce113454bd629037213378ba3219dd40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/84d74485fdb7074f4f9dd6f02ab957b1de513257",
-                "reference": "84d74485fdb7074f4f9dd6f02ab957b1de513257",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/857afc47ce113454bd629037213378ba3219dd40",
+                "reference": "857afc47ce113454bd629037213378ba3219dd40",
                 "shasum": ""
             },
             "require": {
@@ -2420,7 +2420,7 @@
                 "erusev/parsedown": "^1.0",
                 "ext-json": "*",
                 "github/gfm": "0.29.0",
-                "michelf/php-markdown": "^1.4",
+                "michelf/php-markdown": "^1.4 || ^2.0",
                 "nyholm/psr7": "^1.5",
                 "phpstan/phpstan": "^1.8.2",
                 "phpunit/phpunit": "^9.5.21",
@@ -2433,7 +2433,7 @@
             "suggest": {
                 "symfony/yaml": "v2.3+ required if using the Front Matter extension"
             },
-            "time": "2022-07-29T10:59:45+00:00",
+            "time": "2022-10-30T16:45:38+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {

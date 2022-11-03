@@ -144,12 +144,11 @@ class Dpo
     }
     public function ChargeTokenMobile($request)
     {
-
-        $companyToken =  $this->company_token;
-        $transToken   = $request->TransToken;
-        $phoneNumber  = $request->phone;
-        $mno          = $request->mno;
-        $mnocountry   = $request->country;
+        $companyToken = $this->company_token;
+        $transToken   =  $request->transToken;
+        $phoneNumber  =  $request->phone;
+        $mno          =  $request->mno;
+        $mnocountry   =  $request->country;
 
         $xml = '<?xml version="1.0" encoding="UTF-8"?>
               <API3G>
@@ -172,23 +171,26 @@ class Dpo
                 'Content-Type' => 'text/xml; charset=UTF8',
             ]
         ]);
+
         $body = $response->getBody();
+
         if ($body != '') {
             $res = str_replace(array("<br>"), '   ', $body);
             $xml = simplexml_load_string($res);
             $json = json_encode($xml);
             $array = json_decode($json, TRUE);
-            $responce = [];
-
-            if (isset($array['StatusCode']) != '') {
-                $responce['success']    = 'true';
-                $responce['result'] = $array;
-                return $responce;
-            } else {
-                $responce['success'] = 'false';
-                $responce['result'] = $array;
-                return $responce;
+            if ($array['StatusCode'] != '130') {
+                $response = Arr::prepend($array, false, 'success');
+            } else if ($array['StatusCode'] == '130') {
+                $response = Arr::prepend($array, true, 'success');
             }
+            return $response;
+        } else {
+            return [
+                'success'           => false,
+                'result'            => 'Unknown error occurred in token creation',
+                'resultExplanation' => 'Unknown error occurred in token creation',
+            ];
         }
     }
 
@@ -241,8 +243,9 @@ class Dpo
     public function verifyToken($request)
     {
 
+        // return  $request->transToken;
         $companyToken = $this->company_token;
-        $transToken   = $request->TransToken;
+        $transToken   = $request->transToken;
         $xml = '<?xml version="1.0" encoding="utf-8"?>
           <API3G>
             <CompanyToken>' . $companyToken . '</CompanyToken>
@@ -282,13 +285,12 @@ class Dpo
             ];
         }
     }
-    public function getPaymentUrl($data)
+    public function getPaymentUrl($request)
     {
-        if ($data['success'] == true) {
-            $verifyToken   = $this->verifyToken(['TransToken' => $data['TransToken']]);
+        if (!empty( $request->transToken)) {
+            $verifyToken   = $this->verifyToken($request);
             if (!empty($verifyToken) && $verifyToken != '') {
-
-                $dpo_payment_url = $this->gatewayUrl() . $data['TransToken'];
+                $dpo_payment_url = $this->gatewayUrl() . $request->transToken;
                 return $dpo_payment_url;
             } else {
                 return [

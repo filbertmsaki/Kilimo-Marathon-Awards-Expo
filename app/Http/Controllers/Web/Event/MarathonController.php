@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Web\Event;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MarathonRequest;
 use App\Models\MarathonRegistration;
@@ -9,6 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as FacadesRequest;
+
+use function GuzzleHttp\Promise\all;
+
 class MarathonController extends Controller
 {
     /**
@@ -61,7 +66,7 @@ class MarathonController extends Controller
         $payment = $request->payment;
         DB::beginTransaction();
         MarathonRegistration::create($request->except('_token'));
-        // DB::commit();
+        DB::commit();
         $request->merge([
             'city' => $request->address,
             'amount' => 35000,
@@ -69,6 +74,7 @@ class MarathonController extends Controller
             'iso' => 'TZ',
             'zip' => 12345,
             'token' => 'KME' . time(),
+
         ]);
 
         if ($payment == 'lipa_number') {
@@ -77,62 +83,66 @@ class MarathonController extends Controller
             $dpo = new Dpo();
             $tokens = $dpo->createToken($request);
             if ($tokens['success'] === true) {
-                $data['TransToken'] = $tokens['TransToken'];
-                                  
-
                 $request->merge([
-                    'TransToken' =>  $tokens['TransToken'],
-                    'country'=>'Tanzania',
+                    'transToken' =>  $tokens['TransToken'],
                 ]);
-
                 if (FacadesRequest::is('api*')) {
                     if ($request->payment_option == 'Tigo') {
-                        $request->merge([
-                            'mno' =>  'TIGOdebitMandate',
-                        ]);
+                        $payment_options = 'TIGOdebitMandate';
                     }
                     if ($request->payment_option == 'Vodacom') {
-                        $request->merge([
-                            'mno' =>  'Selcom_webPay',
-                        ]);
+                        $payment_options = 'Selcom_webPay';
                     }
                     if ($request->payment_option == 'Airtel') {
-                        $request->merge([
-                            'mno' =>  'Selcom_webPay_Airtel',
-                        ]);
+                        $payment_options = 'Selcom_webPay_Airtel';
                     }
-                    // return $request->all();
-                    // $chargeData = [];
-                    // $chargeData['transToken'] = $tokens['result']['TransToken'];
-                    // $chargeData['phoneNumber'] = $params['phone'];
-                    // $chargeData['mno'] = $params['payment_option'];
-                    // $chargeData['mnocountry'] = 'Tanzania';
-                    $mobilePay = $dpo->ChargeTokenMobile($request);
-                    return $mobilePay;
-
-                    return response()->json('im good to go', 200);
-                }
-
-
-
-
-
-                $verify = $dpo->verifyToken($data);
-                if ($verify['Result'] === '900') {
-                    $payment_url = $dpo->getPaymentUrl($tokens);
-                    // Save the transaction reference
-                    $payment = PushPayment::create([
-                        'transactionref' => $request->token,
-                        'customerphone' => $request->phone,
-                        'transactionamount' => $request->amount,
-                        'transactiontoken' => $data['TransToken'],
-                        'status' => 'pending',
+                    $request->merge([
+                        'mno' =>   $payment_options,
+                        'country' => 'Tanzania',
                     ]);
-                    return Redirect::to($payment_url);
+
+                    $mobilePay = $dpo->ChargeTokenMobile($request);
+                    if (!empty($mobilePay) && $mobilePay != '') {
+                        if ($mobilePay['success'] = true) {
+                            $payment_details = $mobilePay['instructions'];
+                            return response()->json($payment_details, 200);
+
+                        }
+                    }
+                     return response()->json('Error occur, please try again latter!', 400);
+                }
+                $verify = $dpo->verifyToken($request);
+                if ($verify['Result'] === '900') {
+                    $payment_url = $dpo->getPaymentUrl($request);
+                    // Save the transaction reference
+                    // $payment = PushPayment::create([
+                    //     'transactionref' => $request->token,
+                    //     'customerphone' => $request->phone,
+                    //     'transactionamount' => $request->amount,
+                    //     'transactiontoken' =>  $request->transToken,
+                    //     'status' => 'pending',
+                    // ]);
+                    return redirect()->to($payment_url);
                 }
             }
         }
         return redirect()->back()->with('error', 'Error occur, please try again latter!');
+    }
+
+
+    public function mobilePayment($request)
+    {
+        $dpo = new Dpo();
+        $tokens = $dpo->createToken($request);
+        if ($tokens['success'] == true) {
+            $mobilePay = $dpo->ChargeTokenMobile($request);
+            if (!empty($mobilePay) && $mobilePay != '') {
+                if ($mobilePay['success'] = true) {
+                    $payment_details = $mobilePay['result'];
+                    return   $payment_details;
+                }
+            }
+        }
     }
     /**
      * Display the specified resource.
