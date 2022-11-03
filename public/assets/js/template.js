@@ -434,25 +434,25 @@ $(function () {
 
 
 
-	jQuery(window).scroll(startCounter);
-	function startCounter() {
-		var hT = jQuery('.countnm-bx').offset().top,
-			hH = jQuery('.countnm-bx').outerHeight(),
-			wH = jQuery(window).height();
-		if (jQuery(window).scrollTop() > hT+hH-wH) {
-			jQuery(window).off("scroll", startCounter);
-			jQuery('.countnm').each(function () {
-				var $this = jQuery(this);
-				jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
-					duration: 2000,
-					easing: 'swing',
-					step: function () {
-						$this.text(Math.ceil(this.Counter) + '');
-					}
-				});
-			});
-		}
-	}
+	// jQuery(window).scroll(startCounter);
+	// function startCounter() {
+	// 	var hT = jQuery('.countnm-bx').offset().top,
+	// 		hH = jQuery('.countnm-bx').outerHeight(),
+	// 		wH = jQuery(window).height();
+	// 	if (jQuery(window).scrollTop() > hT+hH-wH) {
+	// 		jQuery(window).off("scroll", startCounter);
+	// 		jQuery('.countnm').each(function () {
+	// 			var $this = jQuery(this);
+	// 			jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
+	// 				duration: 2000,
+	// 				easing: 'swing',
+	// 				step: function () {
+	// 					$this.text(Math.ceil(this.Counter) + '');
+	// 				}
+	// 			});
+	// 		});
+	// 	}
+	// }
 
 
   }); // End of use strict
@@ -533,8 +533,8 @@ var options = {
 	link: '#privacy',
 	onAccept: function(){
 		var myPreferences = $.fn.ihavecookies.cookie();
-		console.log('Yay! The following preferences were saved...');
-		console.log(myPreferences);
+		// console.log('Yay! The following preferences were saved...');
+		// console.log(myPreferences);
 	},
 	uncheckBoxes: true,
 	acceptBtnLabel: 'Accept Cookies',
@@ -547,9 +547,9 @@ var options = {
 $(document).ready(function() {
 	$('body').ihavecookies(options);
 
-	if ($.fn.ihavecookies.preference('marketing') === true) {
-		console.log('This should run because marketing is accepted.');
-	}
+	// if ($.fn.ihavecookies.preference('marketing') === true) {
+	// 	console.log('This should run because marketing is accepted.');
+	// }
 
 	$('#ihavecookiesBtn').on('click', function(){
 		$('body').ihavecookies(options, 'reinit');
