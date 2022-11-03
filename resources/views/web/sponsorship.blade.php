@@ -10,11 +10,11 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <img class="box-img-top btrr-5 btlr-5" src="{{ asset('images-s/sponsor3.jpg') }}"
+                                        <img class="box-img-top btrr-5 btlr-5" src="{{ asset('images/sponsor3.jpg') }}"
                                         alt="Card image cap">
                                     </div>
                                     <div class="col-6">
-                                        <img class="box-img-top btrr-5 btlr-5" src="{{ asset('images-s/sponsor1.jpg') }}"
+                                        <img class="box-img-top btrr-5 btlr-5" src="{{ asset('images/sponsor1.jpg') }}"
                                         alt="Card image cap">
                                     </div>
                                 </div>

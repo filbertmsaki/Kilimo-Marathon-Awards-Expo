@@ -1,7 +1,7 @@
  @if ($isPagetitle)
      <!---page Title --->
      <section class="bg-img pt-150 pb-20" data-overlay="7"
-         style="background-image: url({{ asset('images/front-end-img/background/bg-8.jpg') }});">
+         style="background-image: url({{ asset('images/bg.jpg') }});">
          <div class="container">
              <div class="row">
                  <div class="col-12">

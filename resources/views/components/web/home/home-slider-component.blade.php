@@ -39,7 +39,7 @@
             <!-- Wrapper for carousel items -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ asset('images-s/KILIMO MOROGORO-205.jpg') }}" class="d-block " alt="Slide 1">
+                    <img src="{{ asset('images/KILIMO MOROGORO-205.jpg') }}" class="d-block " alt="Slide 1">
                     <div class="carousel-caption">
                         <h1>Kilimo Marathon, Awards & Expo.</h1>
                         <p class="lead">A chance to the Agriculture sector to grow and go hand in hand with the current pace of digitized world.</p>

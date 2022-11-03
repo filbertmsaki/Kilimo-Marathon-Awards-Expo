@@ -85,7 +85,7 @@
                 </div>
                 <div class="col-lg-6 col-12 position-relative">
                     <div class="popup-vdo mt-30 mt-md-0">
-                        <img src="{{ asset('images-s/award-1.jpg') }}" class="img-fluid rounded" alt="Awards"
+                        <img src="{{ asset('images/award-1.jpg') }}" class="img-fluid rounded" alt="Awards"
                             loading="lazy">
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12 col-lg-6">
                         <div class="popup-vdo mt-30 mt-md-0">
-                            <img src="{{ asset('images-s/marathon-1.jpg') }}" class="img-fluid rounded" alt="Awards"
+                            <img src="{{ asset('images/marathon-1.jpg') }}" class="img-fluid rounded" alt="Awards"
                                 loading="lazy">
                         </div>
                     </div>
@@ -226,7 +226,7 @@
             <div class="row mt-30 div-list">
                 <div class="col-lg-4 col-md-4 col-12 div-list-item">
                     <div class="card">
-                        <img class="card-img-top" src="{{ asset('images-s/sponsor4.jpg') }}" alt="Card image cap">
+                        <img class="card-img-top" src="{{ asset('images/sponsor4.jpg') }}" alt="Card image cap">
                         <div class="card-body">
                             <h4 class="card-title text-primary">Pre - Marathon</h4>
                             <p class="card-text">Our goal during this stage will be to create awareness and achieve
@@ -236,7 +236,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-12 div-list-item">
                     <div class="card">
-                        <img class="card-img-top" src="{{ asset('images-s/IMG_6380.jpg') }}" alt="Card image cap">
+                        <img class="card-img-top" src="{{ asset('images/IMG_6380.jpg') }}" alt="Card image cap">
                         <div class="card-body">
                             <h4 class="card-title text-primary">During Marathon</h4>
                             <p class="card-text">To make sure Kilimo Marathon reaches the finishing line with flying
@@ -247,7 +247,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-12 div-list-item">
                     <div class="card">
-                        <img class="card-img-top" src="{{ asset('images-s/KILIMO MOROGORO-205.jpg') }}"
+                        <img class="card-img-top" src="{{ asset('images/KILIMO MOROGORO-205.jpg') }}"
                             alt="Card image cap">
                         <div class="card-body">
                             <h4 class="card-title text-primary">Post - Marathon</h4>
@@ -265,7 +265,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-12 position-relative">
                     <div class="popup-vdo mt-30 mt-md-0">
-                        <img src="{{ asset('images-s/IMG_5276.jpg') }}" class="img-fluid rounded" alt="Awards"
+                        <img src="{{ asset('images/IMG_5276.jpg') }}" class="img-fluid rounded" alt="Awards"
                             loading="lazy">
                     </div>
                 </div>

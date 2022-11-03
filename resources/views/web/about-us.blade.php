@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-md-6 col-12 position-relative">
                             <div class="popup-vdo mt-30 mt-md-0">
-                                <img src="{{ asset('images-s/IMG_5273.jpg') }}" class="img-fluid rounded"
+                                <img src="{{ asset('images/IMG_5273.jpg') }}" class="img-fluid rounded"
                                     alt="">
                             </div>
                         </div>
