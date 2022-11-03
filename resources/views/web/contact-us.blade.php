@@ -88,7 +88,7 @@
                             <ul class="list list-unstyled text-white-80">
                                 <li class="ps-40"><i class="ti-location-pin"></i>429 Mahando Road, Masaki Dar es
                                     salaam, Tanzania</li>
-                                <li class="ps-40 my-20"><i class="ti-mobile"></i>+255 754 222 800 | +255 624 222 211
+                                <li class="ps-40 my-20"><i class="ti-mobile"></i>+255 754 222 800
                                 </li>
                                 <li class="ps-40"><i class="ti-email"></i>marketing@kilimomarathon.co.tz</li>
                             </ul>

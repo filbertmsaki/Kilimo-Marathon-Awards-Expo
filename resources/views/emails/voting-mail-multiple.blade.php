@@ -624,8 +624,7 @@
                                                                 <h1
                                                                     style="margin: 0; color: #1b4707; font-size: 12px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 400; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
                                                                     <strong>Where to find us:</strong><br />429 Mahando
-                                                                    Road, Masaki Dar es salaam<br />+255 754 222 800 |
-                                                                    +255 624 222 211</h1>
+                                                                    Road, Masaki Dar es salaam<br />+255 754 222 800 </h1>
                                                             </td>
                                                         </tr>
                                                     </table>

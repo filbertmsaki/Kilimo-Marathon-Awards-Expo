@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as FacadesRequest;
-
 use function GuzzleHttp\Promise\all;
 
 class MarathonController extends Controller
@@ -59,7 +58,6 @@ class MarathonController extends Controller
      */
     public function store(MarathonRequest $request)
     {
-
         if (!isMarathonActive()) {
             abort(401);
         }
@@ -74,9 +72,7 @@ class MarathonController extends Controller
             'iso' => 'TZ',
             'zip' => 12345,
             'token' => 'KME' . time(),
-
         ]);
-
         if ($payment == 'lipa_number') {
             return ' lipa_number';
         } else {
@@ -100,36 +96,40 @@ class MarathonController extends Controller
                         'mno' =>   $payment_options,
                         'country' => 'Tanzania',
                     ]);
-
                     $mobilePay = $dpo->ChargeTokenMobile($request);
                     if (!empty($mobilePay) && $mobilePay != '') {
                         if ($mobilePay['success'] = true) {
+                            // Save the transaction reference
+                            $payment = PushPayment::create([
+                                'transactionref' => $request->token,
+                                'customerphone' => $request->phone,
+                                'transactionamount' => $request->amount,
+                                'transactiontoken' =>  $request->transToken,
+                                'status' => 'pending',
+                            ]);
                             $payment_details = $mobilePay['instructions'];
                             return response()->json($payment_details, 200);
-
                         }
                     }
-                     return response()->json('Error occur, please try again latter!', 400);
+                    return response()->json('Error occur, please try again latter!', 400);
                 }
                 $verify = $dpo->verifyToken($request);
                 if ($verify['Result'] === '900') {
                     $payment_url = $dpo->getPaymentUrl($request);
                     // Save the transaction reference
-                    // $payment = PushPayment::create([
-                    //     'transactionref' => $request->token,
-                    //     'customerphone' => $request->phone,
-                    //     'transactionamount' => $request->amount,
-                    //     'transactiontoken' =>  $request->transToken,
-                    //     'status' => 'pending',
-                    // ]);
+                    $payment = PushPayment::create([
+                        'transactionref' => $request->token,
+                        'customerphone' => $request->phone,
+                        'transactionamount' => $request->amount,
+                        'transactiontoken' =>  $request->transToken,
+                        'status' => 'pending',
+                    ]);
                     return redirect()->to($payment_url);
                 }
             }
         }
         return redirect()->back()->with('error', 'Error occur, please try again latter!');
     }
-
-
     public function mobilePayment($request)
     {
         $dpo = new Dpo();

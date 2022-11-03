@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Kilimo Awards</title>
-        
+
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
             .container{
@@ -41,12 +41,12 @@
             .conrats{
                 max-width: 250px;
                 padding-left: 30px;
-                
-                
+
+
             }
             .abut{
                 max-width: 250px;
-                padding-left: 30px;                
+                padding-left: 30px;
             }
             a{
                 text-decoration: none;
@@ -65,7 +65,7 @@
                 font-family: 'Montserrat', sans-serif;
                 font-size: 0.7em;
             }
-            
+
         </style>
     </head>
     <body>
@@ -77,7 +77,7 @@
                 <p><a href="https://kilimomarathon.co.tz">Home | </a><a href="https://kilimomarathon.co.tz/awards">Categories | </a><a href="https://kilimomarathon.co.tz/sponsorship">Sponsorship | </a><a href="https://kilimomarathon.co.tz/contact-us">Contact Us</a></p>
             </ul>
         </div>
-       
+
         <div class="aza">
             <div class="conrats">
                 <h3>Congratulations</h3>
@@ -101,7 +101,7 @@
             <div class="linki">
                 <h2>#AnziaShambani</h2>
                 <h4><a href="https://kilimomarathon.co.tz/">www.kilimomarathon.co.tz</a></h4>
-                <p>429 Mahando Road, Masaki Dar es salaam<br>+255 754 222 800 | +255 624 222 211</p>
+                <p>429 Mahando Road, Masaki Dar es salaam<br>+255 754 222 800</p>
             </div>
             <div class="infoh">
                 <p>You are receiving this email because you subscribed to our Mailshots. If you wish to stop receiving these emails the click <a href="#">Unsubscribe</a></p>
