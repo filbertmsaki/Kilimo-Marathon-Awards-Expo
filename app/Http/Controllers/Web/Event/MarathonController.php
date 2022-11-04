@@ -64,7 +64,6 @@ class MarathonController extends Controller
         $payment = $request->payment;
         DB::beginTransaction();
         MarathonRegistration::create($request->except('_token'));
-        DB::commit();
         $request->merge([
             'city' => $request->address,
             'amount' => 35000,
@@ -108,9 +107,11 @@ class MarathonController extends Controller
                                 'status' => 'pending',
                             ]);
                             $payment_details = $mobilePay['instructions'];
+                            DB::commit();
                             return response()->json($payment_details, 200);
                         }
                     }
+                    DB::rollBack();
                     return response()->json('Error occur, please try again latter!', 400);
                 }
                 $verify = $dpo->verifyToken($request);
@@ -124,11 +125,14 @@ class MarathonController extends Controller
                         'transactiontoken' =>  $request->transToken,
                         'status' => 'pending',
                     ]);
+                    DB::commit();
                     return redirect()->to($payment_url);
                 }
+            } else {
+                DB::rollBack();
+                return redirect()->back()->with('error', 'Error occur, please try again latter!');
             }
         }
-        return redirect()->back()->with('error', 'Error occur, please try again latter!');
     }
     public function mobilePayment($request)
     {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\Event\AwardController;
 use App\Http\Controllers\Web\Event\MarathonController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,4 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix'=>'v1'], function(){
     Route::get('marathon-status',[MarathonController::class,'getStatus']);
     Route::post('marathon-registration',[MarathonController::class,'store']);
+
+    Route::get('award-status',[AwardController::class,'getStatus']);
+    Route::post('award-registration',[AwardController::class,'store']);
 });

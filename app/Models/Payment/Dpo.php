@@ -62,85 +62,96 @@ class Dpo
 
     public function createToken($request)
     {
-        $companyToken      = $this->company_token;
-        $serviceType       = $this->account_type;
-        $accountDdescription = $this->account_description;
-        $backUrl           = $this->back_url;
-        $redirectUrl       = $this->redirect_url;
-        $companyRef         = $request->token;
-        $customerFirstName = $request->first_name;
-        $customerLastName  = $request->last_name;
-        $customerPhone     = $request->phone;
-        $customerCountry   = $request->iso;
-        $paymentCurrency   = $this->dpo_default_currency;
-        $paymentAmount     = $request->amount;
-        $customerEmail     = $request->email;
-        $customerCity     = $request->city;
-        $customerAddress     = $request->address;
-        $customerZip     = $request->zip;
-        $serviceDescription   = $request->description;
-        $serviceDate   = date('Y/m/d H:i');
-        $xml = '<?xml version="1.0" encoding="utf-8"?>
-        <API3G>
-        <CompanyToken>' . $companyToken . '</CompanyToken>
-        <Request>createToken</Request>
-        <Transaction>
-        <PaymentAmount>' . $paymentAmount . '</PaymentAmount>
-        <PaymentCurrency>' . $paymentCurrency . '</PaymentCurrency>
-        <CompanyRef>' . $companyRef . '</CompanyRef>
-        <CompanyRefUnique>0</CompanyRefUnique>
-        <RedirectURL>' . $redirectUrl . '</RedirectURL>
-        <BackURL>' . $backUrl . ' </BackURL>
-        <customerCountry>' . $customerCountry . '</customerCountry>
-        <customerFirstName>' . $customerFirstName . '</customerFirstName>
-        <customerLastName>' . $customerLastName . '</customerLastName>
-        <customerPhone>' . $customerPhone . '</customerPhone>
-        <customerEmail>' . $customerEmail . '</customerEmail>
-        <customerCity>' . $customerCity . '</customerCity>
-        <customerAddress>' . $customerAddress . '</customerAddress>
-        <customerZip>' . $customerZip . '</customerZip>
-        <TransactionSource>whmcs</TransactionSource>
-        <PTL>5</PTL>
-        </Transaction>
-        <Services>
-          <Service>
-            <ServiceType>' . $serviceType . '</ServiceType>
-            <ServiceDescription>' . $serviceDescription . '</ServiceDescription>
-            <ServiceDate>' . $serviceDate . '</ServiceDate>
-          </Service>
-        </Services>
-        </API3G>';
 
-        $client = new Client([
-            'base_uri' => $this->baseUrl,
-        ]);
+        try{
+            $companyToken      = $this->company_token;
+            $serviceType       = $this->account_type;
+            $accountDdescription = $this->account_description;
+            $backUrl           = $this->back_url;
+            $redirectUrl       = $this->redirect_url;
+            $companyRef         = $request->token;
+            $customerFirstName = $request->first_name;
+            $customerLastName  = $request->last_name;
+            $customerPhone     = $request->phone;
+            $customerCountry   = $request->iso;
+            $paymentCurrency   = $this->dpo_default_currency;
+            $paymentAmount     = $request->amount;
+            $customerEmail     = $request->email;
+            $customerCity     = $request->city;
+            $customerAddress     = $request->address;
+            $customerZip     = $request->zip;
+            $serviceDescription   = $request->description;
+            $serviceDate   = date('Y/m/d H:i');
+            $xml = '<?xml version="1.0" encoding="utf-8"?>
+            <API3G>
+            <CompanyToken>' . $companyToken . '</CompanyToken>
+            <Request>createToken</Request>
+            <Transaction>
+            <PaymentAmount>' . $paymentAmount . '</PaymentAmount>
+            <PaymentCurrency>' . $paymentCurrency . '</PaymentCurrency>
+            <CompanyRef>' . $companyRef . '</CompanyRef>
+            <CompanyRefUnique>0</CompanyRefUnique>
+            <RedirectURL>' . $redirectUrl . '</RedirectURL>
+            <BackURL>' . $backUrl . ' </BackURL>
+            <customerCountry>' . $customerCountry . '</customerCountry>
+            <customerFirstName>' . $customerFirstName . '</customerFirstName>
+            <customerLastName>' . $customerLastName . '</customerLastName>
+            <customerPhone>' . $customerPhone . '</customerPhone>
+            <customerEmail>' . $customerEmail . '</customerEmail>
+            <customerCity>' . $customerCity . '</customerCity>
+            <customerAddress>' . $customerAddress . '</customerAddress>
+            <customerZip>' . $customerZip . '</customerZip>
+            <TransactionSource>whmcs</TransactionSource>
+            <PTL>5</PTL>
+            </Transaction>
+            <Services>
+              <Service>
+                <ServiceType>' . $serviceType . '</ServiceType>
+                <ServiceDescription>' . $serviceDescription . '</ServiceDescription>
+                <ServiceDate>' . $serviceDate . '</ServiceDate>
+              </Service>
+            </Services>
+            </API3G>';
 
-        $response = $client->post('/API/v6/', [
-            'debug' => FALSE,
-            'body' => $xml,
-            'headers' => [
-                'Content-Type' => 'text/xml; charset=UTF8',
-            ]
-        ]);
-        $body = $response->getBody();
+            $client = new Client([
+                'base_uri' => $this->baseUrl,
+            ]);
 
-        if ($body != '') {
-            $xml = simplexml_load_string($body);
-            $json = json_encode($xml);
-            $array = json_decode($json, TRUE);
-            if ($array['Result'] != '000') {
-                $response = Arr::prepend($array, false, 'success');
-            } else if ($array['Result'] == '000') {
-                $response = Arr::prepend($array, true, 'success');
+            $response = $client->post('/API/v6/', [
+                'debug' => FALSE,
+                'body' => $xml,
+                'headers' => [
+                    'Content-Type' => 'text/xml; charset=UTF8',
+                ]
+            ]);
+            $body = $response->getBody();
+
+            if ($body != '') {
+                $xml = simplexml_load_string($body);
+                $json = json_encode($xml);
+                $array = json_decode($json, TRUE);
+                if ($array['Result'] != '000') {
+                    $response = Arr::prepend($array, false, 'success');
+                } else if ($array['Result'] == '000') {
+                    $response = Arr::prepend($array, true, 'success');
+                }
+                return $response;
+            } else {
+                return [
+                    'success'           => false,
+                    'result'            => 'Unknown error occurred in token creation',
+                    'resultExplanation' => 'Unknown error occurred in token creation',
+                ];
             }
-            return $response;
-        } else {
+        }catch(\GuzzleHttp\Exception\ConnectException $error){
+
             return [
                 'success'           => false,
-                'result'            => 'Unknown error occurred in token creation',
-                'resultExplanation' => 'Unknown error occurred in token creation',
+                'Result'            => 1000,
+                'ResultExplanation' => 'There was technical problen. Please try again latter!.',
             ];
         }
+
     }
     public function ChargeTokenMobile($request)
     {

@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use Swift_TransportException;
 
 class WebController extends Controller
 {
@@ -70,34 +72,49 @@ class WebController extends Controller
     }
     public function subscribe(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email'
-        ]);
-        $email = $request->all()['email'];
-        if ($validator->fails()) {
-            $existemail = Subscriber::where(['email' => $email])->first();
-            if (!empty($existemail)) {
-                $validator->errors()->add('email', 'The email already subscribe to our newsletter.');
-            }
-            return redirect()->back()->with('info', 'The email already subscribe to our newsletter.');
-        }
-        if (!$validator->fails()) {
-            $existemail = Subscriber::where(['email' => $email])->first();
-            if ($existemail !== null) {
+
+        DB::beginTransaction();
+        try{
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email'
+            ]);
+            $email = $request->all()['email'];
+            if ($validator->fails()) {
+                $existemail = Subscriber::where(['email' => $email])->first();
+                if (!empty($existemail)) {
+                    $validator->errors()->add('email', 'The email already subscribe to our newsletter.');
+                }
                 return redirect()->back()->with('info', 'The email already subscribe to our newsletter.');
             }
+            if (!$validator->fails()) {
+                $existemail = Subscriber::where(['email' => $email])->first();
+                if ($existemail !== null) {
+                    return redirect()->back()->with('info', 'The email already subscribe to our newsletter.');
+                }
+            }
+             Subscriber::create(
+                [
+                    'email' => $email
+                ]
+            );
+            $maildata = [
+                'email' => $email,
+                'subject' => 'Thank for subscribing to Kilimo Marathon, Awards & EXPO',
+            ];
+            $mail = new SubscribeMail($maildata);
+            Mail::send($mail);
+        }catch(ValidationException $e){
+            DB::rollBack();
+            throw($e);
+            return back();
+        }catch(Swift_TransportException $e){
+            DB::rollBack();
+            return back()->with('error','There was technical problen. Please try again latter!.');
+        }catch(\Exception $e){
+            DB::rollBack();
+            return back();
         }
-         Subscriber::create(
-            [
-                'email' => $email
-            ]
-        );
-        $maildata = [
-            'email' => $email,
-            'subject' => 'Thank for subscribing to Kilimo Marathon, Awards & EXPO',
-        ];
-        $mail = new SubscribeMail($maildata);
-        Mail::send($mail);
+        DB::commit();
         return redirect()->back()->with('success', 'Thank you for subscribing to our email, please check your inbox');
     }
 }

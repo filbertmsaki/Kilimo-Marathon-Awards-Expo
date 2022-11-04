@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
 class ExpoRequest extends FormRequest
 {
@@ -32,6 +34,10 @@ class ExpoRequest extends FormRequest
             'contact_person_phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'company_details' => 'required',
         ];
+    }
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json($validator->errors()));
     }
 
     public function messages()
