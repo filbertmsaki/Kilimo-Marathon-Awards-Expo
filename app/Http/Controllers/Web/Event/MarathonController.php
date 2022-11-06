@@ -78,8 +78,7 @@ class MarathonController extends Controller
         ]);
         $payment = $request->payment;
         $exist = MarathonRegistration::runnerExist(
-            $request->first_name,
-            $request->last_name,
+            $request->email,
             $request->phone,
         );
         if ($exist) {

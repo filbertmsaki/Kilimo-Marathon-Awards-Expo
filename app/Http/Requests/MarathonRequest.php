@@ -25,6 +25,7 @@ class MarathonRequest extends FormRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'phonecode' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'event' => 'required|numeric',
         ];
