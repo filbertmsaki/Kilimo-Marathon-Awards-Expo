@@ -46,9 +46,9 @@ class MarathonController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isMarathonActive()) {
-                return response()->json(['message'=>trans('marathon.notification.closed')], 400);
+                return response()->json(['message'=>trans('marathon.notification.closed')],  Response::HTTP_NOT_FOUND);
             }
-            return response()->json(['message'=>trans('marathon.notification.opened')], 201);
+            return response()->json(['message'=>trans('marathon.notification.opened')],  Response::HTTP_FOUND);
         }
         abort(401);
     }
@@ -62,7 +62,7 @@ class MarathonController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isMarathonActive()) {
-                return response()->json(['message'=>trans('marathon.notification.closed')], 400);
+                return response()->json(['message'=>trans('marathon.notification.closed')],  Response::HTTP_NOT_FOUND);
             }
         }
         if (!isMarathonActive()) {
@@ -127,11 +127,11 @@ class MarathonController extends Controller
                             ]);
                             $payment_details = $mobilePay['instructions'];
                             DB::commit();
-                            return response()->json($payment_details, 200);
+                            return response()->json($payment_details,  Response::HTTP_CREATED);
                         }
                     }
                     DB::rollBack();
-                    return response()->json(trans('strings.error'), 400);
+                    return response()->json(trans('strings.error'),  Response::HTTP_NOT_FOUND);
                 }
                 $verify = $dpo->verifyToken($request);
                 if ($verify['Result'] === '900') {
