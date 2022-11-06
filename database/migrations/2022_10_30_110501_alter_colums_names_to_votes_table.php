@@ -15,7 +15,6 @@ class AlterColumsNamesToVotesTable extends Migration
     {
         Schema::table('votes', function (Blueprint $table) {
             $table->renameColumn('ip', 'agent');
-
         });
     }
 

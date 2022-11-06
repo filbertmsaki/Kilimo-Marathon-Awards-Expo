@@ -137,9 +137,9 @@
                                             <button type="submit" name="payment" value="online"
                                                 class="btn btn-primary">Register & Pay
                                                 Online</button>
-                                            <button type="submit" name="payment" value="lipa_number"
+                                            {{-- <button type="submit" name="payment" value="lipa_number"
                                                 class="btn btn-warning">Register & Pay Via Lipa
-                                                Number</button>
+                                                Number</button> --}}
                                         </div>
                                     </div>
                                 @endif

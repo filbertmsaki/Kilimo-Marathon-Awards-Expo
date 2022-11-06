@@ -37,4 +37,12 @@ class MarathonRegistration extends Model
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+    public function scopeRunnerExist($query,$first_name,$last_name,$phone)
+    {
+        $currrentYear = date('Y');
+        $qry =$query->where('first_name', $first_name)
+                    ->where('last_name', $last_name)
+                    ->where('phone', $phone);
+        return $qry->whereYear('created_at', '=', $currrentYear)->exists();
+    }
 }

@@ -15,7 +15,11 @@ class AddColumnPhonecodeToAwardNomineesTable extends Migration
     {
         Schema::table('award_nominees', function (Blueprint $table) {
             $table->bigInteger('phonecode')->default(255)->after('contact_person_name');
-
+            $table->integer('entry')->after('category_id');
+            $table->string('service_name')->nullable()->after('company_name');
+            $table->string('company_email')->nullable()->change();
+            $table->string('address')->nullable()->change();
+            $table->string('company_individual')->nullable()->change();
         });
     }
 

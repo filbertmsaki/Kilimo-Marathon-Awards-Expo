@@ -14,10 +14,10 @@ class ChangeColumnsNamesToMarathonRegistrationsTable extends Migration
     public function up()
     {
         Schema::table('marathon_registrations', function (Blueprint $table) {
-            $table->renameColumn('full_name', 'first_name');
-            $table->renameColumn('region', 'address');
-        });
-    }
+
+          $table->renameColumn('full_name', 'first_name');
+            $table->renameColumn('region', 'address');  });
+            }
 
     /**
      * Reverse the migrations.

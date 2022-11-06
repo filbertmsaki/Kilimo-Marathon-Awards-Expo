@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use function GuzzleHttp\Promise\all;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class MarathonController extends Controller
 {
@@ -58,6 +60,11 @@ class MarathonController extends Controller
      */
     public function store(MarathonRequest $request)
     {
+        if (FacadesRequest::is('api*')) {
+            if (!isMarathonActive()) {
+                return response()->json('Marathon Registaration is cloded for now, please try again latter!.', 400);
+            }
+        }
         if (!isMarathonActive()) {
             abort(401);
         }
@@ -70,6 +77,17 @@ class MarathonController extends Controller
             'transactionref' => 'KME' . time(),
         ]);
         $payment = $request->payment;
+        $exist = MarathonRegistration::runnerExist(
+            $request->first_name,
+            $request->last_name,
+            $request->phone,
+        );
+        if ($exist) {
+            if (FacadesRequest::is('api*')) {
+                return response()->json('You have already registered to Kilimo Marathon, please wait we will contact you soon!', Response::HTTP_FOUND);
+            }
+            return redirect()->back()->with('warning', 'You have already registered to Kilimo Marathon, please wait we will contact you soon!');
+        }
         DB::beginTransaction();
         MarathonRegistration::create($request->except('_token'));
 
