@@ -94,7 +94,7 @@
                                     <tbody>
                                         @foreach ($nominees as $nominee)
                                             <tr id="nominee_id_{{ $nominee->id }}">
-                                                <td><input type="checkbox" name="category_id[]"
+                                                <td><input type="checkbox" name="award_id[]"
                                                         value="{{ $nominee->id }}" id="sub_chk_{{ $nominee->id }}"
                                                         class="sub_chk"></td>
                                                 <td>{{ $nominee->company_name }}</td>

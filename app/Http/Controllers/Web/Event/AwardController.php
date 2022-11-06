@@ -52,10 +52,13 @@ class AwardController extends Controller
      */
     public function store(AwardRequest $request)
     {
+      
         if (FacadesRequest::is('api*')) {
+
             if (!isAwardActive()) {
                 return response()->json(['message'=>trans('award.notification.closed')], Response::HTTP_NOT_FOUND);
             }
+
             $award_category = AwardCategory::where('name', $request->category_id)->first();
             if ($award_category == null) {
                 return response()->json(['message'=>trans('award.category.not-exist')], Response::HTTP_NOT_FOUND);

@@ -26,7 +26,7 @@ class AwardRequest extends FormRequest
     public function rules()
     {
         return [
-            'entry' => 'required|numeric',
+            'entry' => 'required',
             'phonecode' => 'required|numeric',
             'category_id' => 'required',
             'company_name' => 'required|string',

@@ -221,6 +221,11 @@ class AwardController extends Controller
     }
     public function destroyAll(Request $request)
     {
+        $id = $request->award_id;
+        foreach ($id as $user) {
+            $deleted = AwardNominee::where('id', $user)->delete();
+        }
+        return redirect()->back()->with('danger', 'Award Nominee  deleted successfully!');
     }
     public function settingIndex()
     {
