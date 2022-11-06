@@ -36,9 +36,9 @@ class ExpoController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isExpoActive()) {
-                return response()->json(trans('expo.notification.closed'), Response::HTTP_NOT_FOUND);
+                return response()->json(['message'=>trans('expo.notification.closed')], Response::HTTP_NOT_FOUND);
             }
-            return response()->json(trans('expo.notification.opened'), Response::HTTP_FOUND);
+            return response()->json(['message'=>trans('expo.notification.opened')], Response::HTTP_FOUND);
         }
         abort(401);
     }
@@ -53,7 +53,7 @@ class ExpoController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isExpoActive()) {
-                return response()->json(trans('expo.notification.closed'), Response::HTTP_NOT_FOUND);
+                return response()->json(['message'=>trans('expo.notification.closed')], Response::HTTP_NOT_FOUND);
             }
         }
         $exist = ExpoRegistration::expoExist(
