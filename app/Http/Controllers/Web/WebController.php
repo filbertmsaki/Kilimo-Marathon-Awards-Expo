@@ -6,7 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Mail\SubscribeMail;
 use App\Models\ContactUs;
 use App\Models\Gallery;
+use App\Models\MarathonRegistration;
+use App\Models\Partner;
+use App\Models\Payment\Dpo;
+use App\Models\Payment\PushPayment;
 use App\Models\Subscriber;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -18,7 +23,8 @@ class WebController extends Controller
 {
     public function index()
     {
-        return view('web.index');
+        $partners = Partner::select('image_url')->orderBy('order', 'ASC')->get();
+        return view('web.index', compact('partners'));
     }
     public function aboutUs()
     {
@@ -68,13 +74,12 @@ class WebController extends Controller
     public function gallery()
     {
         $galleries =  Gallery::inRandomOrder()->limit(24)->get();
-        return view('web.gallery.index',compact('galleries'));
+        return view('web.gallery.index', compact('galleries'));
     }
     public function subscribe(Request $request)
     {
-
         DB::beginTransaction();
-        try{
+        try {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email'
             ]);
@@ -92,7 +97,7 @@ class WebController extends Controller
                     return redirect()->back()->with('info', 'The email already subscribe to our newsletter.');
                 }
             }
-             Subscriber::create(
+            Subscriber::create(
                 [
                     'email' => $email
                 ]
@@ -103,18 +108,160 @@ class WebController extends Controller
             ];
             $mail = new SubscribeMail($maildata);
             Mail::send($mail);
-        }catch(ValidationException $e){
+        } catch (ValidationException $e) {
             DB::rollBack();
-            throw($e);
+            throw ($e);
             return back();
-        }catch(Swift_TransportException $e){
+        } catch (Swift_TransportException $e) {
             DB::rollBack();
-            return back()->with('error','There was technical problen. Please try again latter!.');
-        }catch(\Exception $e){
+            return back()->with('error', 'There was technical problen. Please try again latter!.');
+        } catch (\Exception $e) {
             DB::rollBack();
             return back();
         }
         DB::commit();
         return redirect()->back()->with('success', 'Thank you for subscribing to our email, please check your inbox');
+    }
+    public function callback(Request $request)
+    {
+        $transactionref = $request->CompanyRef;
+        $transactiontoken = $request->TransactionToken;
+        $transactionapproval = $request->CCDapproval;
+        $request->merge([
+            'transToken' =>  $transactiontoken,
+        ]);
+        $payments = PushPayment::where('transactionref', $transactionref)->first()
+            ?? abort(404);
+
+        $dpo = new Dpo();
+        $verify = $dpo->verifyToken($request);
+        if ($verify['Result'] === '000') {
+            //Paid
+            //send SMS to user after complete payment
+            if ($verify['CustomerPhone'] != null) {
+                $phonenumber = $verify['CustomerPhone'];
+                $base_url = 'https://messaging-service.co.tz/api/sms/v1/text/single';
+                $from = 'SHAMBADUNIA';
+                $to = $phonenumber;
+                $text = 'Habari ' . $verify['CustomerName'] . ' malipo yako ya TZS ' . $verify['TransactionAmount'] . ' kwa ajili ya kushiriki kwenye KILIMO MARATHON yamekamilika.Risiti Namba ' . $verify['TransactionApproval'] . '. Kwa msaada zaidi piga simu :+255754222800.';
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => $base_url,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => '{"from":"' . $from . '", "to":"' . $to . '",  "text": "' . $text . '"}',
+                    CURLOPT_HTTPHEADER => array(
+                        'Authorization: Basic c2hhbWJhZHVuaWE6UFY5Qzk1',
+                        'Content-Type: application/json',
+                        'Accept: application/json'
+                    ),
+                ));
+                $response = curl_exec($curl);
+                $error    = curl_error($curl);
+                $datafile = json_decode($response, true, JSON_UNESCAPED_SLASHES);;
+                curl_close($curl);
+            }
+            ////////////////////Marathon Update///////////////////////////////////////////////////
+            DB::beginTransaction();
+            $marathon = MarathonRegistration::where('transactionref', $transactionref)
+                ->where('paid', '=', '0')
+                ->update([
+                    'paid' => 1
+                ]);
+            //////////////////Payment Update////////////////
+            $payments->update([
+                'result' => $verify['Result'],
+                'resultexplanation' => $verify['ResultExplanation'],
+                'customername' => $verify['CustomerName'],
+                'customercredit' => $verify['CustomerCredit'],
+                'customercredittype' => $verify['CustomerCreditType'],
+                'transactionapproval' => $verify['TransactionApproval'],
+                'transactioncurrency' => $verify['TransactionCurrency'],
+                'transactionamount' => $verify['TransactionAmount'],
+                'fraudalert' => $verify['FraudAlert'],
+                'fraudexplnation' => $verify['FraudExplnation'],
+                'transactionnetamount' => $verify['TransactionNetAmount'],
+                'transactionsettlementdate' => $verify['TransactionSettlementDate'],
+                'transactionrollingreserveamount' => $verify['TransactionRollingReserveAmount'],
+                'transactionrollingreservedate' => $verify['TransactionRollingReserveDate'],
+                'transactionfinalcurrency' => $verify['TransactionFinalCurrency'],
+                'transactionfinalamount' => $verify['TransactionFinalAmount'],
+                'customerphone' => $verify['CustomerPhone'],
+                'customercountry' => $verify['CustomerCountry'],
+                'customercity' => $verify['CustomerCity'],
+                'customerzip' => $verify['CustomerZip'],
+                'mobilepaymentrequest' => $verify['MobilePaymentRequest'],
+                'accref' => $verify['AccRef'],
+                'status' => 'Paid',
+            ]);
+        } else {
+            $payments->update([
+                'result' => $verify['Result'],
+                'resultexplanation' => $verify['ResultExplanation'],
+                'customername' => $verify['CustomerName'],
+                'customercredit' => $verify['CustomerCredit'],
+                'customercredittype' => $verify['CustomerCreditType'],
+                'transactionapproval' => $verify['TransactionApproval'],
+                'transactioncurrency' => $verify['TransactionCurrency'],
+                'transactionamount' => $verify['TransactionAmount'],
+                'fraudalert' => $verify['FraudAlert'],
+                'fraudexplnation' => $verify['FraudExplnation'],
+                'transactionnetamount' => $verify['TransactionNetAmount'],
+                'transactionsettlementdate' => $verify['TransactionSettlementDate'],
+                'transactionrollingreserveamount' => $verify['TransactionRollingReserveAmount'],
+                'transactionrollingreservedate' => $verify['TransactionRollingReserveDate'],
+                'transactionfinalcurrency' => $verify['TransactionFinalCurrency'],
+                'transactionfinalamount' => $verify['TransactionFinalAmount'],
+                'customerphone' => $verify['CustomerPhone'],
+                'customercountry' => $verify['CustomerCountry'],
+                'customercity' => $verify['CustomerCity'],
+                'customerzip' => $verify['CustomerZip'],
+                'mobilepaymentrequest' => $verify['MobilePaymentRequest'],
+                'accref' => $verify['AccRef'],
+                'status' => 'Not Paid',
+            ]);
+        }
+        DB::commit();
+        return redirect()->route('web.index')->with('success', 'Payment Complete');
+    }
+    public function canceled(Request $request)
+    {
+        $transactionref = $request->CompanyRef;
+        $transactiontoken = $request->TransactionToken;
+        $transactionapproval = $request->CCDapproval;
+        $check_transaction = PushPayment::where('transactionref', $transactionref)->first()?? abort(404);
+        if ($check_transaction != null) {
+            $check_transaction->update([
+                'transactionref'        => $transactionref,
+                'transactionapproval'   => $transactionapproval,
+                'transactiontoken'      => $transactiontoken,
+                'status'             => 'Canceled',
+            ]);
+            // go back to orders or proposals or features
+        }
+        return redirect()->route('web.index')->with('error', 'Payment Canceled');
+    }
+    public function declined(Request $request)
+    {
+        $transactionref = $request->CompanyRef;
+        $transactiontoken = $request->TransactionToken;
+        $transactionapproval = $request->CCDapproval;
+        $check_transaction = PushPayment::where('transactionref', $transactionref)->first();
+        if ($check_transaction != null) {
+            $check_transaction->update([
+                'transactionref'        => $transactionref,
+                'transactionapproval'   => $transactionapproval,
+                'transactiontoken'      => $transactiontoken,
+                'status'             => 'Declined',
+                'updated_at'         => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+            // go back to orders or proposals or features
+        }
+        return redirect()->route('web.index')->with('error', 'Payment Declined');
     }
 }

@@ -7,6 +7,8 @@ use App\Models\Payment\Dpo;
 use Illuminate\Console\Command;
 use App\Models\Payment\DpoGroup;
 use App\Models\Payment\PushPayment;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 class PaymentVerify extends Command
 {
@@ -39,111 +41,106 @@ class PaymentVerify extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(Request $request)
     {
-        $row_payment_settings = DpoGroup::first();
-        $dpo_company_token      = $row_payment_settings->dpo_company_token;
         $pushpayments = PushPayment::where('status', '!=', 'Paid')->get();
         foreach ($pushpayments as $pay) {
-            $payments = PushPayment::where('slug', $pay->slug)->first();
             $transToken = $pay->transactiontoken;
-            $data = [];
-            $data['companyToken'] = $dpo_company_token;
-            $data['transToken'] = $transToken;
+            $request->merge([
+                'transToken' =>  $transToken,
+            ]);
+            $payments = PushPayment::where('slug', $pay->slug)->first()
+                ?? abort(404);
             $dpo = new Dpo();
-            $verified = $dpo->verifyToken($data);
-            $token = $verified['result'];
-
-            $result = $token['Result'];
-            $resultexplanation = $token['ResultExplanation'];
-
-            if ($result == 000) {
+            $verify = $dpo->verifyToken($request);
+            if ($verify['Result'] === '000') {
                 //Paid
                 //send SMS to user after complete payment
-                $trimedmobile = substr($token['CustomerPhone'], -9);
-                $phonenumber = '255' . $trimedmobile;
-                $base_url = 'https://messaging-service.co.tz/api/sms/v1/text/single';
-                $from = 'SHAMBADUNIA';
-                $to = $phonenumber;
-                $text = 'Habari ' . $token['CustomerName'] . ' malipo yako ya TZS ' . $token['TransactionAmount'] . ' kwa ajili ya kushiriki kwenye KILIMO MARATHON yamekamilika.Risiti Namba ' . $token['TransactionApproval'] . '. Kwa msaada zaidi piga simu :+255754222800.';
-                $curl = curl_init();
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => $base_url,
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => '{"from":"' . $from . '", "to":"' . $to . '",  "text": "' . $text . '"}',
-                    CURLOPT_HTTPHEADER => array(
-                        'Authorization: Basic c2hhbWJhZHVuaWE6UFY5Qzk1',
-                        'Content-Type: application/json',
-                        'Accept: application/json'
-                    ),
-                ));
-                $response = curl_exec($curl);
-                $error    = curl_error($curl);
-                $datafile = json_decode($response, true, JSON_UNESCAPED_SLASHES);;
-                curl_close($curl);
+                if ($verify['CustomerPhone'] != null) {
+                    $phonenumber = $verify['CustomerPhone'];
+                    $base_url = 'https://messaging-service.co.tz/api/sms/v1/text/single';
+                    $from = 'SHAMBADUNIA';
+                    $to = $phonenumber;
+                    $text = 'Habari ' . $verify['CustomerName'] . ' malipo yako ya TZS ' . $verify['TransactionAmount'] . ' kwa ajili ya kushiriki kwenye KILIMO MARATHON yamekamilika.Risiti Namba ' . $verify['TransactionApproval'] . '. Kwa msaada zaidi piga simu :+255754222800.';
+                    $curl = curl_init();
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => $base_url,
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS => '{"from":"' . $from . '", "to":"' . $to . '",  "text": "' . $text . '"}',
+                        CURLOPT_HTTPHEADER => array(
+                            'Authorization: Basic c2hhbWJhZHVuaWE6UFY5Qzk1',
+                            'Content-Type: application/json',
+                            'Accept: application/json'
+                        ),
+                    ));
+                    $response = curl_exec($curl);
+                    $error    = curl_error($curl);
+                    $datafile = json_decode($response, true, JSON_UNESCAPED_SLASHES);;
+                    curl_close($curl);
+                }
                 ////////////////////Marathon Update///////////////////////////////////////////////////
-
-                $marathon = MarathonRegistration::where('phone', $phonenumber)
-                ->where('paid', '=', '0')
-                ->update([
-                    'paid' => 1
-                ]);
+                DB::beginTransaction();
+                $marathon = MarathonRegistration::where('transactionref', $payments->transactionref)
+                    ->where('paid', '=', '0')
+                    ->update([
+                        'paid' => 1
+                    ]);
                 //////////////////Payment Update////////////////
                 $payments->update([
-                    'result' => $result,
-                    'resultexplanation' => $resultexplanation,
-                    'customername' => $token['CustomerName'],
-                    'customercredit' => $token['CustomerCredit'],
-                    'customercredittype' => $token['CustomerCreditType'],
-                    'transactionapproval' => $token['TransactionApproval'],
-                    'transactioncurrency' => $token['TransactionCurrency'],
-                    'transactionamount' => $token['TransactionAmount'],
-                    'fraudalert' => $token['FraudAlert'],
-                    'fraudexplnation' => $token['FraudExplnation'],
-                    'transactionnetamount' => $token['TransactionNetAmount'],
-                    'transactionsettlementdate' => $token['TransactionSettlementDate'],
-                    'transactionrollingreserveamount' => $token['TransactionRollingReserveAmount'],
-                    'transactionrollingreservedate' => $token['TransactionRollingReserveDate'],
-                    'transactionfinalcurrency' => $token['TransactionFinalCurrency'],
-                    'transactionfinalamount' => $token['TransactionFinalAmount'],
-                    'customerphone' => $token['CustomerPhone'],
-                    'customercountry' => $token['CustomerCountry'],
-                    'customercity' => $token['CustomerCity'],
-                    'customerzip' => $token['CustomerZip'],
-                    'mobilepaymentrequest' => $token['MobilePaymentRequest'],
-                    'accref' => $token['AccRef'],
+                    'result' => $verify['Result'],
+                    'resultexplanation' => $verify['ResultExplanation'],
+                    'customername' => $verify['CustomerName'],
+                    'customercredit' => $verify['CustomerCredit'],
+                    'customercredittype' => $verify['CustomerCreditType'],
+                    'transactionapproval' => $verify['TransactionApproval'],
+                    'transactioncurrency' => $verify['TransactionCurrency'],
+                    'transactionamount' => $verify['TransactionAmount'],
+                    'fraudalert' => $verify['FraudAlert'],
+                    'fraudexplnation' => $verify['FraudExplnation'],
+                    'transactionnetamount' => $verify['TransactionNetAmount'],
+                    'transactionsettlementdate' => $verify['TransactionSettlementDate'],
+                    'transactionrollingreserveamount' => $verify['TransactionRollingReserveAmount'],
+                    'transactionrollingreservedate' => $verify['TransactionRollingReserveDate'],
+                    'transactionfinalcurrency' => $verify['TransactionFinalCurrency'],
+                    'transactionfinalamount' => $verify['TransactionFinalAmount'],
+                    'customerphone' => $verify['CustomerPhone'],
+                    'customercountry' => $verify['CustomerCountry'],
+                    'customercity' => $verify['CustomerCity'],
+                    'customerzip' => $verify['CustomerZip'],
+                    'mobilepaymentrequest' => $verify['MobilePaymentRequest'],
+                    'accref' => $verify['AccRef'],
                     'status' => 'Paid',
                 ]);
             } else {
                 $payments->update([
-                    'result' => $result,
-                    'resultexplanation' => $resultexplanation,
-                    'customername' => $token['CustomerName'],
-                    'customercredit' => $token['CustomerCredit'],
-                    'customercredittype' => $token['CustomerCreditType'],
-                    'transactionapproval' => $token['TransactionApproval'],
-                    'transactioncurrency' => $token['TransactionCurrency'],
-                    'transactionamount' => $token['TransactionAmount'],
-                    'fraudalert' => $token['FraudAlert'],
-                    'fraudexplnation' => $token['FraudExplnation'],
-                    'transactionnetamount' => $token['TransactionNetAmount'],
-                    'transactionsettlementdate' => $token['TransactionSettlementDate'],
-                    'transactionrollingreserveamount' => $token['TransactionRollingReserveAmount'],
-                    'transactionrollingreservedate' => $token['TransactionRollingReserveDate'],
-                    'transactionfinalcurrency' => $token['TransactionFinalCurrency'],
-                    'transactionfinalamount' => $token['TransactionFinalAmount'],
-                    'customerphone' => $token['CustomerPhone'],
-                    'customercountry' => $token['CustomerCountry'],
-                    'customercity' => $token['CustomerCity'],
-                    'customerzip' => $token['CustomerZip'],
-                    'mobilepaymentrequest' => $token['MobilePaymentRequest'],
-                    'accref' => $token['AccRef'],
+                    'result' => $verify['Result'],
+                    'resultexplanation' => $verify['ResultExplanation'],
+                    'customername' => $verify['CustomerName'],
+                    'customercredit' => $verify['CustomerCredit'],
+                    'customercredittype' => $verify['CustomerCreditType'],
+                    'transactionapproval' => $verify['TransactionApproval'],
+                    'transactioncurrency' => $verify['TransactionCurrency'],
+                    'transactionamount' => $verify['TransactionAmount'],
+                    'fraudalert' => $verify['FraudAlert'],
+                    'fraudexplnation' => $verify['FraudExplnation'],
+                    'transactionnetamount' => $verify['TransactionNetAmount'],
+                    'transactionsettlementdate' => $verify['TransactionSettlementDate'],
+                    'transactionrollingreserveamount' => $verify['TransactionRollingReserveAmount'],
+                    'transactionrollingreservedate' => $verify['TransactionRollingReserveDate'],
+                    'transactionfinalcurrency' => $verify['TransactionFinalCurrency'],
+                    'transactionfinalamount' => $verify['TransactionFinalAmount'],
+                    'customerphone' => $verify['CustomerPhone'],
+                    'customercountry' => $verify['CustomerCountry'],
+                    'customercity' => $verify['CustomerCity'],
+                    'customerzip' => $verify['CustomerZip'],
+                    'mobilepaymentrequest' => $verify['MobilePaymentRequest'],
+                    'accref' => $verify['AccRef'],
                     'status' => 'Not Paid',
                 ]);
             }

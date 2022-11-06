@@ -12,6 +12,7 @@ class MarathonRegistration extends Model
     protected $guarded = [];
     protected $fillable = [
         'slug',
+        'transactionref',
         'first_name',
         'last_name',
         'gender',

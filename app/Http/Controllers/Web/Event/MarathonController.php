@@ -61,17 +61,18 @@ class MarathonController extends Controller
         if (!isMarathonActive()) {
             abort(401);
         }
-        $payment = $request->payment;
-        DB::beginTransaction();
-        MarathonRegistration::create($request->except('_token'));
         $request->merge([
             'city' => $request->address,
             'amount' => 35000,
             'description' => 'Payment for ' . $request->event . ' Km running',
             'iso' => 'TZ',
             'zip' => 12345,
-            'token' => 'KME' . time(),
+            'transactionref' => 'KME' . time(),
         ]);
+        $payment = $request->payment;
+        DB::beginTransaction();
+        MarathonRegistration::create($request->except('_token'));
+
         if ($payment == 'lipa_number') {
             return ' lipa_number';
         } else {

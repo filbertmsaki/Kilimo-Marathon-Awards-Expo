@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\Event\AwardController;
+use App\Http\Controllers\Web\Event\ExpoController;
 use App\Http\Controllers\Web\Event\MarathonController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,4 +27,7 @@ Route::group(['prefix'=>'v1'], function(){
 
     Route::get('award-status',[AwardController::class,'getStatus']);
     Route::post('award-registration',[AwardController::class,'store']);
+
+    Route::get('expo-status',[ExpoController::class,'getStatus']);
+    Route::post('expo-registration',[ExpoController::class,'store']);
 });

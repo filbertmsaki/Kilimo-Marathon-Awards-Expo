@@ -4,6 +4,7 @@
         <style>
         </style>
     @endsection
+    
     <x-web.home.home-slider-component />
     <section class="py-xl-100 py-20 bg-white" data-aos="fade-up">
         <div class="container">
@@ -293,33 +294,23 @@
                 </div>
             </div>
             <div class="row mt-30">
+                <style>
+
+                    .partner-item {
+                        max-width: 200px;
+                        max-height: 100px;
+                    }
+                </style>
                 <div class="col-12">
-                    <div class="owl-carousel owl-theme owl-btn-1" data-nav-arrow="false" data-nav-dots="false"
-                        data-items="6" data-md-items="4" data-sm-items="3" data-xs-items="2" data-xx-items="2">
-                        <div class="item"><img src="../images/front-end-img/unilogo/uni-1.jpg"
-                                class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
-                        <div class="item"><img src="../images/front-end-img/unilogo/uni-2.jpg"
-                                class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
-                        <div class="item"><img src="../images/front-end-img/unilogo/uni-3.jpg"
-                                class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
-                        <div class="item"><img src="../images/front-end-img/unilogo/uni-4.jpg"
-                                class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
-                        <div class="item"><img src="../images/front-end-img/unilogo/uni-5.jpg"
-                                class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
-                        <div class="item"><img src="../images/front-end-img/unilogo/uni-6.jpg"
-                                class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
-                        <div class="item"><img src="../images/front-end-img/unilogo/uni-7.jpg"
-                                class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
-                        <div class="item"><img src="../images/front-end-img/unilogo/uni-8.jpg"
-                                class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
-                        <div class="item"><img src="../images/front-end-img/unilogo/uni-9.jpg"
-                                class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
-                        <div class="item"><img src="../images/front-end-img/unilogo/uni-10.jpg"
-                                class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
-                        <div class="item"><img src="../images/front-end-img/unilogo/uni-11.jpg"
-                                class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
-                        <div class="item"><img src="../images/front-end-img/unilogo/uni-12.jpg"
-                                class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
+                    <div class="partner owl-carousel owl-theme owl-btn-1" data-nav-arrow="false"
+                        data-nav-dots="false" data-items="6" data-md-items="4" data-sm-items="3" data-xs-items="3"
+                        data-xx-items="2">
+
+
+                        @foreach ($partners as $item)
+                            <div class="item partner-item"><img src="{{ asset($item->image_url) }}"
+                                    class="img-fluid my-15 rounded box-shadowed pull-up" alt=""></div>
+                        @endforeach
                     </div>
                 </div>
             </div>

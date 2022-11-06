@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Message\Thread as MessageThread;
 
+use Illuminate\Database\QueryException;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -38,20 +40,22 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         Paginator::useBootstrap();
-        
-        $general_settings = GeneralSetting::get()->first();
-        if ($general_settings !== null) {
-            $site_name = $general_settings->site_name;
-            $site_url = $general_settings->site_url;
-            $site_logo = $general_settings->site_logo;
-            $site_icon = $general_settings->site_icon;
-            Config::set('app.name', $site_name);
-            Config::set('app.url', $site_url);
-            Config::set('app.logo', $site_logo);
-            Config::set('app.icon', $site_icon);
+        try{
+            $general_settings = GeneralSetting::get()->first();
+            if ($general_settings !== null) {
+                $site_name = $general_settings->site_name;
+                $site_url = $general_settings->site_url;
+                $site_logo = $general_settings->site_logo;
+                $site_icon = $general_settings->site_icon;
+                Config::set('app.name', $site_name);
+                Config::set('app.url', $site_url);
+                Config::set('app.logo', $site_logo);
+                Config::set('app.icon', $site_icon);
+            }
+        }catch(QueryException $e){
+            abort(500);
         }
-
-
+   
 
         view()->composer(['admin.layout.app', 'admin.layout.aside', 'admin.messages.*'], function ($view) {
             $unread_messages = MessageThread::forUserWithNewMessages(Auth::id())->latest('updated_at')->paginate(3);

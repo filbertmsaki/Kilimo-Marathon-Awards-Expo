@@ -37,15 +37,9 @@ class ExpoRegistration extends Model
     {
         $currrentYear = date('Y');
         $qry =$query->where('company_name', $company_name);
-
         if (request()->has('company_phone')) {
-            $qry->where('company_phone', $company_phone);
+            $qry->orWhere('company_phone', $company_phone);
         }
-
-        if (request()->has('contact_person_phone')) {
-            $qry->where('contact_person_phone', $contact_person_phone);
-        }
-
         return $qry->whereYear('created_at', '=', $currrentYear)->exists();
     }
 }

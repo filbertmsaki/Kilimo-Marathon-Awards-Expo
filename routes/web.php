@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Event\MarathonController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\Payment\DpoController;
 use App\Http\Controllers\Admin\Settings\PaymentSettingController;
 use App\Http\Controllers\Admin\Settings\SettingController;
@@ -33,24 +34,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/', function () {return view('welcome');})->name('welcome');
-Route::get('/verify-pay', [App\Http\Controllers\FrontController::class, 'verify_payment'])->name('verify_payment');
-Route::get('/get-balance', [App\Http\Controllers\FrontController::class, 'getBalance'])->name('getBalance');
-
-
 
 Route::get('/mail', function () {
     return view('emails.nomination');
 })->name('email.welcome');
-Auth::routes();
 Auth::routes(['verify' => true]);
-Route::post('loginWithOtp', [App\Http\Controllers\Auth\LoginController::class, 'loginWithOtp'])->name('loginWithOtpview');
-Route::get('loginWithOtp', [App\Http\Controllers\Auth\LoginController::class, 'loginpage'])->name('loginWithOtp');
-Route::post('sendOtp', [App\Http\Controllers\Auth\LoginController::class, 'sendOtp'])->name('sendOtp');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/payment', [App\Http\Controllers\HomeController::class, 'payment'])->name('payment');
-Route::get('/callback', [App\Http\Controllers\FrontController::class, 'callback'])->name('callback');
-Route::get('/canceled', [App\Http\Controllers\FrontController::class, 'canceled'])->name('canceled');
+
 //Front End Route
 Route::group(['as' => 'web.'], function () {
     Route::get('/', [WebController::class, 'index'])->name('index');
@@ -78,6 +67,8 @@ Route::group(['as' => 'web.'], function () {
         Route::resource('marathon', EventMarathonController::class);
         Route::resource('vote', VoteController::class);
     });
+    Route::get('/callback', [WebController::class, 'callback'])->name('callback');
+    Route::get('/canceled', [WebController::class, 'canceled'])->name('canceled');
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
@@ -113,6 +104,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::delete('destroy-all', [GalleryController::class, 'destroyAll'])->name('destroy.all');
     });
     Route::resource('gallery', GalleryController::class);
+    Route::resource('partner', PartnerController::class);
     Route::resource('mail', MailController::class);
     Route::group(['prefix' => 'payment', 'as' => 'payment.'], function () {
         Route::group(['prefix' => 'dpo', 'as' => 'dpo.'], function () {

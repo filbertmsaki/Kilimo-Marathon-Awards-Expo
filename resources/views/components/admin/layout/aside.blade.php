@@ -215,6 +215,14 @@
                         <p>Gallery</p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.partner.index') }}"
+                        class="nav-link {{ Request::is('admin/partner*') ? 'active' : '' }}">
+                        <i class="fas fa-handshake nav-icon"></i>
+                        <p>Partner</p>
+                    </a>
+                </li>
                 @role('admin')
                     <li class="nav-item">
                         <a href="{{ route('admin.payment.dpo.index') }}"

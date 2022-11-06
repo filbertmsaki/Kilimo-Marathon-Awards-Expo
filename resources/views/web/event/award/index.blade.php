@@ -43,9 +43,9 @@
                             <hr>
                             <ul class="course-overview list-unstyled b-1 bg-gray-100">
                                 <li><i class="ti-calendar"></i> <span class="tag">Event Date </span> <span
-                                        class="value">1-June-2023</span></li>
+                                        class="value">March 3<sup>rd</sup> 2023</span></li>
                                 <li><i class="fa fa-street-view"></i> <span class="tag">Venue </span> <span
-                                        class="value">Jamuhuri Stadium, Morogoro</span></li>
+                                        class="value">Morena Hotel, Morogoro.</span></li>
                             </ul>
 
                         </div>

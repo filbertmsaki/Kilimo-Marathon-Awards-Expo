@@ -130,7 +130,7 @@ if (!function_exists('isAwardActive')) {
 if (!function_exists('isExpoActive')) {
     function isExpoActive()
     {
-        return  '';
+        return true;
     }
 }
 if (!function_exists('isVoteActive')) {

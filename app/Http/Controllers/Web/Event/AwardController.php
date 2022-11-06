@@ -9,7 +9,7 @@ use App\Models\AwardNominee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request as FacadesRequest;
-
+use Symfony\Component\HttpFoundation\Response;
 
 class AwardController extends Controller
 {
@@ -37,9 +37,9 @@ class AwardController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isAwardActive()) {
-                return response()->json('Award Registaration is cloded for now, please try again latter!.', 400);
+                return response()->json('Award Registaration is cloded for now, please try again latter!.', Response::HTTP_NOT_FOUND);
             }
-            return response()->json('Award Registaration is now open, you may now proceed to another steps!.', 201);
+            return response()->json('Award Registaration is now open, you may now proceed to another steps!.', Response::HTTP_FOUND);
         }
         abort(401);
     }
@@ -54,26 +54,34 @@ class AwardController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isAwardActive()) {
-                return response()->json('Award Registaration is cloded for now, please try again latter!.', 400);
+                return response()->json('Award Registaration is cloded for now, please try again latter!.', Response::HTTP_NOT_FOUND);
             }
+            $award_category = AwardCategory::where('name', $request->category_id)->first();
+            if ($award_category == null) {
+                return response()->json('The award category does not exist.', Response::HTTP_NOT_FOUND);
+            }
+            $request->merge([
+                'category_id' => $award_category->id
+            ]);
         }
-        abort(401);
-
-        DB::beginTransaction();
+        if (!isAwardActive()) {
+            abort(404);
+        }
         $exist = AwardNominee::nomineeExist(
             $request->company_name,
             $request->category_id
         );
         if ($exist) {
             if (FacadesRequest::is('api*')) {
-                return response()->json('You have already registered in this category, please wait to be verified!', 400);
+                return response()->json('You have already registered in this category, please wait to be verified!',Response::HTTP_FOUND);
             }
             return redirect()->back()->with('warning', 'You have already registered in this category, please wait to be verified!');
         }
+        DB::beginTransaction();
         AwardNominee::create($request->except('_token'));
         DB::commit();
         if (FacadesRequest::is('api*')) {
-            return response()->json('You have successful register to kilimo awards.', 201);
+            return response()->json('You have successful register to kilimo awards.',  Response::HTTP_CREATED);
         }
         return redirect()->back()->with('success', 'You have successful register to kilimo awards!');
     }

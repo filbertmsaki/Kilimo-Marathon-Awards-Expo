@@ -96,200 +96,9 @@ class DashboardController extends Controller
         }
         return redirect()->back()->with('danger', 'Contact deleted successfully!');
     }
-    public function gallery()
-    {
-        $gallery = Gallery::all();
-        return view('admin.gallery.index')->with(['gallery' => $gallery]);
-    }
-    public function gallery_add(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'image' => ['required'],
-            'alt_text' => ['required', 'string'],
-            'event' => ['required', 'string'],
-        ]);
-        $event = $request->event;
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-        if ($gallery_image = $request->file('image')) {
-            $destinationPath = 'gallery/' . date('Y') . '/' . date('m') . '/';
-            $gallery_image_name = strtolower($event) . date('YmdHis') . "." . $gallery_image->getClientOriginalExtension();
-            $gallery_image->move($destinationPath, $gallery_image_name);
-        }
-        $slug = Str::random(40);
-        $i = 0;
-        while (Gallery::where('slug', $slug)->exists()) {
-            $i++;
-            $slug = Str::random(39) . $i;
-        }
-
-        Gallery::create([
-            'slug' => $slug,
-            'image' => $gallery_image_name,
-            'alt_text' => $request->alt_text,
-            'event' => $event,
-            'path' => $destinationPath,
-
-        ]);
-        return redirect()->back()->with('success', 'Carousel Created!');
-    }
-    public function gallery_edit($id)
-    {
-        $where = array('id' => $id);
-        $gallery  = Gallery::where($where)->first();
-        return response()->json($gallery, 200);
-    }
-    public function gallery_delete($id)
-    {
-        $gallery = Gallery::find($id);
-        unlink($gallery->path . $gallery->image);
-        Gallery::where('id', $gallery->id)->delete();
-        return redirect()->back()->with('danger', 'Gallery Deleted Sucessfull!');
-    }
-    public function gallery_delete_all(Request $request)
-    {
-        $id = $request->gallery_id;
-        foreach ($id as $id) {
-            $gallery = Gallery::find($id);
-            unlink($gallery->path . $gallery->image);
-
-            $deleted = Gallery::where('id', $gallery->id)->delete();
-        }
-        return redirect()->back()->with('danger', 'Image Deleted Sucessfull!');
-    }
-    public function marathon_runners()
-    {
-        $currrentYear = date('Y');
-        $marathon_runners = MarathonRegistration::whereYear('created_at', '=', $currrentYear)
-            ->latest()
-            ->get();
-        return view('admin.marathon.marathon-runner')->with(['marathon_runners' => $marathon_runners]);
-    }
-    public function marathon_runners_edit($id)
-    {
-        $where = array('id' => $id);
-        $marathon_runners  = MarathonRegistration::where($where)->first();
-        return response()->json($marathon_runners, 200);
-    }
-    public function marathon_runners_add(Request $request)
-    {
-        $request->validate([
-            'full_name' => 'required',
-            'region' => 'required',
-            'phone' =>  ['required', 'max:13', 'unique:marathon_registrations'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:marathon_registrations'],
-            'event' => 'required',
-        ]);
-
-        $full_name            = $request->full_name;
-        $region                  = $request->region;
-        $email                 = $request->email;
-        $amount                = $request->amount;
-        $description           = $request->description;
-        $event               = $request->event;
-
-        $trimedmobile = substr($request->phone, -9);
-        $phonenumber = '255' . $trimedmobile;
-        $general_slug = Str::random(40);
-
-        $i = 0;
-        while (MarathonRegistration::where('slug', $general_slug)->exists()) {
-            $i++;
-            $general_slug = Hash::make(Str::random(40) . $i);
-        }
-        $marathon_registration = MarathonRegistration::create(
-            [
-                'slug' => $general_slug,
-                'full_name' => $full_name,
-                'region' => $region,
-                'phone' => $phonenumber,
-                'email' => $email,
-                'event' => $event,
-                'paid' => 1,
-            ]
-        );
-        return redirect()->back()->with('success', 'Marathon runner successfully Added!');
-    }
-    public function marathon_runners_store(Request $request)
-    {
-
-        $request->validate([
-            'full_name' => 'required',
-            'region' => 'required',
-            'event' => 'required',
-        ]);
-        $full_name            = $request->full_name;
-        $address               = $request->address;
-        $region                  = $request->region;
-        $event               = $request->event;
-
-        $marathon_runner = MarathonRegistration::where('id', $request->marathon_runner_id)->first();
-        if (!($request->email == $marathon_runner->email)) {
-            $request->validate([
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:marathon_registrations'],
-            ]);
-            $marathon_runner->update([
-                'email' => $request->email,
-            ]);
-        }
-        if (!($request->phone == $marathon_runner->phone)) {
-            $request->validate([
-                'phone' =>  ['required', 'max:13', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:marathon_registrations'],
-            ]);
-            $trimedmobile = substr($request->phone, -9);
-            $phonenumber = '255' . $trimedmobile;
-            $marathon_runner->update([
-                'phone' => $phonenumber,
-            ]);
-        }
-
-        $marathon_runner->update([
-            'full_name' => $full_name,
-            'address' => $address,
-            'region' => $region,
-            'event' => $event,
-        ]);
 
 
-        return redirect()->back()->with('success', 'Marathon runner successfully Update!');
-    }
-    public function marathon_runners_delete($id)
-    {
-        $marathon_runners_destroy = MarathonRegistration::where('id', $id)->delete();
-        return redirect()->back()->with('danger', 'Marathon runner successfully Deleted!');
-    }
-    public function marathon_runners_delete_all(Request $request)
-    {
-        $id = $request->runner_id;
-        foreach ($id as $user) {
-            $deleted = MarathonRegistration::where('id', $user)->delete();
-        }
-        return redirect()->back()->with('danger', 'Marathon runner  deleted successfully!');
-    }
-    public function marathon_settings()
-    {
-        $marathon_settings = AwardMarathonSetting::get()->first();
-        return view('admin.marathon.settings')->with(['marathon_settings' => $marathon_settings]);
-    }
-    public function marathon_settings_store(Request $request)
-    {
-        $this->validate($request, [
-            'marathon_registration' => 'boolean',
-            'marathon_registration_time_remain' => 'required|date_format:Y-m-d H:i:s',
-        ]);
-        $settings = AwardMarathonSetting::updateOrCreate([
-            'id' => $request->general_settings_id
-        ], [
-            'marathon_registration' => $request->marathon_registration,
-            'marathon_registration_time_remain' => $request->marathon_registration_time_remain,
-        ]);
-        if ($settings) {
-            return redirect()->back()->with('success', 'Marathon Settings Successfully  Updated!');
-        } else {
-            return redirect()->back()->with('danger', 'Marathon Settings Fail to Update!');
-        }
-    }
+
     public function award_category()
     {
 
@@ -612,7 +421,7 @@ class DashboardController extends Controller
                 'site_icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|dimensions:ratio=1/1',
             ]);
             if ($site_icon = $request->file('site_icon')) {
-                $destinationPath = 'image/';
+                $destinationPath = 'images/site/';
                 $site_icon_name = 'site_icon_' . date('YmdHis') . "." . $site_icon->getClientOriginalExtension();
                 $site_icon->move($destinationPath, $site_icon_name);
                 //Check if site icon exist in the folder
@@ -629,7 +438,7 @@ class DashboardController extends Controller
                 'site_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
             if ($site_logo = $request->file('site_logo')) {
-                $destinationPath = 'image/';
+                $destinationPath = 'images/site/';
                 $site_logo_name = 'site_logo_' . date('YmdHis') . "." . $site_logo->getClientOriginalExtension();
                 $site_logo->move($destinationPath, $site_logo_name);
             }

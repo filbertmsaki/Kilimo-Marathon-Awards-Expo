@@ -63,13 +63,13 @@ class Dpo
     public function createToken($request)
     {
 
-        try{
+        try {
             $companyToken      = $this->company_token;
             $serviceType       = $this->account_type;
             $accountDdescription = $this->account_description;
             $backUrl           = $this->back_url;
             $redirectUrl       = $this->redirect_url;
-            $companyRef         = $request->token;
+            $companyRef         = $request->transactionref;
             $customerFirstName = $request->first_name;
             $customerLastName  = $request->last_name;
             $customerPhone     = $request->phone;
@@ -143,7 +143,7 @@ class Dpo
                     'resultExplanation' => 'Unknown error occurred in token creation',
                 ];
             }
-        }catch(\GuzzleHttp\Exception\ConnectException $error){
+        } catch (\GuzzleHttp\Exception\ConnectException $error) {
 
             return [
                 'success'           => false,
@@ -151,7 +151,6 @@ class Dpo
                 'ResultExplanation' => 'There was technical problen. Please try again latter!.',
             ];
         }
-
     }
     public function ChargeTokenMobile($request)
     {
@@ -281,7 +280,7 @@ class Dpo
             $json = json_encode($xml);
             $array = json_decode($json, TRUE);
 
-            if ($array['Result'] != 900) {
+            if ($array['Result'] != 000) {
                 $response = Arr::prepend($array, false, 'success');
                 return $response;
             } else {
@@ -298,7 +297,7 @@ class Dpo
     }
     public function getPaymentUrl($request)
     {
-        if (!empty( $request->transToken)) {
+        if (!empty($request->transToken)) {
             $verifyToken   = $this->verifyToken($request);
             if (!empty($verifyToken) && $verifyToken != '') {
                 $dpo_payment_url = $this->gatewayUrl() . $request->transToken;
