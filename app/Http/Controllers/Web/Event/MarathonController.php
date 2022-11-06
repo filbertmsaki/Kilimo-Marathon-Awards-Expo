@@ -115,8 +115,9 @@ class MarathonController extends Controller
                         'country' => 'Tanzania',
                     ]);
                     $mobilePay = $dpo->ChargeTokenMobile($request);
+
                     if (!empty($mobilePay) && $mobilePay != '') {
-                        if ($mobilePay['success'] = true) {
+                        if ($mobilePay['success'] == true) {
                             // Save the transaction reference
                             $payment = PushPayment::create([
                                 'transactionref' => $request->token,
