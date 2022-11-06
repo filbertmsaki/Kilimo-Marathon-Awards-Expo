@@ -127,7 +127,7 @@ class MarathonController extends Controller
                             ]);
                             $payment_details = $mobilePay['instructions'];
                             DB::commit();
-                            return response()->json(['message'=>$payment_details],  Response::HTTP_CREATED);
+                            return response()->json(['message'=> str_replace('    ',PHP_EOL,$payment_details)],  Response::HTTP_CREATED);
                         }
                     }
                     DB::rollBack();
