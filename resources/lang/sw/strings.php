@@ -18,6 +18,6 @@ return [
         'send' => 'Send',
     ],
 
-    'error' => 'Error occur, please try again latter!',
+    'error' => 'Hitilafu imetokea, tafadhali jaribu tena baadaye!',
 
 ];

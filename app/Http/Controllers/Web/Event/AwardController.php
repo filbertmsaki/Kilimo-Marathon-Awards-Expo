@@ -37,9 +37,9 @@ class AwardController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isAwardActive()) {
-                return response()->json('Award Registaration is cloded for now, please try again latter!.', Response::HTTP_NOT_FOUND);
+                return response()->json(trans('award.notification.closed'), Response::HTTP_NOT_FOUND);
             }
-            return response()->json('Award Registaration is now open, you may now proceed to another steps!.', Response::HTTP_FOUND);
+            return response()->json(trans('award.notification.opened'), Response::HTTP_FOUND);
         }
         abort(401);
     }
@@ -54,11 +54,11 @@ class AwardController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isAwardActive()) {
-                return response()->json('Award Registaration is cloded for now, please try again latter!.', Response::HTTP_NOT_FOUND);
+                return response()->json(trans('award.notification.closed'), Response::HTTP_NOT_FOUND);
             }
             $award_category = AwardCategory::where('name', $request->category_id)->first();
             if ($award_category == null) {
-                return response()->json('The award category does not exist.', Response::HTTP_NOT_FOUND);
+                return response()->json(trans('award.category.not-exist'), Response::HTTP_NOT_FOUND);
             }
             $request->merge([
                 'category_id' => $award_category->id
@@ -73,17 +73,17 @@ class AwardController extends Controller
         );
         if ($exist) {
             if (FacadesRequest::is('api*')) {
-                return response()->json('You have already registered in this category, please wait to be verified!',Response::HTTP_FOUND);
+                return response()->json(trans('award.category.already-registered'),Response::HTTP_FOUND);
             }
-            return redirect()->back()->with('warning', 'You have already registered in this category, please wait to be verified!');
+            return redirect()->back()->with('warning', trans('award.category.already-registered'));
         }
         DB::beginTransaction();
         AwardNominee::create($request->except('_token'));
         DB::commit();
         if (FacadesRequest::is('api*')) {
-            return response()->json('You have successful register to kilimo awards.',  Response::HTTP_CREATED);
+            return response()->json(trans('award.notification.registered'),  Response::HTTP_CREATED);
         }
-        return redirect()->back()->with('success', 'You have successful register to kilimo awards!');
+        return redirect()->back()->with('success', trans('award.notification.registered'));
     }
 
     /**

@@ -71,14 +71,14 @@ class VoteController extends Controller
                 'category_id' => $nominee->awardcategory->id,
                 'agent' => $agent
             ]);
-            return response()->json(['success' => 'You  have voted for ' . $nominee->company_name . ' as ' . $nominee->awardcategory->name]);
+            return response()->json(['success' => trans('vote.notification.success',['name'=>$nominee->company_name, 'category'=>$nominee->awardcategory->name])]);
         }
         $voted = Vote::where([
             'agent' => $agent,
             'category_id' => $nominee->awardcategory->id
         ])->first();
         $nominee_voted = AwardNominee::where('id', $voted->nominee_id)->first();
-        return response()->json(['error' => 'You  have already voted for ' . $nominee_voted->company_name . ' in this category']);
+        return response()->json(['error' => trans('vote.notification.error',['name'=>$nominee_voted->company_name])]);
     }
 
     /**

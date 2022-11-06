@@ -46,9 +46,9 @@ class MarathonController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isMarathonActive()) {
-                return response()->json('Marathon Registaration is cloded for now, please try again latter!.', 400);
+                return response()->json(trans('marathon.notification.closed'), 400);
             }
-            return response()->json('Marathon Registaration is now open, you may now proceed to another steps!.', 201);
+            return response()->json(trans('marathon.notification.opened'), 201);
         }
         abort(401);
     }
@@ -62,7 +62,7 @@ class MarathonController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isMarathonActive()) {
-                return response()->json('Marathon Registaration is cloded for now, please try again latter!.', 400);
+                return response()->json(trans('marathon.notification.closed'), 400);
             }
         }
         if (!isMarathonActive()) {
@@ -83,9 +83,9 @@ class MarathonController extends Controller
         );
         if ($exist) {
             if (FacadesRequest::is('api*')) {
-                return response()->json('You have already registered to Kilimo Marathon, please wait we will contact you soon!', Response::HTTP_FOUND);
+                return response()->json(trans('marathon.notification.already-registered'), Response::HTTP_FOUND);
             }
-            return redirect()->back()->with('warning', 'You have already registered to Kilimo Marathon, please wait we will contact you soon!');
+            return redirect()->back()->with('warning', trans('marathon.notification.already-registered'));
         }
         DB::beginTransaction();
         MarathonRegistration::create($request->except('_token'));
@@ -131,7 +131,7 @@ class MarathonController extends Controller
                         }
                     }
                     DB::rollBack();
-                    return response()->json('Error occur, please try again latter!', 400);
+                    return response()->json(trans('strings.error'), 400);
                 }
                 $verify = $dpo->verifyToken($request);
                 if ($verify['Result'] === '900') {
@@ -149,7 +149,7 @@ class MarathonController extends Controller
                 }
             } else {
                 DB::rollBack();
-                return redirect()->back()->with('error', 'Error occur, please try again latter!');
+                return redirect()->back()->with('error', trans('strings.error'));
             }
         }
     }

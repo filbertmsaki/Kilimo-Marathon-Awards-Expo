@@ -36,9 +36,9 @@ class ExpoController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isExpoActive()) {
-                return response()->json('Expo Registaration is cloded for now, please try again latter!.', Response::HTTP_NOT_FOUND);
+                return response()->json(trans('expo.notification.closed'), Response::HTTP_NOT_FOUND);
             }
-            return response()->json('Expo Registaration is now open, you may now proceed to another steps!.', Response::HTTP_FOUND);
+            return response()->json(trans('expo.notification.opened'), Response::HTTP_FOUND);
         }
         abort(401);
     }
@@ -53,7 +53,7 @@ class ExpoController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isExpoActive()) {
-                return response()->json('Expo Registaration is cloded for now, please try again latter!.', Response::HTTP_NOT_FOUND);
+                return response()->json(trans('expo.notification.closed'), Response::HTTP_NOT_FOUND);
             }
         }
         $exist = ExpoRegistration::expoExist(
@@ -63,17 +63,17 @@ class ExpoController extends Controller
         );
         if ($exist) {
             if (FacadesRequest::is('api*')) {
-                return response()->json('You have already registered in kilimo expo, please wait to be verified', Response::HTTP_FOUND);
+                return response()->json(trans('expo.notification.already-registered'), Response::HTTP_FOUND);
             }
-            return redirect()->back()->with('warning', 'You have already registered in kilimo expo, please wait to be verified!');
+            return redirect()->back()->with('warning', trans('expo.notification.already-registered'));
         }
         DB::beginTransaction();
         ExpoRegistration::create($request->except('_token'));
         DB::commit();
         if (FacadesRequest::is('api*')) {
-            return response()->json('You have successful register to kilimo expo.',  Response::HTTP_CREATED);
+            return response()->json(trans('expo.notification.registered'),  Response::HTTP_CREATED);
         }
-        return redirect()->back()->with('success', 'You have successful register to kilimo expo!');
+        return redirect()->back()->with('success', trans('expo.notification.registered'));
     }
 
     /**
