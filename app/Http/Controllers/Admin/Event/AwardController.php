@@ -22,19 +22,19 @@ class AwardController extends Controller
     public function index()
     {
 
-        // $updates = AwardNominee::all();
-        // foreach ($updates as $update) {
-        //     if ($update->company_individual == 'Individual') {
+        $updates = AwardNominee::all();
+        foreach ($updates as $update) {
+            if ($update->company_individual == 'Individual') {
 
-        //         $update->update([
-        //             'entry' => 1
-        //         ]);
-        //     } else {
-        //         $update->update([
-        //             'entry' => 2
-        //         ]);
-        //     }
-        // }
+                $update->update([
+                    'entry' => 1
+                ]);
+            } else {
+                $update->update([
+                    'entry' => 2
+                ]);
+            }
+        }
         $categories = AwardCategory::all();
         $currrentYear = date('Y');
         $nominees = AwardNominee::with('awardcategory')
