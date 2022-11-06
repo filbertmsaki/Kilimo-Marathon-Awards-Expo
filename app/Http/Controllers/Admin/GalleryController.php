@@ -45,7 +45,7 @@ class GalleryController extends Controller
         ]);
         $image_name = '';
         if ($gallery_image = $request->file('image')) {
-            $path = 'images/gallery/' . date('Y') . '/' . date('m') . '/';
+            $path = 'upload/gallery/' . date('Y') . '/' . date('m') . '/';
 
             if (!File::isDirectory($path)) {
                 File::makeDirectory($path, 0777, true, true);
@@ -100,7 +100,7 @@ class GalleryController extends Controller
 
 
         if ($gallery_image = $request->file('image')) {
-            $path = 'images/gallery/' . date('Y') . '/' . date('m') . '/';
+            $path = 'upload/gallery/' . date('Y') . '/' . date('m') . '/';
             if (!File::isDirectory($path)) {
                 File::makeDirectory($path, 0777, true, true);
             }

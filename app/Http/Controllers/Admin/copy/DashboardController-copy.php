@@ -421,7 +421,7 @@ class DashboardController extends Controller
                 'site_icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|dimensions:ratio=1/1',
             ]);
             if ($site_icon = $request->file('site_icon')) {
-                $destinationPath = 'images/site/';
+                $destinationPath = 'upload/site/';
                 $site_icon_name = 'site_icon_' . date('YmdHis') . "." . $site_icon->getClientOriginalExtension();
                 $site_icon->move($destinationPath, $site_icon_name);
                 //Check if site icon exist in the folder
@@ -438,7 +438,7 @@ class DashboardController extends Controller
                 'site_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
             if ($site_logo = $request->file('site_logo')) {
-                $destinationPath = 'images/site/';
+                $destinationPath = 'upload/site/';
                 $site_logo_name = 'site_logo_' . date('YmdHis') . "." . $site_logo->getClientOriginalExtension();
                 $site_logo->move($destinationPath, $site_logo_name);
             }

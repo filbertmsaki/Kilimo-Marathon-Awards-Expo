@@ -46,7 +46,7 @@ class PartnerController extends Controller
         ]);
         $fileName = '';
         if ($file = $request->file('image')) {
-            $path = 'images/partners/' . date('Y') . '/' . date('m') . '/';
+            $path = 'upload/partners/' . date('Y') . '/' . date('m') . '/';
 
             if (!File::isDirectory($path)) {
                 File::makeDirectory($path, 0777, true, true);
@@ -103,7 +103,7 @@ class PartnerController extends Controller
             $request->validate([
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             ]);
-            $path = 'images/partners/' . date('Y') . '/' . date('m') . '/';
+            $path = 'upload/partners/' . date('Y') . '/' . date('m') . '/';
             if (!File::isDirectory($path)) {
                 File::makeDirectory($path, 0777, true, true);
             }
