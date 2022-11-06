@@ -46,9 +46,9 @@ class MarathonController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isMarathonActive()) {
-                return response()->json(trans('marathon.notification.closed'), 400);
+                return response()->json(['message'=>trans('marathon.notification.closed')], 400);
             }
-            return response()->json(trans('marathon.notification.opened'), 201);
+            return response()->json(['message'=>trans('marathon.notification.opened')], 201);
         }
         abort(401);
     }
@@ -62,7 +62,7 @@ class MarathonController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isMarathonActive()) {
-                return response()->json(trans('marathon.notification.closed'), 400);
+                return response()->json(['message'=>trans('marathon.notification.closed')], 400);
             }
         }
         if (!isMarathonActive()) {
@@ -83,7 +83,7 @@ class MarathonController extends Controller
         );
         if ($exist) {
             if (FacadesRequest::is('api*')) {
-                return response()->json(trans('marathon.notification.already-registered'), Response::HTTP_FOUND);
+                return response()->json(['message'=>trans('marathon.notification.already-registered')], Response::HTTP_FOUND);
             }
             return redirect()->back()->with('warning', trans('marathon.notification.already-registered'));
         }
