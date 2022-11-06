@@ -16,7 +16,16 @@ class Localization
      */
     public function handle(Request $request, Closure $next)
     {
-        $locale = ($request->hasHeader('Accept-Language'))? $request->header('Accept-Language') : 'en';
+        $locale = 'en';
+        if ($request->hasHeader('Accept-Language')) {
+            if ($request->header('Accept-Language') == 'Kiswahili' || $request->header('Accept-Language') == 'Swahili') {
+                $locale = 'sw';
+            }
+            if ($request->header('Accept-Language') == 'Kingereza' || $request->header('Accept-Language') == 'English') {
+                $locale = 'en';
+            }
+        }
+        // $locale = ($request->hasHeader('Accept-Language'))? $request->header('Accept-Language') : 'en';
         app()->setLocale($locale);
         return $next($request);
     }
