@@ -26,7 +26,7 @@ class ExpoRequest extends FormRequest
     public function rules()
     {
         return [
-            'entry' => 'required|numeric',
+            'entry' => 'required',
             'phonecode' => 'required|numeric',
             'company_name' => 'required|string',
             'service_name' => 'required|string',

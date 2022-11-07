@@ -55,6 +55,15 @@ class ExpoController extends Controller
             if (!isExpoActive()) {
                 return response()->json(['message'=>trans('expo.notification.closed')], Response::HTTP_NOT_FOUND);
             }
+            if($request->entry == 'Mtu Binafsi' || $request->entry== 'Individual'){
+                $request->merge([
+                    'entry' => 1
+                ]);
+            }else if($request->entry == 'Kampuni' || $request->entry== 'Company'){
+                $request->merge([
+                    'entry' => 2
+                ]);
+            }
         }
         $exist = ExpoRegistration::expoExist(
             $request->company_name,
