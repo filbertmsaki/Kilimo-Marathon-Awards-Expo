@@ -36,9 +36,9 @@ class ExpoController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isExpoActive()) {
-                return response()->json(['message'=>trans('expo.notification.closed')], Response::HTTP_NOT_FOUND);
+                return response()->json(['message' => trans('expo.notification.closed')], Response::HTTP_NOT_FOUND);
             }
-            return response()->json(['message'=>trans('expo.notification.opened')], Response::HTTP_FOUND);
+            return response()->json(['message' => trans('expo.notification.opened')], Response::HTTP_FOUND);
         }
         abort(401);
     }
@@ -53,13 +53,15 @@ class ExpoController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isExpoActive()) {
-                return response()->json(['message'=>trans('expo.notification.closed')], Response::HTTP_NOT_FOUND);
+                return response()->json(['message' => trans('expo.notification.closed')], Response::HTTP_NOT_FOUND);
             }
-            if($request->entry == 'Mtu Binafsi' || $request->entry== 'Individual'){
+            if ($request->entry == 'Mtu Binafsi' || $request->entry == 'Individual') {
                 $request->merge([
-                    'entry' => 1
+                    'entry' => 1,
+                    'company_phone' => null,
+                    'company_email' => null,
                 ]);
-            }else if($request->entry == 'Kampuni' || $request->entry== 'Company'){
+            } else if ($request->entry == 'Kampuni' || $request->entry == 'Company') {
                 $request->merge([
                     'entry' => 2
                 ]);
@@ -72,7 +74,7 @@ class ExpoController extends Controller
         );
         if ($exist) {
             if (FacadesRequest::is('api*')) {
-                return response()->json(['message'=>trans('expo.notification.already-registered')], Response::HTTP_FOUND);
+                return response()->json(['message' => trans('expo.notification.already-registered')], Response::HTTP_FOUND);
             }
             return redirect()->back()->with('warning', trans('expo.notification.already-registered'));
         }
@@ -80,7 +82,7 @@ class ExpoController extends Controller
         ExpoRegistration::create($request->except('_token'));
         DB::commit();
         if (FacadesRequest::is('api*')) {
-            return response()->json(['message'=>trans('expo.notification.registered')],  Response::HTTP_CREATED);
+            return response()->json(['message' => trans('expo.notification.registered')],  Response::HTTP_CREATED);
         }
         return redirect()->back()->with('success', trans('expo.notification.registered'));
     }

@@ -37,9 +37,9 @@ class AwardController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isAwardActive()) {
-                return response()->json(['message'=>trans('award.notification.closed')], Response::HTTP_NOT_FOUND);
+                return response()->json(['message' => trans('award.notification.closed')], Response::HTTP_NOT_FOUND);
             }
-            return response()->json(['message'=>trans('award.notification.opened')], Response::HTTP_FOUND);
+            return response()->json(['message' => trans('award.notification.opened')], Response::HTTP_FOUND);
         }
         abort(401);
     }
@@ -52,23 +52,25 @@ class AwardController extends Controller
      */
     public function store(AwardRequest $request)
     {
-      
+
         if (FacadesRequest::is('api*')) {
 
             if (!isAwardActive()) {
-                return response()->json(['message'=>trans('award.notification.closed')], Response::HTTP_NOT_FOUND);
+                return response()->json(['message' => trans('award.notification.closed')], Response::HTTP_NOT_FOUND);
             }
 
             $award_category = AwardCategory::where('name', $request->category_id)->first();
             if ($award_category == null) {
-                return response()->json(['message'=>trans('award.category.not-exist')], Response::HTTP_NOT_FOUND);
+                return response()->json(['message' => trans('award.category.not-exist')], Response::HTTP_NOT_FOUND);
             }
 
-            if($request->entry == 'Mtu Binafsi' || $request->entry== 'Individual'){
+            if ($request->entry == 'Mtu Binafsi' || $request->entry == 'Individual') {
                 $request->merge([
-                    'entry' => 1
+                    'entry' => 1,
+                    'company_phone' => null,
+                    'company_email' => null,
                 ]);
-            }else if($request->entry == 'Kampuni' || $request->entry== 'Company'){
+            } else if ($request->entry == 'Kampuni' || $request->entry == 'Company') {
                 $request->merge([
                     'entry' => 2
                 ]);
@@ -86,7 +88,7 @@ class AwardController extends Controller
         );
         if ($exist) {
             if (FacadesRequest::is('api*')) {
-                return response()->json(['message'=>trans('award.category.already-registered')],Response::HTTP_FOUND);
+                return response()->json(['message' => trans('award.category.already-registered')], Response::HTTP_FOUND);
             }
             return redirect()->back()->with('warning', trans('award.category.already-registered'));
         }
@@ -94,7 +96,7 @@ class AwardController extends Controller
         AwardNominee::create($request->except('_token'));
         DB::commit();
         if (FacadesRequest::is('api*')) {
-            return response()->json(['message'=>trans('award.notification.registered')],  Response::HTTP_CREATED);
+            return response()->json(['message' => trans('award.notification.registered')],  Response::HTTP_CREATED);
         }
         return redirect()->back()->with('success', trans('award.notification.registered'));
     }

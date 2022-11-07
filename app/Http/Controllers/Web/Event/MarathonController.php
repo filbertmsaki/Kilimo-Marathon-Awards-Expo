@@ -46,9 +46,9 @@ class MarathonController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isMarathonActive()) {
-                return response()->json(['message'=>trans('marathon.notification.closed')],  Response::HTTP_NOT_FOUND);
+                return response()->json(['message' => trans('marathon.notification.closed')],  Response::HTTP_NOT_FOUND);
             }
-            return response()->json(['message'=>trans('marathon.notification.opened')],  Response::HTTP_FOUND);
+            return response()->json(['message' => trans('marathon.notification.opened')],  Response::HTTP_FOUND);
         }
         abort(401);
     }
@@ -62,7 +62,7 @@ class MarathonController extends Controller
     {
         if (FacadesRequest::is('api*')) {
             if (!isMarathonActive()) {
-                return response()->json(['message'=>trans('marathon.notification.closed')],  Response::HTTP_NOT_FOUND);
+                return response()->json(['message' => trans('marathon.notification.closed')],  Response::HTTP_NOT_FOUND);
             }
         }
         if (!isMarathonActive()) {
@@ -83,7 +83,7 @@ class MarathonController extends Controller
         );
         if ($exist) {
             if (FacadesRequest::is('api*')) {
-                return response()->json(['message'=>trans('marathon.notification.already-registered')], Response::HTTP_FOUND);
+                return response()->json(['message' => trans('marathon.notification.already-registered')], Response::HTTP_FOUND);
             }
             return redirect()->back()->with('warning', trans('marathon.notification.already-registered'));
         }
@@ -127,9 +127,9 @@ class MarathonController extends Controller
                             ]);
                             $payment_details = $mobilePay['instructions'];
                             DB::commit();
-                            $data =str_replace('    ',PHP_EOL,$payment_details);
-                            $result =str_replace('   ',PHP_EOL,$data);
-                            return response()->json(['message'=>$result],  Response::HTTP_CREATED);
+                            $data = str_replace('    ', PHP_EOL, $payment_details);
+                            $result = str_replace('   ', PHP_EOL, $data);
+                            return response()->json(['message' => $result],  Response::HTTP_CREATED);
                         }
                     }
                     DB::rollBack();
