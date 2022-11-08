@@ -8,6 +8,7 @@ use App\Models\Payment\Dpo;
 use App\Models\Payment\DpoGroup;
 use App\Models\Payment\PushPayment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DpoController extends Controller
 {
@@ -25,7 +26,6 @@ class DpoController extends Controller
             ->get();
         return view('admin.payment.dpo-index', compact('payments'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +35,6 @@ class DpoController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -46,7 +45,6 @@ class DpoController extends Controller
     {
         //
     }
-
     /**
      * Display the specified resource.
      *
@@ -57,7 +55,6 @@ class DpoController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -68,7 +65,6 @@ class DpoController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -80,7 +76,6 @@ class DpoController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -91,110 +86,80 @@ class DpoController extends Controller
     {
         //
     }
-
     public function verify(Request $request)
     {
         $slug = $request->pay_slug;
-        // TODO Get Payments Settings
-        $row_payment_settings = DpoGroup::first();
-        // dd($row_payment_settings);
-        $dpo_company_token      = $row_payment_settings->dpo_company_token;
-        $payments = PushPayment::where('slug', $slug)->first();
-        $transToken = $payments->transactiontoken;
-        $data = [];
-        $data['companyToken'] = $dpo_company_token;
-        $data['transToken'] = $transToken;
+        $payments = PushPayment::where('slug', $slug)->first()
+            ?? abort(404);
+        $transactiontoken = $payments->transactiontoken;
+        $request->merge([
+            'transToken' =>  $transactiontoken,
+        ]);
         $dpo = new Dpo();
-        $verified = $dpo->verifyToken($data);
-        $token = $verified['result'];
-
-        $result = $token['Result'];
-        $resultexplanation = $token['ResultExplanation'];
-        $customername = $token['CustomerName'];
-        $customercredit = $token['CustomerCredit'];
-        $customercredittype = $token['CustomerCreditType'];
-        $transactionapproval = $token['TransactionApproval'];
-        $transactioncurrency = $token['TransactionCurrency'];
-        $transactionamount = $token['TransactionAmount'];
-        $fraudalert = $token['FraudAlert'];
-        $fraudexplnation = $token['FraudExplnation'];
-        $transactionnetamount = $token['TransactionNetAmount'];
-        $transactionsettlementdate = $token['TransactionSettlementDate'];
-        $transactionrollingreserveamount = $token['TransactionRollingReserveAmount'];
-        $transactionrollingreservedate = $token['TransactionRollingReserveDate'];
-        $transactionfinalcurrency = $token['TransactionFinalCurrency'];
-        $transactionfinalamount = $token['TransactionFinalAmount'];
-        $customerphone = $token['CustomerPhone'];
-        $customercountry = $token['CustomerCountry'];
-        $customercity = $token['CustomerCity'];
-        $customerzip = $token['CustomerZip'];
-        $mobilepaymentrequest = $token['MobilePaymentRequest'];
-        $accref = $token['AccRef'];
-        if ($result == 000) {
+        $verify = $dpo->verifyToken($request);
+        if ($verify['Result'] === '000') {
             //Paid
-            $trimedmobile = substr($customerphone, -9);
-            $phonenumber = '255' . $trimedmobile;
-            MarathonRegistration::where('phone', $phonenumber)
+            ////////////////////Marathon Update///////////////////////////////////////////////////
+            DB::beginTransaction();
+            $marathon = MarathonRegistration::where('transactionref', $payments->transactionref)
                 ->where('paid', '=', '0')
                 ->update([
                     'paid' => 1
                 ]);
-            //////////////////Payment Update///////////////
+            //////////////////Payment Update////////////////
             $payments->update([
-                'result' => $result,
-                'resultexplanation' => $resultexplanation,
-                'customername' => $customername,
-                'customercredit' => $customercredit,
-                'customercredittype' => $customercredittype,
-                'transactionapproval' => $transactionapproval,
-                'transactioncurrency' => $transactioncurrency,
-                'transactionamount' => $transactionamount,
-                'fraudalert' => $fraudalert,
-                'fraudexplnation' => $fraudexplnation,
-                'transactionnetamount' => $transactionnetamount,
-                'transactionsettlementdate' => $transactionsettlementdate,
-                'transactionrollingreserveamount' => $transactionrollingreserveamount,
-                'transactionrollingreservedate' => $transactionrollingreservedate,
-                'transactionfinalcurrency' => $transactionfinalcurrency,
-                'transactionfinalamount' => $transactionfinalamount,
-                'customerphone' => $customerphone,
-                'customercountry' => $customercountry,
-                'customercity' => $customercity,
-                'customerzip' => $customerzip,
-                'mobilepaymentrequest' => $mobilepaymentrequest,
-                'accref' => $accref,
+                'result' => $verify['Result'],
+                'resultexplanation' => $verify['ResultExplanation'],
+                'customername' => $verify['CustomerName'],
+                'customercredit' => $verify['CustomerCredit'],
+                'customercredittype' => $verify['CustomerCreditType'],
+                'transactionapproval' => $verify['TransactionApproval'],
+                'transactioncurrency' => $verify['TransactionCurrency'],
+                'transactionamount' => $verify['TransactionAmount'],
+                'fraudalert' => $verify['FraudAlert'],
+                'fraudexplnation' => $verify['FraudExplnation'],
+                'transactionnetamount' => $verify['TransactionNetAmount'],
+                'transactionsettlementdate' => $verify['TransactionSettlementDate'],
+                'transactionrollingreserveamount' => $verify['TransactionRollingReserveAmount'],
+                'transactionrollingreservedate' => $verify['TransactionRollingReserveDate'],
+                'transactionfinalcurrency' => $verify['TransactionFinalCurrency'],
+                'transactionfinalamount' => $verify['TransactionFinalAmount'],
+                'customerphone' => $verify['CustomerPhone'],
+                'customercountry' => $verify['CustomerCountry'],
+                'customercity' => $verify['CustomerCity'],
+                'customerzip' => $verify['CustomerZip'],
+                'mobilepaymentrequest' => $verify['MobilePaymentRequest'],
+                'accref' => $verify['AccRef'],
                 'status' => 'Paid',
             ]);
-            return redirect()->back()->with('success', $payments->resultexplanation);
         } else {
-            //OverPaid/underpaid
-
             $payments->update([
-                'result' => $result,
-                'resultexplanation' => $resultexplanation,
-                'customername' => $customername,
-                'customercredit' => $customercredit,
-                'transactionapproval' => $transactionapproval,
-                'transactioncurrency' => $transactioncurrency,
-                'transactionamount' => $transactionamount,
-                'fraudalert' => $fraudalert,
-                'fraudexplnation' => $fraudexplnation,
-                'transactionnetamount' => $transactionnetamount,
-                'transactionsettlementdate' => $transactionsettlementdate,
-                'transactionrollingreserveamount' => $transactionrollingreserveamount,
-                'transactionrollingreservedate' => $transactionrollingreservedate,
-                'transactionfinalcurrency' => $transactionfinalcurrency,
-                'transactionfinalamount' => $transactionfinalamount,
-                'customerphone' => $customerphone,
-                'customercountry' => $customercountry,
-                'customercity' => $customercity,
-                'customerzip' => $customerzip,
-                'mobilepaymentrequest' => $mobilepaymentrequest,
-                'accref' => $accref,
-                'customercredittype' => $customercredittype,
+                'result' => $verify['Result'],
+                'resultexplanation' => $verify['ResultExplanation'],
+                'customername' => $verify['CustomerName'],
+                'customercredit' => $verify['CustomerCredit'],
+                'customercredittype' => $verify['CustomerCreditType'],
+                'transactionapproval' => $verify['TransactionApproval'],
+                'transactioncurrency' => $verify['TransactionCurrency'],
+                'transactionamount' => $verify['TransactionAmount'],
+                'fraudalert' => $verify['FraudAlert'],
+                'fraudexplnation' => $verify['FraudExplnation'],
+                'transactionnetamount' => $verify['TransactionNetAmount'],
+                'transactionsettlementdate' => $verify['TransactionSettlementDate'],
+                'transactionrollingreserveamount' => $verify['TransactionRollingReserveAmount'],
+                'transactionrollingreservedate' => $verify['TransactionRollingReserveDate'],
+                'transactionfinalcurrency' => $verify['TransactionFinalCurrency'],
+                'transactionfinalamount' => $verify['TransactionFinalAmount'],
+                'customerphone' => $verify['CustomerPhone'],
+                'customercountry' => $verify['CustomerCountry'],
+                'customercity' => $verify['CustomerCity'],
+                'customerzip' => $verify['CustomerZip'],
+                'mobilepaymentrequest' => $verify['MobilePaymentRequest'],
+                'accref' => $verify['AccRef'],
                 'status' => 'Not Paid',
             ]);
-            return redirect()->back()->with('warning', $payments->resultexplanation);
         }
+        DB::commit();
+        return redirect()->back()->with('success', $payments->resultexplanation);
     }
 }

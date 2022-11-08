@@ -84,7 +84,9 @@ class SubscribeController extends Controller
     {
         $subscriber = Subscriber::where('id', $request->id)->first() ?? abort(404);
         $delete = $subscriber->delete();
-        return redirect()->back()->with('danger', 'Subscriber successfully Deleted!');
+        // return redirect()->back()->with('danger', 'Subscriber successfully Deleted!');
+                return response()->json(['danger'=> 'Subscriber successfully Deleted!']);
+
     }
     public function destroyAll(Request $request)
     {

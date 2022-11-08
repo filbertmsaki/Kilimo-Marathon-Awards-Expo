@@ -5,6 +5,29 @@
 
     @endsection
     @section('script')
+        <script>
+            $(document).ready(function() {
+
+                /* When click edit user */
+                $('body').on('click', '.delete_subscriber', function() {
+                    var data = $(this).data('id');
+                    console.log(data);
+                    var url = "{{ route('admin.subscribe.destroy', 'delete') }}";
+                    $.ajax({
+                        url: url,
+                        type: "DELETE",
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            id:data
+                        },
+                        success: function(dataResult) {
+                            window.location.reload();
+                        }
+                    })
+
+                });
+            });
+        </script>
 
     @endsection
     <section class="content">
@@ -22,8 +45,9 @@
                                     Subscribers</button>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="datatable" class="table table-bordered table-striped" data-id="Subscribers List">
+                            <div class="card-body" id="table-div">
+                                <table id="datatable" class="table table-bordered table-striped"
+                                    data-id="Subscribers List">
                                     <thead>
                                         <tr>
                                             <th width="20px"><input type="checkbox" id="master"></th>
@@ -45,19 +69,19 @@
 
                                                 <td class="" style="text-align:center">
 
-                                                    <a href="javascript:void(0)" onclick="event.preventDefault();
-                                                    document.getElementById('data_delete').submit();"
-                                                    class="btn btn-danger btn-sm"
-                                                    data-toggle="tooltip" data-placement="top" title="Delete"> <i
-                                                        class="fa fa-trash "></i> Delete</a>
-                                                <form class="d-none m-0 p-0" id="data_delete"
+                                                    <a href="javascript:void(0)"
+                                                        class="btn btn-danger btn-sm delete_subscriber"
+                                                        data-id="{{ $subscriber->id }}" data-toggle="tooltip"
+                                                        data-placement="top" title="Delete"> <i
+                                                            class="fa fa-trash "></i> Delete</a>
+                                                    {{-- <form class="d-none m-0 p-0" id="data_delete"
                                                     action="{{ route('admin.subscribe.destroy', 'delete') }}"
                                                     method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <input type="hidden" name="id"
                                                         value="{{ $subscriber->id }}">
-                                                </form>
+                                                </form> --}}
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -2,10 +2,10 @@
     <!-- Brand Logo -->
     <a href="{{ route('admin.dashboard.index') }}" class="brand-link">
         @if (config('app.logo') !== null)
-            <img src="{{ asset('image') . '/' . config('app.logo') }}" alt="{{ config('app.name') }} Logo"
+            <img src="{{ asset( config('app.logo')) }}" alt="{{ config('app.name') }} Logo"
                 class="brand-image img-circle elevation-3" style="opacity: .9">
         @else
-            <img src="{{ asset('imgs/fem-creation.png') }}" alt="{{ config('app.name') }} Logo"
+            <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }} Logo"
                 class="brand-image img-circle elevation-3" style="opacity: .9">
         @endif
         <span class="brand-text font-weight-light" style="font-size: 90%;">{{ config('app.name') }}</span>
@@ -287,8 +287,8 @@
                     </li>
                 @endrole
                 @role('admin')
-                    <li class="nav-item {{ Request::is('admin/settings*') ? 'menu-is-opening menu-open' : '' }}">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item {{ request()->routeIs('admin.setting.*') ? 'menu-is-opening menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ request()->routeIs('admin.setting.*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cogs"></i>
                             <p>
                                 General Settings
@@ -298,14 +298,14 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('admin.setting.site.index') }}"
-                                    class="nav-link {{ Request::is('admin/settings/site-settings*') ? 'active' : '' }}">
+                                    class="nav-link {{ request()->routeIs('admin.setting.site.*') ? 'active' : '' }}">
                                     <i class="fas fa-cog nav-icon"></i>
                                     <p>Site Settings</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.setting.payment.index') }}"
-                                    class="nav-link {{ Request::is('admin/settings/payments*') ? 'active' : '' }}">
+                                    class="nav-link {{ request()->routeIs('admin.setting.payment.*') ? 'active' : '' }}">
                                     <i class="fas fa-coins nav-icon"></i>
                                     <p>Payment Settings</p>
                                 </a>

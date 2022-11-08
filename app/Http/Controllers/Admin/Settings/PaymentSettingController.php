@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Models\Payment\DpoGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PaymentSettingController extends Controller
 {
@@ -14,7 +16,8 @@ class PaymentSettingController extends Controller
      */
     public function index()
     {
-        //
+        $dpo_settings = DpoGroup::get()->first();
+        return view('admin.settings.dpo-group-settings',compact('dpo_settings'));
     }
 
     /**
@@ -35,7 +38,23 @@ class PaymentSettingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'enable_dpo' => 'required',
+            'dpo_sandbox' => 'required',
+            'dpo_base_url' => 'required',
+            'dpo_default_currency' => 'required',
+            'dpo_default_country' => 'required',
+            'dpo_default_service' => 'required',
+            'dpo_default_service_description' => 'required',
+            'dpo_company_token' => 'required|min:35|max:36',
+        ]);
+        DB::beginTransaction();
+        $general_settings = DpoGroup::updateOrCreate([
+            'slug' => $request->general_settings_id,
+        ], $request->except('_token', 'general_settings_id'));
+        DB::commit();
+
+        return redirect()->back()->with('success', 'Dpo Group Services Successfully Updated ');
     }
 
     /**

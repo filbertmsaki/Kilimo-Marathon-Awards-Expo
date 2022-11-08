@@ -3,9 +3,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @if (config('app.icon') !== null)
-        <link rel="icon" type="image/png" href="{{ asset('image') . '/' . config('app.icon') }}" />
+        <link rel="icon" type="image/png" href="{{ asset(config('app.icon')) }}" />
     @else
-        <link rel="icon" type="image/png" href="{{ asset('img/fem-creation-icon.png') }}" />
+        <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}" />
     @endif
     <title> {{ config('app.name') }} | @yield('title')</title>
     <!-- css contents -->
