@@ -1,4 +1,4 @@
-@php($title = 'Kilimo Award')
+@php($title = 'Mkulima Awards (Mashujaa wa Kilimo wa Mama Samia)')
 @php($pageTitle = 'kilimo_award')
 <x-web.layout.app-layout :isPagetitle="true" :pageTitle="$title">
     <section class="py-10">
@@ -6,14 +6,17 @@
             <div class="box">
                 <x-web.layout.page-slider-component :page="$pageTitle" />
                 <div class="box-body">
-                    <h4 class="box-title mb-0 fw-500">Kilimo Awards</h4>
+                    <h4 class="box-title mb-0 fw-500">Mkulima Awards</h4>
                     <hr>
-                    <p class="fs-16 mb-30">Kilimo Awards are awards presented by a SHAMBADUNIA company, for recognizing
-                        the contribution and importance of farmers and stakeholders of the agricultural sector in
-                        Tanzania</p>
-                    <p class="fs-16 mb-30">The KILIMO Awards are by far the biggest and most prestigious awards in
-                        Tanzania farming. Every year we review our award categories to ensure they better reflect the
-                        range of achievements that deserve recognition in the rapidly-changing world of agriculture.</p>
+                    <p class="fs-16 mb-30">Mkulima Awards are awards presented by Morogoro Regional
+                        Commisioner and Shambadunia Ltd to more tha 40 Agriculture Sector
+                        key players, Emerging Farmers and many stakeholders in various
+                        categories for recognizing the contribution and importance of farmers
+                        and stakeholders of the agricultural sector in Tanzania.</p>
+                    <p class="fs-16 mb-30">Every year we review our award categories to ensure they better
+                        reflect the range of achievements that deserve recognition in the
+                        rapidly-changing world of agriculture.
+                    </p>
 
                     <div class="row">
                         <div class="col-md-12 col-lg-6">
@@ -43,7 +46,7 @@
                             <hr>
                             <ul class="course-overview list-unstyled b-1 bg-gray-100">
                                 <li><i class="ti-calendar"></i> <span class="tag">Event Date </span> <span
-                                        class="value">March 3<sup>rd</sup> 2023</span></li>
+                                        class="value"> June 2023</span></li>
                                 <li><i class="fa fa-street-view"></i> <span class="tag">Venue </span> <span
                                         class="value">Morena Hotel, Morogoro.</span></li>
                             </ul>

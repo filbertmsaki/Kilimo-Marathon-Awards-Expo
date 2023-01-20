@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class UsersController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing sluof the resource.
      *
      * @return \Illuminate\Http\Response
      */

@@ -86,9 +86,9 @@
                             with our agent</p>
                         <div class="widget fs-18 my-20 py-20 by-1 border-light">
                             <ul class="list list-unstyled text-white-80">
-                                <li class="ps-40"><i class="ti-location-pin"></i>429 Mahando Road, Masaki Dar es
-                                    salaam, Tanzania</li>
-                                <li class="ps-40 my-20"><i class="ti-mobile"></i>+255 754 222 800
+                                <li class="ps-40"><i class="ti-location-pin"></i>Nhc Commercial Complex, Old Dar es salaam Road,
+                                    Morogoro. Tanzania</li>
+                                <li class="ps-40 my-20"><i class="ti-mobile"></i>+255 754 222 800 | +255 739 300 777
                                 </li>
                                 <li class="ps-40"><i class="ti-email"></i>marketing@kilimomarathon.co.tz</li>
                             </ul>
@@ -118,10 +118,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.227414474732!2d39.281174214244686!3d-6.742091495126172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185c4d0b694de2c1%3A0x23eb27e90c8c535e!2s429%20Mahando%20St%2C%20Dar%20es%20Salaam!5e0!3m2!1sen!2stz!4v1667024634105!5m2!1sen!2stz"
-                        class="map" style="border:0" allowfullscreen loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15845.985885145237!2d37.653119515729735!3d-6.830918621010094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185a5da2dcdff9ad%3A0x84367c86d6410285!2sOld%20Dar%20Es%20Salaam%20Road%2C%20Morogoro!5e0!3m2!1sen!2stz!4v1674219820023!5m2!1sen!2stz" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>

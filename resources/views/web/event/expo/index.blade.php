@@ -21,9 +21,10 @@
                             <h4 class="box-title mb-0 fw-500">Please Note!</h4>
                             <hr>
                             <ul class="list list-mark">
-                                <li> ..</li>
-                                <li> ...</li>
-                                <li> ..</li>
+                                <li>Both local and International Exhibitors are welcome</li>
+                                <li>Exhibitors in any value chain or related products/services</li>
+                                <li>Exhibitors with products/services beyond agriculture are
+                                    also welcome</li>
                             </ul>
                             <hr>
                             <div class="entry-button">
@@ -36,7 +37,7 @@
                             <hr>
                             <ul class="course-overview list-unstyled b-1 bg-gray-100">
                                 <li><i class="ti-calendar"></i> <span class="tag">Event Date </span> <span
-                                        class="value">1-June-2023</span></li>
+                                        class="value">1-3 June-2023</span></li>
                                 <li><i class="fa fa-street-view"></i> <span class="tag">Venue </span> <span
                                         class="value">Jamuhuri Stadium, Morogoro</span></li>
 

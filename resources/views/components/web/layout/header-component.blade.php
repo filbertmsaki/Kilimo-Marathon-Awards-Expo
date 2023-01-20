@@ -9,27 +9,26 @@
 
                             <li class="ms-10 pe-10"><a href="#"><i class="text-dark fa fa-envelope"></i>
                                     marketing@kilimomarathon.co.tz</a></li>
-                            <li class="ms-10 pe-10"><a href="#"><i class="text-dark fa fa-phone"></i>+(255) 754 222 800 </a></li>
+                            <li class="ms-10 pe-10"><a href="#"><i class="text-dark fa fa-phone"></i>+(255) 754
+                                    222 800 | +(255) 739 300 777 </a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6 col-12 xs-mb-10">
                     <div class="topbar-call text-center text-lg-end topbar-right">
-                        <ul class="list-inline d-lg-flex justify-content-end">
-
-                            @if (auth()->check())
-                                <li class="me-10 ps-10"><a href="#"><i
-                                            class="text-dark fa fa-dashboard d-md-inline-block d-none"></i> My
-                                        Account</a></li>
-                                <li class="me-10 ps-10"><a href="#"><i
-                                            class="text-dark fa fa-sign-in d-md-inline-block d-none"></i> Logout</a>
-                                </li>
-                            @else
-                                <li class="me-10 ps-10"><a href="#"><i
-                                            class="text-dark fa fa-user d-md-inline-block d-none"></i> Register</a></li>
-                                <li class="me-10 ps-10"><a href="#"><i
-                                            class="text-dark fa fa-sign-in d-md-inline-block d-none"></i> Login</a></li>
-                            @endif
+                        <ul class="list-unstyled d-flex  justify-content-md-end justify-content-center">
+                            <li><a href="https://www.facebook.com/kilimomarathonexpo" target="_blank"
+                                    class="waves-effect waves-circle btn btn-social-icon btn-circle btn-facebook"><i
+                                        class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/kilimo_MAE" target="_blank"
+                                    class="waves-effect waves-circle btn btn-social-icon btn-circle btn-twitter"><i
+                                        class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.instagram.com/kilimomarathon/" target="_blank"
+                                    class="waves-effect waves-circle btn btn-social-icon btn-circle btn-instagram"><i
+                                        class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/kilimo-marathon-a3a70b225/" target="_blank"
+                                    class="waves-effect waves-circle btn btn-social-icon btn-circle btn-linkedin"><i
+                                        class="fa fa-linkedin"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -61,7 +60,7 @@
                 <a href="#">Events</a>
                 <ul class="dropdown-menu">
                     <li class=" {{ request()->routeIs('web.event.award.*') ? 'active' : '' }}"><a
-                            href="{{ route('web.event.award.index') }}">Kilimo Award</a></li>
+                            href="{{ route('web.event.award.index') }}">Mkulima Awards</a></li>
                     <li class=" {{ request()->routeIs('web.event.expo.*') ? 'active' : '' }}"><a
                             href="{{ route('web.event.expo.index') }}">Kilimo Expo</a></li>
                     <li class=" {{ request()->routeIs('web.event.marathon.*') ? 'active' : '' }}"><a

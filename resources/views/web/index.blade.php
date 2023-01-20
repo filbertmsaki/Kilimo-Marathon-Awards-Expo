@@ -4,7 +4,7 @@
         <style>
         </style>
     @endsection
-    
+
     <x-web.home.home-slider-component />
     <section class="py-xl-100 py-20 bg-white" data-aos="fade-up">
         <div class="container">
@@ -13,11 +13,13 @@
                     <div class="box box-body p-xl-50 p-10 bg-lightest">
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-12">
-                                <h1 class="mb-15">About KMAE</h1>
-                                <p class="fs-22">KILIMO MARATHON which will be a half-marathon with a theme for
-                                    Agriculture sector in general for the aim of helping us realizing our main goal
-                                    which is to reveal tangible support in Tanzania’s agricultural growth by realizing
-                                    an increase in investments and sales of agricultural products.</p>
+                                <h1 class="mb-15 text-center fs-2">KILIMO MARATHON, AWARDS AND EXPO</h1>
+                                <p class="fs-22">2023 Will be the third time for this prestigious agro-sports
+                                    event which is carried out every year in Morogoro region since
+                                    2021. This is the biggest agro sports event in East Africa and
+                                    incorporates running, trekking and cycling. In this marathon you
+                                    will not run on your own but together with your friends,
+                                    colleagues or family</p>
                                 <a href="{{ route('web.aboutUs') }}" class="btn  btn-primary">Read More</a>
                             </div>
                             <div class="col-lg-6 col-12 position-relative">
@@ -27,8 +29,9 @@
                                         <div class="media-body fw-500">
                                             <h5 class="overflow-hidden text-primary  text-overflow-h nowrap">Objective
                                             </h5>
-                                            <p> To create an entertainment themed event for agriculture where people can
-                                                meet and have fun while learning and observing the growth of the sector.
+                                            <p>To promote the local produce and products and to promote the
+                                                region as a tourist destination and showcase the local culture, history,
+                                                and attractions related to agriculture.
                                             </p>
                                         </div>
                                     </div>
@@ -37,9 +40,8 @@
                                         <div class="media-body fw-500">
                                             <h5 class="overflow-hidden text-primary  text-overflow-h nowrap">Tagline
                                             </h5>
-                                            <p>The marathon will accommodate audience of different age but all people
-                                                from the family level can participate. We are hoping to host not less
-                                                than 300.</p>
+                                            <p>2023 Kilimo Marathon will go with a tag “Kilimo ni Biashara, Wekeza
+                                                Ikulipe”</p>
                                         </div>
                                     </div>
                                     <div class="media media-single box-shadowed bg-white pull-up mb-15"
@@ -48,8 +50,11 @@
                                             <h5 class="overflow-hidden text-primary  text-overflow-h nowrap">Target
                                                 Audience
                                             </h5>
-                                            <p>Kilimo Marathon will go with a tag “ANZIA SHAMBANI” therefore it will
-                                                rhyme KILIMO MARATHON ANZIA SHAMBANI.</p>
+                                            <p>The marathon will accommodate audience of different age but all
+                                                people from the family level can participate. We are hoping to host
+                                                not less than 2000 runners, 500 cyclers, 100 Exhibitors, 40 awards
+                                                winners and general walk-in audience of about 5,000 people.
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="media media-single box-shadowed bg-white pull-up mb-0"
@@ -59,7 +64,7 @@
                                                 &
                                                 Venue</h5>
                                             <small class="text-fade">Venue: Morogoro, Tanzania</small>
-                                            <p><small class="text-fade mt-10">Date: June 2023</small></p>
+                                            <p><small class="text-fade mt-10">Date: 1-3. June 2023</small></p>
                                         </div>
                                     </div>
                                 </div>
@@ -104,17 +109,36 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-6 pt-20 ">
-                        <h4 class="box-title mb-0 fw-500">Kilimo Marathon Events</h4>
+                        <h4 class="box-title mb-0 fw-500">Kilimo Marathon Sports activities</h4>
                         <hr>
                         <ul class="course-overview list-unstyled b-1">
-                            <li><i class="me-10 mdi mdi-run"></i> <span class="tag">21 Km running distance</span>
+                            {{-- <li><i class="me-10 mdi mdi-run"></i> <span class="tag">21 Km running distance</span>
                                 <span class="value">Tsh 35,000/=</span>
+                            </li> --}}
+                            <li>
+                                <i class="me-10 mdi mdi-run"></i> <span class="tag">42.2 Km Full Marathon</span>
+
                             </li>
-                            <li><i class="me-10 mdi mdi-run"></i> <span class="tag">10 Km running distance</span>
-                                <span class="value">Tsh 35,000/=</span>
+                            <li>
+                                <i class="me-10 mdi mdi-run"></i> <span class="tag">21.1 Km Half Marathon</span>
                             </li>
-                            <li><i class="me-10 mdi mdi-run"></i> <span class="tag">5 Km running distance</span>
-                                <span class="value">Tsh 35,000/=</span>
+                            <li>
+                                <i class="me-10 mdi mdi-run"></i> <span class="tag">10 Km Fun Run</span>
+                            </li>
+                            <li>
+                                <i class="me-10 mdi mdi-run"></i> <span class="tag">5 Km Fun Run</span>
+                            </li>
+                            <li>
+                                <i class="me-10 mdi mdi-run"></i> <span class="tag">Cycling - Mountain biking</span>
+                            </li>
+                            <li>
+                                <i class="me-10 mdi mdi-run"></i> <span class="tag">Football Skills competition</span>
+                            </li>
+                            <li>
+                                <i class="me-10 mdi mdi-run"></i> <span class="tag">Tug of War</span>
+                            </li>
+                            <li>
+                                <i class="me-10 mdi mdi-run"></i> <span class="tag">Sack race</span>
                             </li>
                         </ul>
                         @if (isMarathonActive())
@@ -145,8 +169,9 @@
                                         <a class="text-dark hover-primary mb-1 fs-16">Marathon Lenght</a>
                                     </div>
                                 </div>
-                                <p class="mb-2">The Marathon will be of various lengths such as 21km, 10km and 5km
-                                    within Morogoro</p>
+                                <p class="mb-2">The Marathon will be of various lengths such as 42km, 21km, 10km
+                                    and 5km within Morogoro
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -295,7 +320,6 @@
             </div>
             <div class="row mt-30">
                 <style>
-
                     .partner-item {
                         max-width: 200px;
                         max-height: 100px;

@@ -2,24 +2,16 @@
     <div class="footer-top bg-dark3 pt-50">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-12">
-                    <div class="widget">
-                        <h4 class="footer-title">About</h4>
-                        <hr class="bg-primary mb-10 mt-0 d-inline-block mx-auto w-60">
-                        <p class="text-capitalize mb-20">SHAMBA DUNIA represents KILIMO MARATHON which will be a fun run
-                            that will theme the Agriculture sector in general for the aim of helping us realizing our
-                            main goal which reveals tangible support in Tanzania’s agricultural growth by realizing an
-                            increase in investments and sales of agricultural products.</p>
-                    </div>
-                </div>
+
                 <div class="col-lg-3 col-6">
                     <div class="widget">
                         <h4 class="footer-title">Contact Info</h4>
                         <hr class="bg-primary mb-10 mt-0 d-inline-block mx-auto w-60">
                         <ul class="list list-unstyled mb-30">
-                            <li> <i class="fa fa-map-marker"></i>  429 Mahando Road, Masaki Dar es salaam,Tanzania
+                            <li> <i class="fa fa-map-marker"></i>Nhc Commercial Complex, Old Dar es salaam Road,
+                                Morogoro. Tanzania
                             </li>
-                            <li> <i class="fa fa-phone"></i> <span>+(255) 754 222 800  </span></li>
+                            <li> <i class="fa fa-phone"></i> <span>+(255) 754 222 800 | +(255) 739 300 777  </span></li>
                             <li> <i class="fa fa-envelope"></i><span>marketing@kilimomarathon.co.tz </span></li>
                         </ul>
                     </div>
@@ -34,6 +26,30 @@
                             <li><a href="{{ route('web.contactUs') }}">Contact Us</a></li>
                             <li><a href="#">FAQs</a></li>
                         </ul>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3" >
+                    <div class="widget footer_widget">
+                        <h4 class="footer-title">Useful Link</h4>
+                        <hr class="bg-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+                        <div class="row">
+                            <div class="col-6">
+                                <ul class="list list-arrow">
+                                    <li><a href="https://morogoro.go.tz/" target="_blank">Morogoro</a></li>
+                                    <li><a href="https://morompya.co.tz/" target="_blank">MoroMpya</a></li>
+                                    <li><a href="https://sagcot.co.tz/" target="_blank">Sagcot</a></li>
+                                    <li><a href="https://actanzania.or.tz/" target="_blank">Act</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <ul class="list list-arrow">
+                                    <li><a href="https://www.tawa.go.tz/" target="_blank">Tawa</a></li>
+                                    <li><a href="https://www.tanzaniaparks.go.tz" target="_blank">Tanapa</a></li>
+                                    <li><a href="https://www.tfs.go.tz" target="_blank">Tfs</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="col-lg-3 col-12">
