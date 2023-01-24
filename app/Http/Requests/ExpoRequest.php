@@ -27,7 +27,6 @@ class ExpoRequest extends FormRequest
     {
         return [
             'entry' => 'required',
-            'phonecode' => 'required|numeric',
             'company_name' => 'required|string',
             'service_name' => 'required|string',
             'contact_person_name' => 'required|string',
@@ -47,7 +46,6 @@ class ExpoRequest extends FormRequest
             'service_name.required' => 'Business service you offer is require!',
             'contact_person_name.required' => 'Contact person name is require!',
             'contact_person_phone.required' => 'Contact person phone is require!',
-            'phonecode.required' => 'Country is required!',
             'entry.required' => 'Entry Category is required!',
         ];
     }
@@ -68,7 +66,7 @@ class ExpoRequest extends FormRequest
     {
         if ($this->request->has('company_phone')) {
             $this->merge([
-                'company_phone' => phone_number_format($this->request->get('phonecode'), $this->request->get('company_phone'))
+                'company_phone' => phone_number_format('255', $this->request->get('company_phone'))
             ]);
         }
     }
@@ -76,7 +74,7 @@ class ExpoRequest extends FormRequest
     {
         if ($this->request->has('contact_person_phone')) {
             $this->merge([
-                'contact_person_phone' => phone_number_format($this->request->get('phonecode'), $this->request->get('contact_person_phone'))
+                'contact_person_phone' => phone_number_format('255', $this->request->get('contact_person_phone'))
             ]);
         }
     }

@@ -27,7 +27,6 @@ class AwardRequest extends FormRequest
     {
         return [
             'entry' => 'required',
-            'phonecode' => 'required|numeric',
             'category_id' => 'required',
             'company_name' => 'required|string',
             'service_name' => 'required|string',
@@ -49,7 +48,6 @@ class AwardRequest extends FormRequest
             'service_name.required' => 'Business service you offer is require!',
             'contact_person_name.required' => 'Contact person name is require!',
             'contact_person_phone.required' => 'Contact person phone is require!',
-            'phonecode.required' => 'Country is required!',
             'entry.required' => 'Entry Category is required!',
         ];
     }
@@ -69,7 +67,7 @@ class AwardRequest extends FormRequest
     {
         if ($this->request->has('company_phone')) {
             $this->merge([
-                'company_phone' => phone_number_format($this->request->get('phonecode'), $this->request->get('company_phone'))
+                'company_phone' => phone_number_format('255', $this->request->get('company_phone'))
             ]);
         }
     }
@@ -77,7 +75,7 @@ class AwardRequest extends FormRequest
     {
         if ($this->request->has('contact_person_phone')) {
             $this->merge([
-                'contact_person_phone' => phone_number_format($this->request->get('phonecode'), $this->request->get('contact_person_phone'))
+                'contact_person_phone' => phone_number_format('255', $this->request->get('contact_person_phone'))
             ]);
         }
     }

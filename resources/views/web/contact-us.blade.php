@@ -29,21 +29,6 @@
                                     @endif
                                 </div>
                             </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <select class="form-select select2" name="phonecode" required>
-                                        <option value="">-- Select Country--</option>
-                                        <option value="254" @if (old('phonecode') == '254') selected @endif>Kenya
-                                        </option>
-                                        <option value="255" @if (old('phonecode') == '255') selected @endif>
-                                            Tanzania
-                                        </option>
-                                        <option value="256" @if (old('phonecode') == '256') selected @endif>Uganda
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="tel" name="phone" value="{{ old('phone') }}"

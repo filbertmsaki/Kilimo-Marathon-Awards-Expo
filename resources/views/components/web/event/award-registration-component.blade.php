@@ -23,22 +23,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <select class="form-select select2" name="phonecode" required>
-                                            <option value="">-- Select Country--</option>
-                                            <option value="254" @if (old('phonecode') == '254') selected @endif>
-                                                Kenya
-                                            </option>
-                                            <option value="255" @if (old('phonecode') == '255') selected @endif>
-                                                Tanzania
-                                            </option>
-                                            <option value="256" @if (old('phonecode') == '256') selected @endif>
-                                                Uganda
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
+                             
                                 <div class="col-md-4" id="company_nameDiv">
                                     <div class="form-group">
                                         <input type="text" name="company_name" id="company_name"

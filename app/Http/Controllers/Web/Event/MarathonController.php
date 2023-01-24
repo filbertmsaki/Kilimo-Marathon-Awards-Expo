@@ -75,6 +75,8 @@ class MarathonController extends Controller
             'iso' => 'TZ',
             'zip' => 12345,
             'transactionref' => 'KME' . time(),
+            'phonecode' => 255,
+
         ]);
         $payment = $request->payment;
         $exist = MarathonRegistration::runnerExist(

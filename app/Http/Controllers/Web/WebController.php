@@ -42,7 +42,7 @@ class WebController extends Controller
     {
         if (!empty($request->phone)) {
             $request->merge([
-                'phone' => phone_number_format($request->get('phonecode'), $request->get('phone'))
+                'phone' => phone_number_format('255', $request->get('phone'))
             ]);
         }
         if ($request->has('first_name')) {
@@ -234,7 +234,7 @@ class WebController extends Controller
         $transactionref = $request->CompanyRef;
         $transactiontoken = $request->TransactionToken;
         $transactionapproval = $request->CCDapproval;
-        $check_transaction = PushPayment::where('transactionref', $transactionref)->first()?? abort(404);
+        $check_transaction = PushPayment::where('transactionref', $transactionref)->first() ?? abort(404);
         if ($check_transaction != null) {
             $check_transaction->update([
                 'transactionref'        => $transactionref,

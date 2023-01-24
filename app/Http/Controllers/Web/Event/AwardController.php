@@ -69,6 +69,7 @@ class AwardController extends Controller
                     'entry' => 1,
                     'company_phone' => null,
                     'company_email' => null,
+                    'phonecode' => 255,
                 ]);
             } else if ($request->entry == 'Kampuni' || $request->entry == 'Company') {
                 $request->merge([

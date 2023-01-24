@@ -24,7 +24,6 @@ class MarathonRequest extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'phonecode' => 'required',
             'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'event' => 'required|numeric',
@@ -62,7 +61,7 @@ class MarathonRequest extends FormRequest
     {
         if ($this->request->has('phone')) {
             $this->merge([
-                'phone' => phone_number_format($this->request->get('phonecode'), $this->request->get('phone'))
+                'phone' => phone_number_format('255', $this->request->get('phone'))
             ]);
         }
     }
