@@ -156,7 +156,7 @@
                             </li>
                         </ul>
                         @if (isMarathonActive())
-                            <div class="entry-button text-center ">
+                            <div class="entry-button text-center mt-10 ">
                                 <a href="{{ route('web.event.marathon.registration') }}"
                                     class="btn btn-primary btn-sm">Marathon Registration</a>
                             </div>
