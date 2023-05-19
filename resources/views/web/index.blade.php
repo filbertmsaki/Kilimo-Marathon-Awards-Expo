@@ -124,7 +124,8 @@
                     <div class="col-md-12 col-lg-6 pt-20 ">
                         <h4 class="box-title mb-0 fw-500">Kilimo Marathon Sports activities</h4>
                         <hr>
-                        <ul class="course-overview list-unstyled b-1">
+                        <div>
+                             <ul class="course-overview list-unstyled b-1">
                             {{-- <li><i class="me-10 mdi mdi-run"></i> <span class="tag">21 Km running distance</span>
                                 <span class="value">Tsh 35,000/=</span>
                             </li> --}}
@@ -155,6 +156,8 @@
                                 <i class="me-10 mdi mdi-run"></i> <span class="tag">Sack race</span>
                             </li>
                         </ul>
+                        </div>
+
                         @if (isMarathonActive())
                             <div class="entry-button text-center mt-10 ">
                                 <a href="{{ route('web.event.marathon.registration') }}"
