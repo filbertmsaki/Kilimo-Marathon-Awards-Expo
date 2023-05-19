@@ -14,12 +14,12 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-12">
                                 <h1 class="mb-15 text-center fs-2">KILIMO MARATHON, AWARDS AND EXPO</h1>
-                                <p class="fs-22">2023 Will be the third time for this prestigious agro-sports
-                                    event which is carried out every year in Morogoro region since
-                                    2021. This is the biggest agro sports event in East Africa and
-                                    incorporates running, trekking and cycling. In this marathon you
-                                    will not run on your own but together with your friends,
-                                    colleagues or family</p>
+                                <p class="fs-22">The Third Annual KILIMO Marathon and Expo is an event that has been
+                                    conducted in the Morogoro Region for three consecutive years. The event is a
+                                    platform dedicated to promoting and showcasing the agriculture sector, with a focus
+                                    on inspiring and engaging the youth.
+                                </p>
+
                                 <a href="{{ route('web.aboutUs') }}" class="btn  btn-primary">Read More</a>
                             </div>
                             <div class="col-lg-6 col-12 position-relative">
@@ -29,19 +29,21 @@
                                         <div class="media-body fw-500">
                                             <h5 class="overflow-hidden text-primary  text-overflow-h nowrap">Objective
                                             </h5>
-                                            <p>To promote the local produce and products and to promote the
-                                                region as a tourist destination and showcase the local culture, history,
-                                                and attractions related to agriculture.
-                                            </p>
+                                            <p>
+                                                The main objective of the Third Annual KILIMO Marathon and Expo is to
+                                                change the negative attitude/behavior of youth toward agribusiness,
+                                                expose them to agribusiness opportunities, and encourage them to
+                                                consider it as a viable career path. </p>
                                         </div>
                                     </div>
                                     <div class="media media-single box-shadowed bg-white pull-up mb-15"
                                         style="cursor: pointer">
                                         <div class="media-body fw-500">
-                                            <h5 class="overflow-hidden text-primary  text-overflow-h nowrap">Tagline
+                                            <h5 class="overflow-hidden text-primary  text-overflow-h nowrap">Theme
                                             </h5>
-                                            <p>2023 Kilimo Marathon will go with a tag “Kilimo ni Biashara, Wekeza
-                                                Ikulipe”</p>
+                                            <p>The main theme for this year’s event is “Hamasika, Jenga Kesho iliyo
+                                                bora” which translates to “Be Inspired, Build a Better Tomorrow”.
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="media media-single box-shadowed bg-white pull-up mb-15"
@@ -50,10 +52,9 @@
                                             <h5 class="overflow-hidden text-primary  text-overflow-h nowrap">Target
                                                 Audience
                                             </h5>
-                                            <p>The marathon will accommodate audience of different age but all
-                                                people from the family level can participate. We are hoping to host
-                                                not less than 2000 runners, 500 cyclers, 100 Exhibitors, 40 awards
-                                                winners and general walk-in audience of about 5,000 people.
+                                            <p>Youth (Aged 18-40 years): The event specifically aims to engage and
+                                                inspire young individuals within the age range of 18 to 40 years.
+
                                             </p>
                                         </div>
                                     </div>
@@ -64,7 +65,7 @@
                                                 &
                                                 Venue</h5>
                                             <small class="text-fade">Venue: Morogoro, Tanzania</small>
-                                            <p><small class="text-fade mt-10">Date: 1-3. June 2023</small></p>
+                                            <p><small class="text-fade mt-10">Date: 21 – 23 September2023</small></p>
                                         </div>
                                     </div>
                                 </div>
@@ -79,15 +80,27 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-12">
-                    <h2 class="mb-10 text-primary">About Kilimo Award</h2>
+                    <h2 class="mb-10 text-primary">The Mkulima Awards</h2>
                     <hr>
-                    <p class="fs-16">The KILIMO Awards are by far the biggest and most prestigious awards in Tanzania
-                        farming. Every year we review our award categories to ensure they better reflect the range of
-                        achievements that deserve recognition in the rapidly-changing world of agriculture.</p>
-                    @if (isAwardActive())
-                        <a href="{{ route('web.event.award.registration') }}" class="btn btn-primary">Register As
-                            Nominee</a>
-                    @endif
+                    <p class="fs-16">
+                        The Mkulima Awards is an annual event that celebrates excellence and innovation in agriculture
+                        in Tanzania. The awards recognize farmers, agribusinesses, and organizations that have made
+                        outstanding contributions to the agriculture sector through their innovation, productivity, and
+                        sustainability practices.
+                        The event is open to all individuals, organizations, and companies involved in agriculture,
+                        including farmers, pro- cessors, input providers, researchers, and innovators. Participants can
+                        submit their entries in various categories, such as crop production, livestock farming,
+                        agribusiness, and research and innovation through the website.
+
+                    </p>
+                    <div class="btn-group">
+                        <a href="{{ route('web.event.award.index') }}" class="btn btn-success">Read More</a>
+                        @if (isAwardActive())
+                            <a href="{{ route('web.event.award.registration') }}" class="btn btn-primary">Register As
+                                Nominee</a>
+                        @endif
+                    </div>
+
                 </div>
                 <div class="col-lg-6 col-12 position-relative">
                     <div class="popup-vdo mt-30 mt-md-0">
@@ -132,7 +145,8 @@
                                 <i class="me-10 mdi mdi-run"></i> <span class="tag">Cycling - Mountain biking</span>
                             </li>
                             <li>
-                                <i class="me-10 mdi mdi-run"></i> <span class="tag">Football Skills competition</span>
+                                <i class="me-10 mdi mdi-run"></i> <span class="tag">Football Skills
+                                    competition</span>
                             </li>
                             <li>
                                 <i class="me-10 mdi mdi-run"></i> <span class="tag">Tug of War</span>
@@ -298,14 +312,21 @@
                 <div class="col-lg-6 col-12 pt-20">
                     <h2 class="mb-10 text-primary">Kilimo Expo</h2>
                     <hr>
-                    <p class="fs-16">The Kilimo Expo, held once in a year, is one of the leading Agriculture Events of
-                        its kind to showcase various products, produce, and services in the agricultural sector
-                        (crop,livestock, Fisheries and agri-tech). This Agriculture Exhibition attracts many Ministers
-                        of Agriculture,decision-makers, experts, practitioners and trainers in agriculture, as well as
-                        thousands of visitors from all around the Tanzania.</p>
-                    <a href="{{ route('web.event.expo.registration') }}" class="btn btn-primary text-center">Register
-                        As
-                        Exhibitor</a>
+                    <p class="fs-16"> A 3 days agriculture exhibition event is a unique platform for farmers,
+                        agricultural businesses, researchers, and stakeholders to showcase the latest innovations,
+                        technologies, products, and services in the agricultural sector. The event provides a forum for
+                        exchanging knowledge, ideas, and experiences that can lead to new business opportunities,
+                        partnerships, and collaborations.
+                    </p>
+                    <div class="btn-group">
+                        <a href="{{ route('web.event.expo.index') }}" class="btn btn-success text-center">Read
+                            More</a>
+                        <a href="{{ route('web.event.expo.registration') }}"
+                            class="btn btn-primary text-center">Register
+                            As
+                            Exhibitor</a>
+                    </div>
+
                 </div>
             </div>
         </div>

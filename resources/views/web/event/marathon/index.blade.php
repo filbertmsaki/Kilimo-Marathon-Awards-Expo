@@ -9,14 +9,23 @@
                 <div class="box-body">
                     <h4 class="box-title mb-0 fw-500">Kilimo Marathon</h4>
                     <hr>
-                    <p class="fs-16 mb-30">Kilimo Marathon, Awards & Expo is a unique agro sports Event in East
-                        Africa, Tanzania. With the aim of offering a tangible support in
-                        Tanzania’s agricultural growth by realizing an increase in investments
-                        and sales of agricultural products.</p>
-                    <p class="fs-16 mb-30">The Kilimo Marathon Event has various sports activities including 42.2
-                        Km Full Marathon, 21.1 Km Half Marathon, 10 Km Fun Run, 5 Km Fun
-                        Run, Cycling - Mountain biking, Football Skills competition, Tug of
-                        War, Sack race</p>
+                    <p class="fs-16 mb-10"><strong> Purpose and objectives of the event:</strong> The purpose of the
+                        event is to educate and inspire youth to participate in agriculture and promote sustainable
+                        farming practices. The event will also call for people to plant trees as an action or cause to
+                        impact the environment positively.
+                    </p>
+                    <p class="fs-16 mb-10"><strong>Importance of the event: </strong> The event is important because it
+                        will promote sustainable agriculture and environmental conservation in Tanzania, and provide
+                        opportunities for youth to learn about agriculture and participate in sports activities.
+                        Event Description
+                    </p>
+                    <p class="fs-16 mb-10"><strong>Types of activities: </strong>The event will feature an agriculture exhibition and various sports activities like mar- athon, half marathon, fun run, netball, grass root football skills competitions, suck race and tag of war. There will be something for everyone, from serious runners to those who just want to have fun.
+                        Target Audience
+                        </p>
+                    <p class="fs-16 mb-10"></p>
+                    <p class="fs-16 mb-10"></p>
+                    <p class="fs-16 mb-10"></p>
+                    <p class="fs-16 mb-10"></p>
                     <div class="row">
                         <div class="col-md-12 col-lg-6">
 
@@ -43,7 +52,7 @@
                             <hr>
                             <ul class="course-overview list-unstyled b-1 bg-gray-100">
                                 <li><i class="ti-calendar"></i> <span class="tag">Event Date </span> <span
-                                        class="value"> 3 June-2023</span></li>
+                                        class="value"> 23 September2023</span></li>
                                 <li><i class="fa fa-street-view"></i> <span class="tag">Venue </span> <span
                                         class="value">Jamuhuri Stadium, Morogoro</span></li>
                             </ul>

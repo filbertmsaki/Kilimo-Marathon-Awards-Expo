@@ -24,7 +24,7 @@ class Dpo
 
     private $dpo_base_url,
         $dpo_default_currency,
-        $dpo_default_country;
+        $dpo_default_country,$account_description;
 
     public function __construct()
     {
