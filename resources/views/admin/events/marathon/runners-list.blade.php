@@ -27,7 +27,7 @@
                                             <td><input type="checkbox" name="runner_id[]" value="{{ $runner->id }}"
                                                     id="sub_chk_{{ $runner->id }}" class="sub_chk"></td>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $runner->full_name }}</td>
+                                            <td>{{ $runner->name }}</td>
                                             <td>{{ $runner->phone }}</td>
                                             <td>{{ $runner->email }}</td>
                                             <td>{{ $runner->event }} Km</td>

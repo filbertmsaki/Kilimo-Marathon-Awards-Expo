@@ -31,9 +31,9 @@
                                         <tr id="nominee_id_{{ $nominee->id }}">
                                             <td><input type="checkbox" name="category_id[]" value="{{ $nominee->id }}"
                                                     id="sub_chk_{{ $nominee->id }}" class="sub_chk"></td>
-                                            <td>{{ $nominee->full_name }}</td>
-                                            <td>{{ $nominee->mobile }}</td>
-                                            <td>{{ $nominee->email }}</td>
+                                            <td>{{ $nominee->company_name }}</td>
+                                            <td>{{ $nominee->contact_person_phone }}</td>
+                                            <td>{{ $nominee->contact_person_email }}</td>
                                             <td>{{ $nominee->awardcategory->name }}</td>
                                             <td>{{ $nominee->company_individual }}</td>
                                             <td>
