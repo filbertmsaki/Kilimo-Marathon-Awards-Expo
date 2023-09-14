@@ -8,10 +8,22 @@
                 <div class="box-body">
                     <h4 class="box-title mb-0 fw-500">Kilimo Expo</h4>
                     <hr>
-                    <p class="fs-16 mb-10">A 3 days agriculture exhibition event is a unique platform for farmers, agricultural businesses, researchers, and stakeholders to showcase the latest innovations, technologies, products, and services in the agricultural sector. The event provides a forum for exchanging knowledge, ideas, and experiences that can lead to new business opportunities, partnerships, and collaborations.
+                    <p class="fs-16 mb-10">A 3 days agriculture exhibition event is a unique platform for farmers,
+                        agricultural businesses, researchers, and stakeholders to showcase the latest innovations,
+                        technologies, products, and services in the agricultural sector. The event provides a forum for
+                        exchanging knowledge, ideas, and experiences that can lead to new business opportunities,
+                        partnerships, and collaborations.
                     </p>
-                    <p class="fs-16 mb-10">We cordially invite all stakeholders in the agriculture sector, including farmers, agricultural businesses, re- searchers, policymakers, investors, and non-governmental organizations, to participate in this year’s agri- culture exhibition event. This is an excellent opportunity for you to showcase your latest products, services, and research findings to a global audience. </p>
-                    <p class="fs-16 mb-10">By participating in this event, you will have a chance to network with other stakeholders, exchange knowledge and ideas, and explore new business opportunities and collaborations. Don’t miss this chance to be a part of the agriculture sector’s most significant event of the year. Register now to secure your place in the exhibition and take advantage of this unique opportunity to showcase your expertise and innovation</p>
+                    <p class="fs-16 mb-10">We cordially invite all stakeholders in the agriculture sector, including
+                        farmers, agricultural businesses, re- searchers, policymakers, investors, and non-governmental
+                        organizations, to participate in this year’s agri- culture exhibition event. This is an
+                        excellent opportunity for you to showcase your latest products, services, and research findings
+                        to a global audience. </p>
+                    <p class="fs-16 mb-10">By participating in this event, you will have a chance to network with other
+                        stakeholders, exchange knowledge and ideas, and explore new business opportunities and
+                        collaborations. Don’t miss this chance to be a part of the agriculture sector’s most significant
+                        event of the year. Register now to secure your place in the exhibition and take advantage of
+                        this unique opportunity to showcase your expertise and innovation</p>
 
 
                     <div class="row">
@@ -36,9 +48,9 @@
                             <hr>
                             <ul class="course-overview list-unstyled b-1 bg-gray-100">
                                 <li><i class="ti-calendar"></i> <span class="tag">Event Date </span> <span
-                                        class="value">21 – 23 September2023</span></li>
+                                        class="value"> 7 - 14 October 2023</span></li>
                                 <li><i class="fa fa-street-view"></i> <span class="tag">Venue </span> <span
-                                        class="value">Jamuhuri Stadium, Morogoro</span></li>
+                                        class="value">Gairo, Morogoro</span></li>
 
                             </ul>
 

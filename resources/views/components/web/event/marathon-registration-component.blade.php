@@ -81,9 +81,6 @@
                                             <option value="21" @if (old('event') == '21') selected @endif>
                                                 21 Km
                                             </option>
-                                            <option value="21" @if (old('event') == '42') selected @endif>
-                                                42 Km
-                                            </option>
                                         </select>
                                     </div>
                                 </div>

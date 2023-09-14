@@ -149,7 +149,7 @@ class AwardController extends Controller
     public function registration()
     {
         if (!isAwardActive()) {
-            abort(404);
+            return redirect()->route('web.index');
         }
         return view('web.event.award.registration');
     }

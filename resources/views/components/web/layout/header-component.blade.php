@@ -38,8 +38,8 @@
 
     <nav hidden class="nav-dark nav-white">
         <div class="nav-header ">
-            <a href="{{ route('web.index') }}" class="brand py-0 " style="width:80px; height:auto;">
-                <img width="70" src="{{ asset('logo.png') }}" alt="" />
+            <a href="{{ route('web.index') }}" class="brand py-0 " style="width:180px; height:auto; padding:10px">
+                <img width="200" src="{{ asset('logo.png') }}" alt="" />
             </a>
             <button class="toggle-bar">
                 <span class="ti-menu"></span>

@@ -55,13 +55,8 @@
                             </ul>
                             <hr>
                             <div class="entry-button btn-group">
-                                <a href="{{ route('web.event.award.category.index') }}"
-                                    class="btn btn-warning btn-sm rounded-0">View Award Categories</a>
-                                @if (isAwardActive())
-                                    <a href="{{ route('web.event.award.registration') }}"
-                                        class="b-0 waves-effect waves-light btn btn-primary btn-sm rounded-0">Register
-                                        As Nominee</a>
-                                @endif
+                                <a href="https://mkulimaawards.co.tz" target="__blank"
+                                    class="b-0 waves-effect waves-light btn btn-primary btn-sm rounded-0">Read More</a>
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-6">
@@ -69,9 +64,9 @@
                             <hr>
                             <ul class="course-overview list-unstyled b-1 bg-gray-100">
                                 <li><i class="ti-calendar"></i> <span class="tag">Event Date </span> <span
-                                        class="value"> 2023</span></li>
+                                        class="value">14 October 2023</span></li>
                                 <li><i class="fa fa-street-view"></i> <span class="tag">Venue </span> <span
-                                        class="value">Morena Hotel, Morogoro.</span></li>
+                                        class="value">Gairo, Morogoro.</span></li>
                             </ul>
 
                         </div>

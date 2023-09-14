@@ -125,37 +125,35 @@
                         <h4 class="box-title mb-0 fw-500">Kilimo Marathon Sports activities</h4>
                         <hr>
                         <div>
-                             <ul class="course-overview list-unstyled b-1">
-                            {{-- <li><i class="me-10 mdi mdi-run"></i> <span class="tag">21 Km running distance</span>
-                                <span class="value">Tsh 35,000/=</span>
-                            </li> --}}
-                            <li>
-                                <i class="me-10 mdi mdi-run"></i> <span class="tag">42.2 Km Full Marathon</span>
+                            <ul class="course-overview list-unstyled b-1">
+                                <li><span class="tag">Marathon Ticket prices</span>
+                                    <span class="value">Tsh 35,000/=</span>
+                                </li>
 
-                            </li>
-                            <li>
-                                <i class="me-10 mdi mdi-run"></i> <span class="tag">21.1 Km Half Marathon</span>
-                            </li>
-                            <li>
-                                <i class="me-10 mdi mdi-run"></i> <span class="tag">10 Km Fun Run</span>
-                            </li>
-                            <li>
-                                <i class="me-10 mdi mdi-run"></i> <span class="tag">5 Km Fun Run</span>
-                            </li>
-                            <li>
-                                <i class="me-10 mdi mdi-run"></i> <span class="tag">Cycling - Mountain biking</span>
-                            </li>
-                            <li>
-                                <i class="me-10 mdi mdi-run"></i> <span class="tag">Football Skills
-                                    competition</span>
-                            </li>
-                            <li>
-                                <i class="me-10 mdi mdi-run"></i> <span class="tag">Tug of War</span>
-                            </li>
-                            <li>
-                                <i class="me-10 mdi mdi-run"></i> <span class="tag">Sack race</span>
-                            </li>
-                        </ul>
+                                <li>
+                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">21 Km Half Marathon</span>
+                                </li>
+                                <li>
+                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">10 Km Fun Run</span>
+                                </li>
+                                <li>
+                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">5 Km Fun Run</span>
+                                </li>
+                                <li>
+                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">Cycling - Mountain
+                                        biking</span>
+                                </li>
+                                <li>
+                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">Football Skills
+                                        competition</span>
+                                </li>
+                                <li>
+                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">Tug of War</span>
+                                </li>
+                                <li>
+                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">Sack race</span>
+                                </li>
+                            </ul>
                         </div>
 
                         @if (isMarathonActive())
@@ -186,7 +184,7 @@
                                         <a class="text-dark hover-primary mb-1 fs-16">Marathon Lenght</a>
                                     </div>
                                 </div>
-                                <p class="mb-2">The Marathon will be of various lengths such as 42km, 21km, 10km
+                                <p class="mb-2">The Marathon will be of various lengths such as 21km, 10km
                                     and 5km within Morogoro
                                 </p>
                             </div>

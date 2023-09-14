@@ -21,8 +21,7 @@
                             <p class="fs-16">
                                 The event features various activities designed to achieve its objectives. These
                                 activities include the KILIMO Marathon, which takes place on the final day of the event,
-                                and offers participants the chance to compete in different distances such as the 42.2 Km
-                                Full Marathon, 21.1 Km Half Marathon, 10 Km Fun Run, and 5 Km Fun Run.
+                                and offers participants the chance to compete in different distances such as the 21.1 Km Half Marathon, 10 Km Fun Run, and 5 Km Fun Run.
                             </p>
 
                         </div>

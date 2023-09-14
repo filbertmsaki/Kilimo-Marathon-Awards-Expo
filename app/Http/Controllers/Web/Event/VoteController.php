@@ -21,7 +21,7 @@ class VoteController extends Controller
     public function index()
     {
         if (!isVoteActive()) {
-            abort(404);
+            return redirect()->route('web.index');
         }
         $currrentYear = date('Y');
         $nominees = AwardNominee::with('awardcategory')

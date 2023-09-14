@@ -33220,6 +33220,7 @@ nav.nav-core-sticky .nav-header {
 
 .top-bar .core-nav.nav-core-sticky {
     top: 50px;
+    padding-top: 20px;
 }
 
 .top-bar .core-nav.nav-core-sticky.on-scroll {
