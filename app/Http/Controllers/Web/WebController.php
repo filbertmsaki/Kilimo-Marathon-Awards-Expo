@@ -71,6 +71,10 @@ class WebController extends Controller
     {
         return view('web.refund-policy');
     }
+    public function privacyPolicy()
+    {
+        return view('web.privacy-policy');
+    }
     public function gallery()
     {
         $galleries =  Gallery::inRandomOrder()->limit(24)->get();

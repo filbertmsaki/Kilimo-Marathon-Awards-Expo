@@ -64,8 +64,8 @@
                                             <h5 class="overflow-hidden text-primary text-overflow-h nowrap">Host, Date
                                                 &
                                                 Venue</h5>
-                                            <small class="text-fade">Venue: Gairo, Morogoro</small>
-                                            <p><small class="text-fade mt-10">Date: 14th October, 2023</small></p>
+                                            <small class="text-fade">Venue:  Morogoro</small>
+                                            <p><small class="text-fade mt-10">Date: 5th October, 2024</small></p>
                                         </div>
                                     </div>
                                 </div>

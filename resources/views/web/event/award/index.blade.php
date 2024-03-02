@@ -64,9 +64,9 @@
                             <hr>
                             <ul class="course-overview list-unstyled b-1 bg-gray-100">
                                 <li><i class="ti-calendar"></i> <span class="tag">Event Date </span> <span
-                                        class="value">14 October 2023</span></li>
+                                        class="value">4th May 2024</span></li>
                                 <li><i class="fa fa-street-view"></i> <span class="tag">Venue </span> <span
-                                        class="value">Gairo, Morogoro.</span></li>
+                                        class="value"> Morogoro.</span></li>
                             </ul>
 
                         </div>

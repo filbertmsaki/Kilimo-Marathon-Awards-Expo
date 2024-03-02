@@ -47,6 +47,7 @@ Route::group(['as' => 'web.'], function () {
     Route::get('/sponsorship', [WebController::class, 'sponsorship'])->name('sponsorship');
     Route::get('/contact-us', [WebController::class, 'ContactUs'])->name('contactUs');
     Route::get('/refund-policy', [WebController::class, 'refundPolicy'])->name('refund.policy');
+    Route::get('/privacy-policy', [WebController::class, 'privacyPolicy'])->name('privacy.policy');
     Route::post('/subscribe', [WebController::class, 'subscribe'])->name('subscribe');
     Route::get('/gallery', [WebController::class, 'gallery'])->name('gallery');
     Route::post('/contact-us', [WebController::class, 'contactUsStore'])->name('contactUs.store');

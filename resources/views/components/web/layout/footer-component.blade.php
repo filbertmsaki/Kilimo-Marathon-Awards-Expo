@@ -24,7 +24,7 @@
                             <li><a href="{{ route('web.refund.policy') }}">Refund Policy</a></li>
                             <li><a href="https://shambadunia.com" target="_blank">Shambadunia</a></li>
                             <li><a href="{{ route('web.contactUs') }}">Contact Us</a></li>
-                            <li><a href="#">FAQs</a></li>
+                            <li><a href="{{ route('web.privacy.policy') }}">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
