@@ -1,4 +1,4 @@
-@php($title = 'Kilimo Marathon')
+@php($title = 'Marathon, Cycling')
 @php($pageTitle = 'kilimo_marathon')
 <x-web.layout.app-layout :isPagetitle="true" :pageTitle="$title">
     <section class="py-10">
@@ -7,27 +7,13 @@
                 <x-web.layout.page-slider-component :page="$pageTitle" />
 
                 <div class="box-body">
-                    <h4 class="box-title mb-0 fw-500">Kilimo Marathon</h4>
+                    <h4 class="box-title mb-0 fw-500">Marathon, Cycling</h4>
                     <hr>
-                    <p class="fs-16 mb-10"><strong> Purpose and objectives of the event:</strong> The purpose of the
-                        event is to educate and inspire youth to participate in agriculture and promote sustainable
-                        farming practices. The event will also call for people to plant trees as an action or cause to
-                        impact the environment positively.
-                    </p>
-                    <p class="fs-16 mb-10"><strong>Importance of the event: </strong> The event is important because it
-                        will promote sustainable agriculture and environmental conservation in Tanzania, and provide
-                        opportunities for youth to learn about agriculture and participate in sports activities.
-                        Event Description
-                    </p>
-                    <p class="fs-16 mb-10"><strong>Types of activities: </strong>The event will feature an agriculture exhibition and various sports activities like mar- athon, half marathon, fun run, netball, grass root football skills competitions, suck race and tag of war. There will be something for everyone, from serious runners to those who just want to have fun.
-                        Target Audience
-                        </p>
-                    <p class="fs-16 mb-10"></p>
-                    <p class="fs-16 mb-10"></p>
-                    <p class="fs-16 mb-10"></p>
-                    <p class="fs-16 mb-10"></p>
+                    <p class="fs-16 mb-10">The sports segment of the Kilimo Marathon is designed to bring together athletes, farmers, and enthusiasts from various backgrounds. The marathon, a central event, promotes physical fitness and community spirit through long-distance running races. Participants can choose from categories such as the half marathon (21.097 km), and a 10 km run, accommodating different fitness levels. This event is open to professional athletes, amateur runners, local communities, and corporate teams, fostering a sense of unity and healthy living. The marathon aims to raise awareness about agricultural practices and encourage healthy lifestyles while engaging the community in a fun and challenging activity.</p>
+                    <p class="fs-16 mb-10">In addition to the marathon, the cycling event offers both competitive and recreational options. This event emphasizes eco-friendly transportation and provides an opportunity to explore the beautiful rural landscapes.The road racing inviting cyclists of all skill levels to participate. The objectives are to highlight the importance of sustainable transportation, showcase scenic agricultural routes, and promote physical activity among participants. By integrating sports into the Kilimo event, we aim to create a dynamic and engaging experience that underscores the importance of health and sustainability.</p>
+
                     <div class="row">
-                        <div class="col-md-12 col-lg-6">
+                        <div class="col-md-12">
 
                             <h4 class="box-title mb-0 fw-500">Please Note!</h4>
                             <hr>
@@ -39,25 +25,15 @@
                                 <li> Or you can choose to pay the running fee using our LIPA NUMBER instead of
                                     registering in the website</li>
                             </ul>
-                            @if (isMarathonActive())
+                            @if (!isMarathonActive())
                                 <hr>
                                 <div class="entry-button">
                                     <a href="{{ route('web.event.marathon.registration') }}"
-                                        class="btn btn-primary btn-sm">Marathon Registration</a>
+                                        class="btn btn-primary btn-sm">Click to register for Marathon or Cycling</a>
                                 </div>
                             @endif
                         </div>
-                        <div class="col-md-12 col-lg-6">
-                            <h4 class="box-title mb-0 fw-500">Calender</h4>
-                            <hr>
-                            <ul class="course-overview list-unstyled b-1 bg-gray-100">
-                                <li><i class="ti-calendar"></i> <span class="tag">Event Date </span> <span
-                                        class="value">5th October 2024</span></li>
-                                <li><i class="fa fa-street-view"></i> <span class="tag">Venue </span> <span
-                                        class="value">Morogoro</span></li>
-                            </ul>
 
-                        </div>
                     </div>
                 </div>
             </div>

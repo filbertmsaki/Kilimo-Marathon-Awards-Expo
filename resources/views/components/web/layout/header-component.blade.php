@@ -9,8 +9,8 @@
 
                             <li class="ms-10 pe-10"><a href="#"><i class="text-dark fa fa-envelope"></i>
                                     marketing@kilimomarathon.co.tz</a></li>
-                            <li class="ms-10 pe-10"><a href="#"><i class="text-dark fa fa-phone"></i>+(255) 754
-                                    222 800 | +(255) 739 300 777 </a></li>
+                            <li class="ms-10 pe-10"><a href="#"><i class="text-dark fa fa-phone"></i>+255 754 222
+                                    800 | +255 766 300 777 </a></li>
                         </ul>
                     </div>
                 </div>
@@ -59,12 +59,14 @@
             <li class="dropdown {{ request()->routeIs('web.event.*') ? 'active' : '' }}">
                 <a href="#">Events</a>
                 <ul class="dropdown-menu">
-                    <li class=" {{ request()->routeIs('web.event.award.*') ? 'active' : '' }}"><a
-                            href="{{ route('web.event.award.index') }}">Mkulima Awards</a></li>
-                    <li class=" {{ request()->routeIs('web.event.expo.*') ? 'active' : '' }}"><a
-                            href="{{ route('web.event.expo.index') }}">Kilimo Expo</a></li>
                     <li class=" {{ request()->routeIs('web.event.marathon.*') ? 'active' : '' }}"><a
-                            href="{{ route('web.event.marathon.index') }}">Kilimo Marathon</a></li>
+                            href="{{ route('web.event.marathon.index') }}">Marathon, Cycling</a></li>
+                    <li class=" {{ request()->routeIs('web.event.expo.*') ? 'active' : '' }}"><a
+                            href="{{ route('web.event.expo.index') }}">Agribusiness Exhibition</a></li>
+                    <li class=" {{ request()->routeIs('web.event.award.*') ? 'active' : '' }}"><a
+                            href="{{ route('web.event.award.index') }}">Awards and Panel Discussions</a></li>
+                    <li class=" {{ request()->routeIs('web.event.agri-tourism.*') ? 'active' : '' }}"><a
+                            href="{{ route('web.event.agri-tourism.index') }}"> Agri-Tourism </a></li>
                 </ul>
             </li>
             <li class=" {{ request()->routeIs('web.gallery') ? 'active' : '' }}">

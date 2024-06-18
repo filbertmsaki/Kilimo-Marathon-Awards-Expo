@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\Settings\SiteController;
 use App\Http\Controllers\Admin\SubscribeController;
 use App\Http\Controllers\Admin\User\ProfileController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Web\Event\AgriTourismController;
 use App\Http\Controllers\Web\Event\AwardController as EventAwardController;
 use App\Http\Controllers\Web\Event\ExpoController as EventExpoController;
 use App\Http\Controllers\Web\Event\MarathonController as EventMarathonController;
@@ -66,6 +67,7 @@ Route::group(['as' => 'web.'], function () {
             Route::get('/registration', [EventMarathonController::class, 'registration'])->name('registration');
         });
         Route::resource('marathon', EventMarathonController::class);
+        Route::resource('agri-tourism', AgriTourismController::class);
         Route::resource('vote', VoteController::class);
     });
     Route::get('/callback', [WebController::class, 'callback'])->name('callback');

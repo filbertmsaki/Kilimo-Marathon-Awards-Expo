@@ -20,70 +20,10 @@
                                 </div>
 
                             </div>
-                            <div class="col-12 ">
-                                <h4 class="box-title mt-3 fw-500">Reasons Why You Should Sponsor Kilimo Marathon, Awards
-                                    & Expo</h4>
-                                <hr>
-                                <ul class="course-curriculum">
-                                    <li>
-                                        <h5 class="text-primary fw-500">1: Brand Visibility And Awareness</h5>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <div class="list-bx">
-                                                    Through sponsoring Kilimo marathon, your brand will get visibility throughout our advertising campaign to the actual event day and after the event
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <h5 class="text-primary fw-500">2: Targeted Marketing</h5>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <div class="list-bx">
-                                                    You gain opportunities to engage one on one with people looking for relevant product solutions.
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <h5 class="text-primary fw-500">3: Consumer Perception</h5>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <div class="list-bx">Public perception can make or break your business. Through sponsoring our event you will be able to generate consumer perception and trust on your brand.
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <h5 class="text-primary fw-500">4: Sales Goals</h5>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <div class="list-bx">
-                                                    Sponsoring events brings a lot of good connection to the brand like leads and new clients but most of all, they give a chance to carryout sales on a demanding market
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <h5 class="text-primary fw-500">5: Community Goodwill</h5>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <div class="list-bx">Strengthening your business image is one of the most valuable benefits of event sponsorship. Through sponsoring Kilimo Marathon a agriculture fun run the cus- tomers will love and be intrigued by your brands support
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <h5 class="text-primary fw-500">6: Content Strategy</h5>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <div class="list-bx">
-                                                    Through sponsoring our event, your brand gets a chance to gather and create a lot of real impactful content for traffic creation on your platforms boosting your sales.
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                            <div class="col-12 mt-30">
+                                <p class="fs-16">Join us in celebrating and empowering the agricultural community at the Kilimo Marathon, Awards, and Expo! This extraordinary event brings together farmers, innovators, and industry leaders to showcase the best of agriculture, recognize outstanding achievements, and inspire the next generation of farmers. By sponsoring or donating to the Kilimo.</p>
+                                <p class="fs-16">Marathon, you'll be making a real difference in the lives of those who feed our nation. Your brand will gain unparalleled visibility among a passionate audience, while your contribution will help us provide valuable resources, training, and networking opportunities to farmers and agribusinesses. Align your brand with a purpose-driven event and make a lasting impact on the future of agriculture. Be a part of the Kilimo Marathon and let's cultivate a brighter future together.</p>
+
                             </div>
                         </div>
                     </div>

@@ -8,15 +8,15 @@
                         <h4 class="footer-title">Contact Info</h4>
                         <hr class="bg-primary mb-10 mt-0 d-inline-block mx-auto w-60">
                         <ul class="list list-unstyled mb-30">
-                            <li> <i class="fa fa-map-marker"></i>Nhc Commercial Complex, Old Dar es salaam Road,
-                                Morogoro. Tanzania
-                            </li>
-                            <li> <i class="fa fa-phone"></i> <span>+(255) 754 222 800 | +(255) 739 300 777  </span></li>
+                            <li> <i class="fa fa-map-marker"></i>Shambadunia Limited: Salum Abdalah Street, Block G,
+                                Plot No 10 (Halotel Building) Opposite Exim Bank. 1st Floor,
+                                Morogoro. Tanzania</li>
+                            <li> <i class="fa fa-phone"></i> <span>+255 754 222 800 | +255 766 300 777</span></li>
                             <li> <i class="fa fa-envelope"></i><span>marketing@kilimomarathon.co.tz </span></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-6 col-lg-3" >
+                <div class="col-6 col-lg-3">
                     <div class="widget footer_widget">
                         <h4 class="footer-title">Quick Link</h4>
                         <hr class="bg-primary mb-4 mt-0 d-inline-block mx-auto w-60">
@@ -28,7 +28,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-6 col-lg-3" >
+                <div class="col-6 col-lg-3">
                     <div class="widget footer_widget">
                         <h4 class="footer-title">Useful Link</h4>
                         <hr class="bg-primary mb-4 mt-0 d-inline-block mx-auto w-60">
@@ -63,11 +63,11 @@
                                     <input name="email" required="required" class="form-control"
                                         placeholder="Your Email Address" type="email">
 
-                                    <button type="submit" class="btn btn-primary"> <i
-                                            class="fa fa-envelope"></i> </button>
-                                            @if ($errors->has('email'))
-                                            <span class="text-danger">{{ $errors->first('email') }}</span>
-                                        @endif
+                                    <button type="submit" class="btn btn-primary"> <i class="fa fa-envelope"></i>
+                                    </button>
+                                    @if ($errors->has('email'))
+                                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    @endif
                                 </div>
                             </form>
                         </div>

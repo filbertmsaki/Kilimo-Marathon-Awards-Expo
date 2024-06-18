@@ -1,4 +1,4 @@
-@php($title = 'Mkulima Awards')
+@php($title = 'Awards and Panel Discussions')
 @php($pageTitle = 'kilimo_award')
 <x-web.layout.app-layout :isPagetitle="true" :pageTitle="$title">
     <section class="py-10">
@@ -6,43 +6,13 @@
             <div class="box">
                 <x-web.layout.page-slider-component :page="$pageTitle" />
                 <div class="box-body">
-                    <h4 class="box-title mb-0 fw-500">Mkulima Awards</h4>
+                    <h4 class="box-title mb-0 fw-500">Awards and Panel Discussions</h4>
                     <hr>
-                    <p class="fs-16 mb-10">The Mkulima Awards is an annual event that celebrates excellence and
-                        innovation in agriculture in Tanzania. The awards recognize farmers, agribusinesses, and
-                        organizations that have made outstanding contributions to the agriculture sector through their
-                        innovation, productivity, and sustainability practices.
-                    </p>
-                    <p class="fs-16 mb-10">The event is open to all individuals, organizations, and companies involved in
-                        agriculture, including farmers, pro- cessors, input providers, researchers, and innovators.
-                        Participants can submit their entries in various categories, such as crop production, livestock
-                        farming, agribusiness, and research and innovation through the website.
-                    </p>
-                    <p class="fs-16 mb-10">The winners of the Mkulima Awards are selected by a panel of judges comprising
-                        of experts in agriculture and business, The awards ceremony is a major highlight of the
-                        agricultural calendar and attracts a diverse range of stakeholders from the private and public
-                        sectors.
-                    </p>
-                    <p class="fs-16 mb-10">To make the Mkulima Awards a success, we are inviting participants to submit
-                        their entries and showcase their achievements in agriculture. We are also calling for partners
-                        and sponsors to support the event and help us rec- ognize and celebrate the efforts of those who
-                        are driving innovation and growth in the agriculture sector.
-                    </p>
-                    <p class="fs-16 mb-10">If you are interested in participating in the Mkulima Awards or supporting the
-                        event as a partner or sponsor, please contact through the contacts provided in the last page, We
-                        look forward to hearing from you and working together to make the Mkulima Awards a success.</p>
-                    <p class="fs-16 mb-10">Mkulima Awards is an excellent initiative that recognizes and celebrates the
-                        efforts of farmers and agriculture stakeholders in Tanzania. The event aims to promote, inspire
-                        and compliment agriculture stakeholders and farmers who have made significant contributions to
-                        the growth and development of the agriculture sector. </p>
-                    <p class="fs-16 mb-10">The process of the awards is transparent and fair, and farmers are encouraged
-                        to participate and vote for their preferred candidates. By recognizing and celebrating the
-                        achievements of farmers and agriculture stakeholders, the Mkulima Awards help to promote and
-                        inspire growth in the agriculture sector in Tanzania.</p>
-
+                    <p class="fs-16 mb-10">The awards segment of the Kilimo event is dedicated to recognizing and celebrating excellence and innovation in the agricultural sector. This segment honors individuals, companies, and organizations that have made significant contributions to agriculture through various award categories. The Best Farmer Award recognizes outstanding farmers who have demonstrated excellence in farming practices and productivity. The Innovative Agribusiness Award honors businesses that have introduced innovative products or services in the agricultural sector, driving progress and efficiency.</p>
+                    <p class="fs-16 mb-10">Sustainable practices are highlighted through the Sustainable Agriculture Award, which acknowledges those who have implemented environmentally friendly and sustainable farming methods. The Young Agripreneur Award celebrates young individuals who have shown exceptional entrepreneurial skills in agriculture, encouraging the next generation of agricultural leaders. The Community Impact Award recognizes projects or individuals who have made a significant positive impact on their communities through agricultural initiatives. By celebrating these achievements, the awards segment aims to encourage innovation and excellence in agriculture, inspire others in the agricultural community, and highlight contributions to sustainable farming practices</p>
 
                     <div class="row">
-                        <div class="col-md-12 col-lg-6">
+                        <div class="col-md-12">
 
                             <h4 class="box-title mb-0 fw-500">Please Note!</h4>
                             <hr>
@@ -55,21 +25,11 @@
                             </ul>
                             <hr>
                             <div class="entry-button btn-group">
-                                <a href="https://mkulimaawards.co.tz" target="__blank"
-                                    class="b-0 waves-effect waves-light btn btn-primary btn-sm rounded-0">Read More</a>
+                                <a href="#"
+                                    class="b-0 waves-effect waves-light btn btn-primary btn-sm rounded-0">Click to register for Awards as nominee</a>
                             </div>
                         </div>
-                        <div class="col-md-12 col-lg-6">
-                            <h4 class="box-title mb-0 fw-500">Calender</h4>
-                            <hr>
-                            <ul class="course-overview list-unstyled b-1 bg-gray-100">
-                                <li><i class="ti-calendar"></i> <span class="tag">Event Date </span> <span
-                                        class="value">4th May 2024</span></li>
-                                <li><i class="fa fa-street-view"></i> <span class="tag">Venue </span> <span
-                                        class="value"> Morogoro.</span></li>
-                            </ul>
 
-                        </div>
                     </div>
                 </div>
             </div>

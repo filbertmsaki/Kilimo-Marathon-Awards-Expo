@@ -71,9 +71,12 @@
                             with our agent</p>
                         <div class="widget fs-18 my-20 py-20 by-1 border-light">
                             <ul class="list list-unstyled text-white-80">
-                                <li class="ps-40"><i class="ti-location-pin"></i>Nhc Commercial Complex, Old Dar es salaam Road,
-                                    Morogoro. Tanzania</li>
-                                <li class="ps-40 my-20"><i class="ti-mobile"></i>+255 754 222 800 | +255 739 300 777
+                                <li class="ps-40"><i class="ti-location-pin"></i>Shambadunia Limited,<br>
+                                    Salum Abdalah Street, Block G, Plot No 10 (Halotel Building) Opposite Exim Bank. 1st Floor, Morogoro. Tanzania.
+                                    </li>
+                                <li class="ps-40 my-20"><i class="ti-location-arrow"></i>P.O Box 2380 Morogoro. Tanzania
+                                </li>
+                                <li class="ps-40 my-20"><i class="ti-mobile"></i>+255 754 222 800 | +255 766 300 777
                                 </li>
                                 <li class="ps-40"><i class="ti-email"></i>marketing@kilimomarathon.co.tz</li>
                             </ul>

@@ -41,8 +41,7 @@
                                         <div class="media-body fw-500">
                                             <h5 class="overflow-hidden text-primary  text-overflow-h nowrap">Theme
                                             </h5>
-                                            <p>The main theme for this year’s event is “Hamasika, Jenga Kesho iliyo
-                                                bora” which translates to “Be Inspired, Build a Better Tomorrow”.
+                                            <p>“Transforming Youth Mindset in Agriculture”.
                                             </p>
                                         </div>
                                     </div>
@@ -64,8 +63,10 @@
                                             <h5 class="overflow-hidden text-primary text-overflow-h nowrap">Host, Date
                                                 &
                                                 Venue</h5>
-                                            <small class="text-fade">Venue:  Morogoro</small>
-                                            <p><small class="text-fade mt-10">Date: 5th October, 2024</small></p>
+                                            <small class="text-fade">Venue: Morogoro Secondary school, Morogoro.
+                                                Tanzania</small>
+                                            <p><small class="text-fade mt-10">Date: 2<sup>nd</sup> - 5<sup>th</sup>
+                                                    October, 2024</small></p>
                                         </div>
                                     </div>
                                 </div>
@@ -122,37 +123,17 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-6 pt-20 ">
-                        <h4 class="box-title mb-0 fw-500">Kilimo Marathon Sports activities</h4>
+                        <h4 class="box-title mb-0 fw-500">Main Event Activities</h4>
                         <hr>
                         <div>
                             <ul class="course-overview list-unstyled b-1">
-                                <li><span class="tag">Marathon Ticket prices</span>
-                                    <span class="value">Tsh 35,000/=</span>
-                                </li>
+                                <li><span>2<sup style="margin-right: 5px">nd</sup> October – </span> Awards Ceremony and Expo Launch</li>
 
-                                <li>
-                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">21 Km Half Marathon</span>
-                                </li>
-                                <li>
-                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">10 Km Fun Run</span>
-                                </li>
-                                <li>
-                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">5 Km Fun Run</span>
-                                </li>
-                                <li>
-                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">Cycling - Mountain
-                                        biking</span>
-                                </li>
-                                <li>
-                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">Football Skills
-                                        competition</span>
-                                </li>
-                                <li>
-                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">Tug of War</span>
-                                </li>
-                                <li>
-                                    <i class="me-10 mdi mdi-run"></i> <span class="tag">Sack race</span>
-                                </li>
+                                <li><span>3<sup style="margin-right: 5px">rd</sup> October – </span> Exhibition, Other sports on ground</li>
+                                <li><span>4<sup style="margin-right: 5px">th</sup> October – </span> Agri- Tourism, Exhibition</li>
+                                <li><span>5<sup style="margin-right: 5px">th</sup> October –</span> Half Marathon (21 Km run), 10 Km Fun run and 5 Km Fun run,
+                                    Cycling 40 km</li>
+
                             </ul>
                         </div>
 
@@ -205,9 +186,9 @@
                                         <a class="text-dark hover-primary mb-1 fs-16">Kilimo Awards</a>
                                     </div>
                                 </div>
-                                <p class="mb-2">This will be held at the end of the marathon to acknowledge game
-                                    changers in the agriculture sector. Several categories will be created allowing the
-                                    general public to nominate nominees.</p>
+                                <p class="mb-2">This will be held at the beginning of the event to set pace and acknowledge game changers in
+                                    the agriculture sector. Several categories will be created allowing the general public to
+                                    nominate nominees.</p>
                             </div>
                         </div>
                     </div>
@@ -244,11 +225,11 @@
                                         </span>
                                     </div>
                                     <div class="d-flex flex-column fw-500">
-                                        <a class="text-dark hover-primary mb-1 fs-16">Event Entry</a>
+                                        <a class="text-dark hover-primary mb-1 fs-16">Agri-Tourism</a>
                                     </div>
                                 </div>
-                                <p class="mb-2">Except for Marathon runners, Exhibitors and other service providers,
-                                    there will be NO ENTRY FEE for anybody who wishes to enter into the exhibition.</p>
+                                <p class="mb-2">Participants from across the country will have an opportunity to have field visits to various
+                                    attractions in Morogoro including farms and other natural attractions</p>
                             </div>
                         </div>
                     </div>
