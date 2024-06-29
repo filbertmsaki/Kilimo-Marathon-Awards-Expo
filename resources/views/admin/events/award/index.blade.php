@@ -116,7 +116,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $nominee->vote ?? '0' }}
+                                                    {{ $nominee->VotesCount  }}
                                                 </td>
                                                 <td class="">
                                                     <a href="javascript:void(0)" id="edit-nominee-btn"

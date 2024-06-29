@@ -36,10 +36,10 @@ class AwardRequest extends FormRequest
 
         ];
     }
-    public function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json($validator->errors()));
-    }
+    // public function failedValidation(Validator $validator)
+    // {
+    //     throw new HttpResponseException(response()->json($validator->errors()));
+    // }
     public function messages()
     {
         return [

@@ -23,7 +23,7 @@
                                         </select>
                                     </div>
                                 </div>
-                             
+
                                 <div class="col-md-4" id="company_nameDiv">
                                     <div class="form-group">
                                         <input type="text" name="company_name" id="company_name"
@@ -120,8 +120,8 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <textarea name="company_details" value="{{ old('company_details') }}" rows="5" class="form-control" required
-                                            placeholder="Short description about your company, business or service"></textarea>
+                                        <textarea name="company_details"  rows="5" class="form-control" required
+                                            placeholder="Short description about your company, business or service">{{ old('company_details') }}</textarea>
                                         @if ($errors->has('company_details'))
                                             <span class="text-danger">{{ $errors->first('company_details') }}</span>
                                         @endif

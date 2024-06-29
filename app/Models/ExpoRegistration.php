@@ -23,6 +23,7 @@ class ExpoRegistration extends Model
         'company_details',
         'active',
         'paid',
+        'transactionref'
     ];
 
     protected static function boot()

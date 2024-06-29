@@ -106,6 +106,7 @@
             toastr.danger("{{ session('danger') }}");
         @endif
     </script>
+    @stack('scripts')
     <script>
         var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?15143';
         var s = document.createElement('script');

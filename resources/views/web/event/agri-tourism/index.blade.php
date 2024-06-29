@@ -15,7 +15,7 @@
                         <div class="col-md-12">
                             <hr>
                             <div class="entry-button btn-group">
-                                <a href="#"
+                                <a href="{{ route('web.event.agri_tourism.registration') }}"
                                     class="b-0 waves-effect waves-light btn btn-primary btn-sm rounded-0">Click to register for Agri tourism</a>
                             </div>
                         </div>

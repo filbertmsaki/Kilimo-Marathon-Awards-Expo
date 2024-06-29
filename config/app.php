@@ -234,6 +234,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
+        'GenderEnum' => \App\Enums\GenderEnum::class,
+        'InterestedActivitiesEnum' => \App\Enums\InterestedActivitiesEnum::class,
     ],
 
 ];

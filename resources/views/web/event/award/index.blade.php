@@ -23,11 +23,16 @@
                                 <li> After nominee verification complete the voting window will be open, and you
                                     notified through the emails</li>
                             </ul>
+                            @if (isAwardActive())
                             <hr>
+
                             <div class="entry-button btn-group">
-                                <a href="#"
+
+                                <a href="{{ route('web.event.award.registration') }}"
                                     class="b-0 waves-effect waves-light btn btn-primary btn-sm rounded-0">Click to register for Awards as nominee</a>
                             </div>
+                            @endif
+
                         </div>
 
                     </div>

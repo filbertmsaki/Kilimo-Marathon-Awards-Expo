@@ -67,6 +67,9 @@ Route::group(['as' => 'web.'], function () {
             Route::get('/registration', [EventMarathonController::class, 'registration'])->name('registration');
         });
         Route::resource('marathon', EventMarathonController::class);
+        Route::group(['prefix' => 'agri-tourism', 'as' => 'agri_tourism.'], function () {
+            Route::get('/registration', [AgriTourismController::class, 'registration'])->name('registration');
+        });
         Route::resource('agri-tourism', AgriTourismController::class);
         Route::resource('vote', VoteController::class);
     });

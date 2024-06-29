@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ExpoRequest;
 use App\Models\AwardCategory;
 use App\Models\ExpoRegistration;
+use App\Models\Payment\Dpo;
+use App\Models\Payment\PushPayment;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Request as FacadesRequest;
@@ -69,6 +71,7 @@ class ExpoController extends Controller
                 ]);
             }
         }
+
         $exist = ExpoRegistration::expoExist(
             $request->company_name,
             $request->company_phone,
@@ -80,9 +83,49 @@ class ExpoController extends Controller
             }
             return redirect()->back()->with('warning', trans('expo.notification.already-registered'));
         }
+        $request->merge([
+            'city' => $request->address,
+            'amount' => 500000,
+            'description' => 'Payment for Agribusiness Exhibition Registration',
+            'iso' => 'TZ',
+            'zip' => 12345,
+            'transactionref' => 'KMEXPO' . time(),
+            'phonecode' => 255,
+            'first_name' => $request->company_name,
+            'last_name' => "",
+            'phone' => $request->contact_person_phone,
+            'email' => $request->contact_person_email,
+        ]);
         DB::beginTransaction();
-        ExpoRegistration::create($request->except('_token'));
-        DB::commit();
+        $expo = ExpoRegistration::create($request->except('_token'));
+        if ($expo) {
+            $dpo = new Dpo();
+            $tokens = $dpo->createToken($request);
+            if ($tokens['success'] === true) {
+                $request->merge([
+                    'transToken' =>  $tokens['TransToken'],
+                ]);
+                $verify = $dpo->verifyToken($request);
+                if ($verify['Result'] === '900') {
+                    $payment_url = $dpo->getPaymentUrl($request);
+                    // Save the transaction reference
+                    $payment = PushPayment::create([
+                        'transactionref' => $request->token,
+                        'customerphone' => $request->phone,
+                        'transactionamount' => $request->amount,
+                        'transactiontoken' =>  $request->transToken,
+                        'status' => 'pending',
+                    ]);
+                    DB::commit();
+                    return redirect()->to($payment_url);
+                }
+            } else {
+                DB::rollBack();
+                return redirect()->back()->with('error', trans('strings.error'));
+            }
+        }
+        DB::rollBack();
+        return redirect()->back()->with('error', 'Unknown error occur.');
         if (FacadesRequest::is('api*')) {
             return response()->json(['message' => trans('expo.notification.registered')],  Response::HTTP_CREATED);
         }

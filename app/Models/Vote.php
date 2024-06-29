@@ -14,4 +14,12 @@ class Vote extends Model
         'category_id',
     ];
 
+
+    public function category()  {
+        return $this->belongsTo(AwardCategory::class,'category_id');
+    }
+    public function nominee()  {
+        return $this->belongsTo(AwardNominee::class,'nominee_id');
+    }
+
 }

@@ -34,10 +34,7 @@ class AwardNominee extends Model
         });
     }
 
-    public function award_voter()
-    {
-        return $this->belongsToMany(AwardVoters::class, 'award_nominee_award_voters');
-    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -46,20 +43,25 @@ class AwardNominee extends Model
     {
         return $this->belongsTo(AwardCategory::class, 'category_id');
     }
-    public function vote()
+    public function votes()
     {
-        return $this->hasMany(Vote::class);
+        return $this->hasMany(Vote::class, 'nominee_id');
     }
 
-    public function getCurrentYearAttribute(){
+    public function getVotesCountAttribute()
+    {
+        return $this->votes->count();
+    }
+    public function getCurrentYearAttribute()
+    {
         return date('Y');
     }
 
-    public function scopeNomineeExist($query,$company_name,$category_id)
+    public function scopeNomineeExist($query, $company_name, $category_id)
     {
         $currrentYear = date('Y');
 
-        $award =$query->where('category_id', $category_id);
+        $award = $query->where('category_id', $category_id);
         if (request()->has('company_name')) {
             $award->where('company_name', $company_name);
         }

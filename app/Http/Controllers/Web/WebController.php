@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Mail\SubscribeMail;
+use App\Models\AgriTourism;
 use App\Models\ContactUs;
+use App\Models\ExpoRegistration;
 use App\Models\Gallery;
 use App\Models\MarathonRegistration;
 use App\Models\Partner;
@@ -147,7 +149,7 @@ class WebController extends Controller
                 $base_url = 'https://messaging-service.co.tz/api/sms/v1/text/single';
                 $from = 'SHAMBADUNIA';
                 $to = $phonenumber;
-                $text = 'Habari ' . $verify['CustomerName'] . ' malipo yako ya TZS ' . $verify['TransactionAmount'] . ' kwa ajili ya kushiriki kwenye KILIMO MARATHON yamekamilika.Risiti Namba ' . $verify['TransactionApproval'] . '. Kwa msaada zaidi piga simu :+255754222800.';
+                $text = 'Habari ' . $verify['CustomerName'] . ' malipo yako ya TZS ' . $verify['TransactionAmount'] . ' yamepolewa. Risiti Namba ' . $verify['TransactionApproval'] . '. Kwa msaada zaidi piga simu :+255754222800.';
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
                     CURLOPT_URL => $base_url,
@@ -172,11 +174,17 @@ class WebController extends Controller
             }
             ////////////////////Marathon Update///////////////////////////////////////////////////
             DB::beginTransaction();
-            $marathon = MarathonRegistration::where('transactionref', $transactionref)
-                ->where('paid', '=', '0')
-                ->update([
-                    'paid' => 1
-                ]);
+            $models = [MarathonRegistration::class, ExpoRegistration::class, AgriTourism::class];
+            foreach ($models as $model) {
+                $record = $model::where('transactionref', $transactionref)
+                    ->where('paid', '=', '0')
+                    ->first();
+                if ($record) {
+                    $record->paid = 1;
+                    $record->save();
+                    break;
+                }
+            }
             //////////////////Payment Update////////////////
             $payments->update([
                 'result' => $verify['Result'],

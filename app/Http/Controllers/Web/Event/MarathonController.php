@@ -28,9 +28,9 @@ class MarathonController extends Controller
     }
     public function registration()
     {
-        if (!isMarathonActive()) {
-            abort(404);
-        }
+        // if (!isMarathonActive()) {
+        //     abort(404);
+        // }
         return view('web.event.marathon.registration');
     }
     /**
@@ -60,14 +60,14 @@ class MarathonController extends Controller
      */
     public function store(MarathonRequest $request)
     {
-        if (FacadesRequest::is('api*')) {
-            if (!isMarathonActive()) {
-                return response()->json(['message' => trans('marathon.notification.closed')],  Response::HTTP_NOT_FOUND);
-            }
-        }
-        if (!isMarathonActive()) {
-            abort(401);
-        }
+        // if (FacadesRequest::is('api*')) {
+        //     if (!isMarathonActive()) {
+        //         return response()->json(['message' => trans('marathon.notification.closed')],  Response::HTTP_NOT_FOUND);
+        //     }
+        // }
+        // if (!isMarathonActive()) {
+        //     abort(401);
+        // }
         $request->merge([
             'city' => $request->address,
             'amount' => 35000,

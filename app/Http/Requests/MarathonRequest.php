@@ -24,9 +24,9 @@ class MarathonRequest extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => ['required', 'string', 'email', 'max:255'],
+            // 'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'event' => 'required|numeric',
+            'event' => 'required',
         ];
     }
     public function failedValidation(Validator $validator)

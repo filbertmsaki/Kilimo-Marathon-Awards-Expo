@@ -44,6 +44,9 @@
                 <img src="{{ asset('images/IMG_6837.jpg') }}" class="d-block " alt="Kilimo Award">
                 @elseif ($page == 'kilimo_expo')
                 <img src="{{ asset('images/IMG_5273.jpg') }}" class="d-block " alt="Kilimo Expo">
+               @else
+               <img src="{{ asset('images/2024/image.jpg') }}" class="d-block " alt="Kilimo Expo">
+
                 @endif
             </div>
         </div>

@@ -127,11 +127,15 @@
                         <hr>
                         <div>
                             <ul class="course-overview list-unstyled b-1">
-                                <li><span>2<sup style="margin-right: 5px">nd</sup> October – </span> Awards Ceremony and Expo Launch</li>
+                                <li><span>2<sup style="margin-right: 5px">nd</sup> October – </span> Awards Ceremony and
+                                    Expo Launch</li>
 
-                                <li><span>3<sup style="margin-right: 5px">rd</sup> October – </span> Exhibition, Other sports on ground</li>
-                                <li><span>4<sup style="margin-right: 5px">th</sup> October – </span> Agri- Tourism, Exhibition</li>
-                                <li><span>5<sup style="margin-right: 5px">th</sup> October –</span> Half Marathon (21 Km run), 10 Km Fun run and 5 Km Fun run,
+                                <li><span>3<sup style="margin-right: 5px">rd</sup> October – </span> Exhibition, Other
+                                    sports on ground</li>
+                                <li><span>4<sup style="margin-right: 5px">th</sup> October – </span> Agri- Tourism,
+                                    Exhibition</li>
+                                <li><span>5<sup style="margin-right: 5px">th</sup> October –</span> Half Marathon (21 Km
+                                    run), 10 Km Fun run and 5 Km Fun run,
                                     Cycling 40 km</li>
 
                             </ul>
@@ -186,8 +190,10 @@
                                         <a class="text-dark hover-primary mb-1 fs-16">Kilimo Awards</a>
                                     </div>
                                 </div>
-                                <p class="mb-2">This will be held at the beginning of the event to set pace and acknowledge game changers in
-                                    the agriculture sector. Several categories will be created allowing the general public to
+                                <p class="mb-2">This will be held at the beginning of the event to set pace and
+                                    acknowledge game changers in
+                                    the agriculture sector. Several categories will be created allowing the general
+                                    public to
                                     nominate nominees.</p>
                             </div>
                         </div>
@@ -228,7 +234,8 @@
                                         <a class="text-dark hover-primary mb-1 fs-16">Agri-Tourism</a>
                                     </div>
                                 </div>
-                                <p class="mb-2">Participants from across the country will have an opportunity to have field visits to various
+                                <p class="mb-2">Participants from across the country will have an opportunity to have
+                                    field visits to various
                                     attractions in Morogoro including farms and other natural attractions</p>
                             </div>
                         </div>
