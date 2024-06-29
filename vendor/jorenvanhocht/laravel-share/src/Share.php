@@ -182,8 +182,7 @@ class Share
      */
     public function whatsapp()
     {
-        $base = config('laravel-share.services.whatsapp.uri');
-        $url=$base.'/?text='. urlencode($this->title).' '. $this->url;
+        $url = config('laravel-share.services.whatsapp.uri') . $this->url;
 
         $this->buildLink('whatsapp', $url);
 
