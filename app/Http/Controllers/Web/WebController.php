@@ -20,9 +20,21 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Swift_TransportException;
+use Illuminate\Support\Facades\Artisan;
 
 class WebController extends Controller
 {
+    public function migrateAndSeed(Request $request)
+    {
+        // Call the migrate command and capture the output
+        Artisan::call('migrate', ['--force' => true]);
+        $migrateOutput = Artisan::output();
+
+        // Combine both outputs
+        $output = $migrateOutput;
+
+        return response()->json(['message' => 'Database migration and seeding completed successfully.', 'output' => $output]);
+    }
     public function index()
     {
         $partners = Partner::select('image_url')->orderBy('order', 'ASC')->get();
