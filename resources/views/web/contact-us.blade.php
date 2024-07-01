@@ -89,7 +89,7 @@
                             <li><a href="https://twitter.com/kilimo_MAE" target="_blank"
                                     class="waves-effect waves-circle btn btn-social-icon btn-circle btn-twitter"><i
                                         class="fa fa-twitter"></i></a></li>
-                            <li><a href="https://www.instagram.com/kilimomarathon/" target="_blank"
+                            <li><a href="https://www.instagram.com/kilimo_marathon/" target="_blank"
                                     class="waves-effect waves-circle btn btn-social-icon btn-circle btn-instagram"><i
                                         class="fa fa-instagram"></i></a></li>
                             <li><a href="https://www.linkedin.com/in/kilimo-marathon-a3a70b225/" target="_blank"
@@ -106,7 +106,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15845.985885145237!2d37.653119515729735!3d-6.830918621010094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185a5da2dcdff9ad%3A0x84367c86d6410285!2sOld%20Dar%20Es%20Salaam%20Road%2C%20Morogoro!5e0!3m2!1sen!2stz!4v1674219820023!5m2!1sen!2stz" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1322.7990289354602!2d37.663525634847296!3d-6.8256944232534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185a5d3ff0760019%3A0x5942d18efc81b3f7!2sShambadunia%20Ltd!5e0!3m2!1sen!2stz!4v1719776837305!5m2!1sen!2stz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>

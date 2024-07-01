@@ -39,11 +39,11 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 @if ($page == 'kilimo_marathon')
-                <img src="{{ asset('images/marathon-1.jpg') }}" class="d-block " alt="Kilimo Marathon">
+                <img src="{{ asset('images/2024/IMG_0905.jpg') }}" class="d-block " alt="Kilimo Marathon">
                 @elseif ($page == 'kilimo_award')
-                <img src="{{ asset('images/IMG_6837.jpg') }}" class="d-block " alt="Kilimo Award">
+                <img src="{{ asset('images/2024/mkulima-awards.jpg') }}" class="d-block " alt="Kilimo Award">
                 @elseif ($page == 'kilimo_expo')
-                <img src="{{ asset('images/IMG_5273.jpg') }}" class="d-block " alt="Kilimo Expo">
+                <img src="{{ asset('images/2024/expo-01.jpg') }}" class="d-block " alt="Kilimo Expo">
                @else
                <img src="{{ asset('images/2024/image.jpg') }}" class="d-block " alt="Kilimo Expo">
 

@@ -14,7 +14,7 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-12">
                                 <h1 class="mb-15 text-center fs-2">KILIMO MARATHON, AWARDS AND EXPO</h1>
-                                <p class="fs-22">The Third Annual KILIMO Marathon and Expo is an event that has been
+                                <p class="fs-22">The fourth Annual KILIMO Marathon and Expo is an event that has been
                                     conducted in the Morogoro Region for three consecutive years. The event is a
                                     platform dedicated to promoting and showcasing the agriculture sector, with a focus
                                     on inspiring and engaging the youth.
@@ -30,7 +30,7 @@
                                             <h5 class="overflow-hidden text-primary  text-overflow-h nowrap">Objective
                                             </h5>
                                             <p>
-                                                The main objective of the Third Annual KILIMO Marathon and Expo is to
+                                                The main objective of the fourth Annual KILIMO Marathon and Expo is to
                                                 change the negative attitude/behavior of youth toward agribusiness,
                                                 expose them to agribusiness opportunities, and encourage them to
                                                 consider it as a viable career path. </p>
@@ -105,8 +105,8 @@
                 </div>
                 <div class="col-lg-6 col-12 position-relative">
                     <div class="popup-vdo mt-30 mt-md-0">
-                        <img src="{{ asset('images/award-1.jpg') }}" class="img-fluid rounded" alt="Awards"
-                            loading="lazy">
+                        <img src="{{ asset('images/2024/mkulima-awards.jpg') }}" class="img-fluid rounded"
+                            alt="Awards" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12 col-lg-6">
                         <div class="popup-vdo mt-30 mt-md-0">
-                            <img src="{{ asset('images/marathon-1.jpg') }}" class="img-fluid rounded" alt="Awards"
+                            <img src="{{ asset('images/2024/002.jpg') }}" class="img-fluid rounded" alt="Awards"
                                 loading="lazy">
                         </div>
                     </div>
@@ -127,16 +127,18 @@
                         <hr>
                         <div>
                             <ul class="course-overview list-unstyled b-1">
-                                <li><span>2<sup style="margin-right: 5px">nd</sup> October – </span> Awards Ceremony and
-                                    Expo Launch</li>
+                                <li><span>2<sup style="margin-right: 5px">nd</sup> October – </span>Expo Launch</li>
 
                                 <li><span>3<sup style="margin-right: 5px">rd</sup> October – </span> Exhibition, Other
                                     sports on ground</li>
                                 <li><span>4<sup style="margin-right: 5px">th</sup> October – </span> Agri- Tourism,
                                     Exhibition</li>
-                                <li><span>5<sup style="margin-right: 5px">th</sup> October –</span> Half Marathon (21 Km
+                                <li><span>5<sup style="margin-right: 5px">th</sup> October –</span>
+                                    Half Marathon (21 Km
                                     run), 10 Km Fun run and 5 Km Fun run,
-                                    Cycling 40 km</li>
+                                    Cycling 100 km</li>
+                                <li><span>5<sup style="margin-right: 5px">th</sup> October (Evening) –</span>
+                                    Awards Ceremony</li>
 
                             </ul>
                         </div>
@@ -255,7 +257,7 @@
             <div class="row mt-30 div-list">
                 <div class="col-lg-4 col-md-4 col-12 div-list-item">
                     <div class="card">
-                        <img class="card-img-top" src="{{ asset('images/sponsor4.jpg') }}" alt="Card image cap">
+                        <img class="card-img-top" src="{{ asset('images/2024/MarathonPoster.jpg') }}" alt="Card image cap">
                         <div class="card-body">
                             <h4 class="card-title text-primary">Pre - Marathon</h4>
                             <p class="card-text">Our goal during this stage will be to create awareness and achieve
@@ -276,7 +278,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-12 div-list-item">
                     <div class="card">
-                        <img class="card-img-top" src="{{ asset('images/KILIMO MOROGORO-205.jpg') }}"
+                        <img class="card-img-top" src="{{ asset('images/2024/KilimoMarathon003.jpg') }}"
                             alt="Card image cap">
                         <div class="card-body">
                             <h4 class="card-title text-primary">Post - Marathon</h4>
@@ -294,14 +296,14 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-12 position-relative">
                     <div class="popup-vdo mt-30 mt-md-0">
-                        <img src="{{ asset('images/IMG_5276.jpg') }}" class="img-fluid rounded" alt="Awards"
+                        <img src="{{ asset('images/2024/IMG_2281.jpg') }}" class="img-fluid rounded" alt="Awards"
                             loading="lazy">
                     </div>
                 </div>
                 <div class="col-lg-6 col-12 pt-20">
                     <h2 class="mb-10 text-primary">Kilimo Expo</h2>
                     <hr>
-                    <p class="fs-16"> A 3 days agriculture exhibition event is a unique platform for farmers,
+                    <p class="fs-16"> A 4 days agriculture exhibition event is a unique platform for farmers,
                         agricultural businesses, researchers, and stakeholders to showcase the latest innovations,
                         technologies, products, and services in the agricultural sector. The event provides a forum for
                         exchanging knowledge, ideas, and experiences that can lead to new business opportunities,

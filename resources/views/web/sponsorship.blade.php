@@ -10,11 +10,11 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-6">
-                                        <img class="box-img-top btrr-5 btlr-5" src="{{ asset('images/sponsor3.jpg') }}"
+                                        <img class="box-img-top btrr-5 btlr-5" src="{{ asset('images/2024/IMG_2650.jpg') }}"
                                         alt="Card image cap">
                                     </div>
                                     <div class="col-6">
-                                        <img class="box-img-top btrr-5 btlr-5" src="{{ asset('images/sponsor1.jpg') }}"
+                                        <img class="box-img-top btrr-5 btlr-5" src="{{ asset('images/2024/IMG_2418.jpg') }}"
                                         alt="Card image cap">
                                     </div>
                                 </div>
@@ -23,7 +23,7 @@
                             <div class="col-12 mt-30">
                                 <p class="fs-16">Join us in celebrating and empowering the agricultural community at the Kilimo Marathon, Awards, and Expo! This extraordinary event brings together farmers, innovators, and industry leaders to showcase the best of agriculture, recognize outstanding achievements, and inspire the next generation of farmers. By sponsoring or donating to the Kilimo.</p>
                                 <p class="fs-16">Marathon, you'll be making a real difference in the lives of those who feed our nation. Your brand will gain unparalleled visibility among a passionate audience, while your contribution will help us provide valuable resources, training, and networking opportunities to farmers and agribusinesses. Align your brand with a purpose-driven event and make a lasting impact on the future of agriculture. Be a part of the Kilimo Marathon and let's cultivate a brighter future together.</p>
-
+                                <p class="fs-16">To become a sponsor or partner of Kilimo Marathon, Awards & Expo, Kindly write to us through <a href="mailto:info@shambadunia.com">info@shambadunia.com</a>  or Call <a href="tel:+255754222800"></a>+255 754 222 800</p>
                             </div>
                         </div>
                     </div>

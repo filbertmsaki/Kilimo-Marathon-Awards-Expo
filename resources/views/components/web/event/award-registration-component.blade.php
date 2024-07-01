@@ -7,7 +7,7 @@
                         <form class="contact-form" action="{{ route('web.event.award.store') }}" method="POST">
                             @csrf
                             <div class="text-start mb-30">
-                                <h2 class="text-center">Kilimo Award Registration Form</h2>
+                                <h2 class="text-center">Mkulima Awards Registration Form</h2>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">

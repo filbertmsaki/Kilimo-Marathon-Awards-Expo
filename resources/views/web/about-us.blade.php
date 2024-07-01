@@ -17,35 +17,19 @@
                                 collaboration with Morogoro Regional Commissioner’s Office, TCCIA Morogoro, SAGCOT and
                                 other stakeholders</p>
 
-                        </div>
-                        <div class="col-md-6 col-12 position-relative">
-                            <div class="popup-vdo mt-30 mt-md-0">
-                                <img src="{{ asset('images/IMG_5273.jpg') }}" class="img-fluid rounded" alt="">
+                            <h4 class="box-title mb-0 fw-500">Our Mission
+                            </h4>
+                            <div>
+                                <ul>
+                                    <li>To create awareness about the vast opportunities in the agricultural sector.
+                                    </li>
+                                    <li>To foster a positive attitude towards agriculture among young people.</li>
+                                    <li>To promote innovation and technology adoption in farming practices.</li>
+                                    <li>To showcase the diverse agricultural products and services available in
+                                        Tanzania.</li>
+                                </ul>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row  align-items-center mt-50">
-                        <div class="col-md-6 col-12 position-relative">
-                            <div class="popup-vdo mt-30 mt-md-0">
-                                <img src="{{ asset('images/IMG_5273.jpg') }}" class="img-fluid rounded" alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="">
-                                <h4 class="box-title mb-0 fw-500">Our Mission
-                                </h4>
-                                <div>
-                                    <ul>
-                                        <li>To create awareness about the vast opportunities in the agricultural sector.
-                                        </li>
-                                        <li>To foster a positive attitude towards agriculture among young people.</li>
-                                        <li>To promote innovation and technology adoption in farming practices.</li>
-                                        <li>To showcase the diverse agricultural products and services available in
-                                            Tanzania.</li>
-                                    </ul>
-                                </div>
 
-                            </div>
                             <div class="mt-10">
                                 <h4 class="box-title mb-0 fw-500">What to Expect</h4>
                                 <div>
@@ -64,8 +48,16 @@
                                 </div>
 
                             </div>
+
+                        </div>
+                        <div class="col-md-6 col-12 position-relative">
+                            <div class="popup-vdo mt-30 mt-md-0">
+                                <img src="{{ asset('images/2024/GeneralDesign.jpg') }}" class="img-fluid rounded"
+                                    alt="">
+                            </div>
                         </div>
                     </div>
+                 
                     <p>Join us as we run, cycle, explore, and celebrate the future of agriculture in Tanzania. Together,
                         we can transform the mindset of our youth and build a prosperous agricultural sector.</p>
                 </div>

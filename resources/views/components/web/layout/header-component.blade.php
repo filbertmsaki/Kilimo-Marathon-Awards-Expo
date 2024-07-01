@@ -64,7 +64,7 @@
                     <li class=" {{ request()->routeIs('web.event.expo.*') ? 'active' : '' }}"><a
                             href="{{ route('web.event.expo.index') }}">Agribusiness Exhibition</a></li>
                     <li class=" {{ request()->routeIs('web.event.award.*') ? 'active' : '' }}"><a
-                            href="{{ route('web.event.award.index') }}">Awards and Panel Discussions</a></li>
+                            href="{{ route('web.event.award.index') }}">Mkulima Awards</a></li>
                     <li class=" {{ request()->routeIs('web.event.agri-tourism.*') ? 'active' : '' }}"><a
                             href="{{ route('web.event.agri-tourism.index') }}"> Agri-Tourism </a></li>
                 </ul>
