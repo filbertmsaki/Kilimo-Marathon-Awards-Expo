@@ -90,7 +90,7 @@
                             <li><a href="https://twitter.com/kilimo_MAE" target="_blank"
                                     class="waves-effect waves-circle btn btn-social-icon btn-circle btn-twitter"><i
                                         class="fa fa-twitter"></i></a></li>
-                            <li><a href="https://www.instagram.com/kilimomarathon/" target="_blank"
+                            <li><a href="https://www.instagram.com/kilimo_marathon" target="_blank"
                                     class="waves-effect waves-circle btn btn-social-icon btn-circle btn-instagram"><i
                                         class="fa fa-instagram"></i></a></li>
                             <li><a href="https://www.linkedin.com/in/kilimo-marathon-a3a70b225/" target="_blank"

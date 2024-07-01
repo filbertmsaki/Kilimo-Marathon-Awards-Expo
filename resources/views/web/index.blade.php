@@ -296,7 +296,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-12 position-relative">
                     <div class="popup-vdo mt-30 mt-md-0">
-                        <img src="{{ asset('images/2024/IMG_2281.jpg') }}" class="img-fluid rounded" alt="Awards"
+                        <img src="{{ asset('images/2024/IMG_2811.jpg') }}" class="img-fluid rounded" alt="Awards"
                             loading="lazy">
                     </div>
                 </div>
