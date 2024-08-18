@@ -44,6 +44,7 @@ Auth::routes(['verify' => true]);
 //Front End Route
 Route::group(['as' => 'web.'], function () {
     Route::get('/migrate-and-seed', [WebController::class, 'migrateAndSeed'])->name('migrateAndSeed');
+    Route::get('/nominees-new', [WebController::class, 'nominees']);
     Route::get('/', [WebController::class, 'index'])->name('index');
     Route::get('/about-us', [WebController::class, 'aboutUs'])->name('aboutUs');
     Route::get('/sponsorship', [WebController::class, 'sponsorship'])->name('sponsorship');

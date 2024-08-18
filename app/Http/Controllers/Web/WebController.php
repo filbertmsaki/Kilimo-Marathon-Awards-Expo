@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Mail\SubscribeMail;
 use App\Models\AgriTourism;
+use App\Models\AwardNominee;
 use App\Models\ContactUs;
 use App\Models\ExpoRegistration;
 use App\Models\Gallery;
@@ -34,6 +35,44 @@ class WebController extends Controller
         $output = $migrateOutput;
 
         return response()->json(['message' => 'Database migration and seeding completed successfully.', 'output' => $output]);
+    }
+    public function nominees()
+    {
+
+        // Fetch all nominees created in the year 2022
+        $nominees2022 = AwardNominee::whereYear('created_at', 2022)->get();
+        foreach ($nominees2022 as $nominee) {
+            // Check if a record with the same company_name and contact_person_phone exists for the current year
+            $exists = AwardNominee::where('company_name', $nominee->company_name)
+                ->where('service_name', $nominee->service_name)
+                ->where('contact_person_phone', $nominee->contact_person_phone)
+                ->whereYear('created_at', now()->year)
+                ->exists();
+
+            if (!$exists) {
+                // Duplicate the nominee data and adjust the timestamps
+                $new =  AwardNominee::create([
+                    'category_id' => $nominee->category_id,
+                    'entry' => $nominee->entry,
+                    'company_name' => $nominee->company_name,
+                    'service_name' => $nominee->service_name,
+                    'company_phone' => $nominee->company_phone,
+                    'company_email' => $nominee->company_email,
+                    'contact_person_name' => $nominee->contact_person_name,
+                    'phonecode' => $nominee->phonecode,
+                    'contact_person_phone' => $nominee->contact_person_phone,
+                    'contact_person_email' => $nominee->contact_person_email,
+                    'address' => $nominee->address,
+                    'company_individual' => $nominee->company_individual,
+                    'company_details' => $nominee->company_details,
+                    'verified' => $nominee->verified,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]);
+            }
+        }
+
+        return "Nominee data from 2022 successfully duplicated for the current year.";
     }
     public function index()
     {
