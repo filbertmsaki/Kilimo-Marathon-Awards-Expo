@@ -55,7 +55,7 @@ class AppServiceProvider extends ServiceProvider
         }catch(QueryException $e){
             abort(500);
         }
-   
+
 
         view()->composer(['admin.layout.app', 'admin.layout.aside', 'admin.messages.*'], function ($view) {
             $unread_messages = MessageThread::forUserWithNewMessages(Auth::id())->latest('updated_at')->paginate(3);
