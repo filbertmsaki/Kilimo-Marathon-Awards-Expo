@@ -225,8 +225,8 @@
                 </li>
                 @role('admin')
                     <li class="nav-item">
-                        <a href="{{ route('admin.payment.dpo.index') }}"
-                            class="nav-link {{ Request::is('admin/payments/dpo*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.payment.flutterwave.index') }}"
+                            class="nav-link {{ Request::is('admin/payments/flutterwave*') ? 'active' : '' }}">
                             <i class="fas fa-coins nav-icon"></i>
                             <p>Payment</p>
                         </a>

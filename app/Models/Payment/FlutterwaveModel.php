@@ -60,4 +60,10 @@ class FlutterwaveModel extends Model
     {
         return $this->morphTo();
     }
+
+     // Additional accessor for payment type
+     public function getPaymentTypeAttribute()
+     {
+         return class_basename($this->payable_type);
+     }
 }

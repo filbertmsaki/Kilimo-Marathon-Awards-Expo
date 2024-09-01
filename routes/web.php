@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\Payment\DpoController;
+use App\Http\Controllers\Admin\Payment\FlutterwavePaymentController;
 use App\Http\Controllers\Admin\Settings\PaymentSettingController;
 use App\Http\Controllers\Admin\Settings\SettingController;
 use App\Http\Controllers\Admin\Settings\SiteController;
@@ -121,6 +122,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
             Route::post('verify-peyment', [DpoController::class, 'verify'])->name('verify');
         });
         Route::resource('dpo', DpoController::class);
+        Route::resource('flutterwave', FlutterwavePaymentController::class);
     });
     Route::group(['prefix' => 'subscribe', 'as' => 'subscribe.'], function () {
         Route::delete('destroy-all', [SubscribeController::class, 'destroyAll'])->name('destroy.all');
