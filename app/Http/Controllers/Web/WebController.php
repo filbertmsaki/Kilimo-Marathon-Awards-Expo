@@ -84,24 +84,30 @@ class WebController extends Controller
     }
     public function flw_callback(Request $request)
     {
-
-        $transaction_id = $request->input('id');
-        $txRef = $request->input('txRef');
-        $status = $request->input('status');
-        $flwRef = $request->input('flwRef');
-        $orderRef = $request->input('orderRef');
-        $chargedAmount = $request->input('charged_amount');
-        $currency = $request->input('currency');
-        $appfee = $request->input('appfee');
-        $merchantfee = $request->input('merchantfee');
-        $chargeType = $request->input('charge_type');
-        $customerPhone = $request->input('customer.phone');
-        $customerFullName = $request->input('customer.fullName');
-        $customerEmail = $request->input('customer.email');
-        $entityCard6 = $request->input('entity.card6');
-        $entityCardLast4 = $request->input('entity.card_last4');
-        $entityCardCountryIso = $request->input('entity.card_country_iso');
-        $eventType = $request->input('event.type');
+        // Extracting data from the request
+        $transaction_id = $request->input('data.id');
+        $txRef = $request->input('data.tx_ref');
+        $status = $request->input('data.status');
+        $flwRef = $request->input('data.flw_ref');
+        $chargedAmount = $request->input('data.charged_amount');
+        $currency = $request->input('data.currency');
+        $device_fingerprint = $request->input('data.device_fingerprint');
+        $app_fee = $request->input('data.app_fee');
+        $app_fee = $request->input('data.app_fee');
+        $merchant_fee = $request->input('data.merchant_fee');
+        $processor_response = $request->input('data.processor_response');
+        $auth_model = $request->input('data.auth_model');
+        $ip = $request->input('data.ip');
+        $narration = $request->input('data.narration');
+        $payment_type = $request->input('data.payment_type');
+        $payent_created_at = $request->input('data.created_at');
+        $card_first_6digits = $request->input('data.card.first_6digits');
+        $card_last_4digits = $request->input('data.card.last_4digits');
+        $card_issuer = $request->input('data.card.issuer');
+        $card_country = $request->input('data.card.country');
+        $card_type = $request->input('data.card.type');
+        $card_expiry = $request->input('data.card.expiry');
+        // Find the Flutterwave record
         $flutterwaveData = FlutterwaveModel::where('reference', $txRef)->where('status', '!=', 'paid')->first();
         if (!$flutterwaveData) {
             return response()->json(['status' => 'error', 'message' => 'Transaction reference not found or already processed']);
@@ -109,10 +115,10 @@ class WebController extends Controller
         if ($status !== 'successful') {
             return response()->json(['status' => 'error', 'message' => 'Payment status is not successful']);
         }
-        if ($currency !==  $flutterwaveData->currency) {
+        if ($currency !== $flutterwaveData->currency) {
             return response()->json(['status' => 'error', 'message' => 'Currency does not match']);
         }
-        if ($chargedAmount <  $flutterwaveData->amount) {
+        if ($chargedAmount < $flutterwaveData->amount) {
             return response()->json(['status' => 'error', 'message' => 'Amount is less than expected']);
         }
         // Update the record with callback data
@@ -122,28 +128,33 @@ class WebController extends Controller
             'transaction_id' => $transaction_id,
             'status' => 'paid',
             'flw_reference' => $flwRef,
-            'order_reference' => $orderRef,
-            'payment_plan' => $request->input('paymentPlan'),
-            'payment_page' => $request->input('paymentPage'),
-            'payent_created_at' => $request->input('createdAt'),
-            'appfee' => $appfee,
-            'merchantfee' => $merchantfee,
-            'merchantbearsfee' => $request->input('merchantbearsfee'),
-            'customer_accountId' => $request->input('customer.AccountId'),
-            'charge_type' => $chargeType,
-            'entity_card6' => $entityCard6,
-            'entity_card_last4' => $entityCardLast4,
-            'entity_card_country_iso' => $entityCardCountryIso,
-            'event_type' => $eventType,
+            'device_fingerprint' => $device_fingerprint,
+            'app_fee' => $app_fee,
+            'merchant_fee' => $merchant_fee,
+            'processor_response' => $processor_response,
+            'auth_model' => $auth_model,
+            'ip' => $ip,
+            'narration' => $narration,
+            'payment_type' => $payment_type,
+            'payent_created_at' => $payent_created_at,
+            'card_first_6digits' => $card_first_6digits,
+            'card_last_4digits' => $card_last_4digits,
+            'card_issuer' => $card_issuer,
+            'card_country' => $card_country,
+            'card_type' => $card_type,
+            'card_expiry' => $card_expiry,
         ]);
-        $marathon = MarathonRegistration::where('reference', $txRef);
+        // Find and update the marathon registration
+        $marathon = MarathonRegistration::where('reference', $txRef)->first();
         if ($marathon) {
             $marathon->update([
                 'paid' => 1
             ]);
         }
+
         return response()->json(['status' => 'success', 'message' => 'Callback received successfully.']);
     }
+
     public function flw_redirect(Request $request)
     {
         // Extract parameters from the request
@@ -201,38 +212,6 @@ class WebController extends Controller
     }
 
     public function index()
-    {
-
-        $partners = Partner::select('image_url')->orderBy('order', 'ASC')->get();
-        return view('web.index', compact('partners'));
-        $data = [
-            'reference' => time(),
-            'amount' => '1000',
-            'currency' => 'NGN',
-            'redirect_url' => 'https://20a2-197-250-51-156.ngrok-free.app/flw-redirect',
-            'customer_email' => 'filymsaki@gmail.com',
-            'customer_name' => 'Filbert Msaki',
-            'customer_phonenumber' => '233121212121',
-            'title' => 'Test Payment',
-        ];
-        $response = FlutterwaveService::createPayment($data);
-        $statusCode =  $response->getStatusCode();
-        $results = $response->getData();
-        if ($statusCode === Response::HTTP_CREATED) {
-            return redirect()->away($results);
-        } else {
-            $message = $results->message;
-
-            return response()->json([
-                'status' => 'error',
-                'message' => $message
-            ], 400);
-        }
-
-        return $response;
-    }
-
-    public function indexOld()
     {
         $partners = Partner::select('image_url')->orderBy('order', 'ASC')->get();
         return view('web.index', compact('partners'));

@@ -115,9 +115,8 @@ class MarathonController extends Controller
 
             $data = [
                 'reference' => $marathonRegistration->reference,
-                'amount' => '35000',
+                'amount' => '100',
                 'currency' => 'TZS',
-                'redirect_url' => 'https://20a2-197-250-51-156.ngrok-free.app/flw-redirect',
                 'customer_email' => $marathonRegistration->email ?? "info@kilimomarathon.co.tz",
                 'customer_name' => $marathonRegistration->name,
                 'customer_phonenumber' => $marathonRegistration->phone,
@@ -133,10 +132,11 @@ class MarathonController extends Controller
                     'reference' => $marathonRegistration->reference,
                     'amount' => $data['amount'],
                     'currency' => $data['currency'],
-                    'customer_phone' => $data['customer_phonenumber'],
-                    'customer_full_name' => $data['customer_name'],
+                    'customer_phone_number' => $data['customer_phonenumber'],
+                    'customer_name' => $data['customer_name'],
                     'customer_email' => $data['customer_email'],
                 ]);
+
                 DB::commit();
                 if ($request->is('api*') || $request->ajax()) {
                     return response()->json(['payment_url' => $results], Response::HTTP_OK);

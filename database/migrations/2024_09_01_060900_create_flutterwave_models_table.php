@@ -16,30 +16,32 @@ class CreateFlutterwaveModelsTable extends Migration
         Schema::create('flutterwaves', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuidMorphs('payable');  // For polymorphic relations
+            $table->string('transaction_id')->nullable();
             $table->string('reference');
+            $table->string('flw_reference')->nullable();
+            $table->string('device_fingerprint')->nullable();
             $table->float('amount', 15, 4)->nullable();
             $table->string('currency');
             $table->float('charged_amount', 15, 4)->nullable();
             $table->string('charged_currency')->nullable();
-            $table->string('transaction_id')->nullable();
+            $table->decimal('app_fee', 15, 2)->nullable();
+            $table->decimal('merchant_fee', 15, 2)->nullable();
+            $table->string('processor_response')->nullable();
+            $table->string('auth_model')->nullable();
+            $table->string('ip')->nullable();
+            $table->string('narration')->nullable();
             $table->string('status')->default('pending');
-            $table->string('flw_reference')->nullable();
-            $table->string('order_reference')->nullable();
-            $table->string('payment_plan')->nullable();
-            $table->string('payment_page')->nullable();
+            $table->string('payment_type')->nullable();
             $table->timestamp('payent_created_at')->nullable();
-            $table->decimal('appfee', 15, 2)->nullable();
-            $table->decimal('merchantfee', 15, 2)->nullable();
-            $table->boolean('merchantbearsfee')->nullable();
-            $table->string('charge_type')->nullable();
-            $table->string('customer_phone')->nullable();
-            $table->string('customer_full_name')->nullable();
+            $table->string('customer_phone_number')->nullable();
+            $table->string('customer_name')->nullable();
             $table->string('customer_email')->nullable();
-            $table->string('customer_accountId')->nullable();
-            $table->string('entity_card6')->nullable();
-            $table->string('entity_card_last4')->nullable();
-            $table->string('entity_card_country_iso')->nullable();
-            $table->string('event_type')->nullable();
+            $table->string('card_first_6digits')->nullable();
+            $table->string('card_last_4digits')->nullable();
+            $table->string('card_issuer')->nullable();
+            $table->string('card_country')->nullable();
+            $table->string('card_type')->nullable();
+            $table->string('card_expiry')->nullable();
             $table->timestamps();
         });
     }
