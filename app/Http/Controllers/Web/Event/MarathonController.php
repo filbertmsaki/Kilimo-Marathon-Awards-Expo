@@ -115,7 +115,7 @@ class MarathonController extends Controller
 
             $data = [
                 'reference' => $marathonRegistration->reference,
-                'amount' => '100',
+                'amount' => '35000',
                 'currency' => 'TZS',
                 'customer_email' => $marathonRegistration->email ?? "info@kilimomarathon.co.tz",
                 'customer_name' => $marathonRegistration->name,

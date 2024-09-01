@@ -10,6 +10,7 @@ class AgriTourism extends Model
     use HasFactory;
 
     protected $fillable = [
+        'agri_tourisms',
         'full_name',
         'phone',
         'email',
@@ -29,6 +30,14 @@ class AgriTourism extends Model
         'activities' => 'array',
         'agree_checkbox' => 'boolean',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->reference = reference_no($model);
+        });
+    }
 
     public function scopeUserExist($query, )
     {

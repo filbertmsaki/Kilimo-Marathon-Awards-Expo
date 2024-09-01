@@ -9,6 +9,7 @@ class ExpoRegistration extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'reference',
         'slug',
         'entry',
         'phonecode',
@@ -31,6 +32,7 @@ class ExpoRegistration extends Model
         parent::boot();
         static::creating(function ($model) {
             $model->slug = unique_token();
+            $model->reference = reference_no($model);
         });
     }
 

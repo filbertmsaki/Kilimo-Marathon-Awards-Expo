@@ -7,7 +7,9 @@ use App\Http\Requests\ExpoRequest;
 use App\Models\AwardCategory;
 use App\Models\ExpoRegistration;
 use App\Models\Payment\Dpo;
+use App\Models\Payment\FlutterwaveModel;
 use App\Models\Payment\PushPayment;
+use App\Services\FlutterwaveService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Request as FacadesRequest;
@@ -83,53 +85,57 @@ class ExpoController extends Controller
             }
             return redirect()->back()->with('warning', trans('expo.notification.already-registered'));
         }
-        $request->merge([
-            'city' => $request->address,
-            'amount' => 500000,
-            'description' => 'Payment for Agribusiness Exhibition Registration',
-            'iso' => 'TZ',
-            'zip' => 12345,
-            'transactionref' => 'KMEXPO' . time(),
-            'phonecode' => 255,
-            'first_name' => $request->company_name,
-            'last_name' => "",
-            'phone' => $request->contact_person_phone,
-            'email' => $request->contact_person_email,
-        ]);
+
         DB::beginTransaction();
-        $expo = ExpoRegistration::create($request->except('_token'));
-        if ($expo) {
-            $dpo = new Dpo();
-            $tokens = $dpo->createToken($request);
-            if ($tokens['success'] === true) {
-                $request->merge([
-                    'transToken' =>  $tokens['TransToken'],
+        try {
+            $expoRegistration = ExpoRegistration::create($request->except('_token'));
+            $data = [
+                'reference' => $expoRegistration->reference,
+                'amount' => '500000',
+                'currency' => 'TZS',
+                'customer_email' => $expoRegistration->contact_person_email ?? "info@kilimomarathon.co.tz",
+                'customer_name' => $expoRegistration->contact_person_name,
+                'customer_phonenumber' => $expoRegistration->contact_person_phone,
+                'title' => 'Payment for Agribusiness Exhibition Registration',
+            ];
+            $response = FlutterwaveService::createPayment($data);
+            $statusCode = $response->getStatusCode();
+            $results = $response->getData();
+            if ($statusCode === Response::HTTP_CREATED) {
+                $flutterwave = FlutterwaveModel::create([
+                    'payable_id' => $expoRegistration->id,
+                    'payable_type' => ExpoRegistration::class,
+                    'reference' => $expoRegistration->reference,
+                    'amount' => $data['amount'],
+                    'currency' => $data['currency'],
+                    'customer_phone_number' => $data['customer_phonenumber'],
+                    'customer_name' => $data['customer_name'],
+                    'customer_email' => $data['customer_email'],
                 ]);
-                $verify = $dpo->verifyToken($request);
-                if ($verify['Result'] === '900') {
-                    $payment_url = $dpo->getPaymentUrl($request);
-                    // Save the transaction reference
-                    $payment = PushPayment::create([
-                        'transactionref' => $request->token,
-                        'customerphone' => $request->phone,
-                        'transactionamount' => $request->amount,
-                        'transactiontoken' =>  $request->transToken,
-                        'status' => 'pending',
-                    ]);
-                    DB::commit();
-                    return redirect()->to($payment_url);
+
+                DB::commit();
+                if ($request->is('api*') || $request->ajax()) {
+                    return response()->json(['payment_url' => $results], Response::HTTP_OK);
                 }
+                return redirect()->away($results);
             } else {
                 DB::rollBack();
-                return redirect()->back()->with('error', trans('strings.error'));
+                $message = $results->message;
+                if ($request->is('api*') || $request->ajax()) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => $message
+                    ], 400);
+                }
+                return redirect()->back()->with('error', $message);
             }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            if ($request->is('api*') || $request->ajax()) {
+                return response()->json(['message' => $e->getMessage()], 500);
+            }
+            return redirect()->back()->with('error', $e->getMessage());
         }
-        DB::rollBack();
-        return redirect()->back()->with('error', 'Unknown error occur.');
-        if (FacadesRequest::is('api*')) {
-            return response()->json(['message' => trans('expo.notification.registered')],  Response::HTTP_CREATED);
-        }
-        return redirect()->back()->with('success', trans('expo.notification.registered'));
     }
 
     /**

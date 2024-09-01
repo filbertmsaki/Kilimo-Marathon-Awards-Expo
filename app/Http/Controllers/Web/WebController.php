@@ -145,14 +145,30 @@ class WebController extends Controller
             'card_expiry' => $card_expiry,
         ]);
         // Find and update the marathon registration
-        $marathon = MarathonRegistration::where('reference', $txRef)->first();
-        if ($marathon) {
-            $marathon->update([
-                'paid' => 1
-            ]);
-        }
+        // List of models to check
+        $models = [
+            MarathonRegistration::class,
+            ExpoRegistration::class,
+            AgriTourism::class
+        ];
 
+        // Iterate through models and update payment status
+        foreach ($models as $model) {
+            if ($this->updatePaymentStatus($model, $txRef)) {
+                break; 
+            }
+        }
         return response()->json(['status' => 'success', 'message' => 'Callback received successfully.']);
+    }
+
+    function updatePaymentStatus($model, $txRef)
+    {
+        $record = $model::where('reference', $txRef)->first();
+        if ($record) {
+            $record->update(['paid' => 1]);
+            return true;
+        }
+        return false;
     }
 
     public function flw_redirect(Request $request)

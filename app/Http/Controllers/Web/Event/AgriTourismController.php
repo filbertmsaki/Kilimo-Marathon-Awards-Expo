@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Web\Event;
 use App\Http\Controllers\Controller;
 use App\Models\AgriTourism;
 use App\Models\Payment\Dpo;
+use App\Models\Payment\FlutterwaveModel;
 use App\Models\Payment\PushPayment;
+use App\Services\FlutterwaveService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -59,17 +61,17 @@ class AgriTourismController extends Controller
             'additional_info' => 'nullable|string',
             'agree_checkbox' => 'accepted',
         ]);
-        $request->merge([
-            'city' => $request->address,
-            'amount' => 100000,
-            'description' => 'Payment for Agri Tourism Registration',
-            'iso' => 'TZ',
-            'zip' => 12345,
-            'transactionref' => 'KMAGRITOUR' . time(),
-            'phonecode' => 255,
-            'first_name' => $request->full_name,
-            'last_name' => "",
-        ]);
+        // $request->merge([
+        //     'city' => $request->address,
+        //     'amount' => 100000,
+        //     'description' => 'Payment for Agri Tourism Registration',
+        //     'iso' => 'TZ',
+        //     'zip' => 12345,
+        //     'transactionref' => 'KMAGRITOUR' . time(),
+        //     'phonecode' => 255,
+        //     'first_name' => $request->full_name,
+        //     'last_name' => "",
+        // ]);
         $exist = AgriTourism::userExist();
         if ($exist) {
             if (FacadesRequest::is('api*')) {
@@ -78,35 +80,55 @@ class AgriTourismController extends Controller
             return redirect()->back()->with('warning', 'You have already registered in agri tourism.');
         }
         DB::beginTransaction();
-        $agri = AgriTourism::create($validatedData);
-        if ($agri) {
-            $dpo = new Dpo();
-            $tokens = $dpo->createToken($request);
-            if ($tokens['success'] === true) {
-                $request->merge([
-                    'transToken' =>  $tokens['TransToken'],
+        try {
+            $agriTourism = AgriTourism::create($validatedData);
+            $data = [
+                'reference' => $agriTourism->reference,
+                'amount' => '100000',
+                'currency' => 'TZS',
+                'customer_email' => $agriTourism->email ?? "info@kilimomarathon.co.tz",
+                'customer_name' => $agriTourism->full_name,
+                'customer_phonenumber' => $agriTourism->phone,
+                'title' => 'Payment for Agri Tourism Registration',
+            ];
+            $response = FlutterwaveService::createPayment($data);
+            $statusCode = $response->getStatusCode();
+            $results = $response->getData();
+            if ($statusCode === Response::HTTP_CREATED) {
+                $flutterwave = FlutterwaveModel::create([
+                    'payable_id' => $agriTourism->id,
+                    'payable_type' => AgriTourism::class,
+                    'reference' => $agriTourism->reference,
+                    'amount' => $data['amount'],
+                    'currency' => $data['currency'],
+                    'customer_phone_number' => $data['customer_phonenumber'],
+                    'customer_name' => $data['customer_name'],
+                    'customer_email' => $data['customer_email'],
                 ]);
-                $verify = $dpo->verifyToken($request);
-                if ($verify['Result'] === '900') {
-                    $payment_url = $dpo->getPaymentUrl($request);
-                    // Save the transaction reference
-                    $payment = PushPayment::create([
-                        'transactionref' => $request->token,
-                        'customerphone' => $request->phone,
-                        'transactionamount' => $request->amount,
-                        'transactiontoken' =>  $request->transToken,
-                        'status' => 'pending',
-                    ]);
-                    DB::commit();
-                    return redirect()->to($payment_url);
+
+                DB::commit();
+                if ($request->is('api*') || $request->ajax()) {
+                    return response()->json(['payment_url' => $results], Response::HTTP_OK);
                 }
+                return redirect()->away($results);
             } else {
                 DB::rollBack();
-                return redirect()->back()->with('error', trans('strings.error'));
+                $message = $results->message;
+                if ($request->is('api*') || $request->ajax()) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => $message
+                    ], 400);
+                }
+                return redirect()->back()->with('error', $message);
             }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            if ($request->is('api*') || $request->ajax()) {
+                return response()->json(['message' => $e->getMessage()], 500);
+            }
+            return redirect()->back()->with('error', $e->getMessage());
         }
-        DB::rollBack();
-        return redirect()->back()->with('error', 'Unknown error occur.');
     }
 
     /**
