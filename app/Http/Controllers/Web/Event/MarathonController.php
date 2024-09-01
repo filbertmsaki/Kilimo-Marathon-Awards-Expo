@@ -112,7 +112,6 @@ class MarathonController extends Controller
                     $eventDescription = 'Event';
                     break;
             }
-
             $data = [
                 'reference' => $marathonRegistration->reference,
                 'amount' => '35000',
