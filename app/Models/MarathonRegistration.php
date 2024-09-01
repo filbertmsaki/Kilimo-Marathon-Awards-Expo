@@ -24,6 +24,7 @@ class MarathonRegistration extends Model
         't_shirt_size',
         'address',
         'paid',
+        'reference'
     ];
 
     protected static function boot()
@@ -31,17 +32,18 @@ class MarathonRegistration extends Model
         parent::boot();
         static::creating(function ($model) {
             $model->slug = unique_token();
+            $model->reference = reference_no($model);
         });
     }
     public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
     }
-    public function scopeRunnerExist($query,$email,$phone)
+    public function scopeRunnerExist($query, $email, $phone)
     {
         $currrentYear = date('Y');
-        $qry =$query->where('email', $email)
-                    ->where('phone', $phone);
+        $qry = $query->where('email', $email)
+            ->where('phone', $phone);
         return $qry->whereYear('created_at', '=', $currrentYear)->exists();
     }
 }

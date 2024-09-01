@@ -3,6 +3,7 @@
 use App\Http\Controllers\Web\Event\AwardController;
 use App\Http\Controllers\Web\Event\ExpoController;
 use App\Http\Controllers\Web\Event\MarathonController;
+use App\Http\Controllers\Web\WebController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::group(['prefix'=>'v1','middleware'=>'localization'], function(){
+    Route::post('/flw-callback', [WebController::class, 'flw_callback'])->name('flw_callback');
+
     Route::get('marathon-status',[MarathonController::class,'getStatus']);
     Route::post('marathon-registration',[MarathonController::class,'store']);
 

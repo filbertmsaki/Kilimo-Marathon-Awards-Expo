@@ -27,8 +27,32 @@ if (!function_exists('remove_special_characters')) {
     function remove_special_characters($string)
     {
         $characters = str_replace(array(
-            '\'', '"', '(', ')', '[', ']', '/', '+', '=', '$', '@',
-            ',', ';', '<', '>', ':', '!', '#', '%', '^', '*', '~', '|', '{', '}', '.',
+            '\'',
+            '"',
+            '(',
+            ')',
+            '[',
+            ']',
+            '/',
+            '+',
+            '=',
+            '$',
+            '@',
+            ',',
+            ';',
+            '<',
+            '>',
+            ':',
+            '!',
+            '#',
+            '%',
+            '^',
+            '*',
+            '~',
+            '|',
+            '{',
+            '}',
+            '.',
         ), '', $string);
         $word = str_replace('_', ' ', $characters);
         $result = preg_replace('/-+/', '-', remove_space(str_replace('&', 'and', $word)));
@@ -55,8 +79,35 @@ if (!function_exists('phone_number_format')) {
     {
 
         $characters = str_replace(array(
-            '\'', '"', '(', ')', '[', ']', '/', '+', '=', '$', '@',
-            ',', ';', '<', '>', ':', '!', '#', '%', '^', '*', '~', '|', '{', '}', '.', ' ', '-', '_'
+            '\'',
+            '"',
+            '(',
+            ')',
+            '[',
+            ']',
+            '/',
+            '+',
+            '=',
+            '$',
+            '@',
+            ',',
+            ';',
+            '<',
+            '>',
+            ':',
+            '!',
+            '#',
+            '%',
+            '^',
+            '*',
+            '~',
+            '|',
+            '{',
+            '}',
+            '.',
+            ' ',
+            '-',
+            '_'
         ), '', $digits);
         $trimedmobile = substr($characters, -9);
         $phonenumber = $code . $trimedmobile;
@@ -145,6 +196,59 @@ if (!function_exists('isVoteActive')) {
             return false;
         } else {
             return true;
+        }
+    }
+}
+
+
+if (!function_exists('reference_no')) {
+    function reference_no($modelName)
+    {
+        $lastOrder = $modelName::orderBy('created_at', 'DESC')->first();
+        $alphabetPart = 'AA';
+        if ($lastOrder && $lastOrder->reference != null) {
+            $lastReference = $lastOrder->reference;
+            $alphabetPart = substr($lastReference, 0, 2);
+            $alphabetPart = increment_alphabet($alphabetPart);
+        }
+
+        $randomPart = generate_random_string(8);
+        $newOrderNo = $alphabetPart . $randomPart;
+        // Ensure the reference is unique
+        while ($modelName::where('reference', $newOrderNo)->exists()) {
+            $alphabetPart = increment_alphabet($alphabetPart);
+            $newOrderNo = $alphabetPart . generate_random_string(8);
+        }
+
+        return strtoupper($newOrderNo);
+    }
+
+    function generate_random_string($length)
+    {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        return substr(str_shuffle(str_repeat($characters, ceil($length / strlen($characters)))), 0, $length);
+    }
+
+    function increment_alphabet($alpha)
+    {
+        // Ensure the input is exactly two characters long
+        if (strlen($alpha) != 2) {
+            throw new InvalidArgumentException('Input must be a two-character string.');
+        }
+
+        $firstChar = $alpha[0];
+        $secondChar = $alpha[1];
+
+        if ($secondChar === 'Z') {
+            if ($firstChar === 'Z') {
+                // Reset to 'AA' if both are 'Z'
+                return 'AA';
+            }
+            // Increment the first character and reset the second character to 'A'
+            return chr(ord($firstChar) + 1) . 'A';
+        } else {
+            // Increment the second character
+            return $firstChar . chr(ord($secondChar) + 1);
         }
     }
 }

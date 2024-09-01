@@ -345,8 +345,8 @@ class ComposerStaticInite01e5a97054fd537b7ccf419493f7d05
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -651,6 +651,7 @@ class ComposerStaticInite01e5a97054fd537b7ccf419493f7d05
         'App\\Models\\Partner' => __DIR__ . '/../..' . '/app/Models/Partner.php',
         'App\\Models\\Payment\\Dpo' => __DIR__ . '/../..' . '/app/Models/Payment/Dpo.php',
         'App\\Models\\Payment\\DpoGroup' => __DIR__ . '/../..' . '/app/Models/Payment/DpoGroup.php',
+        'App\\Models\\Payment\\FlutterwaveModel' => __DIR__ . '/../..' . '/app/Models/Payment/FlutterwaveModel.php',
         'App\\Models\\Payment\\Payment' => __DIR__ . '/../..' . '/app/Models/Payment/Payment.php',
         'App\\Models\\Payment\\PushPayment' => __DIR__ . '/../..' . '/app/Models/Payment/PushPayment.php',
         'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',
@@ -668,6 +669,7 @@ class ComposerStaticInite01e5a97054fd537b7ccf419493f7d05
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\PermissionsServiceProvider' => __DIR__ . '/../..' . '/app/Providers/PermissionsServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Services\\FlutterwaveService' => __DIR__ . '/../..' . '/app/Services/FlutterwaveService.php',
         'App\\Traits\\HasMessagesTrait' => __DIR__ . '/../..' . '/app/Traits/HasMessagesTrait.php',
         'App\\Traits\\HasPermissionsTrait' => __DIR__ . '/../..' . '/app/Traits/HasPermissionsTrait.php',
         'App\\View\\Components\\Admin\\Layout\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/Admin/Layout/AppLayout.php',

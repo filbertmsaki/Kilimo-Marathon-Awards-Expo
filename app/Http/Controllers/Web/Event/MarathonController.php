@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MarathonRequest;
 use App\Models\MarathonRegistration;
 use App\Models\Payment\Dpo;
+use App\Models\Payment\FlutterwaveModel;
 use App\Models\Payment\PushPayment;
+use App\Services\FlutterwaveService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -58,105 +60,108 @@ class MarathonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MarathonRequest $request)
+    public function store(Request $request)
     {
-        // if (FacadesRequest::is('api*')) {
-        //     if (!isMarathonActive()) {
-        //         return response()->json(['message' => trans('marathon.notification.closed')],  Response::HTTP_NOT_FOUND);
-        //     }
-        // }
-        // if (!isMarathonActive()) {
-        //     abort(401);
-        // }
-        $request->merge([
-            'city' => $request->address,
-            'amount' => 35000,
-            'description' => 'Payment for ' . $request->event . ' Km running',
-            'iso' => 'TZ',
-            'zip' => 12345,
-            'transactionref' => 'KME' . time(),
-            'phonecode' => 255,
-
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender' => 'required|in:M,F',
+            'age' => 'required|numeric|min:1|max:120',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15',
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'event' => 'required|in:5,10,21,cycling',
+            't_shirt_size' => 'required|in:S,M,L,XL,XXL',
+            'address' => 'required|string|max:255',
+            'payment' => 'required|in:online,cash',
         ]);
-        $payment = $request->payment;
-        $exist = MarathonRegistration::runnerExist(
-            $request->email,
-            $request->phone,
-        );
+
+        if (!isMarathonActive()) {
+            if ($request->is('api*') || $request->ajax()) {
+                return response()->json(['message' => trans('marathon.notification.closed')], Response::HTTP_NOT_FOUND);
+            }
+            abort(401);
+        }
+
+        $exist = MarathonRegistration::runnerExist($request->email, $request->phone);
         if ($exist) {
-            if (FacadesRequest::is('api*')) {
+            if ($request->is('api*') || $request->ajax()) {
                 return response()->json(['message' => trans('marathon.notification.already-registered')], Response::HTTP_FOUND);
             }
             return redirect()->back()->with('warning', trans('marathon.notification.already-registered'));
         }
+
         DB::beginTransaction();
-        MarathonRegistration::create($request->except('_token'));
+        try {
+            $marathonRegistration = MarathonRegistration::create($request->except('_token'));
+            // Create a description based on the event selected
+            $eventDescription = '';
+            switch ($request->event) {
+                case '5':
+                    $eventDescription = '5 Km Running';
+                    break;
+                case '10':
+                    $eventDescription = '10 Km Running';
+                    break;
+                case '21':
+                    $eventDescription = '21 Km Running';
+                    break;
+                case 'cycling':
+                    $eventDescription = 'Cycling 100 Km';
+                    break;
+                default:
+                    $eventDescription = 'Event';
+                    break;
+            }
 
-        if ($payment == 'lipa_number') {
-            return ' lipa_number';
-        } else {
-            $dpo = new Dpo();
-            $tokens = $dpo->createToken($request);
-            if ($tokens['success'] === true) {
-                $request->merge([
-                    'transToken' =>  $tokens['TransToken'],
+            $data = [
+                'reference' => $marathonRegistration->reference,
+                'amount' => '35000',
+                'currency' => 'TZS',
+                'redirect_url' => 'https://20a2-197-250-51-156.ngrok-free.app/flw-redirect',
+                'customer_email' => $marathonRegistration->email ?? "info@kilimomarathon.co.tz",
+                'customer_name' => $marathonRegistration->name,
+                'customer_phonenumber' => $marathonRegistration->phone,
+                'title' => 'Payment for ' . $eventDescription,
+            ];
+            $response = FlutterwaveService::createPayment($data);
+            $statusCode = $response->getStatusCode();
+            $results = $response->getData();
+            if ($statusCode === Response::HTTP_CREATED) {
+                $flutterwave = FlutterwaveModel::create([
+                    'payable_id' => $marathonRegistration->id,
+                    'payable_type' => MarathonRegistration::class,
+                    'reference' => $marathonRegistration->reference,
+                    'amount' => $data['amount'],
+                    'currency' => $data['currency'],
+                    'customer_phone' => $data['customer_phonenumber'],
+                    'customer_full_name' => $data['customer_name'],
+                    'customer_email' => $data['customer_email'],
                 ]);
-                if (FacadesRequest::is('api*')) {
-                    if ($request->payment_option == 'Tigo') {
-                        $payment_options = 'TIGOdebitMandate';
-                    }
-                    if ($request->payment_option == 'Vodacom') {
-                        $payment_options = 'Selcom_webPay';
-                    }
-                    if ($request->payment_option == 'Airtel') {
-                        $payment_options = 'Selcom_webPay_Airtel';
-                    }
-                    $request->merge([
-                        'mno' =>   $payment_options,
-                        'country' => 'Tanzania',
-                    ]);
-                    $mobilePay = $dpo->ChargeTokenMobile($request);
-
-                    if (!empty($mobilePay) && $mobilePay != '') {
-                        if ($mobilePay['success'] == true) {
-                            // Save the transaction reference
-                            $payment = PushPayment::create([
-                                'transactionref' => $request->token,
-                                'customerphone' => $request->phone,
-                                'transactionamount' => $request->amount,
-                                'transactiontoken' =>  $request->transToken,
-                                'status' => 'pending',
-                            ]);
-                            $payment_details = $mobilePay['instructions'];
-                            DB::commit();
-                            $data = str_replace('    ', PHP_EOL, $payment_details);
-                            $result = str_replace('   ', PHP_EOL, $data);
-                            return response()->json(['message' => $result],  Response::HTTP_CREATED);
-                        }
-                    }
-                    DB::rollBack();
-                    return response()->json(trans('strings.error'),  Response::HTTP_NOT_FOUND);
+                DB::commit();
+                if ($request->is('api*') || $request->ajax()) {
+                    return response()->json(['payment_url' => $results], Response::HTTP_OK);
                 }
-                $verify = $dpo->verifyToken($request);
-                if ($verify['Result'] === '900') {
-                    $payment_url = $dpo->getPaymentUrl($request);
-                    // Save the transaction reference
-                    $payment = PushPayment::create([
-                        'transactionref' => $request->token,
-                        'customerphone' => $request->phone,
-                        'transactionamount' => $request->amount,
-                        'transactiontoken' =>  $request->transToken,
-                        'status' => 'pending',
-                    ]);
-                    DB::commit();
-                    return redirect()->to($payment_url);
-                }
+                return redirect()->away($results);
             } else {
                 DB::rollBack();
-                return redirect()->back()->with('error', trans('strings.error'));
+                $message = $results->message;
+                if ($request->is('api*') || $request->ajax()) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => $message
+                    ], 400);
+                }
+                return redirect()->back()->with('error', $message);
             }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            if ($request->is('api*') || $request->ajax()) {
+                return response()->json(['message' => $e->getMessage()], 500);
+            }
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
     public function mobilePayment($request)
     {
         $dpo = new Dpo();

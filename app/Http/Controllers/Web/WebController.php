@@ -12,16 +12,24 @@ use App\Models\Gallery;
 use App\Models\MarathonRegistration;
 use App\Models\Partner;
 use App\Models\Payment\Dpo;
+use App\Models\Payment\FlutterwaveModel;
 use App\Models\Payment\PushPayment;
 use App\Models\Subscriber;
+use App\Services\FlutterwaveService;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Swift_TransportException;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Stmt\Return_;
 
 class WebController extends Controller
 {
@@ -74,7 +82,157 @@ class WebController extends Controller
 
         return "Nominee data from 2022 successfully duplicated for the current year.";
     }
+    public function flw_callback(Request $request)
+    {
+
+        $transaction_id = $request->input('id');
+        $txRef = $request->input('txRef');
+        $status = $request->input('status');
+        $flwRef = $request->input('flwRef');
+        $orderRef = $request->input('orderRef');
+        $chargedAmount = $request->input('charged_amount');
+        $currency = $request->input('currency');
+        $appfee = $request->input('appfee');
+        $merchantfee = $request->input('merchantfee');
+        $chargeType = $request->input('charge_type');
+        $customerPhone = $request->input('customer.phone');
+        $customerFullName = $request->input('customer.fullName');
+        $customerEmail = $request->input('customer.email');
+        $entityCard6 = $request->input('entity.card6');
+        $entityCardLast4 = $request->input('entity.card_last4');
+        $entityCardCountryIso = $request->input('entity.card_country_iso');
+        $eventType = $request->input('event.type');
+        $flutterwaveData = FlutterwaveModel::where('reference', $txRef)->where('status', '!=', 'paid')->first();
+        if (!$flutterwaveData) {
+            return response()->json(['status' => 'error', 'message' => 'Transaction reference not found or already processed']);
+        }
+        if ($status !== 'successful') {
+            return response()->json(['status' => 'error', 'message' => 'Payment status is not successful']);
+        }
+        if ($currency !==  $flutterwaveData->currency) {
+            return response()->json(['status' => 'error', 'message' => 'Currency does not match']);
+        }
+        if ($chargedAmount <  $flutterwaveData->amount) {
+            return response()->json(['status' => 'error', 'message' => 'Amount is less than expected']);
+        }
+        // Update the record with callback data
+        $flutterwaveData->update([
+            'charged_amount' => $chargedAmount,
+            'charged_currency' => $currency,
+            'transaction_id' => $transaction_id,
+            'status' => 'paid',
+            'flw_reference' => $flwRef,
+            'order_reference' => $orderRef,
+            'payment_plan' => $request->input('paymentPlan'),
+            'payment_page' => $request->input('paymentPage'),
+            'payent_created_at' => $request->input('createdAt'),
+            'appfee' => $appfee,
+            'merchantfee' => $merchantfee,
+            'merchantbearsfee' => $request->input('merchantbearsfee'),
+            'customer_accountId' => $request->input('customer.AccountId'),
+            'charge_type' => $chargeType,
+            'entity_card6' => $entityCard6,
+            'entity_card_last4' => $entityCardLast4,
+            'entity_card_country_iso' => $entityCardCountryIso,
+            'event_type' => $eventType,
+        ]);
+        $marathon = MarathonRegistration::where('reference', $txRef);
+        if ($marathon) {
+            $marathon->update([
+                'paid' => 1
+            ]);
+        }
+        return response()->json(['status' => 'success', 'message' => 'Callback received successfully.']);
+    }
+    public function flw_redirect(Request $request)
+    {
+        // Extract parameters from the request
+        $status = $request->input('status');
+        $txRef = $request->input('tx_ref');
+        $transactionId = $request->input('transaction_id');
+        // Find the record by reference (tx_ref)
+        $flutterwaveData = FlutterwaveModel::where('reference', $txRef)
+            // ->where('status', 'pending')
+            ->first();
+        if (!$flutterwaveData) {
+            return view('web.payment.status', [
+                'status' => 'error',
+                'message' => 'Transaction reference not found'
+            ]);
+        }
+
+        if ($status === 'successful') {
+            $flutterwaveData->update([
+                'payment_status' => 'success',
+                'transaction_id' => $transactionId
+            ]);
+
+            // Return the success view
+            return view('web.payment.status', [
+                'status' => 'successful',
+                'reference' => $txRef,
+                'transaction_id' => $transactionId,
+                'registration' => $flutterwaveData
+            ]);
+        } elseif ($status === 'cancelled') {
+            $flutterwaveData->update([
+                'payment_status' => 'cancelled'
+            ]);
+
+            // Return the cancelled view
+            return view('web.payment.status', [
+                'status' => 'cancelled',
+                'reference' => $txRef,
+                'transaction_id' => $transactionId,
+                'registration' => $flutterwaveData
+            ]);
+        } else {
+            // Handle other statuses
+            $flutterwaveData->update([
+                'payment_status' => 'failed'
+            ]);
+            return view('web.payment.status', [
+                'status' => 'failed',
+                'reference' => $txRef,
+                'transaction_id' => $transactionId,
+                'registration' => $flutterwaveData
+            ]);
+        }
+    }
+
     public function index()
+    {
+
+        $partners = Partner::select('image_url')->orderBy('order', 'ASC')->get();
+        return view('web.index', compact('partners'));
+        $data = [
+            'reference' => time(),
+            'amount' => '1000',
+            'currency' => 'NGN',
+            'redirect_url' => 'https://20a2-197-250-51-156.ngrok-free.app/flw-redirect',
+            'customer_email' => 'filymsaki@gmail.com',
+            'customer_name' => 'Filbert Msaki',
+            'customer_phonenumber' => '233121212121',
+            'title' => 'Test Payment',
+        ];
+        $response = FlutterwaveService::createPayment($data);
+        $statusCode =  $response->getStatusCode();
+        $results = $response->getData();
+        if ($statusCode === Response::HTTP_CREATED) {
+            return redirect()->away($results);
+        } else {
+            $message = $results->message;
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $message
+            ], 400);
+        }
+
+        return $response;
+    }
+
+    public function indexOld()
     {
         $partners = Partner::select('image_url')->orderBy('order', 'ASC')->get();
         return view('web.index', compact('partners'));
