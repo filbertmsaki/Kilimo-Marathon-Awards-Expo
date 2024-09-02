@@ -24,7 +24,7 @@ class FlutterwaveService
                     'tx_ref' => $request['reference'],
                     'amount' => $request['amount'],
                     'currency' =>  $request['currency'],
-                    'redirect_url' =>  $request['redirect_url'] ?? 'https://20a2-197-250-51-156.ngrok-free.app/flw-redirect',
+                    'redirect_url' =>  $request['redirect_url'] ?? 'https://kilimomarathon.co.tz/flw-redirect',
                     'customer' => [
                         'email' => $request['customer_email'],
                         'name' => $request['customer_name'],

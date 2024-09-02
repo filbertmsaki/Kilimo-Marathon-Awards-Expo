@@ -9,9 +9,9 @@
                         <p>Your payment was successful. Thank you for your registration!</p>
                         <p><strong>Reference:</strong> {{ $reference }}</p>
                         <p><strong>Transaction ID:</strong> {{ $transaction_id }}</p>
-                        <p><strong>Name:</strong> {{ $registration->customer_full_name }}</p>
+                        <p><strong>Name:</strong> {{ $registration->customer_name }}</p>
                         <p><strong>Email:</strong> {{ $registration->customer_email }}</p>
-                        <p><strong>Phone:</strong> {{ $registration->customer_phone }}</p>
+                        <p><strong>Phone:</strong> {{ $registration->customer_phone_number }}</p>
                     @elseif ($status === 'cancelled')
                         <h2>Payment Cancelled</h2>
                         <p>Your payment was cancelled. Please try again or contact support.</p>

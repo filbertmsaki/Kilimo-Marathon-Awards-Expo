@@ -91,7 +91,7 @@ class ExpoController extends Controller
             $expoRegistration = ExpoRegistration::create($request->except('_token'));
             $data = [
                 'reference' => $expoRegistration->reference,
-                'amount' => '500000',
+                'amount' => '100',
                 'currency' => 'TZS',
                 'customer_email' => $expoRegistration->contact_person_email ?? "info@kilimomarathon.co.tz",
                 'customer_name' => $expoRegistration->contact_person_name,

@@ -84,7 +84,7 @@ class AgriTourismController extends Controller
             $agriTourism = AgriTourism::create($validatedData);
             $data = [
                 'reference' => $agriTourism->reference,
-                'amount' => '100000',
+                'amount' => '100',
                 'currency' => 'TZS',
                 'customer_email' => $agriTourism->email ?? "info@kilimomarathon.co.tz",
                 'customer_name' => $agriTourism->full_name,
