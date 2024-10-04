@@ -135,7 +135,7 @@
                                         <input class="form-check-input" type="checkbox" id="agree_checkbox"
                                             name="agree_checkbox">
                                         <label class="form-check-label" for="agree_checkbox">By checking this box, you
-                                            agree to pay the Agribusiness Exhibition registration fee of TZS 500,000 and
+                                            agree to pay the Agribusiness Exhibition registration fee of TZS 800,000 and
                                             proceed with the registration process.</label>
                                     </div>
                                 </div>

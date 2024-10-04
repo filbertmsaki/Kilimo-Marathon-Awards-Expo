@@ -65,8 +65,7 @@
                                                 Venue</h5>
                                             <small class="text-fade">Venue: Morogoro Secondary school, Morogoro.
                                                 Tanzania</small>
-                                            <p><small class="text-fade mt-10">Date: 2<sup>nd</sup> - 5<sup>th</sup>
-                                                    October, 2024</small></p>
+                                            <p><small class="text-fade mt-10">Date: 24<sup>th</sup>November, 2024</small></p>
                                         </div>
                                     </div>
                                 </div>
